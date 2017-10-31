@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,next" />
+  <meta name="keywords" content="Tools," />
 
 
 
@@ -37,17 +37,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="git clone git的URL thanks github, open the door which share of code in the world  git init 初始化是新建的第一步  git add &amp;lt;文件&amp;gt; 第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件  git">
+<meta name="keywords" content="Tools">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/10/31/hello-world/index.html">
+<meta property="og:title" content="git 命令行上的常规操作">
+<meta property="og:url" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="git clone git的URL thanks github, open the door which share of code in the world  git init 初始化是新建的第一步  git add &amp;lt;文件&amp;gt; 第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件  git">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-31T07:36:01.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/init.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/add.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/commit.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/push.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/pull.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/more.png">
+<meta property="og:updated_time" content="2017-10-31T09:15:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="git 命令行上的常规操作">
+<meta name="twitter:description" content="git clone git的URL thanks github, open the door which share of code in the world  git init 初始化是新建的第一步  git add &amp;lt;文件&amp;gt; 第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件  git">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/init.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -57,7 +65,7 @@
   };
 </script>
 
-  <title> Hello World | Paulswith·__dobby's Blogs </title>
+  <title> git 命令行上的常规操作 | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -174,7 +182,7 @@
           
           
             
-              Hello World
+              git 命令行上的常规操作
             
           
         </h1>
@@ -183,7 +191,7 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-10-31T15:36:01+08:00" content="2017-10-31">
+          <time itemprop="dateCreated" datetime="2017-10-31T17:14:24+08:00" content="2017-10-31">
             2017-10-31
           </time>
         </span>
@@ -202,31 +210,47 @@
       
 
       
-        <span itemprop="articleBody"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-</span>
+        <span itemprop="articleBody"><h5 id="git-clone-git的URL"><a href="#git-clone-git的URL" class="headerlink" title="git clone git的URL"></a>git clone git的URL</h5><blockquote>
+<p>thanks github, open the door which share of code in the world</p>
+</blockquote>
+<h5 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h5><blockquote>
+<p>初始化是新建的第一步<br><img src="/2017/10/31/git-命令行上的常规操作/init.png" alt=""></p>
+</blockquote>
+<h5 id="git-add-lt-文件-gt"><a href="#git-add-lt-文件-gt" class="headerlink" title="git add &lt;文件&gt;"></a>git add &lt;文件&gt;</h5><blockquote>
+<p>第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件<br><img src="/2017/10/31/git-命令行上的常规操作/add.png" alt=""></p>
+</blockquote>
+<h5 id="git-commit-m-“message”"><a href="#git-commit-m-“message”" class="headerlink" title="git commit -m “message”"></a>git commit -m “message”</h5><h5 id="git-commit-m-“message”-lt-文件-gt"><a href="#git-commit-m-“message”-lt-文件-gt" class="headerlink" title="git commit -m “message” &lt;文件&gt;"></a>git commit -m “message” &lt;文件&gt;</h5><blockquote>
+<p>第一种情况, 相对于前面add之后的commit, 默认提前当前的全部修改.<br>第二种情况, 只是更改某些个文件, commit特定的文件<br><img src="/2017/10/31/git-命令行上的常规操作/commit.png" alt=""></p>
+</blockquote>
+<p>#####git push</p>
+<blockquote>
+<p>git push是全部修改之后的提交代码操作, 默认是master主分支<br><img src="/2017/10/31/git-命令行上的常规操作/push.png" alt=""></p>
+<h5 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h5><p>同步代码,默认是master<br><img src="/2017/10/31/git-命令行上的常规操作/pull.png" alt=""></p>
+<h5 id="git-rm-lt-文件-gt"><a href="#git-rm-lt-文件-gt" class="headerlink" title="git rm &lt;文件&gt;"></a>git rm &lt;文件&gt;</h5><p>记住在本地移除后, 然后git commit -m “为啥移除” &amp;&amp; git push</p>
+</blockquote>
+<h5 id="and-more-请别让你的英文太烂"><a href="#and-more-请别让你的英文太烂" class="headerlink" title="and more , 请别让你的英文太烂"></a>and more , 请别让你的英文太烂</h5><p><img src="/2017/10/31/git-命令行上的常规操作/more.png" alt=""></p>
+<h2 id="文章是从CSDN迁移过来的"><a href="#文章是从CSDN迁移过来的" class="headerlink" title="文章是从CSDN迁移过来的"></a>文章是从CSDN迁移过来的</h2></span>
       
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tools/" rel="tag">#Tools</a>
+          
+        </div>
       
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/" rel="prev">我怎么从0到1搭建了这个hexo-blog</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/" rel="next">我怎么从0到1搭建了这个hexo-blog</a>
             
           </div>
         </div>
@@ -474,7 +498,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#git-clone-git的URL"><span class="nav-number">1.</span> <span class="nav-text">git clone git的URL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-init"><span class="nav-number">2.</span> <span class="nav-text">git init</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-add-lt-文件-gt"><span class="nav-number">3.</span> <span class="nav-text">git add <文件></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-commit-m-“message”"><span class="nav-number">4.</span> <span class="nav-text">git commit -m “message”</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-commit-m-“message”-lt-文件-gt"><span class="nav-number">5.</span> <span class="nav-text">git commit -m “message” <文件></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-pull"><span class="nav-number">6.</span> <span class="nav-text">git pull</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-rm-lt-文件-gt"><span class="nav-number">7.</span> <span class="nav-text">git rm <文件></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#and-more-请别让你的英文太烂"><span class="nav-number">8.</span> <span class="nav-text">and more , 请别让你的英文太烂</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章是从CSDN迁移过来的"><span class="nav-number"></span> <span class="nav-text">文章是从CSDN迁移过来的</span></a></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
