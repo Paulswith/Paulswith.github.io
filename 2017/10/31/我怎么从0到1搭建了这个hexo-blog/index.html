@@ -49,7 +49,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/10/31/我怎么从0到1搭建了这个hexo-blog/settings.png">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/我怎么从0到1搭建了这个hexo-blog/theme.png">
 <meta property="og:image" content="http://yoursite.com/2017/10/31/我怎么从0到1搭建了这个hexo-blog/config_title.png">
-<meta property="og:updated_time" content="2017-10-31T11:18:51.000Z">
+<meta property="og:updated_time" content="2017-10-31T11:20:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我怎么从0到1搭建了这个hexo-blog">
 <meta name="twitter:description" content="本blog从10月份的最后一天,从中午12:30 - 15:52,历经3 x 60m + 22m完成, 写篇我怎么搭好了这个坑.首先感谢下我的好哥们 @locker 兄. 参考博文:http://www.jianshu.com/p/6a330b1cc29d git a new repositories其实名字你开心就好~  ,新建后进入该repositories 的settings,如下图: br">
@@ -213,7 +213,7 @@
 <h3 id="git-a-new-repositories"><a href="#git-a-new-repositories" class="headerlink" title="git a new repositories"></a>git a new repositories</h3><p>其实名字你开心就好~  ,新建后进入该repositories 的settings,<br>如下图:<br><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/cap_gitSite.png" alt=""></p>
 <h3 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h3><p> 这个我的电脑从代码生涯开始它就存在,不累赘.</p>
 <h3 id="noje-js-npm"><a href="#noje-js-npm" class="headerlink" title="noje.js(npm)"></a>noje.js(npm)</h3><p>目前国内访问的话,网速很蜗牛,我安装的时候用的是公司的镜像.另外hexo在后面的init中, 会默认调用npm下载初始化用的部分零件, 如果你找到好的镜像,我建议直接跟我一样,直接把npm替换掉.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry &lt;镜像地址</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry &lt;镜像地址&gt;</div></pre></td></tr></table></figure>
 <h4 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo    #安装最新版本</div></pre></td></tr></table></figure>
 <p>然后切换建议是切换到一个你觉得OK的目录下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo init                       #初始化,会再次下载文件</div><div class="line">npm install                     #下载包依赖</div></pre></td></tr></table></figure>
@@ -226,9 +226,9 @@
 </ul>
 <p><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/settings.png" alt=""></p>
 <h3 id="选个酷点的主题"><a href="#选个酷点的主题" class="headerlink" title="选个酷点的主题"></a>选个酷点的主题</h3><p> <a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">主题选择连接 </a><br> 链接后面附demo了, 看看哪种比较酷, Copy 它的git地址执行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;git地址  theme/&lt;主题名称&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;git地址&gt;  theme/&lt;主题名称&gt;</div></pre></td></tr></table></figure>
 <p>以此为例:<br><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/theme.png" alt=""> </p>
-<p>然后在<code>_config.yml</code>中修改<code>theme: &lt;主题名称</code></p>
+<p>然后在<code>_config.yml</code>中修改<code>theme: &lt;主题名称&gt;</code></p>
 <h3 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 <h3 id="加载hexo"><a href="#加载hexo" class="headerlink" title="加载hexo"></a>加载hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d    #generate静态文件,提交deploy</div></pre></td></tr></table></figure>
 <h3 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s      #hexo server 可以映射到本地端口查看效果</div></pre></td></tr></table></figure>
