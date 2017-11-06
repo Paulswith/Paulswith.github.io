@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Paulswith·__dobby&#39;s Blogs</title>
+  
+  <subtitle>I just wanna improve myself.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-11-06T11:24:57.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Paulswith __dobby</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>验证码识别整理</title>
+    <link href="http://yoursite.com/2017/11/05/%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB%E6%95%B4%E7%90%86/"/>
+    <id>http://yoursite.com/2017/11/05/验证码识别整理/</id>
+    <published>2017-11-05T07:48:39.000Z</published>
+    <updated>2017-11-06T11:24:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下"><a href="#最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下" class="headerlink" title="最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下."></a>最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.</h3><h3 id="验证码识别的大杀器是tesseract君"><a href="#验证码识别的大杀器是tesseract君" class="headerlink" title="验证码识别的大杀器是tesseract君"></a>验证码识别的大杀器是<code>tesseract</code>君</h3><p><img src="/2017/11/05/验证码识别整理/tesseract.png" alt="tesseract"><br><a href="http://www.zmonster.me/2015/04/17/tesseract-install-usage.html" target="_blank" rel="external">tesseract指南中文版-link</a></p><h3 id="但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情"><a href="#但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情" class="headerlink" title="但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情"></a>但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情</h3><p><img src="/2017/11/05/验证码识别整理/tesseract_install.png" alt="tesseract"></p><h3 id="预处理常规有哪些呢"><a href="#预处理常规有哪些呢" class="headerlink" title="预处理常规有哪些呢?"></a>预处理常规有哪些呢?</h3><ul><li>灰度化</li><li>二值化</li><li>去除干扰线</li></ul><h3 id="图片处理库"><a href="#图片处理库" class="headerlink" title="图片处理库"></a>图片处理库</h3><p> Pillow (简称PIL)是一个强大的图片处理库, 具体的文档和官方网站可参考<br><a href="https://pillow.readthedocs.io/en/latest/index.html" target="_blank" rel="external">Pillow文档</a> - <a href="https://python-pillow.org/" target="_blank" rel="external">Pillow官网</a> - <a href="https://github.com/python-pillow/Pillow" target="_blank" rel="external">Pillow_GitHub</a><br><img src="/2017/11/05/验证码识别整理/pil_install.png" alt="安装方法"></p><h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#example_image = Image.open('/tmp/example.png')   #打开一张图片</span></div><div class="line">gray_image = example_image.convert(<span class="string">"L"</span>)</div></pre></td></tr></table></figure><p>convert传入model=”L”的时候, 会转换图片的RGB,返回一张灰度的图片<br><img src="/2017/11/05/验证码识别整理/model_L.png" alt=""></p><h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarizing_image</span><span class="params">(gray_image,threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    传入一张灰度图,进行二值化处理</span></div><div class="line"><span class="string">    :param gray_image: convert之后的灰度图</span></div><div class="line"><span class="string">    :param threshold:二值化阈值, 我对我的目标图片进行不同尝试,发现`180`的时候能拿到比较理想的值</span></div><div class="line"><span class="string">    :return: 二值化后的图片</span></div><div class="line"><span class="string">    """</span></div><div class="line">    pixel_data = gray_image.load()</div><div class="line">    w, h = gray_image.size</div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(h):</div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(w):</div><div class="line">            <span class="keyword">if</span> pixel_data[x, y] &lt; threshold:</div><div class="line">                pixel_data[x, y] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                pixel_data[x, y] = <span class="number">255</span></div><div class="line">    <span class="keyword">return</span> gray_image</div></pre></td></tr></table></figure><p>以该阈值为分界划分黑白, 查了下拿到的资料, 有设置为127的, 160的, 以哪种为标准呢? 个人觉得是想要的验证码比较清晰的程度就可以了, 这一块你可以多试试, 我尝试在120-180的区间给到的都比较满意. </p><h3 id="去除干扰线"><a href="#去除干扰线" class="headerlink" title="去除干扰线"></a>去除干扰线</h3><p>这里的方法看到不少,参考简书的作者比较粗暴的方式进行了处理<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">depoint</span><span class="params">(binarizing_image)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    对于像素值&gt;245的邻域像素，判别为属于背景色，\</span></div><div class="line"><span class="string">    如果一个像素上下左右4各像素值有超过2个像素属于背景色，那么该像素就是噪声。</span></div><div class="line"><span class="string">    jianshu_link: "http://www.jianshu.com/p/41127bf90ca9"</span></div><div class="line"><span class="string">    :param binarizing_image:</span></div><div class="line"><span class="string">    :return:</span></div><div class="line"><span class="string">    """</span></div><div class="line">    pixdata = binarizing_image.load()</div><div class="line">    w,h = binarizing_image.size</div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>,h<span class="number">-1</span>):</div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,w<span class="number">-1</span>):</div><div class="line">            count = <span class="number">0</span></div><div class="line">            <span class="keyword">if</span> pixdata[x,y<span class="number">-1</span>] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x,y+<span class="number">1</span>] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x<span class="number">-1</span>,y] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x+<span class="number">1</span>,y] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> count &gt; <span class="number">2</span>:</div><div class="line">                pixdata[x,y] = <span class="number">255</span></div><div class="line">    <span class="keyword">return</span> binarizing_image</div></pre></td></tr></table></figure></p><h3 id="处理后的图片转文字"><a href="#处理后的图片转文字" class="headerlink" title="处理后的图片转文字"></a>处理后的图片转文字</h3><p>图片转文字实际就是文章开头的tesseract , 不过大牛把它集成在pytesser这个库中,我们命令的调用方法如下:<br><img src="/2017/11/05/验证码识别整理/out_put.png" alt=""></p><p>化繁为简,pytesser一行代码告诉你文字中的图片, 当然前提是必须要安装tesseract<br>用法如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#图片文件直接转</span></div><div class="line"><span class="keyword">print</span> pytesser.image_file_to_string(<span class="string">'after_revole_image.jpg'</span>) </div><div class="line"><span class="comment">#这是PIL打开后的图片</span></div><div class="line"><span class="keyword">print</span> pytesser.image_to_string(image)</div></pre></td></tr></table></figure></p><p><a href="http://code.google.com/p/pytesser/" target="_blank" rel="external">pytesser-下载链接</a> - <a href="https://my.oschina.net/jhao104/blog/647326" target="_blank" rel="external">pytesser安装遇到坑?</a></p><h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性?"></a>局限性?</h3><p>简单的图片,识别率可破50%, 稍微复杂的图片, 基本是挂彩的. 有解决方案吗? 看到AI训练的模式可以较强的处理 . 这是一个方向. </p><h5 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h5><p><a href="http://www.jianshu.com/p/41127bf90ca9" target="_blank" rel="external">http://www.jianshu.com/p/41127bf90ca9</a><br><a href="http://aducode.github.io/posts/2014-07-08/python_identification_verification_code.html" target="_blank" rel="external">http://aducode.github.io/posts/2014-07-08/python_identification_verification_code.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下&quot;&gt;&lt;a href=&quot;#最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下&quot; class=&quot;headerlink&quot; title
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+      <category term="verificationCode" scheme="http://yoursite.com/tags/verificationCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>instruments命令行监控</title>
+    <link href="http://yoursite.com/2017/10/31/instruments%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9B%91%E6%8E%A7/"/>
+    <id>http://yoursite.com/2017/10/31/instruments命令行监控/</id>
+    <published>2017-10-31T13:11:26.000Z</published>
+    <updated>2017-11-06T11:25:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><em>周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限) </em></p><p><em>遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化监控, 提取出instrument的数据来完成性能的监控,完成对app某迭代阶段, 或者整个app周期的性能走势.</em></p><p><code>&lt;!---------------我是内容分割线---------------------------------------&gt;</code></p><h3 id="what’s-instruments"><a href="#what’s-instruments" class="headerlink" title="what’s  instruments"></a>what’s  instruments</h3><p>instruments是instrument命令行的工具, 在执行自动化的我们需要它来监控程序拿到数据.</p><h3 id="如何启动"><a href="#如何启动" class="headerlink" title="如何启动:"></a>如何启动:</h3><p><img src="/2017/10/31/instruments命令行监控/cap.png" alt=""></p><ul><li>-w           “UUID” 这里是真机的uuid</li><li>-t            “template”   后缀是.tracetemplace , 是想要录制的模板,整个在下面详解</li><li>-D           “save_trace”  完成录制后存储的位置, 为.trace文件, 与普通录制一致</li><li>App的bunldeID </li><li>-v           看help, 是说记录日志的,实际也没看到打印日志</li></ul><h3 id="现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢"><a href="#现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢" class="headerlink" title="现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?"></a>现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?</h3><p>其实很简单~  可惜我踩了一些坑才过来.<br>首先启动instrument app -&gt; 空模板 -&gt;  右上角新增想要的录制的模板(想说的是, 理论上是全部都可以录制, 自己挖坑跳跳才知道) .<br><img src="/2017/10/31/instruments命令行监控/add_tem.png" alt=""></p><p>左上角File -&gt; SaveAsTemplate , 存储, 拿到录制模板<code>.tracetemplace</code> :<br><img src="/2017/10/31/instruments命令行监控/as_tem.png" alt=""><br>Command+S, 存储, 拿到录制结束后, 会存储的<code>.trace</code>;</p><blockquote><p>这里为什么要这样子执行, 因为要保证.trace 和 .tracetemplace 一致,才能保存录制结果</p></blockquote><h3 id="拿到设备的UUID"><a href="#拿到设备的UUID" class="headerlink" title="拿到设备的UUID"></a>拿到设备的UUID</h3><p><code>instruments -s</code>可以拿到, 或者<code>xcrun simctl list</code> (是活动的设备会在后面提示(Booted)) </p><h3 id="如果你连bundleID都不知道"><a href="#如果你连bundleID都不知道" class="headerlink" title="如果你连bundleID都不知道~"></a>如果你连bundleID都不知道~</h3><p><code>ios-deploy -B</code>可以拿到连接设备的全部bundleID , 如果你的电脑没有ios-deploy, <code>brew install ios-deplo</code>, 大多情况下我这一步是啰嗦了.</p><h3 id="其他部分instruments-参数参考"><a href="#其他部分instruments-参数参考" class="headerlink" title="其他部分instruments 参数参考"></a>其他部分instruments 参数参考</h3><p><img src="/2017/10/31/instruments命令行监控/guide_all.png" alt=""></p><h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题?"></a>遗留问题?</h3><p>我尚未在模拟器上运行成功,  希望有运行成功的联系交流. </p><h2 id="拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行"><a href="#拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行" class="headerlink" title="拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行"></a>拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行</h2><h2 id="后序呢-怎么实现title上的想法"><a href="#后序呢-怎么实现title上的想法" class="headerlink" title="后序呢? 怎么实现title上的想法"></a>后序呢? 怎么实现title上的想法</h2><p>有接触一篇github, 作者似乎是逆向实现了,但代码也好久没更新了, 但是我本地暂未成功解析<br><a href="https://github.com/Qusic/TraceUtility" target="_blank" rel="external">TraceUtility</a><br><a href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0ahUKEwjyiabL65rXAhWBsJQKHa0WDLgQFgglMAA&amp;url=http%3a%2f%2fwww%2ecnblogs%2ecom%2fhyddd%2fp%2f5329608%2ehtml&amp;usg=AOvVaw2PasSIoEIDhnu52mlh62bt" target="_blank" rel="external">博文地址</a></p><h2 id="序已经开始了-目前的OC还没接触逆向-现在这一枪打响了"><a href="#序已经开始了-目前的OC还没接触逆向-现在这一枪打响了" class="headerlink" title="序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~"></a>序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;em&gt;周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限) &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;遗憾的是ios方面的在我当前涉及的圈子,发现能去这样
+      
+    
+    </summary>
+    
+      <category term="Unix" scheme="http://yoursite.com/categories/Unix/"/>
+    
+    
+      <category term="testTools" scheme="http://yoursite.com/tags/testTools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 命令行上的常规操作</title>
+    <link href="http://yoursite.com/2017/10/31/git-%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8A%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2017/10/31/git-命令行上的常规操作/</id>
+    <published>2017-10-31T09:14:24.000Z</published>
+    <updated>2017-11-06T11:25:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="git-clone-git的URL"><a href="#git-clone-git的URL" class="headerlink" title="git clone git的URL"></a>git clone git的URL</h5><blockquote><p>thanks github, open the door which share of code in the world</p></blockquote><h5 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h5><blockquote><p>初始化是新建的第一步<br><img src="/2017/10/31/git-命令行上的常规操作/init.png" alt=""></p></blockquote><h5 id="git-add-lt-文件-gt"><a href="#git-add-lt-文件-gt" class="headerlink" title="git add &lt;文件&gt;"></a>git add &lt;文件&gt;</h5><blockquote><p>第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件<br><img src="/2017/10/31/git-命令行上的常规操作/add.png" alt=""></p></blockquote><h5 id="git-commit-m-“message”"><a href="#git-commit-m-“message”" class="headerlink" title="git commit -m “message”"></a>git commit -m “message”</h5><h5 id="git-commit-m-“message”-lt-文件-gt"><a href="#git-commit-m-“message”-lt-文件-gt" class="headerlink" title="git commit -m “message” &lt;文件&gt;"></a>git commit -m “message” &lt;文件&gt;</h5><blockquote><p>第一种情况, 相对于前面add之后的commit, 默认提前当前的全部修改.<br>第二种情况, 只是更改某些个文件, commit特定的文件<br><img src="/2017/10/31/git-命令行上的常规操作/commit.png" alt=""></p></blockquote><p>#####git push</p><blockquote><p>git push是全部修改之后的提交代码操作, 默认是master主分支<br><img src="/2017/10/31/git-命令行上的常规操作/push.png" alt=""></p><h5 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h5><p>同步代码,默认是master<br><img src="/2017/10/31/git-命令行上的常规操作/pull.png" alt=""></p><h5 id="git-rm-lt-文件-gt"><a href="#git-rm-lt-文件-gt" class="headerlink" title="git rm &lt;文件&gt;"></a>git rm &lt;文件&gt;</h5><p>记住在本地移除后, 然后git commit -m “为啥移除” &amp;&amp; git push</p></blockquote><h5 id="and-more-请别让你的英文太烂"><a href="#and-more-请别让你的英文太烂" class="headerlink" title="and more , 请别让你的英文太烂"></a>and more , 请别让你的英文太烂</h5><p><img src="/2017/10/31/git-命令行上的常规操作/more.png" alt=""></p><h2 id="文章是从CSDN迁移过来的"><a href="#文章是从CSDN迁移过来的" class="headerlink" title="文章是从CSDN迁移过来的"></a>文章是从CSDN迁移过来的</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h5 id=&quot;git-clone-git的URL&quot;&gt;&lt;a href=&quot;#git-clone-git的URL&quot; class=&quot;headerlink&quot; title=&quot;git clone git的URL&quot;&gt;&lt;/a&gt;git clone git的URL&lt;/h5&gt;&lt;blockquote&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Unix" scheme="http://yoursite.com/categories/Unix/"/>
+    
+    
+      <category term="gitCommand" scheme="http://yoursite.com/tags/gitCommand/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我怎么从0到1搭建了这个hexo-blog</title>
+    <link href="http://yoursite.com/2017/10/31/%E6%88%91%E6%80%8E%E4%B9%88%E4%BB%8E0%E5%88%B01%E6%90%AD%E5%BB%BA%E4%BA%86%E8%BF%99%E4%B8%AAhexo-blog/"/>
+    <id>http://yoursite.com/2017/10/31/我怎么从0到1搭建了这个hexo-blog/</id>
+    <published>2017-10-31T08:46:58.000Z</published>
+    <updated>2017-11-06T11:24:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>本blog从10月份的最后一天,从中午12:30 - 15:52,历经3 x 60m + 22m完成, 写篇我怎么搭好了这个坑.</strong><br>首先感谢下我的好哥们 <a href="https://sherlockz.github.io/" target="_blank" rel="external">@locker </a>兄.</p><p>参考博文:<a href="http://www.jianshu.com/p/6a330b1cc29d" target="_blank" rel="external">http://www.jianshu.com/p/6a330b1cc29d</a></p><h3 id="git-a-new-repositories"><a href="#git-a-new-repositories" class="headerlink" title="git a new repositories"></a>git a new repositories</h3><p>其实名字你开心就好~  ,新建后进入该repositories 的settings,<br>如下图:<br><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/cap_gitSite.png" alt=""></p><h3 id="brew"><a href="#brew" class="headerlink" title="brew"></a>brew</h3><p> 这个我的电脑从代码生涯开始它就存在,不累赘.</p><h3 id="noje-js-npm"><a href="#noje-js-npm" class="headerlink" title="noje.js(npm)"></a>noje.js(npm)</h3><p>目前国内访问的话,网速很蜗牛,我安装的时候用的是公司的镜像.另外hexo在后面的init中, 会默认调用npm下载初始化用的部分零件, 如果你找到好的镜像,我建议直接跟我一样,直接把npm替换掉.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry &lt;镜像地址&gt;</div></pre></td></tr></table></figure><h4 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo    #安装最新版本</div></pre></td></tr></table></figure><p>然后切换建议是切换到一个你觉得OK的目录下</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo init                       #初始化,会再次下载文件</div><div class="line">npm install                     #下载包依赖</div></pre></td></tr></table></figure><h3 id="配置ssh连接"><a href="#配置ssh连接" class="headerlink" title="配置ssh连接"></a>配置ssh连接</h3><p>博文中是有要求配置ssh,但我因为是第一次踩坑后重来的, 直接使用了https, 若您有时间,我也建议你使用ssh. 可参考上面的博文, 需要提示的是new一个ssh-key, 需要到github对应的邮箱确认下. 本地ssh绑定的邮箱也需要和github一致.</p><h3 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h3><p>在hexo的文件下, 有个<code>_config.yml</code> ,这里是hexo的基本配置,下拉到最下面, 如果你是跟我一样对markdown接触不多的, 请务必注意<code>:</code>之后的空格</p><ul><li>type: git</li><li>repo: 这里是你刚才新建的那个https–.git地址 . ssh的话则是ssh</li><li>branch: master</li></ul><p><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/settings.png" alt=""></p><h3 id="选个酷点的主题"><a href="#选个酷点的主题" class="headerlink" title="选个酷点的主题"></a>选个酷点的主题</h3><p> <a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">主题选择连接 </a><br> 链接后面附demo了, 看看哪种比较酷, Copy 它的git地址执行:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone &lt;git地址&gt;  theme/&lt;主题名称&gt;</div></pre></td></tr></table></figure><p>以此为例:<br><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/theme.png" alt=""> </p><p>然后在<code>_config.yml</code>中修改<code>theme: &lt;主题名称&gt;</code></p><h3 id="提交修改"><a href="#提交修改" class="headerlink" title="提交修改"></a>提交修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure><h3 id="加载hexo"><a href="#加载hexo" class="headerlink" title="加载hexo"></a>加载hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo g -d    #generate静态文件,提交deploy</div></pre></td></tr></table></figure><h3 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo s      #hexo server 可以映射到本地端口查看效果</div></pre></td></tr></table></figure><h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>访问的地址是 githubUserName.github.io<br>如我的github name是paulswith, 地址即为<a href="https://paulswith.github.io" target="_blank" rel="external">https://paulswith.github.io</a></p><h3 id="mark下哪些坑"><a href="#mark下哪些坑" class="headerlink" title="mark下哪些坑"></a>mark下哪些坑</h3><p> 1 . 修改头像问题, 请直接copy文件到<br><code>theme/主题名字/source/images/default_avatar.jpg</code> 替换此文件<br> 2 . 配置项的title之类的没有生效? 参考<br><img src="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/config_title.png" alt=""><br> 3 . 要忍受Hexo提供的图片语法? <a href="https://www.tuicool.com/articles/umEBVfI" target="_blank" rel="external">https://www.tuicool.com/articles/umEBVfI</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;本blog从10月份的最后一天,从中午12:30 - 15:52,历经3 x 60m + 22m完成, 写篇我怎么搭好了这个坑.&lt;/strong&gt;&lt;br&gt;首先感谢下我的好哥们 &lt;a href=&quot;https://sherlockz.github.io/&quot; ta
+      
+    
+    </summary>
+    
+      <category term="WEB" scheme="http://yoursite.com/categories/WEB/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2017/10/31/hello-world/"/>
+    <id>http://yoursite.com/2017/10/31/hello-world/</id>
+    <published>2017-10-31T07:36:01.000Z</published>
+    <updated>2017-10-31T07:36:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
