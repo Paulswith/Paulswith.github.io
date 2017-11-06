@@ -37,25 +37,24 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="git clone git的URL thanks github, open the door which share of code in the world  git init 初始化是新建的第一步  git add &amp;lt;文件&amp;gt; 第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件  git">
+<meta name="description" content="最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.验证码识别的大杀器是tesseract君tesseract指南中文版-link 但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情 预处理常规有哪些呢? 灰度化 二值化 去除干扰线  图片处理库 Pillow (简称PIL)">
 <meta name="keywords" content="Tools">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git 命令行上的常规操作">
-<meta property="og:url" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/index.html">
+<meta property="og:title" content="验证码识别整理">
+<meta property="og:url" content="http://yoursite.com/2017/11/05/验证码识别整理/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="git clone git的URL thanks github, open the door which share of code in the world  git init 初始化是新建的第一步  git add &amp;lt;文件&amp;gt; 第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件  git">
+<meta property="og:description" content="最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.验证码识别的大杀器是tesseract君tesseract指南中文版-link 但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情 预处理常规有哪些呢? 灰度化 二值化 去除干扰线  图片处理库 Pillow (简称PIL)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/init.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/add.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/commit.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/push.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/pull.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/more.png">
-<meta property="og:updated_time" content="2017-10-31T09:15:19.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/11/05/验证码识别整理/tesseract.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/05/验证码识别整理/tesseract_install.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/05/验证码识别整理/pil_install.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/05/验证码识别整理/model_L.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/05/验证码识别整理/out_put.png">
+<meta property="og:updated_time" content="2017-11-06T09:53:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git 命令行上的常规操作">
-<meta name="twitter:description" content="git clone git的URL thanks github, open the door which share of code in the world  git init 初始化是新建的第一步  git add &amp;lt;文件&amp;gt; 第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件  git">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/31/git-命令行上的常规操作/init.png">
+<meta name="twitter:title" content="验证码识别整理">
+<meta name="twitter:description" content="最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.验证码识别的大杀器是tesseract君tesseract指南中文版-link 但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情 预处理常规有哪些呢? 灰度化 二值化 去除干扰线  图片处理库 Pillow (简称PIL)">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/05/验证码识别整理/tesseract.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -65,7 +64,7 @@
   };
 </script>
 
-  <title> git 命令行上的常规操作 | Paulswith·__dobby's Blogs </title>
+  <title> 验证码识别整理 | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -182,7 +181,7 @@
           
           
             
-              git 命令行上的常规操作
+              验证码识别整理
             
           
         </h1>
@@ -191,8 +190,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-10-31T17:14:24+08:00" content="2017-10-31">
-            2017-10-31
+          <time itemprop="dateCreated" datetime="2017-11-05T15:48:39+08:00" content="2017-11-05">
+            2017-11-05
           </time>
         </span>
 
@@ -210,26 +209,25 @@
       
 
       
-        <span itemprop="articleBody"><h5 id="git-clone-git的URL"><a href="#git-clone-git的URL" class="headerlink" title="git clone git的URL"></a>git clone git的URL</h5><blockquote>
-<p>thanks github, open the door which share of code in the world</p>
-</blockquote>
-<h5 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h5><blockquote>
-<p>初始化是新建的第一步<br><img src="/2017/10/31/git-命令行上的常规操作/init.png" alt=""></p>
-</blockquote>
-<h5 id="git-add-lt-文件-gt"><a href="#git-add-lt-文件-gt" class="headerlink" title="git add &lt;文件&gt;"></a>git add &lt;文件&gt;</h5><blockquote>
-<p>第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件<br><img src="/2017/10/31/git-命令行上的常规操作/add.png" alt=""></p>
-</blockquote>
-<h5 id="git-commit-m-“message”"><a href="#git-commit-m-“message”" class="headerlink" title="git commit -m “message”"></a>git commit -m “message”</h5><h5 id="git-commit-m-“message”-lt-文件-gt"><a href="#git-commit-m-“message”-lt-文件-gt" class="headerlink" title="git commit -m “message” &lt;文件&gt;"></a>git commit -m “message” &lt;文件&gt;</h5><blockquote>
-<p>第一种情况, 相对于前面add之后的commit, 默认提前当前的全部修改.<br>第二种情况, 只是更改某些个文件, commit特定的文件<br><img src="/2017/10/31/git-命令行上的常规操作/commit.png" alt=""></p>
-</blockquote>
-<p>#####git push</p>
-<blockquote>
-<p>git push是全部修改之后的提交代码操作, 默认是master主分支<br><img src="/2017/10/31/git-命令行上的常规操作/push.png" alt=""></p>
-<h5 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h5><p>同步代码,默认是master<br><img src="/2017/10/31/git-命令行上的常规操作/pull.png" alt=""></p>
-<h5 id="git-rm-lt-文件-gt"><a href="#git-rm-lt-文件-gt" class="headerlink" title="git rm &lt;文件&gt;"></a>git rm &lt;文件&gt;</h5><p>记住在本地移除后, 然后git commit -m “为啥移除” &amp;&amp; git push</p>
-</blockquote>
-<h5 id="and-more-请别让你的英文太烂"><a href="#and-more-请别让你的英文太烂" class="headerlink" title="and more , 请别让你的英文太烂"></a>and more , 请别让你的英文太烂</h5><p><img src="/2017/10/31/git-命令行上的常规操作/more.png" alt=""></p>
-<h2 id="文章是从CSDN迁移过来的"><a href="#文章是从CSDN迁移过来的" class="headerlink" title="文章是从CSDN迁移过来的"></a>文章是从CSDN迁移过来的</h2></span>
+        <span itemprop="articleBody"><h3 id="最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下"><a href="#最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下" class="headerlink" title="最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下."></a>最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.</h3><h3 id="验证码识别的大杀器是tesseract君"><a href="#验证码识别的大杀器是tesseract君" class="headerlink" title="验证码识别的大杀器是tesseract君"></a>验证码识别的大杀器是<code>tesseract</code>君</h3><p><img src="/2017/11/05/验证码识别整理/tesseract.png" alt="tesseract"><br><a href="http://www.zmonster.me/2015/04/17/tesseract-install-usage.html" target="_blank" rel="external">tesseract指南中文版-link</a></p>
+<h3 id="但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情"><a href="#但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情" class="headerlink" title="但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情"></a>但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情</h3><p><img src="/2017/11/05/验证码识别整理/tesseract_install.png" alt="tesseract"></p>
+<h3 id="预处理常规有哪些呢"><a href="#预处理常规有哪些呢" class="headerlink" title="预处理常规有哪些呢?"></a>预处理常规有哪些呢?</h3><ul>
+<li>灰度化</li>
+<li>二值化</li>
+<li>去除干扰线</li>
+</ul>
+<h3 id="图片处理库"><a href="#图片处理库" class="headerlink" title="图片处理库"></a>图片处理库</h3><p> Pillow (简称PIL)是一个强大的图片处理库, 具体的文档和官方网站可参考<br><a href="https://pillow.readthedocs.io/en/latest/index.html" target="_blank" rel="external">Pillow文档</a> - <a href="https://python-pillow.org/" target="_blank" rel="external">Pillow官网</a> - <a href="https://github.com/python-pillow/Pillow" target="_blank" rel="external">Pillow_GitHub</a><br><img src="/2017/11/05/验证码识别整理/pil_install.png" alt="安装方法"></p>
+<h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#example_image = Image.open('/tmp/example.png')   #打开一张图片</span></div><div class="line">gray_image = example_image.convert(<span class="string">"L"</span>)</div></pre></td></tr></table></figure>
+<p>convert传入model=”L”的时候, 会转换图片的RGB,返回一张灰度的图片<br><img src="/2017/11/05/验证码识别整理/model_L.png" alt=""></p>
+<h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarizing_image</span><span class="params">(gray_image,threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    传入一张灰度图,进行二值化处理</span></div><div class="line"><span class="string">    :param gray_image: convert之后的灰度图</span></div><div class="line"><span class="string">    :param threshold:二值化阈值, 我对我的目标图片进行不同尝试,发现`180`的时候能拿到比较理想的值</span></div><div class="line"><span class="string">    :return: 二值化后的图片</span></div><div class="line"><span class="string">    """</span></div><div class="line">    pixel_data = gray_image.load()</div><div class="line">    w, h = gray_image.size</div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(h):</div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(w):</div><div class="line">            <span class="keyword">if</span> pixel_data[x, y] &lt; threshold:</div><div class="line">                pixel_data[x, y] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                pixel_data[x, y] = <span class="number">255</span></div><div class="line">    <span class="keyword">return</span> gray_image</div></pre></td></tr></table></figure>
+<p>以该阈值为分界划分黑白, 查了下拿到的资料, 有设置为127的, 160的, 以哪种为标准呢? 个人觉得是想要的验证码比较清晰的程度就可以了, 这一块你可以多试试, 我尝试在120-180的区间给到的都比较满意. </p>
+<h3 id="去除干扰线"><a href="#去除干扰线" class="headerlink" title="去除干扰线"></a>去除干扰线</h3><p>这里的方法看到不少,参考简书的作者比较粗暴的方式进行了处理<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">depoint</span><span class="params">(binarizing_image)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    对于像素值&gt;245的邻域像素，判别为属于背景色，\</span></div><div class="line"><span class="string">    如果一个像素上下左右4各像素值有超过2个像素属于背景色，那么该像素就是噪声。</span></div><div class="line"><span class="string">    jianshu_link: "http://www.jianshu.com/p/41127bf90ca9"</span></div><div class="line"><span class="string">    :param binarizing_image:</span></div><div class="line"><span class="string">    :return:</span></div><div class="line"><span class="string">    """</span></div><div class="line">    pixdata = binarizing_image.load()</div><div class="line">    w,h = binarizing_image.size</div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>,h<span class="number">-1</span>):</div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,w<span class="number">-1</span>):</div><div class="line">            count = <span class="number">0</span></div><div class="line">            <span class="keyword">if</span> pixdata[x,y<span class="number">-1</span>] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x,y+<span class="number">1</span>] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x<span class="number">-1</span>,y] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x+<span class="number">1</span>,y] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> count &gt; <span class="number">2</span>:</div><div class="line">                pixdata[x,y] = <span class="number">255</span></div><div class="line">    <span class="keyword">return</span> binarizing_image</div></pre></td></tr></table></figure></p>
+<h3 id="处理后的图片转文字"><a href="#处理后的图片转文字" class="headerlink" title="处理后的图片转文字"></a>处理后的图片转文字</h3><p>图片转文字实际就是文章开头的tesseract , 不过大牛把它集成在pytesser这个库中,我们命令的调用方法如下:<br><img src="/2017/11/05/验证码识别整理/out_put.png" alt=""></p>
+<p>化繁为简,pytesser一行代码告诉你文字中的图片, 当然前提是必须要安装tesseract<br>用法如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#图片文件直接转</span></div><div class="line"><span class="keyword">print</span> pytesser.image_file_to_string(<span class="string">'after_revole_image.jpg'</span>) </div><div class="line"><span class="comment">#这是PIL打开后的图片</span></div><div class="line"><span class="keyword">print</span> pytesser.image_to_string(image)</div></pre></td></tr></table></figure></p>
+<p><a href="http://code.google.com/p/pytesser/" target="_blank" rel="external">pytesser-下载链接</a> - <a href="https://my.oschina.net/jhao104/blog/647326" target="_blank" rel="external">pytesser安装遇到坑?</a></p>
+<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性?"></a>局限性?</h3><p>简单的图片,识别率可破50%, 稍微复杂的图片, 基本是挂彩的. 有解决方案吗? 看到AI训练的模式可以较强的处理 . 这是一个方向. </p>
+<h5 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h5><p><a href="http://www.jianshu.com/p/41127bf90ca9" target="_blank" rel="external">http://www.jianshu.com/p/41127bf90ca9</a><br><a href="http://aducode.github.io/posts/2014-07-08/python_identification_verification_code.html" target="_blank" rel="external">http://aducode.github.io/posts/2014-07-08/python_identification_verification_code.html</a></p>
+</span>
       
     </div>
 
@@ -246,13 +244,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/instruments命令行监控/" rel="prev">instruments命令行监控</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/" rel="next">我怎么从0到1搭建了这个hexo-blog</a>
+              <a href="/2017/10/31/instruments命令行监控/" rel="next">instruments命令行监控</a>
             
           </div>
         </div>
@@ -500,7 +496,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#git-clone-git的URL"><span class="nav-number">1.</span> <span class="nav-text">git clone git的URL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-init"><span class="nav-number">2.</span> <span class="nav-text">git init</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-add-lt-文件-gt"><span class="nav-number">3.</span> <span class="nav-text">git add <文件></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-commit-m-“message”"><span class="nav-number">4.</span> <span class="nav-text">git commit -m “message”</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-commit-m-“message”-lt-文件-gt"><span class="nav-number">5.</span> <span class="nav-text">git commit -m “message” <文件></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-pull"><span class="nav-number">6.</span> <span class="nav-text">git pull</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#git-rm-lt-文件-gt"><span class="nav-number">7.</span> <span class="nav-text">git rm <文件></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#and-more-请别让你的英文太烂"><span class="nav-number">8.</span> <span class="nav-text">and more , 请别让你的英文太烂</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章是从CSDN迁移过来的"><span class="nav-number"></span> <span class="nav-text">文章是从CSDN迁移过来的</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下"><span class="nav-number">1.</span> <span class="nav-text">最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证码识别的大杀器是tesseract君"><span class="nav-number">2.</span> <span class="nav-text">验证码识别的大杀器是tesseract君</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情"><span class="nav-number">3.</span> <span class="nav-text">但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预处理常规有哪些呢"><span class="nav-number">4.</span> <span class="nav-text">预处理常规有哪些呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片处理库"><span class="nav-number">5.</span> <span class="nav-text">图片处理库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灰度化"><span class="nav-number">6.</span> <span class="nav-text">灰度化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二值化"><span class="nav-number">7.</span> <span class="nav-text">二值化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去除干扰线"><span class="nav-number">8.</span> <span class="nav-text">去除干扰线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理后的图片转文字"><span class="nav-number">9.</span> <span class="nav-text">处理后的图片转文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局限性"><span class="nav-number">10.</span> <span class="nav-text">局限性?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考文章"><span class="nav-number">10.0.1.</span> <span class="nav-text">参考文章</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
