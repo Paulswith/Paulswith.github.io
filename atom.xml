@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-06T11:24:57.000Z</updated>
+  <updated>2017-11-08T10:55:15.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>brewupgrade-提示ruby版本低</title>
+    <link href="http://yoursite.com/2017/11/08/brewupgrade-%E6%8F%90%E7%A4%BAruby%E7%89%88%E6%9C%AC%E4%BD%8E/"/>
+    <id>http://yoursite.com/2017/11/08/brewupgrade-提示ruby版本低/</id>
+    <published>2017-11-08T10:40:41.000Z</published>
+    <updated>2017-11-08T10:55:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="干嘛写"><a href="#干嘛写" class="headerlink" title="干嘛写?"></a>干嘛写?</h3><blockquote><p>mac自带了很多的开发环境,ruby python java so on~~, 但版本有时候低了, 又不能直接升级系统的这些,昨天brew upgrade的时候提示了ruby版本低,mark这个小tip</p></blockquote><h3 id="Error-like-that"><a href="#Error-like-that" class="headerlink" title="Error like that"></a>Error like that</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/tishi.png" alt=""></p><blockquote><p>你在<code>brew upgrade</code>的时候报了这样的错误</p></blockquote><h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/old_version.png" alt=""></p><blockquote><p>官网都到2.4+了,确实older</p></blockquote><h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/which_ruby.png" alt=""></p><blockquote><p>因为是系统自带,which看到是在/usr/bin/下的</p></blockquote><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/resove.png" alt=""></p><blockquote><p>可以试试, 两行, 完美解决,当然也会有解决不了的, 往下看</p></blockquote><h3 id="怎么解决的"><a href="#怎么解决的" class="headerlink" title="怎么解决的?"></a>怎么解决的?</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/find.png" alt=""></p><blockquote><p>可以从结果完美运行知道, brew 运行的时候不会指定要哪个目录下的ruby,直接是ruby —</p><p>没有解决的是什么情况呢? 这时候你which ruby看到的应该与我不同, 它依然显示是/usr/bin/下面的</p><p>因为 <code>[环境变量在同样名词的情况下, 是会存在覆盖的. ]</code>, 你可以打开你的.bash_profile 或 .zshrc 配置文件下, export PATH=<strong>*</strong>, 是不是把/usr/local/bin/ 的顺序, 放在了/usr/bin的前面了. </p></blockquote><h3 id="mac大法好"><a href="#mac大法好" class="headerlink" title="mac大法好"></a>mac大法好</h3><blockquote><p>小tip,没什么料, 点点滴滴点点</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;干嘛写&quot;&gt;&lt;a href=&quot;#干嘛写&quot; class=&quot;headerlink&quot; title=&quot;干嘛写?&quot;&gt;&lt;/a&gt;干嘛写?&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;mac自带了很多的开发环境,ruby python java so on~~, 但版本有时候低了, 又
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>验证码识别整理</title>
@@ -72,7 +94,7 @@
     <link href="http://yoursite.com/2017/10/31/git-%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8A%E7%9A%84%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C/"/>
     <id>http://yoursite.com/2017/10/31/git-命令行上的常规操作/</id>
     <published>2017-10-31T09:14:24.000Z</published>
-    <updated>2017-11-06T11:25:24.000Z</updated>
+    <updated>2017-11-08T10:36:37.000Z</updated>
     
     <content type="html"><![CDATA[<h5 id="git-clone-git的URL"><a href="#git-clone-git的URL" class="headerlink" title="git clone git的URL"></a>git clone git的URL</h5><blockquote><p>thanks github, open the door which share of code in the world</p></blockquote><h5 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h5><blockquote><p>初始化是新建的第一步<br><img src="/2017/10/31/git-命令行上的常规操作/init.png" alt=""></p></blockquote><h5 id="git-add-lt-文件-gt"><a href="#git-add-lt-文件-gt" class="headerlink" title="git add &lt;文件&gt;"></a>git add &lt;文件&gt;</h5><blockquote><p>第二部, 任何时候仓库中新增了某个文件,都需要add, 后面跟随文件.  可以精准到某个文件, 也可以指定某个文件夹,亦或者”.”,当前目录全部文件<br><img src="/2017/10/31/git-命令行上的常规操作/add.png" alt=""></p></blockquote><h5 id="git-commit-m-“message”"><a href="#git-commit-m-“message”" class="headerlink" title="git commit -m “message”"></a>git commit -m “message”</h5><h5 id="git-commit-m-“message”-lt-文件-gt"><a href="#git-commit-m-“message”-lt-文件-gt" class="headerlink" title="git commit -m “message” &lt;文件&gt;"></a>git commit -m “message” &lt;文件&gt;</h5><blockquote><p>第一种情况, 相对于前面add之后的commit, 默认提前当前的全部修改.<br>第二种情况, 只是更改某些个文件, commit特定的文件<br><img src="/2017/10/31/git-命令行上的常规操作/commit.png" alt=""></p></blockquote><p>#####git push</p><blockquote><p>git push是全部修改之后的提交代码操作, 默认是master主分支<br><img src="/2017/10/31/git-命令行上的常规操作/push.png" alt=""></p><h5 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h5><p>同步代码,默认是master<br><img src="/2017/10/31/git-命令行上的常规操作/pull.png" alt=""></p><h5 id="git-rm-lt-文件-gt"><a href="#git-rm-lt-文件-gt" class="headerlink" title="git rm &lt;文件&gt;"></a>git rm &lt;文件&gt;</h5><p>记住在本地移除后, 然后git commit -m “为啥移除” &amp;&amp; git push</p></blockquote><h5 id="and-more-请别让你的英文太烂"><a href="#and-more-请别让你的英文太烂" class="headerlink" title="and more , 请别让你的英文太烂"></a>and more , 请别让你的英文太烂</h5><p><img src="/2017/10/31/git-命令行上的常规操作/more.png" alt=""></p><h2 id="文章是从CSDN迁移过来的"><a href="#文章是从CSDN迁移过来的" class="headerlink" title="文章是从CSDN迁移过来的"></a>文章是从CSDN迁移过来的</h2>]]></content>
     
