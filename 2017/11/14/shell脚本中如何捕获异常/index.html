@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="testTools," />
+  <meta name="keywords" content="shell," />
 
 
 
@@ -39,23 +39,25 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限)  遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化">
-<meta name="keywords" content="testTools">
+<meta name="description" content="在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?答案是 #? : 用于捕获上一条命令的状态,0的状态为正常,1为异常自己在整理shell的时候遇到一些坑, 把它的规范列一下  #?和echo输出命令要注意这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是echo">
+<meta name="keywords" content="shell">
 <meta property="og:type" content="article">
-<meta property="og:title" content="instruments命令行监控">
-<meta property="og:url" content="http://yoursite.com/2017/10/31/instruments命令行监控/index.html">
+<meta property="og:title" content="shell脚本中如何捕获异常">
+<meta property="og:url" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限)  遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化">
+<meta property="og:description" content="在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?答案是 #? : 用于捕获上一条命令的状态,0的状态为正常,1为异常自己在整理shell的时候遇到一些坑, 把它的规范列一下  #?和echo输出命令要注意这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是echo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/cap.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/add_tem.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/as_tem.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/guide_all.png">
-<meta property="og:updated_time" content="2017-11-06T11:25:38.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/echo1.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/echo2.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/fix1.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/fix2.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/full1.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/full2.png">
+<meta property="og:updated_time" content="2017-11-14T11:14:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="instruments命令行监控">
-<meta name="twitter:description" content="周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限)  遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/cap.png">
+<meta name="twitter:title" content="shell脚本中如何捕获异常">
+<meta name="twitter:description" content="在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?答案是 #? : 用于捕获上一条命令的状态,0的状态为正常,1为异常自己在整理shell的时候遇到一些坑, 把它的规范列一下  #?和echo输出命令要注意这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是echo">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/echo1.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -65,7 +67,7 @@
   };
 </script>
 
-  <title> instruments命令行监控 | Paulswith·__dobby's Blogs </title>
+  <title> shell脚本中如何捕获异常 | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -190,7 +192,7 @@
           
           
             
-              instruments命令行监控
+              shell脚本中如何捕获异常
             
           
         </h1>
@@ -199,8 +201,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-10-31T21:11:26+08:00" content="2017-10-31">
-            2017-10-31
+          <time itemprop="dateCreated" datetime="2017-11-14T18:56:50+08:00" content="2017-11-14">
+            2017-11-14
           </time>
         </span>
 
@@ -233,29 +235,14 @@
       
 
       
-        <span itemprop="articleBody"><p><em>周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限) </em></p>
-<p><em>遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化监控, 提取出instrument的数据来完成性能的监控,完成对app某迭代阶段, 或者整个app周期的性能走势.</em></p>
-<p><code>&lt;!---------------我是内容分割线---------------------------------------&gt;</code></p>
-<h3 id="what’s-instruments"><a href="#what’s-instruments" class="headerlink" title="what’s  instruments"></a>what’s  instruments</h3><p>instruments是instrument命令行的工具, 在执行自动化的我们需要它来监控程序拿到数据.</p>
-<h3 id="如何启动"><a href="#如何启动" class="headerlink" title="如何启动:"></a>如何启动:</h3><p><img src="/2017/10/31/instruments命令行监控/cap.png" alt=""></p>
-<ul>
-<li>-w           “UUID” 这里是真机的uuid</li>
-<li>-t            “template”   后缀是.tracetemplace , 是想要录制的模板,整个在下面详解</li>
-<li>-D           “save_trace”  完成录制后存储的位置, 为.trace文件, 与普通录制一致</li>
-<li>App的bunldeID </li>
-<li>-v           看help, 是说记录日志的,实际也没看到打印日志</li>
-</ul>
-<h3 id="现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢"><a href="#现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢" class="headerlink" title="现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?"></a>现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?</h3><p>其实很简单~  可惜我踩了一些坑才过来.<br>首先启动instrument app -&gt; 空模板 -&gt;  右上角新增想要的录制的模板(想说的是, 理论上是全部都可以录制, 自己挖坑跳跳才知道) .<br><img src="/2017/10/31/instruments命令行监控/add_tem.png" alt=""></p>
-<p>左上角File -&gt; SaveAsTemplate , 存储, 拿到录制模板<code>.tracetemplace</code> :<br><img src="/2017/10/31/instruments命令行监控/as_tem.png" alt=""><br>Command+S, 存储, 拿到录制结束后, 会存储的<code>.trace</code>;</p>
-<blockquote>
-<p>这里为什么要这样子执行, 因为要保证.trace 和 .tracetemplace 一致,才能保存录制结果</p>
+        <span itemprop="articleBody"><blockquote>
+<p>在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?<br>答案是 <code>#?</code> : <code>用于捕获上一条命令的状态,0的状态为正常,1为异常</code><br>自己在整理shell的时候遇到一些坑, 把它的规范列一下</p>
 </blockquote>
-<h3 id="拿到设备的UUID"><a href="#拿到设备的UUID" class="headerlink" title="拿到设备的UUID"></a>拿到设备的UUID</h3><p><code>instruments -s</code>可以拿到, 或者<code>xcrun simctl list</code> (是活动的设备会在后面提示(Booted)) </p>
-<h3 id="如果你连bundleID都不知道"><a href="#如果你连bundleID都不知道" class="headerlink" title="如果你连bundleID都不知道~"></a>如果你连bundleID都不知道~</h3><p><code>ios-deploy -B</code>可以拿到连接设备的全部bundleID , 如果你的电脑没有ios-deploy, <code>brew install ios-deplo</code>, 大多情况下我这一步是啰嗦了.</p>
-<h3 id="其他部分instruments-参数参考"><a href="#其他部分instruments-参数参考" class="headerlink" title="其他部分instruments 参数参考"></a>其他部分instruments 参数参考</h3><p><img src="/2017/10/31/instruments命令行监控/guide_all.png" alt=""></p>
-<h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题?"></a>遗留问题?</h3><p>我尚未在模拟器上运行成功,  希望有运行成功的联系交流. </p>
-<h2 id="拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行"><a href="#拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行" class="headerlink" title="拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行"></a>拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行</h2><h2 id="后序呢-怎么实现title上的想法"><a href="#后序呢-怎么实现title上的想法" class="headerlink" title="后序呢? 怎么实现title上的想法"></a>后序呢? 怎么实现title上的想法</h2><p>有接触一篇github, 作者似乎是逆向实现了,但代码也好久没更新了, 但是我本地暂未成功解析<br><a href="https://github.com/Qusic/TraceUtility" target="_blank" rel="external">TraceUtility</a><br><a href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0ahUKEwjyiabL65rXAhWBsJQKHa0WDLgQFgglMAA&amp;url=http%3a%2f%2fwww%2ecnblogs%2ecom%2fhyddd%2fp%2f5329608%2ehtml&amp;usg=AOvVaw2PasSIoEIDhnu52mlh62bt" target="_blank" rel="external">博文地址</a></p>
-<h2 id="序已经开始了-目前的OC还没接触逆向-现在这一枪打响了"><a href="#序已经开始了-目前的OC还没接触逆向-现在这一枪打响了" class="headerlink" title="序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~"></a>序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~</h2></span>
+<h3 id="和echo输出命令要注意"><a href="#和echo输出命令要注意" class="headerlink" title="#?和echo输出命令要注意"></a>#?和echo输出命令要注意</h3><p><img src="/2017/11/14/shell脚本中如何捕获异常/echo1.png" alt=""><br>这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是<code>echo $?</code>应该给到是1<br>但是看看执行结果:<br><img src="/2017/11/14/shell脚本中如何捕获异常/echo2.png" alt=""><br>看到输出的结果是0, 原因在于<code>echo</code>上, <code>echo</code>包了这一层命令, 只要<code>echo</code>直接将这命令打印在终端, 就是完整的完成工作,根本没有异常可言.</p>
+<h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><p>当然是去除<code>echo</code>直接输出, 但是还是要注意的是, <code>$?</code>仅仅提示是上一条,这里必须十分谨慎.列下能捕获到异常:<br><img src="/2017/11/14/shell脚本中如何捕获异常/fix1.png" alt=""><br><img src="/2017/11/14/shell脚本中如何捕获异常/fix2.png" alt=""><br>可以看到输出是1了, 确认命令使用没问题后,就可以进行逻辑处理.</p>
+<h3 id="避免"><a href="#避免" class="headerlink" title="避免"></a>避免</h3><p>这是完整的逻辑代码:<br><img src="/2017/11/14/shell脚本中如何捕获异常/full1.png" alt=""><br>更好的避免, 将允许的条件, 并到逻辑与:<br><img src="/2017/11/14/shell脚本中如何捕获异常/full2.png" alt=""></p>
+<p><code>[shell大法好]</code></p>
+</span>
       
     </div>
 
@@ -263,7 +250,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/testTools/" rel="tag">#testTools</a>
+            <a href="/tags/shell/" rel="tag">#shell</a>
           
         </div>
       
@@ -272,13 +259,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/05/验证码识别整理/" rel="prev">验证码识别整理</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/31/git-命令行上的常规操作/" rel="next">git 命令行上的常规操作</a>
+              <a href="/2017/11/08/OC中常用的延迟执行代码方法/" rel="next">OC中常用的延迟执行代码方法</a>
             
           </div>
         </div>
@@ -474,7 +459,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#what’s-instruments"><span class="nav-number">1.</span> <span class="nav-text">what’s  instruments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何启动"><span class="nav-number">2.</span> <span class="nav-text">如何启动:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢"><span class="nav-number">3.</span> <span class="nav-text">现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拿到设备的UUID"><span class="nav-number">4.</span> <span class="nav-text">拿到设备的UUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果你连bundleID都不知道"><span class="nav-number">5.</span> <span class="nav-text">如果你连bundleID都不知道~</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他部分instruments-参数参考"><span class="nav-number">6.</span> <span class="nav-text">其他部分instruments 参数参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遗留问题"><span class="nav-number">7.</span> <span class="nav-text">遗留问题?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行"><span class="nav-number"></span> <span class="nav-text">拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后序呢-怎么实现title上的想法"><span class="nav-number"></span> <span class="nav-text">后序呢? 怎么实现title上的想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序已经开始了-目前的OC还没接触逆向-现在这一枪打响了"><span class="nav-number"></span> <span class="nav-text">序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#和echo输出命令要注意"><span class="nav-number">1.</span> <span class="nav-text">#?和echo输出命令要注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修复"><span class="nav-number">2.</span> <span class="nav-text">修复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免"><span class="nav-number">3.</span> <span class="nav-text">避免</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>

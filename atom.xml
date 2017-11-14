@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-08T11:35:04.000Z</updated>
+  <updated>2017-11-14T11:14:22.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>shell脚本中如何捕获异常</title>
+    <link href="http://yoursite.com/2017/11/14/shell%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/"/>
+    <id>http://yoursite.com/2017/11/14/shell脚本中如何捕获异常/</id>
+    <published>2017-11-14T10:56:50.000Z</published>
+    <updated>2017-11-14T11:14:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?<br>答案是 <code>#?</code> : <code>用于捕获上一条命令的状态,0的状态为正常,1为异常</code><br>自己在整理shell的时候遇到一些坑, 把它的规范列一下</p></blockquote><h3 id="和echo输出命令要注意"><a href="#和echo输出命令要注意" class="headerlink" title="#?和echo输出命令要注意"></a>#?和echo输出命令要注意</h3><p><img src="/2017/11/14/shell脚本中如何捕获异常/echo1.png" alt=""><br>这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是<code>echo $?</code>应该给到是1<br>但是看看执行结果:<br><img src="/2017/11/14/shell脚本中如何捕获异常/echo2.png" alt=""><br>看到输出的结果是0, 原因在于<code>echo</code>上, <code>echo</code>包了这一层命令, 只要<code>echo</code>直接将这命令打印在终端, 就是完整的完成工作,根本没有异常可言.</p><h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><p>当然是去除<code>echo</code>直接输出, 但是还是要注意的是, <code>$?</code>仅仅提示是上一条,这里必须十分谨慎.列下能捕获到异常:<br><img src="/2017/11/14/shell脚本中如何捕获异常/fix1.png" alt=""><br><img src="/2017/11/14/shell脚本中如何捕获异常/fix2.png" alt=""><br>可以看到输出是1了, 确认命令使用没问题后,就可以进行逻辑处理.</p><h3 id="避免"><a href="#避免" class="headerlink" title="避免"></a>避免</h3><p>这是完整的逻辑代码:<br><img src="/2017/11/14/shell脚本中如何捕获异常/full1.png" alt=""><br>更好的避免, 将允许的条件, 并到逻辑与:<br><img src="/2017/11/14/shell脚本中如何捕获异常/full2.png" alt=""></p><p><code>[shell大法好]</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?&lt;br&gt;答案是 &lt;code&gt;#?&lt;/code&gt; : &lt;code&gt;用于捕获上一条命令的状态,0的状态为正常,1为异
+      
+    
+    </summary>
+    
+      <category term="Unix" scheme="http://yoursite.com/categories/Unix/"/>
+    
+    
+      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>OC中常用的延迟执行代码方法</title>
