@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="testTools," />
+  <meta name="keywords" content="iosDev," />
 
 
 
@@ -39,23 +39,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限)  遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化">
-<meta name="keywords" content="testTools">
+<meta name="description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1">
+<meta name="keywords" content="iosDev">
 <meta property="og:type" content="article">
-<meta property="og:title" content="instruments命令行监控">
-<meta property="og:url" content="http://yoursite.com/2017/10/31/instruments命令行监控/index.html">
+<meta property="og:title" content="ios重签名脚本的0到1">
+<meta property="og:url" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限)  遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化">
+<meta property="og:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/cap.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/add_tem.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/as_tem.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/guide_all.png">
-<meta property="og:updated_time" content="2017-11-06T11:25:38.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/sign_profile.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/signstr.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/type.png">
+<meta property="og:updated_time" content="2017-11-14T13:16:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="instruments命令行监控">
-<meta name="twitter:description" content="周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限)  遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/31/instruments命令行监控/cap.png">
+<meta name="twitter:title" content="ios重签名脚本的0到1">
+<meta name="twitter:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/sign_profile.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -65,7 +64,7 @@
   };
 </script>
 
-  <title> instruments命令行监控 | Paulswith·__dobby's Blogs </title>
+  <title> ios重签名脚本的0到1 | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -190,7 +189,7 @@
           
           
             
-              instruments命令行监控
+              ios重签名脚本的0到1
             
           
         </h1>
@@ -199,8 +198,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-10-31T21:11:26+08:00" content="2017-10-31">
-            2017-10-31
+          <time itemprop="dateCreated" datetime="2017-11-14T20:03:21+08:00" content="2017-11-14">
+            2017-11-14
           </time>
         </span>
 
@@ -209,8 +208,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Unix/" itemprop="url" rel="index">
-                  <span itemprop="name">Unix</span>
+                <a href="/categories/unix/" itemprop="url" rel="index">
+                  <span itemprop="name">unix</span>
                 </a>
               </span>
 
@@ -233,29 +232,47 @@
       
 
       
-        <span itemprop="articleBody"><p><em>周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限) </em></p>
-<p><em>遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化监控, 提取出instrument的数据来完成性能的监控,完成对app某迭代阶段, 或者整个app周期的性能走势.</em></p>
-<p><code>&lt;!---------------我是内容分割线---------------------------------------&gt;</code></p>
-<h3 id="what’s-instruments"><a href="#what’s-instruments" class="headerlink" title="what’s  instruments"></a>what’s  instruments</h3><p>instruments是instrument命令行的工具, 在执行自动化的我们需要它来监控程序拿到数据.</p>
-<h3 id="如何启动"><a href="#如何启动" class="headerlink" title="如何启动:"></a>如何启动:</h3><p><img src="/2017/10/31/instruments命令行监控/cap.png" alt=""></p>
-<ul>
-<li>-w           “UUID” 这里是真机的uuid</li>
-<li>-t            “template”   后缀是.tracetemplace , 是想要录制的模板,整个在下面详解</li>
-<li>-D           “save_trace”  完成录制后存储的位置, 为.trace文件, 与普通录制一致</li>
-<li>App的bunldeID </li>
-<li>-v           看help, 是说记录日志的,实际也没看到打印日志</li>
-</ul>
-<h3 id="现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢"><a href="#现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢" class="headerlink" title="现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?"></a>现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?</h3><p>其实很简单~  可惜我踩了一些坑才过来.<br>首先启动instrument app -&gt; 空模板 -&gt;  右上角新增想要的录制的模板(想说的是, 理论上是全部都可以录制, 自己挖坑跳跳才知道) .<br><img src="/2017/10/31/instruments命令行监控/add_tem.png" alt=""></p>
-<p>左上角File -&gt; SaveAsTemplate , 存储, 拿到录制模板<code>.tracetemplace</code> :<br><img src="/2017/10/31/instruments命令行监控/as_tem.png" alt=""><br>Command+S, 存储, 拿到录制结束后, 会存储的<code>.trace</code>;</p>
-<blockquote>
-<p>这里为什么要这样子执行, 因为要保证.trace 和 .tracetemplace 一致,才能保存录制结果</p>
+        <span itemprop="articleBody"><blockquote>
+<p>对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文<br>感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码</p>
 </blockquote>
-<h3 id="拿到设备的UUID"><a href="#拿到设备的UUID" class="headerlink" title="拿到设备的UUID"></a>拿到设备的UUID</h3><p><code>instruments -s</code>可以拿到, 或者<code>xcrun simctl list</code> (是活动的设备会在后面提示(Booted)) </p>
-<h3 id="如果你连bundleID都不知道"><a href="#如果你连bundleID都不知道" class="headerlink" title="如果你连bundleID都不知道~"></a>如果你连bundleID都不知道~</h3><p><code>ios-deploy -B</code>可以拿到连接设备的全部bundleID , 如果你的电脑没有ios-deploy, <code>brew install ios-deplo</code>, 大多情况下我这一步是啰嗦了.</p>
-<h3 id="其他部分instruments-参数参考"><a href="#其他部分instruments-参数参考" class="headerlink" title="其他部分instruments 参数参考"></a>其他部分instruments 参数参考</h3><p><img src="/2017/10/31/instruments命令行监控/guide_all.png" alt=""></p>
-<h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题?"></a>遗留问题?</h3><p>我尚未在模拟器上运行成功,  希望有运行成功的联系交流. </p>
-<h2 id="拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行"><a href="#拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行" class="headerlink" title="拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行"></a>拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行</h2><h2 id="后序呢-怎么实现title上的想法"><a href="#后序呢-怎么实现title上的想法" class="headerlink" title="后序呢? 怎么实现title上的想法"></a>后序呢? 怎么实现title上的想法</h2><p>有接触一篇github, 作者似乎是逆向实现了,但代码也好久没更新了, 但是我本地暂未成功解析<br><a href="https://github.com/Qusic/TraceUtility" target="_blank" rel="external">TraceUtility</a><br><a href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0ahUKEwjyiabL65rXAhWBsJQKHa0WDLgQFgglMAA&amp;url=http%3a%2f%2fwww%2ecnblogs%2ecom%2fhyddd%2fp%2f5329608%2ehtml&amp;usg=AOvVaw2PasSIoEIDhnu52mlh62bt" target="_blank" rel="external">博文地址</a></p>
-<h2 id="序已经开始了-目前的OC还没接触逆向-现在这一枪打响了"><a href="#序已经开始了-目前的OC还没接触逆向-现在这一枪打响了" class="headerlink" title="序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~"></a>序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~</h2></span>
+<h3 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h3><p><img src="/2017/11/14/ios重签名脚本的0到1/sign_profile.png" alt=""></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign</div></pre></td></tr></table></figure>
+<ul>
+<li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
+<li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
+<li>$3 是否修改bundleID,默认是原先的</li>
+</ul>
+<p><img src="/2017/11/14/ios重签名脚本的0到1/signstr.png" alt=""></p>
+<blockquote>
+<p>脚本内部需要写入一个一个签名字符串,可以通过<code>security find-identity -v -p codesigning</code>拿到.</p>
+<p>是否砸壳可以通过<code>otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\(正版\)/Payload/MQQSecure.app/MQQSecure | grep cryptid</code> ,若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.</p>
+</blockquote>
+<h3 id="mobileProvision生成Entitlements-plist"><a href="#mobileProvision生成Entitlements-plist" class="headerlink" title="mobileProvision生成Entitlements.plist"></a>mobileProvision生成Entitlements.plist</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">security cms -D -i $provision &gt; ProvisionProfile.plist </div><div class="line">/usr/libexec/PlistBuddy -x -c "Print Entitlements" ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist</div></pre></td></tr></table></figure>
+<p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见<a href="https://paulswith.github.io/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="external">plist文件-在脚本中的操作</a></p>
+<h3 id="mobileProvision拷贝为embedded-mobileprovision"><a href="#mobileProvision拷贝为embedded-mobileprovision" class="headerlink" title="mobileProvision拷贝为embedded.mobileprovision"></a>mobileProvision拷贝为embedded.mobileprovision</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp $provision $appPlace/embedded.mobileprovision</div></pre></td></tr></table></figure>
+<p>签名的时候需要这个文件</p>
+<h3 id="是否概要更改BundleID"><a href="#是否概要更改BundleID" class="headerlink" title="是否概要更改BundleID"></a>是否概要更改BundleID</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if [[ $3 ]]; then</div><div class="line">	plutil -replace CFBundleIdentifier -string "$3" $appPlace/Info.plist</div><div class="line">	reBundleID=`plutil -p $appPlace/Info.plist | grep 'CFBundleIdentifier' `</div><div class="line">	echo "Log info : you wanna replace to: $&#123;reBundleID&#125;"</div><div class="line">fi</div></pre></td></tr></table></figure>
+<p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p>
+<h3 id="删除影响签名文件"><a href="#删除影响签名文件" class="headerlink" title="删除影响签名文件"></a>删除影响签名文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">plutil -remove CFBundleREsourceSpecification $appPlace/Info.plist   #删除签名源文件相关</div><div class="line">rm -rf $appPlace/Watch  #发现watch插件必现失败,这个必须删除了</div><div class="line">rm -rf $appPlace/PlugIns #发现PlugIns插件必现失败,这个必须删除了,就算下面重签也不管的, 坑超多</div><div class="line">codesignInfo=`find $appPlace -name "CodeResources" `</div><div class="line">for i in $codesignInfo; do</div><div class="line">	rm -f $i</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li>对Info.plist里面的CFBundleREsourceSpecification这个key删除,具体不知道做了什么,IosAppSigner也这么做了</li>
+<li>Watch和Plugins这两个文件,我曾试过对他们都进行重签名, 但依然不管用, 相关坑大概是独立性,可以跳转到<a href="https://nianxi.net/ios/dump-decrypted-ios-app-extensions.html" target="_blank" rel="external">念茜女神</a>的博文了解</li>
+<li>源文件的_CodeSignature/CodeResources也进行了全局删除,签名后会自动生成这个文件</li>
+</ul>
+<h3 id="开始重签"><a href="#开始重签" class="headerlink" title="开始重签"></a>开始重签</h3><h4 id="第一步-相关lib-framework签名"><a href="#第一步-相关lib-framework签名" class="headerlink" title="第一步,相关lib-framework签名"></a>第一步,相关lib-framework签名</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">allShouldSign=` find $appPlace -name "*.appex" &amp;&amp; find $appPlace  -name "*.framework" &amp;&amp; find $appPlace  -name "*.dylib" &amp;&amp; find $appPlace/* -name "*.app" ` #最上层的先不签</div><div class="line">for i in $allShouldSign; do</div><div class="line">	codesign -fs "$&#123;signStr&#125;" --no-strict --entitlements=/tmp/project_resign/Entitlements.plist $i</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li>对上方类型都进行一篇搜索,得到绝对路径后进行重签名<br><img src="/2017/11/14/ios重签名脚本的0到1/type.png" alt=""><blockquote>
+<p>这是iosAppResigner中,作者对着全部的类型都检索了一遍,我并完全覆盖,如果你踩到了坑,可以试试把类型都加上</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="核心包签名"><a href="#核心包签名" class="headerlink" title="核心包签名"></a>核心包签名</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">codesign -vvv -fs "$signStr" --no-strict --entitlements=/tmp/project_resign/Entitlements.plist $appPlace</div></pre></td></tr></table></figure>
+<h3 id="打包为ipa"><a href="#打包为ipa" class="headerlink" title="打包为ipa"></a>打包为ipa</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd $tempPlace</div><div class="line">zip -qry sign.ipa ./Payload</div><div class="line">mv $tempPlace/sign.ipa ~/Desktop</div></pre></td></tr></table></figure>
+<ul>
+<li>因为打包的时候是递归形式的, 指定绝对路径会踩坑,注意就行</li>
+</ul>
+<p>最后是安装</p>
+</span>
       
     </div>
 
@@ -263,7 +280,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/testTools/" rel="tag">#testTools</a>
+            <a href="/tags/iosDev/" rel="tag">#iosDev</a>
           
         </div>
       
@@ -272,13 +289,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/05/验证码识别整理/" rel="prev">验证码识别整理</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/31/git-命令行上的常规操作/" rel="next">git 命令行上的常规操作</a>
+              <a href="/2017/11/14/plist文件-在脚本中的操作/" rel="next">plist文件-在脚本中的操作</a>
             
           </div>
         </div>
@@ -474,7 +489,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#what’s-instruments"><span class="nav-number">1.</span> <span class="nav-text">what’s  instruments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何启动"><span class="nav-number">2.</span> <span class="nav-text">如何启动:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢"><span class="nav-number">3.</span> <span class="nav-text">现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拿到设备的UUID"><span class="nav-number">4.</span> <span class="nav-text">拿到设备的UUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果你连bundleID都不知道"><span class="nav-number">5.</span> <span class="nav-text">如果你连bundleID都不知道~</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他部分instruments-参数参考"><span class="nav-number">6.</span> <span class="nav-text">其他部分instruments 参数参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遗留问题"><span class="nav-number">7.</span> <span class="nav-text">遗留问题?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行"><span class="nav-number"></span> <span class="nav-text">拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后序呢-怎么实现title上的想法"><span class="nav-number"></span> <span class="nav-text">后序呢? 怎么实现title上的想法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序已经开始了-目前的OC还没接触逆向-现在这一枪打响了"><span class="nav-number"></span> <span class="nav-text">序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Profile"><span class="nav-number">1.</span> <span class="nav-text">Profile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobileProvision生成Entitlements-plist"><span class="nav-number">3.</span> <span class="nav-text">mobileProvision生成Entitlements.plist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobileProvision拷贝为embedded-mobileprovision"><span class="nav-number">4.</span> <span class="nav-text">mobileProvision拷贝为embedded.mobileprovision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是否概要更改BundleID"><span class="nav-number">5.</span> <span class="nav-text">是否概要更改BundleID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除影响签名文件"><span class="nav-number">6.</span> <span class="nav-text">删除影响签名文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始重签"><span class="nav-number">7.</span> <span class="nav-text">开始重签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-相关lib-framework签名"><span class="nav-number">7.1.</span> <span class="nav-text">第一步,相关lib-framework签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#核心包签名"><span class="nav-number">7.2.</span> <span class="nav-text">核心包签名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包为ipa"><span class="nav-number">8.</span> <span class="nav-text">打包为ipa</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
