@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-14T11:14:22.000Z</updated>
+  <updated>2017-11-14T11:59:28.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>plist文件-在脚本中的操作</title>
+    <link href="http://yoursite.com/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2017/11/14/plist文件-在脚本中的操作/</id>
+    <published>2017-11-14T11:30:39.000Z</published>
+    <updated>2017-11-14T11:59:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件</p></blockquote><h3 id="method-ONE"><a href="#method-ONE" class="headerlink" title="method_ONE"></a>method_ONE</h3><h4 id="内容截取并保存临时文件中"><a href="#内容截取并保存临时文件中" class="headerlink" title="内容截取并保存临时文件中"></a>内容截取并保存临时文件中</h4><p>先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间<br><img src="/2017/11/14/plist文件-在脚本中的操作/all.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security cms -D -i ./original.mobileprovision | grep --after-context=20 "&lt;key&gt;Entitlements&lt;/key&gt;"  &gt; /tmp/tmp_provision</div></pre></td></tr></table></figure></p><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p><h4 id="python进行正则匹配-过滤dict之后的内容"><a href="#python进行正则匹配-过滤dict之后的内容" class="headerlink" title="python进行正则匹配,过滤dict之后的内容"></a>python进行正则匹配,过滤dict之后的内容</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">provision=`python -c "from re import findall,compile,S;data=open('/tmp/tmp_provision','r').read();print findall(compile(r'&lt;dict&gt;.*&lt;/dict&gt;',S),data)[0];"`</div></pre></td></tr></table></figure><h4 id="最后重定向到一个-plist文件中"><a href="#最后重定向到一个-plist文件中" class="headerlink" title="最后重定向到一个.plist文件中"></a>最后重定向到一个.plist文件中</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;&lt;plist version="1.0"&gt;'$provision'&lt;/plist&gt;' &gt; Entitlements.plist</div></pre></td></tr></table></figure><blockquote><p>这个方法虽然可以, 但是其中第三部, 必须要格外注意字符的使用, 不然就格式不对,导致重定向出来的无法识别为.plist</p></blockquote><h3 id="method-TWO"><a href="#method-TWO" class="headerlink" title="method_TWO"></a>method_TWO</h3><h4 id="重定向为一个-plist"><a href="#重定向为一个-plist" class="headerlink" title="重定向为一个.plist"></a>重定向为一个.plist</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist</div></pre></td></tr></table></figure><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p><h4 id="提取内容生成"><a href="#提取内容生成" class="headerlink" title="提取内容生成"></a>提取内容生成</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/libexec/PlistBuddy -x -c "Print Entitlements" ProvisionProfile.plist &gt; Entitlements.plist</div></pre></td></tr></table></figure><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p><blockquote><p>这个方法比上面的稳妥不知道多少倍, 但是第一个的方法是自己钻研</p></blockquote><h3 id="plist文件的增删改查"><a href="#plist文件的增删改查" class="headerlink" title=".plist文件的增删改查"></a>.plist文件的增删改查</h3><p><img src="/2017/11/14/plist文件-在脚本中的操作/plutil.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">plutil -p ./ProvisionProfile.plist  #查看</div><div class="line">plutil -insert Insert -string "insert data here" ./ProvisionProfile.plist    #增</div><div class="line">plutil -replace Insert -string "change  data here" ./ProvisionProfile.plist  #替换</div></pre></td></tr></table></figure></p><blockquote><p>列举的就诸如此类,plutil是一个.plist官方推荐的好工具</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;method-ONE&quot;&gt;&lt;a href=&quot;#method-ON
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>shell脚本中如何捕获异常</title>
