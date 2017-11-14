@@ -39,21 +39,22 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1">
+<meta name="description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1 需">
 <meta name="keywords" content="iosDev">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ios重签名脚本的0到1">
 <meta property="og:url" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1">
+<meta property="og:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1 需">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/sign_profile.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/signstr.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/type.png">
-<meta property="og:updated_time" content="2017-11-14T13:16:22.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/install.png">
+<meta property="og:updated_time" content="2017-11-14T13:41:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios重签名脚本的0到1">
-<meta name="twitter:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1">
+<meta name="twitter:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用1./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign  $1 需">
 <meta name="twitter:image" content="http://yoursite.com/2017/11/14/ios重签名脚本的0到1/sign_profile.png">
 
 
@@ -236,7 +237,7 @@
 <p>对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文<br>感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码</p>
 </blockquote>
 <h3 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h3><p><img src="/2017/11/14/ios重签名脚本的0到1/sign_profile.png" alt=""></p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./codesign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign</div></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign</div></pre></td></tr></table></figure>
 <ul>
 <li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
 <li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
@@ -244,13 +245,12 @@
 </ul>
 <p><img src="/2017/11/14/ios重签名脚本的0到1/signstr.png" alt=""></p>
 <blockquote>
-<p>脚本内部需要写入一个一个签名字符串,可以通过<code>security find-identity -v -p codesigning</code>拿到.</p>
-<p>是否砸壳可以通过<code>otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\(正版\)/Payload/MQQSecure.app/MQQSecure | grep cryptid</code> ,若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.</p>
+<p>脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security find-identity -v -p codesigning</div></pre></td></tr></table></figure></p>
+<p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\(正版\)/Payload/MQQSecure.app/MQQSecure | grep cryptid</div></pre></td></tr></table></figure></p>
 </blockquote>
 <h3 id="mobileProvision生成Entitlements-plist"><a href="#mobileProvision生成Entitlements-plist" class="headerlink" title="mobileProvision生成Entitlements.plist"></a>mobileProvision生成Entitlements.plist</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">security cms -D -i $provision &gt; ProvisionProfile.plist </div><div class="line">/usr/libexec/PlistBuddy -x -c "Print Entitlements" ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist</div></pre></td></tr></table></figure>
 <p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见<a href="https://paulswith.github.io/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" target="_blank" rel="external">plist文件-在脚本中的操作</a></p>
 <h3 id="mobileProvision拷贝为embedded-mobileprovision"><a href="#mobileProvision拷贝为embedded-mobileprovision" class="headerlink" title="mobileProvision拷贝为embedded.mobileprovision"></a>mobileProvision拷贝为embedded.mobileprovision</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp $provision $appPlace/embedded.mobileprovision</div></pre></td></tr></table></figure>
-<p>签名的时候需要这个文件</p>
 <h3 id="是否概要更改BundleID"><a href="#是否概要更改BundleID" class="headerlink" title="是否概要更改BundleID"></a>是否概要更改BundleID</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if [[ $3 ]]; then</div><div class="line">	plutil -replace CFBundleIdentifier -string "$3" $appPlace/Info.plist</div><div class="line">	reBundleID=`plutil -p $appPlace/Info.plist | grep 'CFBundleIdentifier' `</div><div class="line">	echo "Log info : you wanna replace to: $&#123;reBundleID&#125;"</div><div class="line">fi</div></pre></td></tr></table></figure>
 <p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p>
 <h3 id="删除影响签名文件"><a href="#删除影响签名文件" class="headerlink" title="删除影响签名文件"></a>删除影响签名文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">plutil -remove CFBundleREsourceSpecification $appPlace/Info.plist   #删除签名源文件相关</div><div class="line">rm -rf $appPlace/Watch  #发现watch插件必现失败,这个必须删除了</div><div class="line">rm -rf $appPlace/PlugIns #发现PlugIns插件必现失败,这个必须删除了,就算下面重签也不管的, 坑超多</div><div class="line">codesignInfo=`find $appPlace -name "CodeResources" `</div><div class="line">for i in $codesignInfo; do</div><div class="line">	rm -f $i</div><div class="line">done</div></pre></td></tr></table></figure>
@@ -271,7 +271,8 @@
 <ul>
 <li>因为打包的时候是递归形式的, 指定绝对路径会踩坑,注意就行</li>
 </ul>
-<p>最后是安装</p>
+<h3 id="安装试试"><a href="#安装试试" class="headerlink" title="安装试试"></a>安装试试</h3><p><img src="/2017/11/14/ios重签名脚本的0到1/install.png" alt=""></p>
+<p><a href="https://github.com/Paulswith/ToolsScript/tree/master/iosResign" target="_blank" rel="external">- - -附源码github链接</a></p>
 </span>
       
     </div>
@@ -489,7 +490,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Profile"><span class="nav-number">1.</span> <span class="nav-text">Profile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobileProvision生成Entitlements-plist"><span class="nav-number">3.</span> <span class="nav-text">mobileProvision生成Entitlements.plist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobileProvision拷贝为embedded-mobileprovision"><span class="nav-number">4.</span> <span class="nav-text">mobileProvision拷贝为embedded.mobileprovision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是否概要更改BundleID"><span class="nav-number">5.</span> <span class="nav-text">是否概要更改BundleID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除影响签名文件"><span class="nav-number">6.</span> <span class="nav-text">删除影响签名文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始重签"><span class="nav-number">7.</span> <span class="nav-text">开始重签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-相关lib-framework签名"><span class="nav-number">7.1.</span> <span class="nav-text">第一步,相关lib-framework签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#核心包签名"><span class="nav-number">7.2.</span> <span class="nav-text">核心包签名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包为ipa"><span class="nav-number">8.</span> <span class="nav-text">打包为ipa</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Profile"><span class="nav-number">1.</span> <span class="nav-text">Profile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobileProvision生成Entitlements-plist"><span class="nav-number">3.</span> <span class="nav-text">mobileProvision生成Entitlements.plist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobileProvision拷贝为embedded-mobileprovision"><span class="nav-number">4.</span> <span class="nav-text">mobileProvision拷贝为embedded.mobileprovision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是否概要更改BundleID"><span class="nav-number">5.</span> <span class="nav-text">是否概要更改BundleID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除影响签名文件"><span class="nav-number">6.</span> <span class="nav-text">删除影响签名文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始重签"><span class="nav-number">7.</span> <span class="nav-text">开始重签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步-相关lib-framework签名"><span class="nav-number">7.1.</span> <span class="nav-text">第一步,相关lib-framework签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#核心包签名"><span class="nav-number">7.2.</span> <span class="nav-text">核心包签名</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包为ipa"><span class="nav-number">8.</span> <span class="nav-text">打包为ipa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装试试"><span class="nav-number">9.</span> <span class="nav-text">安装试试</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
