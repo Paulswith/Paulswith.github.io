@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-14T13:41:32.000Z</updated>
+  <updated>2017-11-16T13:23:16.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小tip之mac动态背景</title>
+    <link href="http://yoursite.com/2017/11/16/%E5%B0%8Ftip%E4%B9%8Bmac%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF/"/>
+    <id>http://yoursite.com/2017/11/16/小tip之mac动态背景/</id>
+    <published>2017-11-16T12:16:58.000Z</published>
+    <updated>2017-11-16T13:23:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>作为一个mac粉, 动态背景怎么能少,现在分享一个小tip,有兴趣的往下看</p></blockquote><h3 id="首先安装一下"><a href="#首先安装一下" class="headerlink" title="首先安装一下"></a>首先安装一下</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;作为一个mac粉, 动态背景怎么能少,现在分享一个小tip,有兴趣的往下看&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;首先安装一下&quot;&gt;&lt;a href=&quot;#首先安装一下&quot; class=&quot;headerlink&quot; title=&quot;首先安装一下&quot;&gt;
+      
+    
+    </summary>
+    
+      <category term="macTools" scheme="http://yoursite.com/categories/macTools/"/>
+    
+    
+      <category term="macTools" scheme="http://yoursite.com/tags/macTools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mac上的Mysql踩坑记</title>
+    <link href="http://yoursite.com/2017/11/16/mac%E4%B8%8A%E7%9A%84Mysql%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
+    <id>http://yoursite.com/2017/11/16/mac上的Mysql踩坑记/</id>
+    <published>2017-11-16T12:05:35.000Z</published>
+    <updated>2017-11-16T13:21:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>之前对一个动态背景的接口进行存储处理, 依然是选择mysql存储, 本想着很简单的事情,却在安装的时候各种坑, 所以依然mark下.</p></blockquote><h3 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h3><p>我选择的是<a href="https://dev.mysql.com/downloads/cluster/" target="_blank" rel="external">MySQL Cluster</a>,community的都是个人使用免费的,还真没具体看什么区别.</p><h3 id="匹配环境"><a href="#匹配环境" class="headerlink" title="匹配环境"></a>匹配环境</h3><p><img src="/2017/11/16/mac上的Mysql踩坑记/env.png" alt=""><br>需要将这个加入到环境里面, 后面安装MySQLDB的时候也需要这个环境的支持的.</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=/usr/local/mysql/bin:$PATH</div></pre></td></tr></table></figure><h3 id="安装后登录密码"><a href="#安装后登录密码" class="headerlink" title="安装后登录密码"></a>安装后登录密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root</div></pre></td></tr></table></figure><p>99%的情况你这样子直接登录就出问题了, 原因是密码不知道.<br>我的解决方法是:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mysqld_safe --skip-grant-tables&amp;</div></pre></td></tr></table></figure><p>这时候再:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root mysql</div></pre></td></tr></table></figure><h3 id="python安装MySQLdb"><a href="#python安装MySQLdb" class="headerlink" title="python安装MySQLdb"></a>python安装MySQLdb</h3><p>使用python操作mysql的时候需要一个库叫做<code>MySQLdb</code>,坑的是安装的时候, 原因是不知道它具体在pip 安装是什么名字的, 一直用MySQLdb怎么也找不到. </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install mysql-python</div></pre></td></tr></table></figure><p>是的,没了.就这样子就可以了. </p><h3 id="python操作mysql"><a href="#python操作mysql" class="headerlink" title="python操作mysql"></a>python操作mysql</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line">__author = <span class="string">'dobby 2017.11.2'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">import</span> simplejson <span class="keyword">as</span> json</div><div class="line"><span class="keyword">import</span>  MySQLdb</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#step ------------------------connect mysql----------------</span></div><div class="line">db = MySQLdb.connect(host=<span class="string">'localhost'</span>,port=<span class="number">3306</span>,</div><div class="line">                     user=<span class="string">'root'</span>, db=<span class="string">'owner'</span>, charset=<span class="string">'utf8'</span>)   </div><div class="line">                    <span class="comment"># 打开数据库连接,我是没有密码的连接</span></div><div class="line">cursor = db.cursor()      </div><div class="line"><span class="comment"># 使用cursor()方法获取操作游标,因为这是一个c的api, 后面的操作都是基于这个指针</span></div><div class="line">cursor.execute(<span class="string">'show tables'</span>)        </div><div class="line"><span class="comment">#只是全部的执行方法</span></div><div class="line">data = cursor.fetchone()                </div><div class="line"><span class="comment">#这个命令能拿到上条执行方法后的返回值 ,类似os.read()吧</span></div><div class="line"><span class="keyword">print</span> data</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#step ------------------------get  data----------------</span></div><div class="line">session = requests.session()</div><div class="line">req =session.get(<span class="string">'http://a1.phobos.apple.com/us/r1000\</span></div><div class="line"><span class="string">                 /000/Features/atv/AutumnResources/videos/entries.json'</span>)</div><div class="line"><span class="keyword">if</span> req.content <span class="keyword">and</span> int(req.status_code) == <span class="number">200</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">'get all data succeed.'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#step -----------------------handler data-------------</span></div><div class="line">api_data_list = json.loads(req.content)</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    <span class="keyword">for</span> dict_data <span class="keyword">in</span> api_data_list:</div><div class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> dict_data[<span class="string">'assets'</span>]:</div><div class="line">            <span class="comment"># 生成mysql数据写入的sql语句</span></div><div class="line">            sql = <span class="string">"INSERT INTO wallpaper values('&#123;a&#125;','&#123;b&#125;','&#123;c&#125;','&#123;d&#125;','&#123;e&#125;')"</span>.\</div><div class="line">                format(a=item[<span class="string">'url'</span>],b=item[<span class="string">'accessibilityLabel'</span>],c=item[<span class="string">'type'</span>],</div><div class="line">                       d=item[<span class="string">'id'</span>],e=item[<span class="string">'timeOfDay'</span>])</div><div class="line">            <span class="comment"># 执行语句</span></div><div class="line">            cursor.execute(sql)</div><div class="line">            data = cursor.fetchone()</div><div class="line">            <span class="keyword">print</span> data</div><div class="line">        <span class="comment"># ******这是重点, 必须对数据进行总提交</span></div><div class="line">        db.commit()</div><div class="line"><span class="keyword">except</span>:</div><div class="line">    db.rollback() <span class="comment">#避免出现中断的情况, 如果有就回滚</span></div><div class="line">db.close()  <span class="comment">#关闭数据库,避免数据丢失....</span></div></pre></td></tr></table></figure><blockquote><p>坑之类代码都在里面了, 就这样子吧,好像没什么料,主要还是mark下….</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;之前对一个动态背景的接口进行存储处理, 依然是选择mysql存储, 本想着很简单的事情,却在安装的时候各种坑, 所以依然mark下.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;安装Mysql&quot;&gt;&lt;a href=&quot;#安装Mysql&quot; cla
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="Mysql" scheme="http://yoursite.com/tags/Mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>ios重签名脚本的0到1</title>
