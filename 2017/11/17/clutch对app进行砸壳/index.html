@@ -55,7 +55,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/succeed.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/getzip.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/6.png">
-<meta property="og:updated_time" content="2017-11-17T03:15:31.000Z">
+<meta property="og:updated_time" content="2017-11-17T03:17:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="clutch对app进行砸壳">
 <meta name="twitter:description" content="逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.  什么是壳一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文">
@@ -257,7 +257,7 @@
 <h4 id="把成果拿到本地验证"><a href="#把成果拿到本地验证" class="headerlink" title="把成果拿到本地验证"></a>把成果拿到本地验证</h4><p>方法有很多, 例如用ifunbox打开上面的路径,直接拿出来, 但是我的9.3.5的没有办法在Ifunbox查看系统目录, 所以用下路的这个方法<br><img src="/2017/11/17/clutch对app进行砸壳/getzip.png" alt=""><br>–&gt; 就是压缩然后scp到本地</p>
 <h3 id="验收"><a href="#验收" class="headerlink" title="验收"></a>验收</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -l tagerBinary | grep cryptid</div></pre></td></tr></table></figure>
 <p><img src="/2017/11/17/clutch对app进行砸壳/6.png" alt=""><br>意料之中的cryptid=0<br>为啥只显示一个,因为它只有一个架构<code>arm_v7</code></p>
-<p><code>[后面的话还有尽量把一些注入动态库的方法一并列出]</code></p>
+<p><code>[后面的话把逆向的轮子方法一并列出]</code></p>
 </span>
       
     </div>
