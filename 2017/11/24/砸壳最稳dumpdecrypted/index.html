@@ -39,27 +39,24 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.  什么是壳一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文">
+<meta name="description" content="之前写过一篇clutch砸壳的, 但clutch似乎没有100%成功的情况, 所以还是得老司机来.  编译得到.dylibhttps://github.com/stefanesser/dumpdecrypted下载后make一下会生成一个.dylib 拷贝到设备上iproxy 2222 22开启一个映射后:scp -P 2222 dumpdecrypted.dylib root@localhos">
 <meta name="keywords" content="砸壳">
 <meta property="og:type" content="article">
-<meta property="og:title" content="clutch对app进行砸壳">
-<meta property="og:url" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/index.html">
+<meta property="og:title" content="砸壳最稳dumpdecrypted">
+<meta property="og:url" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.  什么是壳一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文">
+<meta property="og:description" content="之前写过一篇clutch砸壳的, 但clutch似乎没有100%成功的情况, 所以还是得老司机来.  编译得到.dylibhttps://github.com/stefanesser/dumpdecrypted下载后make一下会生成一个.dylib 拷贝到设备上iproxy 2222 22开启一个映射后:scp -P 2222 dumpdecrypted.dylib root@localhos">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/remote.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/copyto.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/usafe.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/searchBD.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/nofound.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/succeed.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/getzip.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/6.png">
-<meta property="og:updated_time" content="2017-11-17T03:17:10.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/build.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/quit.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/perform.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/end.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/end2.png">
+<meta property="og:updated_time" content="2017-11-24T13:53:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="clutch对app进行砸壳">
-<meta name="twitter:description" content="逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.  什么是壳一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文">
-<meta name="twitter:image" content="http://yoursite.com/2017/11/17/clutch对app进行砸壳/remote.png">
+<meta name="twitter:title" content="砸壳最稳dumpdecrypted">
+<meta name="twitter:description" content="之前写过一篇clutch砸壳的, 但clutch似乎没有100%成功的情况, 所以还是得老司机来.  编译得到.dylibhttps://github.com/stefanesser/dumpdecrypted下载后make一下会生成一个.dylib 拷贝到设备上iproxy 2222 22开启一个映射后:scp -P 2222 dumpdecrypted.dylib root@localhos">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/24/砸壳最稳dumpdecrypted/build.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -69,7 +66,7 @@
   };
 </script>
 
-  <title> clutch对app进行砸壳 | Paulswith·__dobby's Blogs </title>
+  <title> 砸壳最稳dumpdecrypted | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -194,7 +191,7 @@
           
           
             
-              clutch对app进行砸壳
+              砸壳最稳dumpdecrypted
             
           
         </h1>
@@ -203,8 +200,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-11-17T09:55:29+08:00" content="2017-11-17">
-            2017-11-17
+          <time itemprop="dateCreated" datetime="2017-11-24T21:17:28+08:00" content="2017-11-24">
+            2017-11-24
           </time>
         </span>
 
@@ -238,26 +235,18 @@
 
       
         <span itemprop="articleBody"><blockquote>
-<p>逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.</p>
+<p>之前写过一篇<a href="https://paulswith.github.io/2017/11/17/clutch%E5%AF%B9app%E8%BF%9B%E8%A1%8C%E7%A0%B8%E5%A3%B3/" target="_blank" rel="external">clutch砸壳</a>的, 但clutch似乎没有100%成功的情况, 所以还是得老司机来.</p>
 </blockquote>
-<h3 id="什么是壳"><a href="#什么是壳" class="headerlink" title="什么是壳"></a>什么是壳</h3><p>一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.<br>怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文件查看:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -l targetBinary | grep cryptid</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>得到的结果如果是1则是未砸壳的, 0是已砸壳.<br>还有一种情况是一些App支持多种架构的,可能会展示多个cryptid=1/0, 在哪个平台跑就砸哪个.</p>
-</blockquote>
-<h3 id="确定目标后安装App"><a href="#确定目标后安装App" class="headerlink" title="确定目标后安装App"></a>确定目标后安装App</h3><p>我这里以麦当劳App(听说改名金拱门)为例,从appStore下载安装.</p>
-<h3 id="编译clutch二进制文件"><a href="#编译clutch二进制文件" class="headerlink" title="编译clutch二进制文件"></a>编译clutch二进制文件</h3><p>clutch神器<a href="https://github.com/KJCracks/Clutch" target="_blank" rel="external">下载地址</a>, 下载编译后允许会得到一个二进制文件, 这里不累述哈, 或者你可以直接从我的<a href="https://github.com/Paulswith/ToolsScript" target="_blank" rel="external">git地址</a>clone我编译后的,在clutch_binary文件下.</p>
-<h3 id="拷贝clutch到设备"><a href="#拷贝clutch到设备" class="headerlink" title="拷贝clutch到设备"></a>拷贝clutch到设备</h3><h4 id="连接手机"><a href="#连接手机" class="headerlink" title="连接手机"></a>连接手机</h4><p><img src="/2017/11/17/clutch对app进行砸壳/remote.png" alt=""><br>我这里用iproxy从22映射到2222端口,并整个过程保持. 右边线尝试登录下,默认密码是alpine, 其他情况就自行谷歌帮助,我相信这没什么难度.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iproxy 2222 22</div></pre></td></tr></table></figure></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh root@localhost -p 2222</div></pre></td></tr></table></figure>
-<p>测试连接成功后输入 <code>exit</code> 退出,接着下一步</p>
-<h4 id="scp拷贝到手机"><a href="#scp拷贝到手机" class="headerlink" title="scp拷贝到手机"></a>scp拷贝到手机</h4><p>scp(secure copy) 支持ssh协议远程拷贝, 我们用它拷贝到设备上, 前提是上面的<br>的测试成功了.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -P 2222 ./clutch root@localhost:/usr/bin/</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/11/17/clutch对app进行砸壳/copyto.png" alt=""><br>如果这样子的话就成功了, /usr/bin/默认已经在环境变量查找内, 拷贝到这里可以省事很多多.</p>
-<h4 id="找到目标"><a href="#找到目标" class="headerlink" title="找到目标"></a>找到目标</h4><p>先介绍下clutch用法:<br><img src="/2017/11/17/clutch对app进行砸壳/usafe.png" alt=""><br>推荐<code>ios-deploy -B</code>可以获取bundleID, <code>brew install ios-deploy</code>就可以安装了.<br><img src="/2017/11/17/clutch对app进行砸壳/searchBD.png" alt=""><br>例如我这里的目标是麦当劳app, 尝试搜一下<code>mc</code>,果不其然就是它了.<br>拿到的bundleID就是<code>com.mcdonalds.gma</code><br>(嗯, 还有个grep的方法更简单,但是我真的不知道它是麦当劳, 因为他显示的是Arch,所以靠谱的话就还是上面,BundleID基本会跟名称一直吧)<br><img src="/2017/11/17/clutch对app进行砸壳/nofound.png" alt=""></p>
-<h4 id="开始砸壳"><a href="#开始砸壳" class="headerlink" title="开始砸壳"></a>开始砸壳</h4><p>连接设备<code>ssh root@localhost -p 2222</code><br>进入命令行后输入:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">clutch -b com.mcdonalds.gma</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/11/17/clutch对app进行砸壳/succeed.png" alt=""><br>看到这样子的情况的话就是成功了,注意这里粉红色部分, 还给出了砸成功之后的存储路径,我们拷贝下它</p>
-<h4 id="把成果拿到本地验证"><a href="#把成果拿到本地验证" class="headerlink" title="把成果拿到本地验证"></a>把成果拿到本地验证</h4><p>方法有很多, 例如用ifunbox打开上面的路径,直接拿出来, 但是我的9.3.5的没有办法在Ifunbox查看系统目录, 所以用下路的这个方法<br><img src="/2017/11/17/clutch对app进行砸壳/getzip.png" alt=""><br>–&gt; 就是压缩然后scp到本地</p>
-<h3 id="验收"><a href="#验收" class="headerlink" title="验收"></a>验收</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otool -l tagerBinary | grep cryptid</div></pre></td></tr></table></figure>
-<p><img src="/2017/11/17/clutch对app进行砸壳/6.png" alt=""><br>意料之中的cryptid=0<br>为啥只显示一个,因为它只有一个架构<code>arm_v7</code></p>
-<p><code>[后面的话把逆向的轮子方法一并列出]</code></p>
+<h3 id="编译得到-dylib"><a href="#编译得到-dylib" class="headerlink" title="编译得到.dylib"></a>编译得到.dylib</h3><p><a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">https://github.com/stefanesser/dumpdecrypted</a><br>下载后<code>make</code>一下会生成一个.dylib<br><img src="/2017/11/24/砸壳最稳dumpdecrypted/build.png" alt=""></p>
+<h3 id="拷贝到设备上"><a href="#拷贝到设备上" class="headerlink" title="拷贝到设备上"></a>拷贝到设备上</h3><p><code>iproxy 2222 22</code><br>开启一个映射后:<br><code>scp -P 2222 dumpdecrypted.dylib root@localhost:/tmp/</code></p>
+<h3 id="获取App目录"><a href="#获取App目录" class="headerlink" title="获取App目录"></a>获取App目录</h3><p>启动下目标App,cycript到进程中, 输入:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSHomeDirectory()</div></pre></td></tr></table></figure></p>
+<h3 id="拷贝-dylib到App目录"><a href="#拷贝-dylib到App目录" class="headerlink" title="拷贝.dylib到App目录"></a>拷贝.dylib到App目录</h3><p>退出cycript,切换到App目录后:<br> 拷贝.dylib 到得到的目录:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp /tmp/dumpdecrypted.dylib  .</div></pre></td></tr></table></figure></p>
+<p>mible用户查看进程:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su mobile    #切换普通用户</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/24/砸壳最稳dumpdecrypted/quit.png" alt=""></p>
+<h3 id="开始砸壳"><a href="#开始砸壳" class="headerlink" title="开始砸壳"></a>开始砸壳</h3><p>启动下App,然后:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;</div></pre></td></tr></table></figure>
+<p><img src="/2017/11/24/砸壳最稳dumpdecrypted/perform.png" alt=""></p>
+<h3 id="查看文件"><a href="#查看文件" class="headerlink" title="查看文件"></a>查看文件</h3><p><img src="/2017/11/24/砸壳最稳dumpdecrypted/end.png" alt=""><br><img src="/2017/11/24/砸壳最稳dumpdecrypted/end2.png" alt=""></p>
 </span>
       
     </div>
@@ -275,13 +264,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/24/去除OplayerLite广告提示-越狱机/" rel="prev">去除OplayerLite广告提示-越狱机</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/16/小tip之mac动态背景/" rel="next">小tip之mac动态背景</a>
+              <a href="/2017/11/24/去除OplayerLite广告提示-越狱机/" rel="next">去除OplayerLite广告提示-越狱机</a>
             
           </div>
         </div>
@@ -477,7 +464,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是壳"><span class="nav-number">1.</span> <span class="nav-text">什么是壳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定目标后安装App"><span class="nav-number">2.</span> <span class="nav-text">确定目标后安装App</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译clutch二进制文件"><span class="nav-number">3.</span> <span class="nav-text">编译clutch二进制文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝clutch到设备"><span class="nav-number">4.</span> <span class="nav-text">拷贝clutch到设备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连接手机"><span class="nav-number">4.1.</span> <span class="nav-text">连接手机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scp拷贝到手机"><span class="nav-number">4.2.</span> <span class="nav-text">scp拷贝到手机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#找到目标"><span class="nav-number">4.3.</span> <span class="nav-text">找到目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始砸壳"><span class="nav-number">4.4.</span> <span class="nav-text">开始砸壳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把成果拿到本地验证"><span class="nav-number">4.5.</span> <span class="nav-text">把成果拿到本地验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验收"><span class="nav-number">5.</span> <span class="nav-text">验收</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译得到-dylib"><span class="nav-number">1.</span> <span class="nav-text">编译得到.dylib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝到设备上"><span class="nav-number">2.</span> <span class="nav-text">拷贝到设备上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取App目录"><span class="nav-number">3.</span> <span class="nav-text">获取App目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝-dylib到App目录"><span class="nav-number">4.</span> <span class="nav-text">拷贝.dylib到App目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始砸壳"><span class="nav-number">5.</span> <span class="nav-text">开始砸壳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看文件"><span class="nav-number">6.</span> <span class="nav-text">查看文件</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
