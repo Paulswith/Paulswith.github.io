@@ -1,0 +1,775 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="滴滴点点滴滴" />
+
+
+
+  <meta name="keywords" content="实战去除广告," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Paulswith·__dobby's Blogs" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="最近在学习逆向相关的实践+踩坑, 庆哥的视频中一个课程是对于OPlayerLite进行进行广告处理了, 因为是去年的课程App也更新了逻辑, 我沿着先辈的道路把坑撸了一把, mark这场一天一夜的战斗.  分析层级结构定位目标对象连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的v">
+<meta name="keywords" content="实战去除广告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="去除OplayerLite广告提示-越狱机">
+<meta property="og:url" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/index.html">
+<meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
+<meta property="og:description" content="最近在学习逆向相关的实践+踩坑, 庆哥的视频中一个课程是对于OPlayerLite进行进行广告处理了, 因为是去年的课程App也更新了逻辑, 我沿着先辈的道路把坑撸了一把, mark这场一天一夜的战斗.  分析层级结构定位目标对象连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的v">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/fe.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/debugS.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/lldb.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/offset.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/viewadd.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/bradd.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/fit.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/addfun.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/spass.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/findMethod.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/jumpCode.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/findH.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/H1.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/tweek.png">
+<meta property="og:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/0ads.png">
+<meta property="og:updated_time" content="2017-11-24T12:59:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="去除OplayerLite广告提示-越狱机">
+<meta name="twitter:description" content="最近在学习逆向相关的实践+踩坑, 庆哥的视频中一个课程是对于OPlayerLite进行进行广告处理了, 因为是去年的课程App也更新了逻辑, 我沿着先辈的道路把坑撸了一把, mark这场一天一夜的战斗.  分析层级结构定位目标对象连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的v">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/24/去除OplayerLite广告提示-越狱机/fe.png">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 去除OplayerLite广告提示-越狱机 | Paulswith·__dobby's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">I just wanna improve myself.</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon icon-next-commonweal"></i> <br />
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              去除OplayerLite广告提示-越狱机
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2017-11-24T17:56:29+08:00" content="2017-11-24">
+            2017-11-24
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/reverseEngineering/" itemprop="url" rel="index">
+                  <span itemprop="name">reverseEngineering</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>最近在学习逆向相关的实践+踩坑, 庆哥的视频中一个课程是对于OPlayerLite进行进行广告处理了, 因为是去年的课程App也更新了逻辑, 我沿着先辈的道路把坑撸了一把, mark这场一天一夜的战斗.</p>
+</blockquote>
+<h3 id="分析层级结构"><a href="#分析层级结构" class="headerlink" title="分析层级结构"></a>分析层级结构</h3><h4 id="定位目标对象"><a href="#定位目标对象" class="headerlink" title="定位目标对象"></a>定位目标对象</h4><p>连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的view,上面有一行文本”Buy the full version to remove ads?”<br>这时候我们连接到cycript打印下层级:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UIApp.keyWindow.recursiveDescription().toString()</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/fe.png" alt=""><br>由于我已去除了过了,又从App Store重新下载, 发现还是没有广告,图片暂时就没哈<br>其中有引起我们注意的层级是:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">|    |    | &lt;UIView: 0x17501dc0; frame = (0 0; 320 50); layer = &lt;CALayer: 0x177a8eb0&gt;&gt;</div><div class="line">|    |    |    | &lt;UIButton: 0x17778a30; frame = (0 0; 320 50); opaque = NO; layer = &lt;CALayer: 0x177a8d80&gt;&gt;</div><div class="line">|    |    |    |    | &lt;UIImageView: 0x17630de0; frame = (0 0; 320 50); clipsToBounds = YES; opaque = NO; userInteractionEnabled = NO; layer = &lt;CALayer: 0x17630ec0&gt;&gt;</div><div class="line">|    |    |    | &lt;UILabel: 0x176b1380; frame = (60 0; 260 50); text = 'Buy the full version to r...'; userInteractionEnabled = NO; layer = &lt;_UILabelLayer: 0x1762fc70&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>其中<code>UILabel: 0x176b1380</code>中的text属性跟我们看到的ads上是一样的,它的同级view是UIButton, 父view是UIView .<br> 因为咱们要解决的目标是view, 尤为关注是这里的frame.size, 它们都是<code>320 50</code>, label也是height=50. 把这部分截图保存下来,待会查找的时候需要用到</p>
+<h4 id="正向分析设计"><a href="#正向分析设计" class="headerlink" title="正向分析设计"></a>正向分析设计</h4><blockquote>
+<p>划重点: 从正向的开发的角度, 分析它是如何设计的</p>
+</blockquote>
+<p>如果是我开发君, 我的伪代码大概如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if  (!payBuyFullViersion)  &#123;</div><div class="line">    AdsView *adsview =  [[AdsView alloc] init];</div><div class="line">    [self.palyerView addSubview:adsview]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可能其他的逻辑未必跟我符合. 但是一定必然的是, 这个adsView 必须是addSubview上去的,addSubview是UIKit中view的方法, 咱们需要静态分析这个地址, 通过断点来查看它对应的调用者/参数, 从而拿到地址,来定位到OplayerLite</p>
+<h3 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h3><h4 id="从UIKit入手"><a href="#从UIKit入手" class="headerlink" title="从UIKit入手"></a>从UIKit入手</h4><p>我们需要用到lldb, 连接到设备, 查看UIKit的存储地址, 然后通过IDA查看addSubview:的静态代码地址.<br>本地先映射一下 <code>iproxy 1234 1234</code> , 然后越狱启动<code>debugserver  *:1234  -a &lt;pid&gt;</code><br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/debugS.png" alt=""><br>本地连接:<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/lldb.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">im list -o -f</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/offset.png" alt=""><br>得到了Oplayer lite的偏移地址和UIKit偏移地址<br>同时我们看到了UIKit的文件地址(可能有的地址是在设备上, 那么你需要拷贝到本地,不想这样子就连一下Xcode,你就会在本地看到它了)</p>
+<p>IDA分析UIKit, 并获取addSubview:的地址:<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/viewadd.png" alt=""><br>在lldb下断点,记得加上上面看到的偏移,如:<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/bradd.png" alt=""><br>然后进入到播放界面触发断点</p>
+<h4 id="体力活查询"><a href="#体力活查询" class="headerlink" title="体力活查询"></a>体力活查询</h4><p>因为上面我们讲到<br><code>[self.palyerView addSubview:adsview]</code><br>这里的adsView是作为参数的,所以我们需要Print object r2<br>漫长的开始 <code>c</code>和粘贴 <code>po $r2</code>,一遍持续一遍注意看打印出来的frame,是不是有我们符合的<code>frame=(n,n,320,50)</code><br>这可能会很漫长,取决于当前页面子元素数量和人品~</p>
+<p>…….<br>当你发现frame跟我们所看到符合的时候,那么基本就可以确认是它了.同时有个地方要注意:<br>你需要看到这个地址来自于Oplayer lite才可以, 否则执行以下<code>ni</code>,执行下一条汇编直到看见它<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/fit.png" alt=""><br>而第一条指令的地址就是我们要的地址, 减去我们上面的偏移地址,拿到静态代码的地址.</p>
+<h3 id="分析目标静态代码"><a href="#分析目标静态代码" class="headerlink" title="分析目标静态代码"></a>分析目标静态代码</h3><h4 id="对逻辑静态分析"><a href="#对逻辑静态分析" class="headerlink" title="对逻辑静态分析"></a>对逻辑静态分析</h4><p>通过上面拿到的地址, 我们可以看到这里是一个实例方法<br><code>-[PlayViewController addAds_OnLocalAds]</code><br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/addfun.png" alt=""><br>不是很仔细的看了一遍伪代码,这个方法是被调用来展示view,但是否展示的逻辑并不在这里, 我们需要看谁是它的调用方, 因为删掉之前的断点,重新在<code>-[PlayViewController addAds_OnLocalAds]</code>这个方法上下断点, 依然加上偏移地址(这里的偏移地址已经是OPlayerlite了).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">br s -a &apos;0x00052000+0x002A49F8&apos;</div><div class="line">#断点触发后, 打印lr寄存器的值</div><div class="line">p/x $lr</div></pre></td></tr></table></figure></p>
+<p>LR寄存器(R14)可以理解当代码段执行完毕后要回到调用者的地址.<br>通过LR寄存器得到的值, 我们减去偏移地址,可以得到调用者在静态代码的位置.<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/spass.png" alt=""><br>依然借助IDA分析, 可以看到msg_send的一些部分是相关的设置方向, frame, getWidth等方法, 而调用的位置就在viewWillAppear:这里.</p>
+<h4 id="寻找绕弯的方法"><a href="#寻找绕弯的方法" class="headerlink" title="寻找绕弯的方法"></a>寻找绕弯的方法</h4><p>现在, 我们定位到了调用添加广告View的代码块, 继续往上翻,能不能找到帮助我们跳过这里的逻辑呢?<br>果然, 神器就是神器, 留意左边这根线:<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/findMethod.png" alt=""><br>辅助IDA的伪代码,我们还能发现些神马:<br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/jumpCode.png" alt=""></p>
+<blockquote>
+<p>这里的两个跳转对应了两个逻辑判断分支, 我在图片中表明了, 逻辑2的情况其实稍加复杂, 但我在逻辑1发现了关键点:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if ( !((unsigned int)+[OlimSoftUtility isUpgraded](&amp;OBJC_CLASS___OlimSoftUtility, &quot;isUpgraded&quot;, a3) &amp; 0xFF) )</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>伪代码的意思是<code>+[OlimSoftUtility isUpgraded]</code>的返回值和 #0xFF 进行了逻辑与的运算, 理解到 #0xFF 是非0类型必为真, 而现在只需要<code>+[OlimSoftUtility isUpgraded]</code>能返回真即可跳过这段代码. 这个猜想是否正确,毕竟是伪代码,所以需要对汇编部分进行确认:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">__text:0029D2F8     BLX.W           _objc_msgSend ; +[OlimSoftUtility isUpgraded]</div><div class="line">__text:0029D2FC     TST.W           R0, #0xFF</div></pre></td></tr></table></figure></p>
+<p>第一行很容易看出是发送了消息,也就是刚才说的调用了<code>+[OlimSoftUtility isUpgraded]</code>这个方法, 而第二行, 将第一行<code>+[OlimSoftUtility isUpgraded]</code> 返回值 与 0xFF进行了 <code>TST</code>指令, 对于目前汇编的底子不硬,通过查询资料得知:</p>
+<blockquote>
+<p>TST 指令对 Rn 中的值和 Operand2 的值按位进行“与”运算。 除了结果会被丢弃以外，这与 ANDS 指令功能相同。</p>
+</blockquote>
+<p>那么就基本能确定结论了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if ( ([OlimSoftUtility isUpgraded] &amp;&amp; 0xFF) == NO ) &#123;</div><div class="line">    // 添加广告</div><div class="line">&#125;</div><div class="line">// 0xFF 固定为YES</div></pre></td></tr></table></figure></p>
+<h4 id="头文件最终确认"><a href="#头文件最终确认" class="headerlink" title="头文件最终确认"></a>头文件最终确认</h4><p>找到class-dump 出的头文件目录:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -rn "isUpgraded" ./headers</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/findH.png" alt=""><br><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/H1.png" alt=""><br>发现它就是一个类方法,很纯粹.那么也不用太多想法, 试试就试试了.</p>
+<h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><h4 id="code"><a href="#code" class="headerlink" title="code"></a>code</h4><p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/tweek.png" alt=""></p>
+<p>让个惊讶的tweak.xm代码:<br>“当然我这样子处理应该是会引起某些问题了, 但这是目前我分析到的能力”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">%hook OlimSoftUtility</div><div class="line"></div><div class="line">+ (BOOL)isUpgraded &#123;</div><div class="line">	%log;</div><div class="line">	// NSLog(@&quot;replace this method!!!!!!!!!!!!!!!!!!!&quot;);</div><div class="line">	return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">%end</div></pre></td></tr></table></figure></p>
+<p>Makefile代码:<br>我指定了IP 和 Port, 待会可以在直接调用 make install 进行安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">export THEOS_DEVICE_IP=localhost    </div><div class="line">export THEOS_DEVICE_PORT=2222</div><div class="line">export ARCHS=armv7</div><div class="line">export TARGET=iphone:clang:latest:8.0</div><div class="line">export THEOS_MAKE_PATH=/opt/theos/makefiles</div><div class="line">export THEOS=/opt/theos</div><div class="line"></div><div class="line">include $(THEOS)/makefiles/common.mk</div><div class="line"></div><div class="line">TWEAK_NAME = removeOplayerAds</div><div class="line">removeOplayerAds_FILES = Tweak.xm</div><div class="line"></div><div class="line">include $(THEOS_MAKE_PATH)/tweak.mk</div><div class="line"></div><div class="line">after-install::</div><div class="line">	install.exec "killall -9 SpringBoard"</div></pre></td></tr></table></figure></p>
+<h4 id="一些小坑点"><a href="#一些小坑点" class="headerlink" title="一些小坑点"></a>一些小坑点</h4><h4 id="没找到dpkg-deb"><a href="#没找到dpkg-deb" class="headerlink" title="没找到dpkg-deb:"></a>没找到dpkg-deb:</h4><p>dpkg-deb的原名是/opt/theos/bin/dm.pl, 你需要把它的名字改为dpkg-deb,然后执行下面的语句<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">➜  removeoplayerads make package</div><div class="line">==&gt; Error: /Applications/Xcode.app/Contents/Developer/usr/bin/make package requires dpkg-deb.</div><div class="line">make: *** [internal-package-check] Error 1</div><div class="line"><span class="meta">#</span>## 决绝方法</div><div class="line">➜  removeoplayerads sudo perl -i -pe 'y|\r||d' /opt/theos/bin/dpkg-deb</div><div class="line">Password:</div></pre></td></tr></table></figure></p>
+<h4 id="BundleID最准确的获取方法"><a href="#BundleID最准确的获取方法" class="headerlink" title="BundleID最准确的获取方法"></a>BundleID最准确的获取方法</h4><p>cycript 进入到目标APP进程后:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[NSBundle mainBundle] bundleIdentifier]</div></pre></td></tr></table></figure></p>
+<h4 id="汇编查询"><a href="#汇编查询" class="headerlink" title="汇编查询"></a>汇编查询</h4><p>干货, 大全!!!<br><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cihbjcag.html" target="_blank" rel="external">http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cihbjcag.html</a></p>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/0ads.png" alt=""></p>
+<p><code>[没什么比实践到的收获有成就感了,它是继续前行的动力之一]</code></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/实战去除广告/" rel="tag">#实战去除广告</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/selenium-request辅助爬虫/" rel="next">selenium+request辅助爬虫</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div>
+      
+        <style type="text/css">
+
+    .donate_bar {
+        text-align: center;
+        margin-top : 5%;
+    }
+
+    .donate_bar.hidden {
+        display:none;
+    }
+/*
+    .donate_bar a.btn_donate {
+        display: inline-block;
+        width: 82px;
+        height: 82px;
+        margin-left:auto;
+        margin-right:auto;
+
+        background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+        _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat; 
+
+        -webkit-transition: background 0s;
+        -moz-transition: background 0s;
+        -o-transition: background 0s;
+        -ms-transition: background 0s;
+        transition: background 0s;
+    }
+*/
+    .donate_bar a.btn_donate:hover { 
+        // background-position: 0px -82px;
+        color: #87daff;
+    }
+
+    .donate_bar .donate_txt {
+        display: block;
+        color: #9d9d9d;
+        font: 14px/2 "Microsoft Yahei";
+    }
+
+    .bold { 
+        font-weight: bold; 
+    }
+
+    .post-donate a {
+        border-bottom: 0px;
+    }
+
+    #donate_guide table {
+        border: none;
+    }
+
+    #donate_guide td {
+        border-bottom: none;
+        border-right: none;
+        // background: #333333;
+        valign: top;
+    }
+
+</style>
+
+
+
+      
+    </div>
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Paulswith __dobby" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Paulswith __dobby</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">滴滴点点滴滴</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Paulswith" target="_blank">GitHub</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析层级结构"><span class="nav-number">1.</span> <span class="nav-text">分析层级结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定位目标对象"><span class="nav-number">1.1.</span> <span class="nav-text">定位目标对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正向分析设计"><span class="nav-number">1.2.</span> <span class="nav-text">正向分析设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态分析"><span class="nav-number">2.</span> <span class="nav-text">静态分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从UIKit入手"><span class="nav-number">2.1.</span> <span class="nav-text">从UIKit入手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#体力活查询"><span class="nav-number">2.2.</span> <span class="nav-text">体力活查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析目标静态代码"><span class="nav-number">3.</span> <span class="nav-text">分析目标静态代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对逻辑静态分析"><span class="nav-number">3.1.</span> <span class="nav-text">对逻辑静态分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找绕弯的方法"><span class="nav-number">3.2.</span> <span class="nav-text">寻找绕弯的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#头文件最终确认"><span class="nav-number">3.3.</span> <span class="nav-text">头文件最终确认</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写代码"><span class="nav-number">4.</span> <span class="nav-text">编写代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#code"><span class="nav-number">4.1.</span> <span class="nav-text">code</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些小坑点"><span class="nav-number">4.2.</span> <span class="nav-text">一些小坑点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没找到dpkg-deb"><span class="nav-number">4.3.</span> <span class="nav-text">没找到dpkg-deb:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BundleID最准确的获取方法"><span class="nav-number">4.4.</span> <span class="nav-text">BundleID最准确的获取方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#汇编查询"><span class="nav-number">4.5.</span> <span class="nav-text">汇编查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果图"><span class="nav-number">5.</span> <span class="nav-text">效果图</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2017
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Paulswith __dobby
+  </span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+</div>
+
+<!-- busuanzi -->
+
+  <div class="">
+    <div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+  </div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
