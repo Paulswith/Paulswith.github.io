@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-29T01:33:02.000Z</updated>
+  <updated>2017-12-03T11:09:56.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac逆向-窗口管理Divvy</title>
+    <link href="http://yoursite.com/2017/12/03/mac%E9%80%86%E5%90%91-%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86Divvy/"/>
+    <id>http://yoursite.com/2017/12/03/mac逆向-窗口管理Divvy/</id>
+    <published>2017-12-03T09:57:54.000Z</published>
+    <updated>2017-12-03T11:09:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Divvy个人感觉是最棒的一款窗口管理软件了~, 但是它动不动就会提示个五秒的窗口让你注册License,最近小试牛刀完IOSApp, 它给我提供一个入门的机会…</p></blockquote><h3 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h3><p><img src="/2017/12/03/mac逆向-窗口管理Divvy/predic.png" alt=""><br>mac上的逆向其实比较省, 你不需要额外的砸壳,直接就能能从包里面拿到执行文件.<br>class-dump 头文件.<br>用Hopper打开,反汇编一下方便待会查看.<br>然后神器依旧是monkeyDev, 它帮我们省去注入.dylib 和 重签名等”繁杂步骤”~</p><h3 id="入口分析"><a href="#入口分析" class="headerlink" title="入口分析"></a>入口分析</h3><p>本来大多数的步骤一定是从view开始, 有一款神器就[interface inspector], 但总会报错一些乱七八糟的问题,暂时还没调好, 于是乎我粗糙的从hopper搜索”Register”,(如果一开始搜的是首字母小写的话可能不会饶那么弯…),结果是这样子的,<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/first.png" alt=""><br>也查到其他无关的,最后确定就是这里,伪代码和汇编看并没有看出什么头绪,于是乎先看看有没有调用这里这个类相关.</p><p>追踪前,这里有一款强大的工具说下:<br><code>frida-trace</code>: frida-trace -m “-[PTHotKeyCenter <em>]”  Divvy<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/frida.png" alt=""><br>用法是frida-trace -m “&lt;+类方法/-实例方法&gt;[类名 方法名&lt;</em>代表全部&gt;]”  <ps aux查询到的允许名=""><br>执行后它会自动帮你生成跟踪的js文件,然后监听所指定的方法.</ps></p><p>一开始觉得吧, PTHotKeyCenter不像是很关键的类, 也是没怎么写Mac的App的原因,但还是监听了一下:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/trace.png" alt=""><br>我尝试打开它,然后随便输入一串号码注册, 发现他怎么整都只打印这些, 而且就在我使用快捷键的时候~<br>随意也明白了,这就是”热键”,仅此而已…</p><h3 id="动态调试"><a href="#动态调试" class="headerlink" title="动态调试"></a>动态调试</h3><p>进行到这里其实是无头绪的, 然后想着是从mondev进行动态调试,看看能不能从调用栈看看这里的情况.<br>想着hook哪个方法的时候,脑子冒个灵光,想到了这个view的展示, 我就输入”)show”看看有没有什么可疑的,结果:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/show.png" alt=""> 十分意外第一个方法,很明显这个方法应该是展示注册这个View的,而且还待会参数时间.<br>如果是这个方法果然没错, 那么我可能得到,一是找不到更好的hook方法,duration的参数改为最少的时间,或者可以尝试return这部展示的操作. 其次先Hook下看看调用栈,是什么决定它展示也是可以的, 于是开始我的Hook代码.<br>MonkeyDev默认是subStrate的hook方法代码, 当然也是可以替换成其它的(按道理当然可以~):<br>这是一开始的代码:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/array.png" alt=""><br>但是允许会报错,其中需要修改:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">static void newHookFunc(AppController* self,SEL _cmd,id array)&#123; // &#125;</div><div class="line">                    //replacet to | //下面</div><div class="line">static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2)&#123; // &#125;</div><div class="line">// 需要指明多少个参数, 不知道参数类型就使用泛型id</div></pre></td></tr></table></figure></p><p>build一下且进入调试后, 用时在<code>static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2){</code> 这里Xcode断点一下:<br>但如果直接执行还需要做两部:</p><ul><li>关闭原程序</li><li>如果类似这种辅助类APP,需要到系统中关闭它的辅助项.</li><li>可能你还不熟悉如何进入调试macApp ,那快去翻一下MonkeyDev的wiki,或者见文末</li></ul><p>然后进入注册页面,果不其然的断点触发.然后我打印了一下调用栈:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/stack.png" alt=""><br>是的,一眼看去都是非Divvy调用栈的可用信息~ 有点陷入僵局了.</p><h3 id="人品才是最高逆向"><a href="#人品才是最高逆向" class="headerlink" title="人品才是最高逆向"></a>人品才是最高逆向</h3><p>有点朦胧的时候, 我回到<code>- (void)showLicensingWindow:(id)arg1 withTimeoutDuration:(int)arg2;</code>这个方法中, 结果真的很意外,其中有个地方很雷人:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/ok.png" alt=""><br><code>- (BOOL)verifyLicense;</code>这真的不能再明白的一个方法了,不管是不是依然开始Hook一下.mac的逆向就是各种Hook~<br>hook代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#import &quot;Divvy.h&quot;</div><div class="line">#import &quot;substrate.h&quot;</div><div class="line"></div><div class="line">@class AppController;</div><div class="line"></div><div class="line">static BOOL (*originFunc)(AppController*,SEL,id);</div><div class="line">static BOOL newHookFunc(AppController* self,SEL _cmd,id array)&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">static void __attribute__((constructor)) initialize(void) &#123;</div><div class="line">    MSHookMessageEx(objc_getClass(&quot;AppController&quot;),@selector(verifyLicense), (IMP)&amp;newHookFunc, (IMP*)&amp;originFunc);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>依然Build一下跑起来, 真的很意外,因为启动的时候默认也是要弹一次注册框的, 这次启动并没有,启动后直接什么也展示(而且我忘记断点了). 手动选到注册框看一下怎么肥事:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/finish.png" alt=""><br>真的很意外, 就像小黄书的作者狗神中说的,运气也是逆向的一部分.嗨森~</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>谁说人品不是逆向的一部分呢, 实践就能找到快乐.第一次Mac的调试竟然这么快就收获自我成就感,赚到了.<br>App的话我打包上传到<a href="https://github.com/Paulswith/ToolsScript/tree/master/Divvy_windowManagerTool" target="_blank" rel="external">这里</a></p><p>特别鸣谢大佬协助:<br><a href="https://github.com/AloneMonkey/MonkeyDev/wiki/Mac%E5%BA%94%E7%94%A8%E6%8F%92%E4%BB%B6" target="_blank" rel="external">monkeyDev之MAC应用</a><br><a href="http://www.alonemonkey.com/2017/05/31/get-start-with-mac-reverse/" target="_blank" rel="external">庆哥的一篇文章走进MAC逆向</a><br><a href=""><code>膜庆哥</code></a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;Divvy个人感觉是最棒的一款窗口管理软件了~, 但是它动不动就会提示个五秒的窗口让你注册License,最近小试牛刀完IOSApp, 它给我提供一个入门的机会…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;工具准备&quot;&gt;&lt;a href=&quot;#
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>UNREAD逆向-去除阅读限制</title>
