@@ -1,0 +1,787 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="滴滴点点滴滴" />
+
+
+
+  <meta name="keywords" content="逆向探探," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Paulswith·__dobby's Blogs" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="一阵子下来才明白,逆向其实会上瘾,尤其是我这种~ 天生就爱搞破坏的坏孩子来讲探探是一个社交APP, 似乎不少人在上面找到另一半的. 这种卡片社交简单,背后隐藏的推荐逻辑,筛选逻辑才是它能如此盛名的原因.要重点说明,这些需求是我一产品的同学给我提的, 绝非个人偏好~ 我不是那种人…  梗概先上下图(功能入口在 新手引导-&amp;gt;探探怎么玩-&amp;gt; ):这是目前逆向后我给它新增的功能,因为工作也比">
+<meta name="keywords" content="逆向探探">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探探逆向之旅">
+<meta property="og:url" content="http://yoursite.com/2017/12/18/探探逆向之旅/index.html">
+<meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
+<meta property="og:description" content="一阵子下来才明白,逆向其实会上瘾,尤其是我这种~ 天生就爱搞破坏的坏孩子来讲探探是一个社交APP, 似乎不少人在上面找到另一半的. 这种卡片社交简单,背后隐藏的推荐逻辑,筛选逻辑才是它能如此盛名的原因.要重点说明,这些需求是我一产品的同学给我提的, 绝非个人偏好~ 我不是那种人…  梗概先上下图(功能入口在 新手引导-&amp;gt;探探怎么玩-&amp;gt; ):这是目前逆向后我给它新增的功能,因为工作也比">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/genggai.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/geng.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/flex.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/syscall.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/xuxu.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/access.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/close.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/user.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/hong.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/value.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/huameizi.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/dingyi.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/use.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/fenxi.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/location.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/galiao.png">
+<meta property="og:updated_time" content="2017-12-18T10:01:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="探探逆向之旅">
+<meta name="twitter:description" content="一阵子下来才明白,逆向其实会上瘾,尤其是我这种~ 天生就爱搞破坏的坏孩子来讲探探是一个社交APP, 似乎不少人在上面找到另一半的. 这种卡片社交简单,背后隐藏的推荐逻辑,筛选逻辑才是它能如此盛名的原因.要重点说明,这些需求是我一产品的同学给我提的, 绝非个人偏好~ 我不是那种人…  梗概先上下图(功能入口在 新手引导-&amp;gt;探探怎么玩-&amp;gt; ):这是目前逆向后我给它新增的功能,因为工作也比">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/18/探探逆向之旅/genggai.png">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 探探逆向之旅 | Paulswith·__dobby's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">I just wanna improve myself.</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon icon-next-commonweal"></i> <br />
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              探探逆向之旅
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2017-12-18T15:27:30+08:00" content="2017-12-18">
+            2017-12-18
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/reverseEngineering/" itemprop="url" rel="index">
+                  <span itemprop="name">reverseEngineering</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>一阵子下来才明白,逆向其实会上瘾,尤其是我这种~ 天生就爱搞破坏的坏孩子来讲<br>探探是一个社交APP, 似乎不少人在上面找到另一半的. 这种卡片社交简单,背后隐藏的推荐逻辑,筛选逻辑才是它能如此盛名的原因.<br>要重点说明,这些需求是我一产品的同学给我提的, 绝非个人偏好~ 我不是那种人…</p>
+</blockquote>
+<h3 id="梗概"><a href="#梗概" class="headerlink" title="梗概"></a>梗概</h3><h4 id="先上下图"><a href="#先上下图" class="headerlink" title="先上下图"></a>先上下图</h4><p>(功能入口在 新手引导-&gt;探探怎么玩-&gt; ):<br><img src="/2017/12/18/探探逆向之旅/genggai.png" alt=""><br>这是目前逆向后我给它新增的功能,因为工作也比较忙,就没有新增过多的需求,但是整个App的架构逻辑其实已经很清晰了, 基本可以合理的新增一些需求在里面, 这也说明探探的开发架构逻辑挺棒的.</p>
+<h4 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h4><p><img src="/2017/12/18/探探逆向之旅/geng.png" alt=""><br>下方是一个简单的tableview, 功能的启动都在这里,当然功能是有互斥和优先级的, </p>
+<ul>
+<li>同时开启无条件选妹和选妹子onlyStudent, 无条件选妹子优先. </li>
+<li>为了更好的效果在主页的地方选妹子,我最后采取的是模拟点击likeButton,在NSTimer中执行,当刷的人对已拉取用户求余==0的时候停止, 如果不想停止就把infinite打开,这是一个疯狂的爬取,没有停止的线性条件,除非杀APP. 为什么这么做呢, 因为我把自动拉取的信息默认是保存到Document/cache.txt里面, 主要是照片的url和部分简介</li>
+<li>自动尬聊采用的是图灵的API, 你拿到源码后需要替换为您的key, 谷歌搜索”图灵机器人”,打开后进入到某个想聊天的窗口, 它如果收到信息会自动跟她尬聊.</li>
+<li>上方是用Mapkit,新增Mapview在上方,用来更改定位,然后下面的打开(不过测了下证明这块功能还有点问题的,有兴趣的哥们继续挖掘下)</li>
+</ul>
+<h3 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h3><h4 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h4><ul>
+<li>依然是最酷的<a href="https://github.com/AloneMonkey/MonkeyDev" target="_blank" rel="external">MonkeyDev </a></li>
+<li><a href="https://github.com/Flipboard/FLEX" target="_blank" rel="external">FLEX</a>(reveal过期了,这是一个很棒的替代品), 下载后编译一下, 然后按照monkeyDev中wifi加入第三方库的方式操作即可</li>
+<li><a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="external">frida-ios-dump</a> 还是庆哥出品,砸壳后顺带把整个APP导出</li>
+<li>其它的全程是cycript+LLDB调戏 就不累述了…<br><img src="/2017/12/18/探探逆向之旅/flex.png" alt=""> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &lt;FLEX/FLEXManager.h&gt;</div><div class="line">// open it in here</div><div class="line"> [[FLEXManager sharedManager] showExplorer];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>导入库之后,在注入成功的这个通知回调里,启动这个方法</p>
+<h4 id="调试遇到的问题"><a href="#调试遇到的问题" class="headerlink" title="调试遇到的问题"></a>调试遇到的问题</h4><p>探探是有反调试的, 用的是sysctl. 很强<br>那么你调试的时候需要讲MonkeyDev里面的打开, 这个反反调试检测默认是关闭的,原因注释上有<br><img src="/2017/12/18/探探逆向之旅/syscall.png" alt=""></p>
+<h4 id="从需求粗发的debug"><a href="#从需求粗发的debug" class="headerlink" title="从需求粗发的debug"></a>从需求粗发的debug</h4><p>逆向App,我一般的套路都是酱紫.<br>设计需求 -&gt;  需求在哪里会展示 -&gt; 从view到Controller-&gt; controller方法猜测 -&gt; 结合monkeyDev进行方法trace -&gt; 确认需求方法 -&gt; hopper找方法地址 -&gt;  LLDB调试下断点 -&gt; 查看调用栈(bt) -&gt; 然后开始埋点尝试hook<br><img src="/2017/12/18/探探逆向之旅/xuxu.png" alt=""><br>用笔记在记录每次你发现的新宇宙(虽然开始的很早,实际没有时间弄它…)</p>
+<h3 id="HookKKK"><a href="#HookKKK" class="headerlink" title="HookKKK"></a>HookKKK</h3><h4 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h4><h5 id="hook位置"><a href="#hook位置" class="headerlink" title="hook位置:"></a>hook位置:</h5><p>入口开关之所以选在 [新手引导-&gt;探探怎么玩-&gt;], 因为很符合呀,介绍都免了<br><img src="/2017/12/18/探探逆向之旅/access.png" alt=""><br>就是找到控制器后,发现这里是tableview , 直接hook了tableview的代理方法, == 0的时候进入.</p>
+<h5 id="UI层设计"><a href="#UI层设计" class="headerlink" title="UI层设计:"></a>UI层设计:</h5><p>上方是mapview, 这本身就是一个内存问题,地图App都知道, 所以在dismiss的位置,需要很”干净”的把它清理一下.<br><img src="/2017/12/18/探探逆向之旅/close.png" alt=""><br>下方是tableView, 还是很简单cell注册来循环利用,省点内存</p>
+<h4 id="人物存储的方式"><a href="#人物存储的方式" class="headerlink" title="人物存储的方式"></a>人物存储的方式</h4><p>探探采取CoreData进行本地存储,用户的模型是<code>UserObject</code><br><img src="/2017/12/18/探探逆向之旅/user.png" alt=""><br>简要一些浅层面我所看到的:</p>
+<ul>
+<li>其实又有<code>ProfileInfo</code>存储用户的一些社会内容, 里面又包含学校信息在模型<code>StudiesInfo</code>和工作信息模型<code>WorkInfo</code></li>
+<li><code>LocationInfo</code>是用户的地理信息</li>
+<li><code>MembershipInfo</code>似乎探探在一轮融资后要开启会员模式是真的</li>
+<li><code>SettingsInfo</code>主要是你自己的一些信息,就是设置里面的,包含要不要阻拦联系人等</li>
+<li>其他深一点层面诸如<code>RelationshipObject</code>/<code>HiddenUsersCollection</code>,等着有需要的去挖掘<br>其实这些都能座位你来筛选的网格,只不过你想怎么操作罢了</li>
+</ul>
+<h4 id="自动划妹子"><a href="#自动划妹子" class="headerlink" title="自动划妹子"></a>自动划妹子</h4><p><code>P1HomeNearbyViewController</code>是我们一进去的时候的控制器,我在<code>viewDidAppear</code>是时候进行了逻辑判断, 逻辑设置项来自<code>自定义入口</code>所写到的本地缓存,<code>1 - 0</code>字符串存储的方式进行boolValue处理:<br>全局的几个定义:<br><img src="/2017/12/18/探探逆向之旅/hong.png" alt=""><br>设置YES(1) or NO(0) 来存储:<br><img src="/2017/12/18/探探逆向之旅/value.png" alt=""><br>那么通过这样子,我们就能进行全局的逻辑判断了:<br><img src="/2017/12/18/探探逆向之旅/huameizi.png" alt=""></p>
+<p>其中,我把这些我需要hook用到的头文件,从class-dump出来的抽出来, 进行@interface一下,来欺骗编译器,如果是@property就不需要继承什么, 如果是方法,报错的话可能需要继承NSObject或其他已定义的:<br><img src="/2017/12/18/探探逆向之旅/dingyi.png" alt=""></p>
+<p>用起来的时候就跟正向开发很像了,你熟悉的味道:<br><img src="/2017/12/18/探探逆向之旅/use.png" alt=""><br>其中有尝试刷妹子这里,如果直接调用响应后的方法刷卡片, 会有一系列问题,最后认怂直接是模拟点击的.而且为什么用NSTimer而不是for循环之类呢,可能就是runloop层的概念了,当前运行NOPro,有兴趣的自行调戏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[likeButton sendActionsForControlEvents:[likeButton allControlEvents]];</div></pre></td></tr></table></figure></p>
+<h4 id="改定位"><a href="#改定位" class="headerlink" title="改定位"></a>改定位</h4><p>该定位和大多数的App一样,但是探探有点麻烦的是我一直就没有刷出来地图过, (听说是触发”擦肩而过”这个业务逻辑才会展示地图),业务不熟真的很不好玩~<br>因为上层展示卡片的控制器是<code>P1HomeLookingViewController</code>,我直接trace到他有返回了信息:<br><img src="/2017/12/18/探探逆向之旅/fenxi.png" alt=""></p>
+<p>所以我也姑且很粗糙的做了hook,Mapview保存到配置的经纬度,在这里转为double值并返回:<br><img src="/2017/12/18/探探逆向之旅/location.png" alt=""></p>
+<p>手动创建自定义的CLLocation对象,返回给它,核心方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CLLocation *lacationInfo = [[CLLocation alloc] initWithLatitude:latitude.doubleValue longitude:longitude.doubleValue];</div></pre></td></tr></table></figure></p>
+<h4 id="自动尬聊"><a href="#自动尬聊" class="headerlink" title="自动尬聊"></a>自动尬聊</h4><p>尬聊是一门技术, 猿不懂, 那找会的来帮忙吧~~<br>目前实现的单个尬聊, 多个尬聊尚存在问题, 且在有限的时间内就给到这样子的需求了<br><img src="/2017/12/18/探探逆向之旅/galiao.png" alt=""><br>网络请求很粗糙了使用了NSURLSession,但能保证内存是不会问题.<br><code>#pragma mark - HOOK =&gt; &quot;-[P1ConversationTableView controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:]&quot;</code><br>这个方法其实未必是很合理hook地点, 原因是存在多次抛的通知, 我进行了过滤后才拿到那条到底是她刚才发的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ConversationObject *conversation = [self conversationObject];</div><div class="line">NSComparisonResult compareResult = [[conversation latestReceivedTime] compare:[conversation latestReadMessageCreatedTime]];</div><div class="line">if (compareResult == NSOrderedDescending &amp;&amp; !conversation.isRead &amp;&amp; ![arg2.owner isCurrentUser]) &#123;</div><div class="line">            NSString *message = conversation.messageCollection.latestNormalMessage.message;</div><div class="line">            NSString *lastMessage = [TT_CONFIG objectForKey:LAST_MESSAGE];</div><div class="line">            if (![lastMessage isEqualToString:message]) &#123;  //  这里会收到重复的通知 ,可能这里并不是最佳hook的位置</div></pre></td></tr></table></figure></p>
+<ul>
+<li>conversation是消息的模型,每条信息对应一个conversation,第一个过滤<code>本条消息的创建时间</code> 和 <code>上条已读消息的创建时间</code>比对</li>
+<li>消息不能是已读</li>
+<li>消息的发送者不是自己</li>
+<li>本条消息和配置的消息不同(确认是新的消息后回保存到配置,完整字符串比较)</li>
+</ul>
+<p>在确认是最新消息后, 通过图灵机器人的接口, POST请求出去,剩下的就是解包-&gt; 调方法发回去,其中主要的是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P1MessagesViewController *messageVC = (P1MessagesViewController *)[self.superview nextResponder];</div></pre></td></tr></table></figure></p>
+<p>发送消息的方法在P1MessagesViewController,为了找到它,可真是废了一把劲, 最后就是这么简单</p>
+<p>ano: 尬聊木有真实妹子,都是探探小助手帮的我 谢谢哦</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>逆向真的会让人上瘾 , 主要的是保持你”猥琐的”好奇心~ , 工具的使用可能都差不多,训练的是一种敏感, 对方法敏感诸如此类呀<br>从逆向我们能快速知道别人的需求做了什么,  快速了解别人的业务等,是一种很高效快速的熟悉方式.<br>至此告一段落,代码直接见我的GIT <a href="https://github.com/Paulswith/ToolsScript/tree/master/tantan_project" target="_blank" rel="external">tantan_project</a></p>
+<p>[<code>仅供学习,注意尺度</code>]</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/逆向探探/" rel="tag">#逆向探探</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/03/mac逆向-窗口管理Divvy/" rel="next">mac逆向-窗口管理Divvy</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div>
+      
+        <style type="text/css">
+
+    .donate_bar {
+        text-align: center;
+        margin-top : 5%;
+    }
+
+    .donate_bar.hidden {
+        display:none;
+    }
+/*
+    .donate_bar a.btn_donate {
+        display: inline-block;
+        width: 82px;
+        height: 82px;
+        margin-left:auto;
+        margin-right:auto;
+
+        background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+        _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat; 
+
+        -webkit-transition: background 0s;
+        -moz-transition: background 0s;
+        -o-transition: background 0s;
+        -ms-transition: background 0s;
+        transition: background 0s;
+    }
+*/
+    .donate_bar a.btn_donate:hover { 
+        // background-position: 0px -82px;
+        color: #87daff;
+    }
+
+    .donate_bar .donate_txt {
+        display: block;
+        color: #9d9d9d;
+        font: 14px/2 "Microsoft Yahei";
+    }
+
+    .bold { 
+        font-weight: bold; 
+    }
+
+    .post-donate a {
+        border-bottom: 0px;
+    }
+
+    #donate_guide table {
+        border: none;
+    }
+
+    #donate_guide td {
+        border-bottom: none;
+        border-right: none;
+        // background: #333333;
+        valign: top;
+    }
+
+</style>
+
+
+
+      
+    </div>
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Paulswith __dobby" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Paulswith __dobby</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">滴滴点点滴滴</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Paulswith" target="_blank">GitHub</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#梗概"><span class="nav-number">1.</span> <span class="nav-text">梗概</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先上下图"><span class="nav-number">1.1.</span> <span class="nav-text">先上下图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能简介"><span class="nav-number">1.2.</span> <span class="nav-text">功能简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始调试"><span class="nav-number">2.</span> <span class="nav-text">开始调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调试工具"><span class="nav-number">2.1.</span> <span class="nav-text">调试工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试遇到的问题"><span class="nav-number">2.2.</span> <span class="nav-text">调试遇到的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从需求粗发的debug"><span class="nav-number">2.3.</span> <span class="nav-text">从需求粗发的debug</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HookKKK"><span class="nav-number">3.</span> <span class="nav-text">HookKKK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#入口"><span class="nav-number">3.1.</span> <span class="nav-text">入口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hook位置"><span class="nav-number">3.1.1.</span> <span class="nav-text">hook位置:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UI层设计"><span class="nav-number">3.1.2.</span> <span class="nav-text">UI层设计:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#人物存储的方式"><span class="nav-number">3.2.</span> <span class="nav-text">人物存储的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动划妹子"><span class="nav-number">3.3.</span> <span class="nav-text">自动划妹子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改定位"><span class="nav-number">3.4.</span> <span class="nav-text">改定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动尬聊"><span class="nav-number">3.5.</span> <span class="nav-text">自动尬聊</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2017
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Paulswith __dobby
+  </span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+</div>
+
+<!-- busuanzi -->
+
+  <div class="">
+    <div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+  </div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
