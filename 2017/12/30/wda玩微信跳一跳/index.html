@@ -52,7 +52,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/pyhonTest.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/calcuC.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/the_d.png">
-<meta property="og:updated_time" content="2017-12-30T06:51:46.000Z">
+<meta property="og:updated_time" content="2017-12-30T07:30:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wda玩微信跳一跳">
 <meta name="twitter:description" content="… 等我写完这个脚本,刷到了372分, 才发现Android的大佬们早就有一套操作了, 似乎想法都差不多,我的环境是在ios-mac上执行  安装环境WebDriverAgenthttps://github.com/facebook/WebDriverAgentfacebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点需要一些环境依赖,代码clo">
@@ -240,7 +240,8 @@
 <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><h4 id="WebDriverAgent"><a href="#WebDriverAgent" class="headerlink" title="WebDriverAgent"></a>WebDriverAgent</h4><p><a href="https://github.com/facebook/WebDriverAgent" target="_blank" rel="external">https://github.com/facebook/WebDriverAgent</a><br>facebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点<br>需要一些环境依赖,代码clone下来之后, 得在项目路径下执行下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./Scripts/bootstrap.sh</div></pre></td></tr></table></figure></p>
 <p>xcode打开,选择Target是WebDriverAgentRunner,Test到手机(签名用个人Appid就可以,然后Test到手机后,信任一下证书)<br><img src="/2017/12/30/wda玩微信跳一跳/wdaAgent.png" alt=""></p>
 <h4 id="facebook-wda"><a href="#facebook-wda" class="headerlink" title="facebook-wda"></a>facebook-wda</h4><p><a href="https://github.com/openatx/facebook-wda" target="_blank" rel="external">https://github.com/openatx/facebook-wda</a><br>wda,一个python脚本,配合WebDriverAgent使用,便捷的安装方法:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install --pre facebook-wda</div></pre></td></tr></table></figure></p>
-<h4 id="测试下环境"><a href="#测试下环境" class="headerlink" title="测试下环境"></a>测试下环境</h4><p>用以下命令启动下WebDriverAgent,你需要改下下方的name=你自己的手机名:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination 'platform=iOS,name=YourDeviceName' test</div></pre></td></tr></table></figure></p>
+<h4 id="测试下环境"><a href="#测试下环境" class="headerlink" title="测试下环境"></a>测试下环境</h4><p>用个终端端口转发下(iproxy 可以通过 brew install usbmuxd安装):<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">iproxy 8100 8100</div></pre></td></tr></table></figure></p>
+<p>用以下命令启动下WebDriverAgent,你需要改下下方的name=你自己的手机名:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination 'platform=iOS,name=YourDeviceName' test</div></pre></td></tr></table></figure></p>
 <p>看到输出这个就启动正常了:<br><img src="/2017/12/30/wda玩微信跳一跳/startAgent.png" alt=""></p>
 <p>另开个终端,启动下python,如下测试下:<br><img src="/2017/12/30/wda玩微信跳一跳/pyhonTest.png" alt=""></p>
 <h3 id="脚本实现"><a href="#脚本实现" class="headerlink" title="脚本实现:"></a>脚本实现:</h3><p><a href="https://github.com/Paulswith/ToolsScript/tree/master/Wechat_jump_game" target="_blank" rel="external">git代码地址-python3.6.3</a></p>
