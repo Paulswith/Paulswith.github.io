@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="shell," />
+  <meta name="keywords" content="自动化," />
 
 
 
@@ -39,21 +39,24 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件  method_ONE内容截取并保存临时文件中先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间1security cms -D -i ./original.mobileprovision | gr">
-<meta name="keywords" content="shell">
+<meta name="description" content="… 等我写完这个脚本,刷到了372分, 才发现Android的大佬们早就有一套操作了, 似乎想法都差不多,我的环境是在ios-mac上执行  安装环境WebDriverAgenthttps://github.com/facebook/WebDriverAgentfacebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点需要一些环境依赖,代码clo">
+<meta name="keywords" content="自动化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="plist文件-在脚本中的操作">
-<meta property="og:url" content="http://yoursite.com/2017/11/14/plist文件-在脚本中的操作/index.html">
+<meta property="og:title" content="wda玩微信跳一跳">
+<meta property="og:url" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件  method_ONE内容截取并保存临时文件中先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间1security cms -D -i ./original.mobileprovision | gr">
+<meta property="og:description" content="… 等我写完这个脚本,刷到了372分, 才发现Android的大佬们早就有一套操作了, 似乎想法都差不多,我的环境是在ios-mac上执行  安装环境WebDriverAgenthttps://github.com/facebook/WebDriverAgentfacebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点需要一些环境依赖,代码clo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/11/14/plist文件-在脚本中的操作/all.png">
-<meta property="og:image" content="http://yoursite.com/2017/11/14/plist文件-在脚本中的操作/plutil.png">
-<meta property="og:updated_time" content="2017-11-14T12:03:46.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/wdaAgent.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/startAgent.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/pyhonTest.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/calcuC.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/the_d.png">
+<meta property="og:updated_time" content="2017-12-30T06:51:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="plist文件-在脚本中的操作">
-<meta name="twitter:description" content="背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件  method_ONE内容截取并保存临时文件中先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间1security cms -D -i ./original.mobileprovision | gr">
-<meta name="twitter:image" content="http://yoursite.com/2017/11/14/plist文件-在脚本中的操作/all.png">
+<meta name="twitter:title" content="wda玩微信跳一跳">
+<meta name="twitter:description" content="… 等我写完这个脚本,刷到了372分, 才发现Android的大佬们早就有一套操作了, 似乎想法都差不多,我的环境是在ios-mac上执行  安装环境WebDriverAgenthttps://github.com/facebook/WebDriverAgentfacebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点需要一些环境依赖,代码clo">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/30/wda玩微信跳一跳/wdaAgent.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -63,7 +66,7 @@
   };
 </script>
 
-  <title> plist文件-在脚本中的操作 | Paulswith·__dobby's Blogs </title>
+  <title> wda玩微信跳一跳 | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -188,7 +191,7 @@
           
           
             
-              plist文件-在脚本中的操作
+              wda玩微信跳一跳
             
           
         </h1>
@@ -197,8 +200,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-11-14T19:30:39+08:00" content="2017-11-14">
-            2017-11-14
+          <time itemprop="dateCreated" datetime="2017-12-30T13:20:31+08:00" content="2017-12-30">
+            2017-12-30
           </time>
         </span>
 
@@ -207,8 +210,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Unix/" itemprop="url" rel="index">
-                  <span itemprop="name">Unix</span>
+                <a href="/categories/Python/" itemprop="url" rel="index">
+                  <span itemprop="name">Python</span>
                 </a>
               </span>
 
@@ -232,26 +235,19 @@
 
       
         <span itemprop="articleBody"><blockquote>
-<p>背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件</p>
+<p>… 等我写完这个脚本,刷到了372分, 才发现Android的大佬们早就有一套操作了, 似乎想法都差不多,我的环境是在ios-mac上执行</p>
 </blockquote>
-<h3 id="method-ONE"><a href="#method-ONE" class="headerlink" title="method_ONE"></a>method_ONE</h3><h4 id="内容截取并保存临时文件中"><a href="#内容截取并保存临时文件中" class="headerlink" title="内容截取并保存临时文件中"></a>内容截取并保存临时文件中</h4><p>先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间<br><img src="/2017/11/14/plist文件-在脚本中的操作/all.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security cms -D -i ./original.mobileprovision | grep --after-context=20 "&lt;key&gt;Entitlements&lt;/key&gt;"  &gt; /tmp/tmp_provision</div></pre></td></tr></table></figure></p>
-<p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p>
-<h4 id="python进行正则匹配-过滤dict之后的内容"><a href="#python进行正则匹配-过滤dict之后的内容" class="headerlink" title="python进行正则匹配,过滤dict之后的内容"></a>python进行正则匹配,过滤dict之后的内容</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">provision=`python -c "from re import findall,compile,S;data=open('/tmp/tmp_provision','r').read();print findall(compile(r'&lt;dict&gt;.*&lt;/dict&gt;',S),data)[0];"`</div></pre></td></tr></table></figure>
-<h4 id="最后重定向到一个-plist文件中"><a href="#最后重定向到一个-plist文件中" class="headerlink" title="最后重定向到一个.plist文件中"></a>最后重定向到一个.plist文件中</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;&lt;plist version="1.0"&gt;'$provision'&lt;/plist&gt;' &gt; Entitlements.plist</div></pre></td></tr></table></figure>
-<blockquote>
-<p>这个方法虽然可以, 但是其中第三部, 必须要格外注意字符的使用, 不然就格式不对,导致重定向出来的无法识别为.plist</p>
-</blockquote>
-<h3 id="method-TWO"><a href="#method-TWO" class="headerlink" title="method_TWO"></a>method_TWO</h3><h4 id="重定向为一个-plist"><a href="#重定向为一个-plist" class="headerlink" title="重定向为一个.plist"></a>重定向为一个.plist</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist</div></pre></td></tr></table></figure>
-<p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p>
-<h4 id="提取内容生成"><a href="#提取内容生成" class="headerlink" title="提取内容生成"></a>提取内容生成</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/libexec/PlistBuddy -x -c "Print Entitlements" ProvisionProfile.plist &gt; Entitlements.plist</div></pre></td></tr></table></figure>
-<p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p>
-<blockquote>
-<p>这个方法比上面的稳妥不知道多少倍, 但是第一个的方法是自己钻研</p>
-</blockquote>
-<h3 id="plist文件的增删改查"><a href="#plist文件的增删改查" class="headerlink" title=".plist文件的增删改查"></a>.plist文件的增删改查</h3><p><img src="/2017/11/14/plist文件-在脚本中的操作/plutil.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">plutil -p ./ProvisionProfile.plist  #查看</div><div class="line">plutil -insert Insert -string "insert data here" ./ProvisionProfile.plist    #增</div><div class="line">plutil -replace Insert -string "change  data here" ./ProvisionProfile.plist  #替换</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>列举的就诸如此类,plutil是一个.plist官方推荐的好工具</p>
-</blockquote>
+<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><h4 id="WebDriverAgent"><a href="#WebDriverAgent" class="headerlink" title="WebDriverAgent"></a>WebDriverAgent</h4><p><a href="https://github.com/facebook/WebDriverAgent" target="_blank" rel="external">https://github.com/facebook/WebDriverAgent</a><br>facebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点<br>需要一些环境依赖,代码clone下来之后, 得在项目路径下执行下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./Scripts/bootstrap.sh</div></pre></td></tr></table></figure></p>
+<p>xcode打开,选择Target是WebDriverAgentRunner,Test到手机(签名用个人Appid就可以,然后Test到手机后,信任一下证书)<br><img src="/2017/12/30/wda玩微信跳一跳/wdaAgent.png" alt=""></p>
+<h4 id="facebook-wda"><a href="#facebook-wda" class="headerlink" title="facebook-wda"></a>facebook-wda</h4><p><a href="https://github.com/openatx/facebook-wda" target="_blank" rel="external">https://github.com/openatx/facebook-wda</a><br>wda,一个python脚本,配合WebDriverAgent使用,便捷的安装方法:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install --pre facebook-wda</div></pre></td></tr></table></figure></p>
+<h4 id="测试下环境"><a href="#测试下环境" class="headerlink" title="测试下环境"></a>测试下环境</h4><p>用以下命令启动下WebDriverAgent,你需要改下下方的name=你自己的手机名:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination 'platform=iOS,name=YourDeviceName' test</div></pre></td></tr></table></figure></p>
+<p>看到输出这个就启动正常了:<br><img src="/2017/12/30/wda玩微信跳一跳/startAgent.png" alt=""></p>
+<p>另开个终端,启动下python,如下测试下:<br><img src="/2017/12/30/wda玩微信跳一跳/pyhonTest.png" alt=""></p>
+<h3 id="脚本实现"><a href="#脚本实现" class="headerlink" title="脚本实现:"></a>脚本实现:</h3><p><a href="https://github.com/Paulswith/ToolsScript/tree/master/Wechat_jump_game" target="_blank" rel="external">git代码地址-python3.6.3</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">IMAGE_PLACE = <span class="string">'/tmp/screen.png'</span></div><div class="line">each_pixel_d = <span class="number">0.00190</span></div><div class="line"></div><div class="line">c = wda.Client()</div><div class="line">s = c.session(<span class="string">'com.tencent.xin'</span>)</div><div class="line">input(<span class="string">"请自行切换到游戏里面的界面,回车即可开始"</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_to_duration</span><span class="params">(position_list)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    勾股定理 求d=C=开根号(A^2+B^2)</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> position_list:</div><div class="line">        <span class="keyword">return</span></div><div class="line">    x1,y1 = position_list[<span class="number">0</span>]</div><div class="line">    x2,y2 = position_list[<span class="number">1</span>]</div><div class="line">    the_d = math.sqrt(math.pow(y2 - y1, <span class="number">2</span>) + math.pow(x2 - x1, <span class="number">2</span>))</div><div class="line">    <span class="keyword">return</span> float(<span class="string">'%.3f'</span> % (the_d * each_pixel_d))</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">while</span> <span class="number">1</span>:</div><div class="line">        x = c.screenshot(IMAGE_PLACE)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(IMAGE_PLACE):</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="comment"># time.sleep(1)  #图片就算在了,渲染还没结束,这1秒阻塞就给了吧,或者不给,为渲染正常的以下方阴影为准</span></div><div class="line">        pl.imshow(pl.array(Image.open(IMAGE_PLACE)))</div><div class="line">        position_list = pl.ginput(<span class="number">2</span>,timeout=<span class="number">2147483647</span>)</div><div class="line">        pl.ion()</div><div class="line">        duration = change_to_duration(position_list)</div><div class="line">        pl.ioff()</div><div class="line">        <span class="keyword">if</span> duration <span class="keyword">and</span> os.path.exists(IMAGE_PLACE):</div><div class="line">            s.tap_hold(<span class="number">200</span>, <span class="number">200</span>, duration=duration)</div><div class="line">            os.remove(IMAGE_PLACE)</div></pre></td></tr></table></figure>
+<p>首先进入到游戏页面,截图到本地<br>使用plt.imshow展示这张图片, 通过plt.ginput我们点击的两个点会被记录下来,<br>我们通过分析这两个点, 得到小人到对面物体的地点:<br>嗯, 勾股定理:<br><img src="/2017/12/30/wda玩微信跳一跳/calcuC.png" alt="">   </p>
+<p><code>change_to_duration</code>中先勾股计算的距离d,  然后乘以每个像素点的对应的秒, <code>each_pixel_d = 0.00190</code>是我目前计算到的.应该算还挺准.最后这个方法返回的是按键时间.<br>而最终操作的方法:<br><code>s.tap_hold(200, 200, duration=duration)</code> durantion就是<code>change_to_duration</code>计算出的按键时间.</p>
+<h3 id="直接使用"><a href="#直接使用" class="headerlink" title="直接使用"></a>直接使用</h3><p>启动后只需要做三步, 点击小人的底部,点击前方物体的中心,然后关闭图, 嗯就可以了, 耐心点,还是可以在朋友圈装一下下的.<br><img src="/2017/12/30/wda玩微信跳一跳/the_d.png" alt=""></p>
 </span>
       
     </div>
@@ -260,7 +256,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/shell/" rel="tag">#shell</a>
+            <a href="/tags/自动化/" rel="tag">#自动化</a>
           
         </div>
       
@@ -269,13 +265,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/14/ios重签名脚本的0到1/" rel="prev">ios重签名脚本的0到1</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/14/shell脚本中如何捕获异常/" rel="next">shell脚本中如何捕获异常</a>
+              <a href="/2017/12/18/探探逆向之旅/" rel="next">探探逆向之旅</a>
             
           </div>
         </div>
@@ -471,7 +465,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#method-ONE"><span class="nav-number">1.</span> <span class="nav-text">method_ONE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容截取并保存临时文件中"><span class="nav-number">1.1.</span> <span class="nav-text">内容截取并保存临时文件中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python进行正则匹配-过滤dict之后的内容"><span class="nav-number">1.2.</span> <span class="nav-text">python进行正则匹配,过滤dict之后的内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后重定向到一个-plist文件中"><span class="nav-number">1.3.</span> <span class="nav-text">最后重定向到一个.plist文件中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#method-TWO"><span class="nav-number">2.</span> <span class="nav-text">method_TWO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重定向为一个-plist"><span class="nav-number">2.1.</span> <span class="nav-text">重定向为一个.plist</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提取内容生成"><span class="nav-number">2.2.</span> <span class="nav-text">提取内容生成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plist文件的增删改查"><span class="nav-number">3.</span> <span class="nav-text">.plist文件的增删改查</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装环境"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WebDriverAgent"><span class="nav-number">1.1.</span> <span class="nav-text">WebDriverAgent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#facebook-wda"><span class="nav-number">1.2.</span> <span class="nav-text">facebook-wda</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试下环境"><span class="nav-number">1.3.</span> <span class="nav-text">测试下环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本实现"><span class="nav-number">2.</span> <span class="nav-text">脚本实现:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接使用"><span class="nav-number">3.</span> <span class="nav-text">直接使用</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
