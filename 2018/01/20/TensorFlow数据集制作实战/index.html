@@ -1,0 +1,747 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="滴滴点点滴滴" />
+
+
+
+  <meta name="keywords" content="TensorFlow," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Paulswith·__dobby's Blogs" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="这是实战篇,往下看先  当前数据当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹  数据1 -&amp;gt; 大概是1600+张 数据0 -&amp;gt; 大概是160+张  比例是10:1左右, 而数量1800+上来看也不是很理想,  我这里为了省事是直接水平翻转图片, 得到1800*2(待会见代码). 当然为了避免欠拟合情">
+<meta name="keywords" content="TensorFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow数据集制作实战">
+<meta property="og:url" content="http://yoursite.com/2018/01/20/TensorFlow数据集制作实战/index.html">
+<meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
+<meta property="og:description" content="这是实战篇,往下看先  当前数据当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹  数据1 -&amp;gt; 大概是1600+张 数据0 -&amp;gt; 大概是160+张  比例是10:1左右, 而数量1800+上来看也不是很理想,  我这里为了省事是直接水平翻转图片, 得到1800*2(待会见代码). 当然为了避免欠拟合情">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/01/20/TensorFlow数据集制作实战/all_data.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/20/TensorFlow数据集制作实战/succeed.png">
+<meta property="og:image" content="http://yoursite.com/2018/01/20/TensorFlow数据集制作实战/tu.png">
+<meta property="og:updated_time" content="2018-01-20T09:36:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow数据集制作实战">
+<meta name="twitter:description" content="这是实战篇,往下看先  当前数据当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹  数据1 -&amp;gt; 大概是1600+张 数据0 -&amp;gt; 大概是160+张  比例是10:1左右, 而数量1800+上来看也不是很理想,  我这里为了省事是直接水平翻转图片, 得到1800*2(待会见代码). 当然为了避免欠拟合情">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/20/TensorFlow数据集制作实战/all_data.png">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> TensorFlow数据集制作实战 | Paulswith·__dobby's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">I just wanna improve myself.</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon icon-next-commonweal"></i> <br />
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              TensorFlow数据集制作实战
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2018-01-20T15:52:53+08:00" content="2018-01-20">
+            2018-01-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/MachineLearning/" itemprop="url" rel="index">
+                  <span itemprop="name">MachineLearning</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>这是实战篇,往下看先</p>
+</blockquote>
+<h4 id="当前数据"><a href="#当前数据" class="headerlink" title="当前数据"></a>当前数据</h4><p><img src="/2018/01/20/TensorFlow数据集制作实战/all_data.png" alt=""><br>当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹</p>
+<ul>
+<li>数据1 -&gt; 大概是1600+张</li>
+<li>数据0 -&gt; 大概是160+张</li>
+</ul>
+<p>比例是10:1左右, 而数量1800+上来看也不是很理想,  我这里为了省事是直接水平翻转图片, 得到1800*2(待会见代码). 当然为了避免欠拟合情况当然更好的方法是挖掘更多的资源.  </p>
+<h4 id="根据文件夹标签化图片"><a href="#根据文件夹标签化图片" class="headerlink" title="根据文件夹标签化图片"></a>根据文件夹标签化图片</h4><p>头部一些声明:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line">__author = <span class="string">'dobby'</span></div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div><div class="line"></div><div class="line"></div><div class="line">plane_path = <span class="string">'/Users/dobby/Documents/data_img/plane'</span></div><div class="line">UNplane_path = <span class="string">'/Users/dobby/Documents/data_img/UNplane'</span></div><div class="line">records_path = <span class="string">'/Users/dobby/Documents/data_img/train.tfrecords'</span></div><div class="line">dataset_list = []</div></pre></td></tr></table></figure></p>
+<p>遍历这两个文件夹, 如果是plane文件夹,那里面存储是label=1的图片, 反之是0. 进行标签化<br>存储方式为(image_path, label)的元组 一起存储在dataset_list数组中<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">classic_data</span><span class="params">(path)</span>:</span></div><div class="line">    <span class="comment"># 根据目录标签数据</span></div><div class="line">    <span class="keyword">if</span> path == plane_path:</div><div class="line">        label = <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        label = <span class="number">0</span></div><div class="line">    </div><div class="line">    file_list =  os.listdir(path)</div><div class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> file_list:</div><div class="line">        <span class="keyword">if</span> each[:<span class="number">5</span>] != <span class="string">'plane'</span>:</div><div class="line">            <span class="keyword">continue</span></div><div class="line">        im_full_path = os.path.join(path, each)</div><div class="line">        dataset_list.append((im_full_path, label))</div></pre></td></tr></table></figure></p>
+<h4 id="转为数据集"><a href="#转为数据集" class="headerlink" title="转为数据集"></a>转为数据集</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_record</span><span class="params">(data_list, should_transpose=False)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">     图片转为bytes写入</span></div><div class="line"><span class="string">     字符串也是bytes</span></div><div class="line"><span class="string">     1/0 Int</span></div><div class="line"><span class="string">    """</span></div><div class="line">    counter = <span class="number">0</span></div><div class="line">     <span class="comment"># 新建一个写入session</span></div><div class="line">    writer = tf.python_io.TFRecordWriter(records_path)</div><div class="line">    <span class="keyword">for</span> path,label <span class="keyword">in</span> data_list:</div><div class="line">        counter += <span class="number">1</span></div><div class="line">        print(<span class="string">"&#123;i&#125;,&#123;j&#125;\n"</span>.format(i=path, j=label))</div><div class="line">        <span class="comment"># 打开图片</span></div><div class="line">        img = Image.open(path)</div><div class="line">        <span class="comment"># 将图片统一大小</span></div><div class="line">        img = img.resize((<span class="number">300</span>, <span class="number">300</span>))</div><div class="line">        <span class="comment"># 转换为bytes</span></div><div class="line">        img_raw = img.tobytes()</div><div class="line">        data = tf.train.Example(</div><div class="line">            features=tf.train.Features(</div><div class="line">                feature=&#123;</div><div class="line">                    <span class="string">'label'</span>:tf.train.Feature(int64_list=tf.train.Int64List(value=[label])), <span class="comment"># 0/1 分类,所以是INT</span></div><div class="line">                    <span class="string">'image'</span>:tf.train.Feature(bytes_list=tf.train.BytesList(value=[img_raw])) <span class="comment"># 字符串/图片/语音用bytes</span></div><div class="line">                &#125;</div><div class="line">            )</div><div class="line">        )</div><div class="line">        writer.write(data.SerializeToString())</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> should_transpose:</div><div class="line">            counter += <span class="number">1</span></div><div class="line">            <span class="comment"># 将图片左右翻转后生成一张新的图片,label不变,</span></div><div class="line">            rot_img = img.transpose(Image.FLIP_LEFT_RIGHT)</div><div class="line">            rot_img_raw = rot_img.tobytes()</div><div class="line">            data_2 = tf.train.Example(</div><div class="line">                features=tf.train.Features(</div><div class="line">                    feature=&#123;</div><div class="line">                        <span class="string">'label'</span>:tf.train.Feature(int64_list=tf.train.Int64List(value=[label])),</div><div class="line">                        <span class="string">'image'</span>:tf.train.Feature(bytes_list=tf.train.BytesList(value=[rot_img_raw]))</div><div class="line">                    &#125;</div><div class="line">                )</div><div class="line">            )</div><div class="line"></div><div class="line">            writer.write(data_2.SerializeToString())</div><div class="line">    writer.close()</div><div class="line">    print(<span class="string">"写入数据集-DONE, 共存&#123;&#125;个数据"</span>.format(counter))</div></pre></td></tr></table></figure>
+<ul>
+<li><code>writer = tf.python_io.TFRecordWriter(records_path)</code>启动一个写入TFRecord句柄, 遍历数组取出图片和label, 将图片设置统一大小并转为bytes.</li>
+<li><code>tf.train.Example(tf.train.Features)</code>是核心的处理代码, Example成TensorFlow的特定规则数据, 通过使用TFRecordWriter写入到TFRecord中.Example包含一个键值对数据结构(与dict相同), 使用属性features记录, 因此, 初始化时必须传入这个features参数</li>
+<li><code>writer.write(data.SerializeToString())</code>把Example序列成字符串写入TFRecord</li>
+<li><code>should_transpose=False</code>参数用来配置是否水平翻转图片, 并令数据扩大一倍</li>
+<li>当然关于TFRecord的写入具体规则, 如果需要可以参考该链接<a href="http://blog.csdn.net/qq_39037910/article/details/72900308" target="_blank" rel="external">Tensorflow: 文件读写</a></li>
+</ul>
+<h4 id="测试是否写入成功"><a href="#测试是否写入成功" class="headerlink" title="测试是否写入成功"></a>测试是否写入成功</h4><p>执行函数代码, 需要注意, 我提前将数据存储在python的列表中的, 可以使用<code>random.shuffle</code>进行数据的洗牌<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">classic_data(plane_path)</div><div class="line">classic_data(UNplane_path)</div><div class="line">random.shuffle(dataset_list)</div><div class="line">create_record(dataset_list, should_transpose=<span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
+<p>结果:<br><img src="/2018/01/20/TensorFlow数据集制作实战/succeed.png" alt=""></p>
+<p>可以看到数据洗牌, 而且数据*2, 都成功做到了.<br><img src="/2018/01/20/TensorFlow数据集制作实战/tu.png" alt=""></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TensorFlow/" rel="tag">#TensorFlow</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/20/TensorFlow数据集-Dataset-API/" rel="next">TensorFlow数据集-Dataset-API</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div>
+      
+        <style type="text/css">
+
+    .donate_bar {
+        text-align: center;
+        margin-top : 5%;
+    }
+
+    .donate_bar.hidden {
+        display:none;
+    }
+/*
+    .donate_bar a.btn_donate {
+        display: inline-block;
+        width: 82px;
+        height: 82px;
+        margin-left:auto;
+        margin-right:auto;
+
+        background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+        _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat; 
+
+        -webkit-transition: background 0s;
+        -moz-transition: background 0s;
+        -o-transition: background 0s;
+        -ms-transition: background 0s;
+        transition: background 0s;
+    }
+*/
+    .donate_bar a.btn_donate:hover { 
+        // background-position: 0px -82px;
+        color: #87daff;
+    }
+
+    .donate_bar .donate_txt {
+        display: block;
+        color: #9d9d9d;
+        font: 14px/2 "Microsoft Yahei";
+    }
+
+    .bold { 
+        font-weight: bold; 
+    }
+
+    .post-donate a {
+        border-bottom: 0px;
+    }
+
+    #donate_guide table {
+        border: none;
+    }
+
+    #donate_guide td {
+        border-bottom: none;
+        border-right: none;
+        // background: #333333;
+        valign: top;
+    }
+
+</style>
+
+
+
+      
+    </div>
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Paulswith __dobby" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Paulswith __dobby</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">滴滴点点滴滴</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Paulswith" target="_blank">GitHub</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#当前数据"><span class="nav-number">1.</span> <span class="nav-text">当前数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据文件夹标签化图片"><span class="nav-number">2.</span> <span class="nav-text">根据文件夹标签化图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转为数据集"><span class="nav-number">3.</span> <span class="nav-text">转为数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试是否写入成功"><span class="nav-number">4.</span> <span class="nav-text">测试是否写入成功</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2017 - 
+  <span itemprop="copyrightYear">2018
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Paulswith __dobby
+  </span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+</div>
+
+<!-- busuanzi -->
+
+  <div class="">
+    <div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+  </div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
