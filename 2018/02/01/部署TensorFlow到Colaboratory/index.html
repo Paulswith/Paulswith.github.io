@@ -39,17 +39,19 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="一个二分类的机器学习, 用TensorFlow写的, 刚好看到google提供的免费褥羊毛GPU, 虽然坑很多, 但还是部署上去了,GPU效率真的比CPU强的多多.官方完整的帮助连接在这里,注意上面的代码是基于Python2的, 我用的python3  数据集准备CSV之类的轻量数据集PASS, 有即可 TFRecord重量数据集可以类似我这样子, 将数据存储到目录下Datasets下, 推荐t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/10/31/hello-world/index.html">
+<meta property="og:title" content="部署TensorFlow到Colaboratory">
+<meta property="og:url" content="http://yoursite.com/2018/02/01/部署TensorFlow到Colaboratory/index.html">
 <meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="一个二分类的机器学习, 用TensorFlow写的, 刚好看到google提供的免费褥羊毛GPU, 虽然坑很多, 但还是部署上去了,GPU效率真的比CPU强的多多.官方完整的帮助连接在这里,注意上面的代码是基于Python2的, 我用的python3  数据集准备CSV之类的轻量数据集PASS, 有即可 TFRecord重量数据集可以类似我这样子, 将数据存储到目录下Datasets下, 推荐t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-31T07:36:01.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/02/01/部署TensorFlow到Colaboratory/shareLinke.png">
+<meta property="og:updated_time" content="2018-02-01T08:53:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="部署TensorFlow到Colaboratory">
+<meta name="twitter:description" content="一个二分类的机器学习, 用TensorFlow写的, 刚好看到google提供的免费褥羊毛GPU, 虽然坑很多, 但还是部署上去了,GPU效率真的比CPU强的多多.官方完整的帮助连接在这里,注意上面的代码是基于Python2的, 我用的python3  数据集准备CSV之类的轻量数据集PASS, 有即可 TFRecord重量数据集可以类似我这样子, 将数据存储到目录下Datasets下, 推荐t">
+<meta name="twitter:image" content="http://yoursite.com/2018/02/01/部署TensorFlow到Colaboratory/shareLinke.png">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -59,7 +61,7 @@
   };
 </script>
 
-  <title> Hello World | Paulswith·__dobby's Blogs </title>
+  <title> 部署TensorFlow到Colaboratory | Paulswith·__dobby's Blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -184,7 +186,7 @@
           
           
             
-              Hello World
+              部署TensorFlow到Colaboratory
             
           
         </h1>
@@ -193,8 +195,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2017-10-31T15:36:01+08:00" content="2017-10-31">
-            2017-10-31
+          <time itemprop="dateCreated" datetime="2018-02-01T14:48:23+08:00" content="2018-02-01">
+            2018-02-01
           </time>
         </span>
 
@@ -212,15 +214,29 @@
       
 
       
-        <span itemprop="articleBody"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <span itemprop="articleBody"><blockquote>
+<p>一个二分类的机器学习, 用TensorFlow写的, 刚好看到google提供的免费褥羊毛GPU, 虽然坑很多, 但还是部署上去了,GPU效率真的比CPU强的多多.<br><a href="https://colab.research.google.com/notebook#fileId=/v2/external/notebooks/io.ipynb&amp;scrollTo=sOm9PFrT8mGG" target="_blank" rel="external">官方完整的帮助连接</a>在这里,注意上面的代码是基于Python2的, 我用的python3</p>
+</blockquote>
+<h3 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h3><h4 id="CSV之类的轻量数据集"><a href="#CSV之类的轻量数据集" class="headerlink" title="CSV之类的轻量数据集"></a>CSV之类的轻量数据集</h4><p>PASS, 有即可</p>
+<h4 id="TFRecord重量数据集"><a href="#TFRecord重量数据集" class="headerlink" title="TFRecord重量数据集"></a>TFRecord重量数据集</h4><p>可以类似我这样子, 将数据存储到目录下<code>Datasets</code>下, 推荐tar压缩<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zcvf Datasets.gz Datasets</div></pre></td></tr></table></figure></p>
+<p>自行配置好谷歌Drive, 链接<a href="https://www.google.com/drive/" target="_blank" rel="external">https://www.google.com/drive/</a><br>下载符合电脑版本, 把数据集存入同步到云端.</p>
+<h3 id="如何上传"><a href="#如何上传" class="headerlink" title="如何上传"></a>如何上传</h3><p>打开你的Colaboratory-new一个jupyter脚本.</p>
+<h4 id="小文件上传"><a href="#小文件上传" class="headerlink" title="小文件上传"></a>小文件上传</h4><p><em>for Python2:</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> files</div><div class="line"></div><div class="line"><span class="comment"># 你需填的:</span></div><div class="line">FILE_NAME = <span class="string">'想保存到Colaboratory的文件名'</span></div><div class="line"></div><div class="line">uploaded = files.upload()</div><div class="line"><span class="keyword">with</span> open(FILE_NAME, <span class="string">'wb'</span>) <span class="keyword">as</span> file:</div><div class="line">    file.write(uploaded[uploaded.keys()[<span class="number">0</span>]])</div></pre></td></tr></table></figure></p>
+<p><em>but for Python3:</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> files</div><div class="line"></div><div class="line"><span class="comment"># 你需填的:</span></div><div class="line">FILE_NAME = <span class="string">'想保存到Colaboratory的文件名'</span></div><div class="line"></div><div class="line">uploaded = files.upload()</div><div class="line"><span class="keyword">with</span> open(FILE_NAME, <span class="string">'wb'</span>) <span class="keyword">as</span> file:</div><div class="line">    file.write(uploaded[list[uploaded.keys()][<span class="number">0</span>]])</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>对应的python执行上述代码后, 会出现<code>Choose file</code>按钮, 选择本地文件确认即可上传, 默认在当前路径, 可用<code>!ls -l</code>查看下</p>
+</blockquote>
+<h4 id="大文件上传"><a href="#大文件上传" class="headerlink" title="大文件上传"></a>大文件上传</h4><p><em>下面开始我就没有试过python2了,都是基于python3</em></p>
+<p>如果是大文件上传, 就按照前面的准备, 我们已经把文件传到了GoogleDrive云盘.<br>Now, 在浏览器打开Drive找到那个文件, 右键-&gt;查看共享链接: -&gt; 拷贝id=后面这个key, 粘贴到下方代码的位置<br><img src="/2018/02/01/部署TensorFlow到Colaboratory/shareLinke.png" alt=""><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这行代码相当于unix,会去帮我们安装这个包</span></div><div class="line">!pip install -U -q PyDrive</div><div class="line"></div><div class="line"><span class="keyword">from</span> pydrive.auth <span class="keyword">import</span> GoogleAuth</div><div class="line"><span class="keyword">from</span> pydrive.drive <span class="keyword">import</span> GoogleDrive</div><div class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> auth</div><div class="line"><span class="keyword">from</span> oauth2client.client <span class="keyword">import</span> GoogleCredentials</div><div class="line"></div><div class="line"><span class="comment"># 你需填的:</span></div><div class="line">PACKAGE_ID = <span class="string">'key粘贴到这里'</span></div><div class="line">PACKAGE_NAME = <span class="string">'drive文件的名字还是Colaboratory将存储的名字呢,你自己试试, 我就是填drive对应的名字'</span></div><div class="line"></div><div class="line"></div><div class="line">auth.authenticate_user()</div><div class="line">gauth = GoogleAuth()</div><div class="line">gauth.credentials = GoogleCredentials.get_application_default()</div><div class="line">drive = GoogleDrive(gauth)</div><div class="line"></div><div class="line">downloaded = drive.CreateFile(&#123;<span class="string">'id'</span>:PACKAGE_ID&#125;)</div><div class="line">downloaded.GetContentFile(PACKAGE_NAME)</div><div class="line">print(<span class="string">'Transpose succeed.'</span>)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>执行上述代码, 会弹出一个授权链接和一个授权码输入框, 授权链接授权后会给你这串授权码,粘贴回车即可.依然可以用<code>!ls -l</code>查看下, <code>Colaboratory</code>有自带一些命令的, 在/bin下, 所以可以用tar命令进行解压:<code>tar czvf Datasets.gz</code></p>
+</blockquote>
+<h3 id="训练后的内容数据如何下载"><a href="#训练后的内容数据如何下载" class="headerlink" title="训练后的内容数据如何下载"></a>训练后的内容数据如何下载</h3><p>训练后的模型-tensorBoardLog等文件我们会把它下载下来, 以便我们后续使用. so, 这里来记录下如何下载下来</p>
+<h4 id="小文件"><a href="#小文件" class="headerlink" title="小文件"></a>小文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> files</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 你需要填的:</span></div><div class="line">FILE_PATH = <span class="string">'下载的文件路径'</span></div><div class="line"></div><div class="line">files.download(FILE_PATH)</div></pre></td></tr></table></figure>
+<blockquote>
+<p><em>尴尬脸</em> 简单吧,简单到写不下去了</p>
+</blockquote>
+<h4 id="大文件"><a href="#大文件" class="headerlink" title="大文件"></a>大文件</h4><p>大文件还是推荐打包, tar:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> google.colab <span class="keyword">import</span> auth</div><div class="line"><span class="keyword">from</span> googleapiclient.discovery <span class="keyword">import</span> build</div><div class="line"><span class="keyword">from</span> googleapiclient.http <span class="keyword">import</span> MediaFileUpload</div><div class="line"></div><div class="line"><span class="comment"># 你需要填的:</span></div><div class="line">SAVE_INTODRIVE_NAME = <span class="string">'想以什么名字保存到drive'</span></div><div class="line">FILE_PATH = <span class="string">'想下载的文件路径'</span></div><div class="line"></div><div class="line">auth.authenticate_user()</div><div class="line">drive_service = build(<span class="string">'drive'</span>, <span class="string">'v3'</span>)</div><div class="line">file_metadata = &#123;</div><div class="line">  <span class="string">'name'</span>:SAVE_INTODRIVE_NAME,</div><div class="line">  <span class="string">'mimeType'</span>: <span class="string">'text/plain'</span></div><div class="line">&#125;</div><div class="line">media = MediaFileUpload(FILE_PATH, </div><div class="line">                        mimetype=<span class="string">'text/plain'</span>,</div><div class="line">                        resumable=<span class="keyword">True</span>)</div><div class="line">created = drive_service.files().create(body=file_metadata,</div><div class="line">                                       media_body=media,</div><div class="line">                                       fields=<span class="string">'id'</span>).execute()</div><div class="line">print(<span class="string">'File ID: &#123;&#125;'</span>.format(created.get(<span class="string">'id'</span>)))</div><div class="line">print(<span class="string">'Transpose succeed.'</span>)</div></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -232,11 +248,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/我怎么从0到1搭建了这个hexo-blog/" rel="prev">我怎么从0到1搭建了这个hexo-blog</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/20/TensorFlow数据集制作实战/" rel="next">TensorFlow数据集制作实战</a>
             
           </div>
         </div>
@@ -432,7 +448,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集准备"><span class="nav-number">1.</span> <span class="nav-text">数据集准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CSV之类的轻量数据集"><span class="nav-number">1.1.</span> <span class="nav-text">CSV之类的轻量数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TFRecord重量数据集"><span class="nav-number">1.2.</span> <span class="nav-text">TFRecord重量数据集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何上传"><span class="nav-number">2.</span> <span class="nav-text">如何上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小文件上传"><span class="nav-number">2.1.</span> <span class="nav-text">小文件上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大文件上传"><span class="nav-number">2.2.</span> <span class="nav-text">大文件上传</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练后的内容数据如何下载"><span class="nav-number">3.</span> <span class="nav-text">训练后的内容数据如何下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小文件"><span class="nav-number">3.1.</span> <span class="nav-text">小文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大文件"><span class="nav-number">3.2.</span> <span class="nav-text">大文件</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
