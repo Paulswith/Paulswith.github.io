@@ -1,0 +1,770 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mala">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="滴滴点点滴滴" />
+
+
+
+  <meta name="keywords" content="迁移学习移植IOS," />
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Paulswith·__dobby's Blogs" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/ 上文记录了如何从一个别人训练好的模型, 切入我们自己的图片, 改为我们自己的模型.本来以为移植到手机很简单, 但是不简单的是我的模型本身就是迁移学习别人的模型,有很多莫名其面的坑,  在CoreML经历了N个坑后,1点14">
+<meta name="keywords" content="迁移学习移植IOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习迁移模型到IOS">
+<meta property="og:url" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/index.html">
+<meta property="og:site_name" content="Paulswith·__dobby&#39;s Blogs">
+<meta property="og:description" content="https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/ 上文记录了如何从一个别人训练好的模型, 切入我们自己的图片, 改为我们自己的模型.本来以为移植到手机很简单, 但是不简单的是我的模型本身就是迁移学习别人的模型,有很多莫名其面的坑,  在CoreML经历了N个坑后,1点14">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/tools.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/guhua.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/model.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/inout.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/1.png?r=20">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/2.png?r=20">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/3.png?r=20">
+<meta property="og:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/4.png?r=20">
+<meta property="og:updated_time" content="2018-02-24T18:57:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习迁移模型到IOS">
+<meta name="twitter:description" content="https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/ 上文记录了如何从一个别人训练好的模型, 切入我们自己的图片, 改为我们自己的模型.本来以为移植到手机很简单, 但是不简单的是我的模型本身就是迁移学习别人的模型,有很多莫名其面的坑,  在CoreML经历了N个坑后,1点14">
+<meta name="twitter:image" content="http://yoursite.com/2018/02/25/机器学习迁移模型到IOS/tools.png">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mala',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> 机器学习迁移模型到IOS | Paulswith·__dobby's Blogs </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">I just wanna improve myself.</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            <i class="menu-item-icon icon-next-commonweal"></i> <br />
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              机器学习迁移模型到IOS
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2018-02-25T01:01:47+08:00" content="2018-02-25">
+            2018-02-25
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/MachineLearning/" itemprop="url" rel="index">
+                  <span itemprop="name">MachineLearning</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p><a href="https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/" target="_blank" rel="external">https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/</a> 上文记录了如何从一个别人训练好的模型, 切入我们自己的图片, 改为我们自己的模型.<br>本来以为移植到手机很简单, 但是不简单的是我的模型本身就是迁移学习别人的模型,有很多莫名其面的坑,  在CoreML经历了N个坑后,1点14分我搞掂了.</p>
+</blockquote>
+<p><strong> 项目源码和转换源码已经上传到git.</strong><br><a href="https://github.com/Paulswith/machineLearningIntro/tree/master/classification_101" target="_blank" rel="external">https://github.com/Paulswith/machineLearningIntro/tree/master/classification_101</a></p>
+<h3 id="转化为mlmodel"><a href="#转化为mlmodel" class="headerlink" title="转化为mlmodel"></a>转化为mlmodel</h3><p>说说转换为mlmodel的工具有两个:</p>
+<ul>
+<li>coremltools, 它目前只支持五种模型的转换, 不包括tensorflow:<br><img src="/2018/02/25/机器学习迁移模型到IOS/tools.png" alt=""></li>
+<li>若你跟我一样是tensorflow , 那么必须使用tfcoreml<br>  <a href="https://github.com/tf-coreml" target="_blank" rel="external">https://github.com/tf-coreml</a> 有安装方法.<br>  转换Example: <a href="https://github.com/tf-coreml/tf-coreml/tree/master/examples" target="_blank" rel="external">https://github.com/tf-coreml/tf-coreml/tree/master/examples</a> </li>
+</ul>
+<p><strong> 接着往下看: </strong></p>
+<h4 id="是否是graph-pb"><a href="#是否是graph-pb" class="headerlink" title="是否是graph-pb?"></a>是否是graph-pb?</h4><p>如果你跟我一样, 训练的模型, 从tensorflow的代码保存下来的, 调用的:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">saver.save(sess, MODEL_SAVEPATH, global_step=<span class="number">50</span>)</div></pre></td></tr></table></figure></p>
+<p>它并不会保存出一个pb文件, 其中的.meta也需要其他方式转换似乎也可以, 我没有尝试过.<br>用这个方法, 你需要在上方代码的下面加两行,就可以继续:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> i %SAVE_EPOCH == <span class="number">0</span>:</div><div class="line">                    tf.train.write_graph(sess.graph, MODEL_SAVE_DIR, <span class="string">'model.pbtxt'</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="pdtxt固化为pd"><a href="#pdtxt固化为pd" class="headerlink" title="pdtxt固化为pd"></a>pdtxt固化为pd</h4><p>操作参考链接<a href="https://www.jianshu.com/p/091415b114e2" target="_blank" rel="external">https://www.jianshu.com/p/091415b114e2</a><br>我是直接使用的bezel, 编译tensorflow源码后, 直接使用, 其中参数跟着填, 需要注意的是output_node:<br><img src="/2018/02/25/机器学习迁移模型到IOS/guhua.png" alt=""></p>
+<h4 id="导入化图"><a href="#导入化图" class="headerlink" title="导入化图"></a>导入化图</h4><p>导入图和查看图的节点信息:<br> 如果你的图不属于pb文件, 那么就会在导入图的时候报错的.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(TF_MODEL_FILE, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</div><div class="line">    serialized = f.read()</div><div class="line">tf.reset_default_graph()</div><div class="line">original_gdef = tf.GraphDef()</div><div class="line">original_gdef.ParseFromString(serialized)</div><div class="line"></div><div class="line"><span class="comment">##2 可以在这里查看到全部的图信息(前提是你有转换成功)</span></div><div class="line"><span class="keyword">with</span> tf.Graph().as_default() <span class="keyword">as</span> g:</div><div class="line">    tf.import_graph_def(original_gdef, name=<span class="string">''</span>)</div><div class="line">    ops = g.get_operations()</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):</div><div class="line">            print(<span class="string">'op id &#123;&#125; : op name: &#123;&#125;, op type: "&#123;&#125;"'</span>.format(str(i),ops[i].name, ops[i].type))</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        print(<span class="string">"全部节点已打印完毕."</span>)</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+<h4 id="预处理节点"><a href="#预处理节点" class="headerlink" title="预处理节点"></a>预处理节点</h4><p>其实这一步个人不是很清楚很知道它做了什么,但确是不得不做的. 最后的大小看着也不像是”减包”<br>需要注意两点:</p>
+<ul>
+<li>input_node_names: 这里填写的节点从上方的代码可以打印看得到的, 实际在训练模型的时候, 我们直接喂图片的节点是在”import/DecodeJpeg/contents”, 而这里”必须是import/Mul”.</li>
+<li>output_node_names: 因为模型是剪切拼接的, 这跟tensorflow直接调用是一样的节点.<br><strong> 最后生成一个完整的pb文件. </strong><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">input_node_names = [<span class="string">'import/Mul'</span>, <span class="string">'BottleneckInputPlaceholder'</span>]   <span class="comment"># 本来以为是import/DecodeJpeg/contents, 实际上是Mul(tfcoreml-git上说的)</span></div><div class="line">output_node_names = [<span class="string">'import/pool_3/_reshape'</span>,<span class="string">'final_train_ops/softMax_last'</span>]  <span class="comment"># 想要保存的节点 , 'final_train_ops/softMax_last'</span></div><div class="line"></div><div class="line">gdef = strip_unused_lib.strip_unused(</div><div class="line">        input_graph_def = original_gdef,</div><div class="line">        input_node_names = input_node_names,</div><div class="line">        output_node_names = output_node_names,</div><div class="line">        placeholder_type_enum = dtypes.float32.as_datatype_enum)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">with</span> gfile.GFile(FROZEN_MODEL_FILE, <span class="string">"wb"</span>) <span class="keyword">as</span> f:</div><div class="line">    f.write(gdef.SerializeToString())</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="开始转换"><a href="#开始转换" class="headerlink" title="开始转换"></a>开始转换</h4><ul>
+<li><p>input_tensor_shapes: 是placeholder 和 input节点, 方括号的第一个参数是batch大小,代表一张一张的喂给它. 字典里面这两个, 对应生成后的InceptionV3_input的两个属性.</p>
+</li>
+<li><p>output_tensor_names: 训练后得到的节点, 对应生成后的InceptionV3_output的两个属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">input_tensor_shapes = &#123;</div><div class="line">                        <span class="string">"import/Mul:0"</span>:[<span class="number">1</span>,<span class="number">299</span>,<span class="number">299</span>,<span class="number">3</span>],          <span class="comment"># batch size is 1</span></div><div class="line">                        <span class="string">"BottleneckInputPlaceholder:0"</span>:[<span class="number">1</span>,<span class="number">2048</span>],</div><div class="line">                       &#125;</div><div class="line">output_tensor_names = [<span class="string">'import/pool_3/_reshape:0'</span>,<span class="string">'final_train_ops/softMax_last:0'</span>]</div><div class="line"></div><div class="line"><span class="comment"># Call the converter. This may take a while</span></div><div class="line">coreml_model = tfcoreml.convert(</div><div class="line">        tf_model_path=FROZEN_MODEL_FILE,</div><div class="line">        mlmodel_path=COREML_MODEL_FILE,</div><div class="line">        input_name_shape_dict=input_tensor_shapes,</div><div class="line">        output_feature_names=output_tensor_names,</div><div class="line">        image_input_names = [<span class="string">'import/Mul:0'</span>],</div><div class="line">        red_bias = <span class="number">-1</span>,</div><div class="line">        green_bias = <span class="number">-1</span>,</div><div class="line">        blue_bias = <span class="number">-1</span>,</div><div class="line">        image_scale = <span class="number">2.0</span>/<span class="number">255.0</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>上方具体的参数可以在方法看得到,后面四个参数就是我们输入图片时候的均值化,  还有个特殊的参数<code>class_labels</code>, output后的模型可以直接索引到标签, 但是在实践过程中, 我这个本身是迁移别人的学习的模型并起不到作用.</p>
+</blockquote>
+<p>执行完成后生成文件:<br><img src="/2018/02/25/机器学习迁移模型到IOS/model.png" alt=""></p>
+<h3 id="ios-code调用"><a href="#ios-code调用" class="headerlink" title="ios-code调用"></a>ios-code调用</h3><h4 id="了解模型"><a href="#了解模型" class="headerlink" title="了解模型:"></a>了解模型:</h4><p>首先, 直接将inceptionV3.mlmodel拖入到工程:<br>导入头文件, <code>inceptionV3.h</code>, 点开查看:<br><img src="/2018/02/25/机器学习迁移模型到IOS/inout.png" alt=""></p>
+<p>他们之间的关系是, <strong>inception_v3_input导入 -&gt; 启动inception_v3.model训练 -&gt; 得到inception_v3_output</strong> 分别提供了一个实例化方法.</p>
+<h4 id="开始代码"><a href="#开始代码" class="headerlink" title="开始代码"></a>开始代码</h4><p>首先确认他们之间的调用方向 层次, 我直接是参考tensorflow加载的顺序, 只要理解了, 就可以直接调用了:<br>这是Python的调用方法:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">poo3_frist = sess.run(poo3, feed_dict=&#123;inpiut_x: image&#125;)   <span class="comment"># 按照模型的顺序要, 先喂给它图片, 然后图片提取到瓶颈的tensor</span></div><div class="line">result     = sess.run(predict, feed_dict=&#123;change_input:poo3_frist&#125;) <span class="comment"># 瓶颈的tensor再转入input传入, 得到我们最后的predict</span></div></pre></td></tr></table></figure></p>
+<p>如果参照tensorflow加载模型的做法, 我们直接是一张图片, 得到一个run到pool3, 但实际CoreML只给我们生成了一个实例方法:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">instancetype</span>)initWithBottleneckInputPlaceholder__0:(MLMultiArray *)BottleneckInputPlaceholder__0 import__Mul__0:(CVPixelBufferRef)import__Mul__0;</div></pre></td></tr></table></figure></p>
+<p>方法必须要传入一个<code>MLMultiArray</code>, 而且shape必须一致的. 最后我直接调用<code>MLMultiArray</code>的方法,生成一个0值的2048shape</p>
+<p><strong>预测部分的, 完整核心代码</strong> 均有详细的注释说明<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">- (inception_v3 *)tfModel &#123;</div><div class="line">    <span class="keyword">if</span> (!_tfModel) &#123;</div><div class="line">        <span class="comment">// 1 加载模型, 本身代码会调用init的时候, 方法会调用initWithContentsOfURL, 找到inception文件进行初始化</span></div><div class="line">        _tfModel = [[inception_v3 alloc] init];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _tfModel;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)predictWithFoodImage:(<span class="built_in">UIImage</span> *)foodImage</div><div class="line">&#123;</div><div class="line">    <span class="comment">// step1: 标准为size, 转为可传入的参数.</span></div><div class="line">    <span class="built_in">UIImage</span> *img = [foodImage scaleToSize:<span class="built_in">CGSizeMake</span>(<span class="number">299</span>, <span class="number">299</span>)];             <span class="comment">// 转换为可传参的图片大小</span></div><div class="line">    CVPixelBufferRef refImage = [[<span class="built_in">UIImage</span> new] pixelBufferFromCGImage:img];  <span class="comment">// 转换为可传参的类型</span></div><div class="line"></div><div class="line">    </div><div class="line">    <span class="comment">// step2.1: 由于一开始是没有BottleneckInputPlaceholder, 直接0值初始一个传入</span></div><div class="line">    MLMultiArray *holder = [[MLMultiArray alloc] initWithShape:@[@<span class="number">2048</span>] dataType:MLMultiArrayDataTypeDouble error:<span class="literal">nil</span>];</div><div class="line">    <span class="comment">// step2.2: 启动预测, 预测完成后得到import__pool_3___reshape__0</span></div><div class="line">    inception_v3Output *output = [<span class="keyword">self</span>.tfModel predictionFromBottleneckInputPlaceholder__0:holder import__Mul__0:refImage error:<span class="literal">nil</span>];</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="comment">// step3: 从第二步, 完整得到了想要的BottleneckInputPlaceholder, 直接代入, 图片也代入.</span></div><div class="line">    inception_v3Output *output1 = [<span class="keyword">self</span>.tfModel predictionFromBottleneckInputPlaceholder__0:output.import__pool_3___reshape__0 import__Mul__0:refImage error:<span class="literal">nil</span>];</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">// step4: 从final_train_ops__softMax_last__0提取预测结果</span></div><div class="line">    MLMultiArray *__final = output1.final_train_ops__softMax_last__0;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> poAccu:__final];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="调用摄像头进行图片获取"><a href="#调用摄像头进行图片获取" class="headerlink" title="调用摄像头进行图片获取"></a>调用摄像头进行图片获取</h4><p>通过整合代码层次, 代码调用也封装好了, 方便代用:<br> 从简书上拿到别人写好的调用摄像头拍照<a href="https://www.jianshu.com/p/62d69d89fa43" target="_blank" rel="external">https://www.jianshu.com/p/62d69d89fa43</a>, 提取了下代码:<br>主要逻辑:<br>拍照后重置大小展示到view,  异步进行模型预测, 回到主线程展示label结果.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//触发事件：拍照</span></div><div class="line">- (<span class="keyword">void</span>)addCamera</div><div class="line">&#123;</div><div class="line">    <span class="built_in">UIImagePickerController</span> *picker = [[<span class="built_in">UIImagePickerController</span> alloc] init];</div><div class="line">    picker.delegate = <span class="keyword">self</span>;</div><div class="line">    picker.allowsEditing = <span class="literal">YES</span>; <span class="comment">//可编辑</span></div><div class="line">    <span class="comment">//判断是否可以打开照相机</span></div><div class="line">    <span class="keyword">if</span> ([<span class="built_in">UIImagePickerController</span> isSourceTypeAvailable:<span class="built_in">UIImagePickerControllerSourceTypeCamera</span>]) &#123;</div><div class="line">        <span class="comment">//摄像头</span></div><div class="line">        picker.sourceType = <span class="built_in">UIImagePickerControllerSourceTypeCamera</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">//否则打开照片库</span></div><div class="line">        picker.sourceType = <span class="built_in">UIImagePickerControllerSourceTypePhotoLibrary</span>;</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span> presentViewController:picker animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#pragma mark - UIImagePickerControllerDelegate</span></div><div class="line"></div><div class="line"><span class="comment">//拍摄完成后要执行的代理方法</span></div><div class="line">- (<span class="keyword">void</span>)imagePickerController:(<span class="built_in">UIImagePickerController</span> *)picker didFinishPickingMediaWithInfo:(<span class="built_in">NSDictionary</span> *)info</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSString</span> *mediaType = [info objectForKey:<span class="built_in">UIImagePickerControllerMediaType</span>];</div><div class="line">    <span class="keyword">if</span> ([mediaType isEqualToString:<span class="string">@"public.image"</span>]) &#123;</div><div class="line">        <span class="comment">//得到照片</span></div><div class="line">        <span class="built_in">UIImage</span> *image = [info objectForKey:<span class="built_in">UIImagePickerControllerOriginalImage</span>];</div><div class="line">        image = [image scaleToSize:<span class="keyword">self</span>.imageView.frame.size];</div><div class="line">        <span class="keyword">self</span>.imageView.image = image;</div><div class="line">        <span class="comment">// 异步处理, 不要占用主线程:</span></div><div class="line">        <span class="built_in">dispatch_async</span>(dispatch_queue_create(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</div><div class="line">            <span class="built_in">NSString</span> *preString = [<span class="keyword">self</span>.prediction predictWithFoodImage:image];</div><div class="line">            <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">                <span class="keyword">self</span>.preLabel.text = preString;</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//进入拍摄页面点击取消按钮</span></div><div class="line">- (<span class="keyword">void</span>)imagePickerControllerDidCancel:(<span class="built_in">UIImagePickerController</span> *)picker</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span> dismissViewControllerAnimated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p>制作gif, 直接看图片: 或者上面链接从我的git上下载源码:<br><img src="/2018/02/25/机器学习迁移模型到IOS/1.png?r=20" alt=""><img src="/2018/02/25/机器学习迁移模型到IOS/2.png?r=20" alt=""><img src="/2018/02/25/机器学习迁移模型到IOS/3.png?r=20" alt=""><img src="/2018/02/25/机器学习迁移模型到IOS/4.png?r=20" alt=""></p>
+<p>[<code>好困, 该睡觉了...</code>]</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/迁移学习移植IOS/" rel="tag">#迁移学习移植IOS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/24/迁移学习InceptionV3/" rel="next">迁移学习InceptionV3</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div>
+      
+        <style type="text/css">
+
+    .donate_bar {
+        text-align: center;
+        margin-top : 5%;
+    }
+
+    .donate_bar.hidden {
+        display:none;
+    }
+/*
+    .donate_bar a.btn_donate {
+        display: inline-block;
+        width: 82px;
+        height: 82px;
+        margin-left:auto;
+        margin-right:auto;
+
+        background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+        _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat; 
+
+        -webkit-transition: background 0s;
+        -moz-transition: background 0s;
+        -o-transition: background 0s;
+        -ms-transition: background 0s;
+        transition: background 0s;
+    }
+*/
+    .donate_bar a.btn_donate:hover { 
+        // background-position: 0px -82px;
+        color: #87daff;
+    }
+
+    .donate_bar .donate_txt {
+        display: block;
+        color: #9d9d9d;
+        font: 14px/2 "Microsoft Yahei";
+    }
+
+    .bold { 
+        font-weight: bold; 
+    }
+
+    .post-donate a {
+        border-bottom: 0px;
+    }
+
+    #donate_guide table {
+        border: none;
+    }
+
+    #donate_guide td {
+        border-bottom: none;
+        border-right: none;
+        // background: #333333;
+        valign: top;
+    }
+
+</style>
+
+
+
+      
+    </div>
+
+    <div class="post-spread">
+      
+        <div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+	<a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Paulswith __dobby" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Paulswith __dobby</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">滴滴点点滴滴</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="menu-item-icon icon-next-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Paulswith" target="_blank">GitHub</a>
+              </span>
+            
+          
+        </div>
+
+        <div class="links-of-friendly motion-element">
+          
+        </div>
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#转化为mlmodel"><span class="nav-number">1.</span> <span class="nav-text">转化为mlmodel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#是否是graph-pb"><span class="nav-number">1.1.</span> <span class="nav-text">是否是graph-pb?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pdtxt固化为pd"><span class="nav-number">1.2.</span> <span class="nav-text">pdtxt固化为pd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导入化图"><span class="nav-number">1.3.</span> <span class="nav-text">导入化图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#预处理节点"><span class="nav-number">1.4.</span> <span class="nav-text">预处理节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始转换"><span class="nav-number">1.5.</span> <span class="nav-text">开始转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ios-code调用"><span class="nav-number">2.</span> <span class="nav-text">ios-code调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#了解模型"><span class="nav-number">2.1.</span> <span class="nav-text">了解模型:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开始代码"><span class="nav-number">2.2.</span> <span class="nav-text">开始代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用摄像头进行图片获取"><span class="nav-number">2.3.</span> <span class="nav-text">调用摄像头进行图片获取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试结果"><span class="nav-number">3.</span> <span class="nav-text">测试结果</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2017 - 
+  <span itemprop="copyrightYear">2018
+  </span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Paulswith __dobby
+  </span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme by <a class="theme-link" href="http://blog.idhyt.com">idhyt</a>.<a class="theme-link" href="https://github.com/idhyt/hexo-theme-next/tree/magiclamp">Mala</a>
+</div>
+
+<!-- busuanzi -->
+
+  <div class="">
+    <div class="theme-info">
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <span id="busuanzi_container_site_pv">
+        本站总访问量<a class="theme-link"><span id="busuanzi_value_site_pv"></span></a>次
+    </span>
+</div>
+  </div>
+
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
