@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-02-24T18:57:29.000Z</updated>
+  <updated>2018-06-05T02:19:13.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/06/05/configs/sorts/"/>
+    <id>http://yoursite.com/2018/06/05/configs/sorts/</id>
+    <published>2018-06-05T02:18:28.000Z</published>
+    <updated>2018-06-05T02:19:13.000Z</updated>
+    
+    <content type="html"><![CDATA[{"":["xcode9之后的打包方式.md","机器学习迁移模型到ios.md","迁移学习inceptionv3.md","部署tensorflow到colaboratory.md","tensorflow数据集制作实战.md","ios重签名脚本的0到1.md","mac上的mysql踩坑记.md","tensorflow数据集-dataset-api.md","wda玩微信跳一跳.md","探探逆向之旅.md","mac逆向-窗口管理divvy.md","unread逆向-去除阅读限制.md","seleniumandrequest辅助爬虫.md","砸壳最稳dumpdecrypted.md","去除oplayerlite广告提示-越狱机.md","clutch对app进行砸壳.md","小tip之mac动态背景.md","plist文件-在脚本中的操作.md","shell脚本中如何捕获异常.md","oc中常用的延迟执行代码方法.md","brewupgrade-提示ruby版本低.md","git-命令行上的常规操作.md","instruments命令行监控.md","验证码识别整理.md","我怎么从0到1搭建了这个hexo-blog.md","hello-world.md","xcode9之后的打包方式","seleniumandrequest辅助爬虫","部署tensorflow到colaboratory","我怎么从0到1搭建了这个hexo-blog","brewupgrade-提示ruby版本低","去除oplayerlite广告提示-越狱机","unread逆向-去除阅读限制","tensorflow数据集制作实战","instruments命令行监控","砸壳最稳dumpdecrypted","ios重签名脚本的0到1","验证码识别整理","mac逆向-窗口管理divvy","clutch对app进行砸壳","迁移学习inceptionv3","plist文件-在脚本中的操作","wda玩微信跳一跳","shell脚本中如何捕获异常","git-命令行上的常规操作","机器学习迁移模型到ios","mac上的mysql踩坑记","oc中常用的延迟执行代码方法","小tip之mac动态背景","探探逆向之旅","tensorflow数据集-dataset-api"],"__positions":{"ios重签名脚本的0到1.md":6,"instruments命令行监控.md":23,"砸壳最稳dumpdecrypted":36,"小tip之mac动态背景":49,"验证码识别整理":38,"验证码识别整理.md":24,"tensorflow数据集-dataset-api.md":8,"去除oplayerlite广告提示-越狱机":32,"brewupgrade-提示ruby版本低":31,"clutch对app进行砸壳.md":16,"mac逆向-窗口管理divvy.md":11,"git-命令行上的常规操作":45,"xcode9之后的打包方式":27,"seleniumandrequest辅助爬虫":28,"git-命令行上的常规操作.md":22,"我怎么从0到1搭建了这个hexo-blog.md":25,"mac逆向-窗口管理divvy":39,"我怎么从0到1搭建了这个hexo-blog":30,"oc中常用的延迟执行代码方法.md":20,"tensorflow数据集-dataset-api":51,"机器学习迁移模型到ios":46,"unread逆向-去除阅读限制":33,"oc中常用的延迟执行代码方法":48,"tensorflow数据集制作实战.md":5,"seleniumandrequest辅助爬虫.md":13,"小tip之mac动态背景.md":17,"机器学习迁移模型到ios.md":2,"shell脚本中如何捕获异常.md":19,"部署tensorflow到colaboratory":29,"mac上的mysql踩坑记.md":7,"探探逆向之旅.md":10,"砸壳最稳dumpdecrypted.md":14,"wda玩微信跳一跳.md":9,"迁移学习inceptionv3.md":3,"wda玩微信跳一跳":43,"xcode9之后的打包方式.md":1,"去除oplayerlite广告提示-越狱机.md":15,"shell脚本中如何捕获异常":44,"unread逆向-去除阅读限制.md":12,"plist文件-在脚本中的操作":42,"clutch对app进行砸壳":40,"hello-world.md":26,"brewupgrade-提示ruby版本低.md":21,"部署tensorflow到colaboratory.md":4,"instruments命令行监控":35,"ios重签名脚本的0到1":37,"探探逆向之旅":50,"mac上的mysql踩坑记":47,"tensorflow数据集制作实战":34,"plist文件-在脚本中的操作.md":18,"迁移学习inceptionv3":41},"__raw_positions":{"ios重签名脚本的0到1.md":6,"砸壳最稳dumpdecrypted":36,"tensorflow数据集-dataset-api":51,"验证码识别整理":38,"plist文件-在脚本中的操作":42,"验证码识别整理.md":24,"tensorflow数据集-dataset-api.md":8,"去除oplayerlite广告提示-越狱机":32,"brewupgrade-提示ruby版本低":31,"clutch对app进行砸壳.md":16,"clutch对app进行砸壳":40,"git-命令行上的常规操作":45,"xcode9之后的打包方式":27,"seleniumandrequest辅助爬虫":28,"ios重签名脚本的0到1":37,"我怎么从0到1搭建了这个hexo-blog.md":25,"mac逆向-窗口管理divvy":39,"我怎么从0到1搭建了这个hexo-blog":30,"部署tensorflow到colaboratory":29,"小tip之mac动态背景":49,"mac上的mysql踩坑记":47,"机器学习迁移模型到ios":46,"unread逆向-去除阅读限制":33,"oc中常用的延迟执行代码方法":48,"tensorflow数据集制作实战.md":5,"seleniumandrequest辅助爬虫.md":13,"小tip之mac动态背景.md":17,"机器学习迁移模型到ios.md":2,"shell脚本中如何捕获异常.md":19,"mac逆向-窗口管理divvy.md":11,"mac上的mysql踩坑记.md":7,"探探逆向之旅.md":10,"砸壳最稳dumpdecrypted.md":14,"wda玩微信跳一跳.md":9,"wda玩微信跳一跳":43,"xcode9之后的打包方式.md":1,"去除oplayerlite广告提示-越狱机.md":15,"shell脚本中如何捕获异常":44,"unread逆向-去除阅读限制.md":12,"迁移学习inceptionv3.md":3,"oc中常用的延迟执行代码方法.md":20,"hello-world.md":26,"brewupgrade-提示ruby版本低.md":21,"部署tensorflow到colaboratory.md":4,"instruments命令行监控":35,"git-命令行上的常规操作.md":22,"探探逆向之旅":50,"instruments命令行监控.md":23,"tensorflow数据集制作实战":34,"plist文件-在脚本中的操作.md":18,"迁移学习inceptionv3":41}}]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        {&quot;&quot;:[&quot;xcode9之后的打包方式.md&quot;,&quot;机器学习迁移模型到ios.md&quot;,&quot;迁移学习inceptionv3.md&quot;,&quot;部署tensorflow到colaboratory.md&quot;,&quot;tensorflow数据集制作实战.md&quot;,&quot;ios重签名脚本的0到1.md&quot;,&quot;mac上
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>xcode9之后的打包方式</title>
+    <link href="http://yoursite.com/2018/06/05/xcode9%E4%B9%8B%E5%90%8E%E7%9A%84%E6%89%93%E5%8C%85%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2018/06/05/xcode9之后的打包方式/</id>
+    <published>2018-06-05T02:10:38.000Z</published>
+    <updated>2018-06-05T03:26:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="XCode8-3之前的打包"><a href="#XCode8-3之前的打包" class="headerlink" title="XCode8.3之前的打包"></a>XCode8.3之前的打包</h2><p><a href="https://github.com/webfrogs/xcode_shell/blob/master/ipa-build" target="_blank" rel="external">https://github.com/webfrogs/xcode_shell/blob/master/ipa-build</a><br>阅读链接上的这个脚本, 可以理解构建三部曲为:</p><ol><li>Clean build cache</li><li>编译出.archive </li><li>xcrun打包为.ipa文件</li></ol><p>第三步是和XCode9差异最大的地方, 先记住这里:<br><img src="/2018/06/05/xcode9之后的打包方式/xcrun.png" alt=""></p><h2 id="XCode9之后的打包"><a href="#XCode9之后的打包" class="headerlink" title="XCode9之后的打包"></a>XCode9之后的打包</h2><p>听说是8.3之后就不一样的了.<br>细化上面的三个步骤为:</p><h4 id="Clean-Build-Cache"><a href="#Clean-Build-Cache" class="headerlink" title="Clean Build Cache:"></a>Clean Build Cache:</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration</div></pre></td></tr></table></figure><p>与xcode8无任何差异.</p><h4 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span><span class="bash">configuration -archivePath <span class="variable">$archivePath</span> -destination generic/platform=ios \</span></div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p><h4 id="将-xcarchive生成-IPA"><a href="#将-xcarchive生成-IPA" class="headerlink" title="将.xcarchive生成.IPA"></a>将.xcarchive生成.IPA</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath $archivePath \</div><div class="line">-exportPath $exportPath -destination generic/platform=ios \</div><div class="line">-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates</div></pre></td></tr></table></figure><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br><img src="/2018/06/05/xcode9之后的打包方式/plist.png" alt=""></p><p>我确信你按照我的复制去执行, 基本很难打包成功, 如果想要打包成功, 你得用XCode手动打包一遍, 选择对应的打包方式<code>method</code>, 然后生成的路径下, 就附带了这个<code>ExportOptions.plist</code>:</p><ol><li>打开xcode, Product -&gt; Archive 等待编译完成, 自己弹出可选框</li><li>如图操作导出:<br><img src="/2018/06/05/xcode9之后的打包方式/exportPlist.png" alt=""></li></ol><p>成功后, 同级目录下就存在<code>ExportOptions.plist</code>文件了, 其中默认bitCode是YES的, 你可以选择改为NO开提升效率.</p><h2 id="脚本化"><a href="#脚本化" class="headerlink" title="脚本化"></a>脚本化</h2><p>脚本地址: <a href="https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9" target="_blank" rel="external">https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9</a></p><h4 id="稍微优化了一下"><a href="#稍微优化了一下" class="headerlink" title="稍微优化了一下:"></a>稍微优化了一下:</h4><ol><li>添加<code>xcpretty</code>美化xcodebuild出来的那团东西, 安装请执行<code>gem install xcpretty</code></li><li>所有操作,有添加日志记录,你需要制定日志路径</li><li>若打包后的目录下存在类似的旧包, <code>判断方式是监测是否存在与scheme同名的文件</code>, 有的话备份. 你需要制定部分后存储的路径.<br><strong>展示效果</strong>:<br><img src="/2018/06/05/xcode9之后的打包方式/run.png" alt=""></li></ol><h4 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h4><ul><li>根目录下执行 <code>xcodebuild -list</code>, 把下面<code>user-define</code>这些配置下:<br><img src="/2018/06/05/xcode9之后的打包方式/config.png" alt=""></li><li>项目根目录生成<code>package</code>文件夹, 将<strong>脚本</strong>和<strong>ExportOptions.plist</strong>放进去.</li><li>给脚本添加执行权限<code>chmod +x package.sh</code>, 执行.</li></ul><p>补充: 我直接项目是<code>.xcworkspace</code>的, 因为很少有项目还是单target的吧~ 如果是, 你需要自行改下, 或email我~(dobby确实还是懒)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;XCode8-3之前的打包&quot;&gt;&lt;a href=&quot;#XCode8-3之前的打包&quot; class=&quot;headerlink&quot; title=&quot;XCode8.3之前的打包&quot;&gt;&lt;/a&gt;XCode8.3之前的打包&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.co
+      
+    
+    </summary>
+    
+      <category term="MachineLearning" scheme="http://yoursite.com/categories/MachineLearning/"/>
+    
+    
+      <category term="迁移学习移植IOS" scheme="http://yoursite.com/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8DIOS/"/>
+    
+  </entry>
   
   <entry>
     <title>机器学习迁移模型到IOS</title>
@@ -502,59 +548,6 @@
     
     
       <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OC中常用的延迟执行代码方法</title>
-    <link href="http://yoursite.com/2017/11/08/OC%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C%E4%BB%A3%E7%A0%81%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2017/11/08/OC中常用的延迟执行代码方法/</id>
-    <published>2017-11-08T11:12:41.000Z</published>
-    <updated>2017-11-08T11:35:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="写于篇头"><a href="#写于篇头" class="headerlink" title="写于篇头"></a>写于篇头</h3><blockquote><p>很多时候我们在代码中延迟执行代码, 情况分很多种,列一下我常用的在哪些情况</p></blockquote><h3 id="performSelector"><a href="#performSelector" class="headerlink" title="performSelector"></a>performSelector</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/1.png" alt=""></p><blockquote><p>很多时候用于延迟展示动画,例如转场动画等, 小延迟来产生的视觉误差,达到动画之美.  </p></blockquote><h3 id="NSTimer-scheduled"><a href="#NSTimer-scheduled" class="headerlink" title="NSTimer scheduled"></a>NSTimer scheduled</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/2.png" alt=""></p><blockquote><p>常用来一些页面的定时器, 例如一些App上的广告倒计时, NSTimer可以定时执行一些动作. 且repeats参数,可以决定这里的循环. </p></blockquote><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/t2.png" alt=""></p><blockquote><p>注意Timer本身是被Runloop强引用的,所以如果是定义为property,用weak修饰.<br>然后可在<code>invalidate</code>中停止和销毁</p></blockquote><h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/3.png" alt=""></p><blockquote><p>gcd中可以指定线程, 常用来做异步的处理,不阻塞主线的操作, 例如延迟网络加载so on. </p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;写于篇头&quot;&gt;&lt;a href=&quot;#写于篇头&quot; class=&quot;headerlink&quot; title=&quot;写于篇头&quot;&gt;&lt;/a&gt;写于篇头&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;很多时候我们在代码中延迟执行代码, 情况分很多种,列一下我常用的在哪些情况&lt;/p&gt;
-&lt;/block
-      
-    
-    </summary>
-    
-      <category term="Objective-C" scheme="http://yoursite.com/categories/Objective-C/"/>
-    
-    
-      <category term="iosDev" scheme="http://yoursite.com/tags/iosDev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>brewupgrade-提示ruby版本低</title>
-    <link href="http://yoursite.com/2017/11/08/brewupgrade-%E6%8F%90%E7%A4%BAruby%E7%89%88%E6%9C%AC%E4%BD%8E/"/>
-    <id>http://yoursite.com/2017/11/08/brewupgrade-提示ruby版本低/</id>
-    <published>2017-11-08T10:40:41.000Z</published>
-    <updated>2017-11-08T11:14:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="干嘛写"><a href="#干嘛写" class="headerlink" title="干嘛写?"></a>干嘛写?</h3><blockquote><p>mac自带了很多的开发环境,ruby python java so on~~, 但版本有时候低了, 又不能直接升级系统的这些,昨天brew upgrade的时候提示了ruby版本低,mark这个小tip</p></blockquote><h3 id="Error-like-that"><a href="#Error-like-that" class="headerlink" title="Error like that"></a>Error like that</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/tishi.png" alt=""></p><blockquote><p>你在<code>brew upgrade</code>的时候报了这样的错误</p></blockquote><h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/old_version.png" alt=""></p><blockquote><p>官网都到2.4+了,确实older</p></blockquote><h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/which_ruby.png" alt=""></p><blockquote><p>因为是系统自带,which看到是在/usr/bin/下的</p></blockquote><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/resove.png" alt=""></p><blockquote><p>可以试试, 两行, 完美解决,当然也会有解决不了的, 往下看</p></blockquote><h3 id="怎么解决的"><a href="#怎么解决的" class="headerlink" title="怎么解决的?"></a>怎么解决的?</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/find.png" alt=""></p><blockquote><p>可以从结果完美运行知道, brew 运行的时候不会指定要哪个目录下的ruby,直接是ruby —</p><p>没有解决的是什么情况呢? 这时候你which ruby看到的应该与我不同, 它依然显示是/usr/bin/下面的</p><p>因为 <code>[环境变量在同样名词的情况下, 是会存在覆盖的. ]</code>, 你可以打开你的.bash_profile 或 .zshrc 配置文件下, export PATH=<strong>*</strong>, 是不是把/usr/local/bin/ 的顺序, 放在了/usr/bin的前面了. </p></blockquote><h3 id="mac大法好"><a href="#mac大法好" class="headerlink" title="mac大法好"></a>mac大法好</h3><blockquote><p>小tip,没什么料, 点点滴滴点点</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;干嘛写&quot;&gt;&lt;a href=&quot;#干嘛写&quot; class=&quot;headerlink&quot; title=&quot;干嘛写?&quot;&gt;&lt;/a&gt;干嘛写?&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;mac自带了很多的开发环境,ruby python java so on~~, 但版本有时候低了, 又
-      
-    
-    </summary>
-    
-      <category term="Unix" scheme="http://yoursite.com/categories/Unix/"/>
-    
-    
-      <category term="brewupgradeError" scheme="http://yoursite.com/tags/brewupgradeError/"/>
     
   </entry>
   
