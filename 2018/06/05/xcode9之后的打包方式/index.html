@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="iosDev," />
+  <meta name="keywords" content="迁移学习移植IOS," />
 
 
 
@@ -40,7 +40,7 @@
 
 
 <meta name="description" content="XCode8.3之前的打包https://github.com/webfrogs/xcode_shell/blob/master/ipa-build阅读链接上的这个脚本, 可以理解构建三部曲为:  Clean build cache 编译出.archive  xcrun打包为.ipa文件  第三步是和XCode9差异最大的地方, 先记住这里: XCode9之后的打包听说是8.3之后就不一样的了.细">
-<meta name="keywords" content="iosDev">
+<meta name="keywords" content="迁移学习移植IOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xcode9之后的打包方式">
 <meta property="og:url" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/index.html">
@@ -50,9 +50,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/xcrun.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/plist.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/exportPlist.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/run.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/xcode9之后的打包方式">
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/config.png">
-<meta property="og:updated_time" content="2018-06-05T03:36:02.000Z">
+<meta property="og:updated_time" content="2018-06-20T12:49:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xcode9之后的打包方式">
 <meta name="twitter:description" content="XCode8.3之前的打包https://github.com/webfrogs/xcode_shell/blob/master/ipa-build阅读链接上的这个脚本, 可以理解构建三部曲为:  Clean build cache 编译出.archive  xcrun打包为.ipa文件  第三步是和XCode9差异最大的地方, 先记住这里: XCode9之后的打包听说是8.3之后就不一样的了.细">
@@ -210,8 +210,8 @@
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Unix/" itemprop="url" rel="index">
-                  <span itemprop="name">Unix</span>
+                <a href="/categories/MachineLearning/" itemprop="url" rel="index">
+                  <span itemprop="name">MachineLearning</span>
                 </a>
               </span>
 
@@ -242,11 +242,11 @@
 </ol>
 <p>第三步是和XCode9差异最大的地方, 先记住这里:<br><img src="/2018/06/05/xcode9之后的打包方式/xcrun.png" alt=""></p>
 <h2 id="XCode9之后的打包"><a href="#XCode9之后的打包" class="headerlink" title="XCode9之后的打包"></a>XCode9之后的打包</h2><p>听说是8.3之后就不一样的了.<br>细化上面的三个步骤为:</p>
-<h3 id="Clean-Build-Cache"><a href="#Clean-Build-Cache" class="headerlink" title="Clean Build Cache:"></a>Clean Build Cache:</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration</div></pre></td></tr></table></figure>
+<h4 id="Clean-Build-Cache"><a href="#Clean-Build-Cache" class="headerlink" title="Clean Build Cache:"></a>Clean Build Cache:</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration</div></pre></td></tr></table></figure>
 <p>与xcode8无任何差异.</p>
-<h3 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span>configuration -archivePath $archivePath -destination generic/platform=ios \</div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure>
+<h4 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span>configuration -archivePath $archivePath -destination generic/platform=ios \</div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure>
 <p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
-<h3 id="将-xcarchive生成-IPA"><a href="#将-xcarchive生成-IPA" class="headerlink" title="将.xcarchive生成.IPA"></a>将.xcarchive生成.IPA</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath $archivePath \</div><div class="line">-exportPath $exportPath -destination generic/platform=ios \</div><div class="line">-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates</div></pre></td></tr></table></figure>
+<h4 id="将-xcarchive生成-IPA"><a href="#将-xcarchive生成-IPA" class="headerlink" title="将.xcarchive生成.IPA"></a>将.xcarchive生成.IPA</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath $archivePath \</div><div class="line">-exportPath $exportPath -destination generic/platform=ios \</div><div class="line">-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates</div></pre></td></tr></table></figure>
 <p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br><img src="/2018/06/05/xcode9之后的打包方式/plist.png" alt=""></p>
 <p>我确信你按照我的复制去执行, 基本很难打包成功, 如果想要打包成功, 你得用XCode手动打包一遍, 选择对应的打包方式<code>method</code>, 然后生成的路径下, 就附带了这个<code>ExportOptions.plist</code>:</p>
 <ol>
@@ -254,13 +254,13 @@
 <li>如图操作导出:<br><img src="/2018/06/05/xcode9之后的打包方式/exportPlist.png" alt=""></li>
 </ol>
 <p>成功后, 同级目录下就存在<code>ExportOptions.plist</code>文件了, 其中默认bitCode是YES的, 你可以选择改为NO开提升效率.</p>
-<h2 id="生成脚本"><a href="#生成脚本" class="headerlink" title="生成脚本"></a>生成脚本</h2><p>脚本地址: <a href="https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9" target="_blank" rel="external">https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9</a></p>
-<h3 id="稍微优化了一下"><a href="#稍微优化了一下" class="headerlink" title="稍微优化了一下:"></a>稍微优化了一下:</h3><ol>
+<h2 id="脚本化"><a href="#脚本化" class="headerlink" title="脚本化"></a>脚本化</h2><p>脚本地址: <a href="https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9" target="_blank" rel="external">https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9</a></p>
+<h4 id="稍微优化了一下"><a href="#稍微优化了一下" class="headerlink" title="稍微优化了一下:"></a>稍微优化了一下:</h4><ol>
 <li>添加<code>xcpretty</code>美化xcodebuild出来的那团东西, 安装请执行<code>gem install xcpretty</code></li>
 <li>所有操作,有添加日志记录,你需要制定日志路径</li>
-<li>若打包后的目录下存在类似的旧包, <code>判断方式是监测是否存在与scheme同名的文件</code>, 有的话备份. 你需要制定部分后存储的路径.<br><strong>展示效果</strong>:<br><img src="/2018/06/05/xcode9之后的打包方式/run.png" alt=""></li>
+<li>若打包后的目录下存在类似的旧包, <code>判断方式是监测是否存在与scheme同名的文件</code>, 有的话备份. 你需要制定部分后存储的路径.<br>展示效果:<br><img src="/2018/06/05/xcode9之后的打包方式/xcode9之后的打包方式" alt=""></li>
 </ol>
-<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><ul>
+<h4 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h4><ul>
 <li>根目录下执行 <code>xcodebuild -list</code>, 把下面<code>user-define</code>这些配置下:<br><img src="/2018/06/05/xcode9之后的打包方式/config.png" alt=""></li>
 <li>项目根目录生成<code>package</code>文件夹, 将<strong>脚本</strong>和<strong>ExportOptions.plist</strong>放进去.</li>
 <li>给脚本添加执行权限<code>chmod +x package.sh</code>, 执行.</li>
@@ -274,7 +274,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iosDev/" rel="tag">#iosDev</a>
+            <a href="/tags/迁移学习移植IOS/" rel="tag">#迁移学习移植IOS</a>
           
         </div>
       
@@ -282,6 +282,8 @@
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/05/configs/sorts/" rel="prev"></a>
             
           </div>
 
@@ -428,21 +430,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -483,7 +485,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode8-3之前的打包"><span class="nav-number">1.</span> <span class="nav-text">XCode8.3之前的打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode9之后的打包"><span class="nav-number">2.</span> <span class="nav-text">XCode9之后的打包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Clean-Build-Cache"><span class="nav-number">2.1.</span> <span class="nav-text">Clean Build Cache:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译-生成-xcarchive"><span class="nav-number">2.2.</span> <span class="nav-text">编译,生成.xcarchive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-xcarchive生成-IPA"><span class="nav-number">2.3.</span> <span class="nav-text">将.xcarchive生成.IPA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成脚本"><span class="nav-number">3.</span> <span class="nav-text">生成脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#稍微优化了一下"><span class="nav-number">3.1.</span> <span class="nav-text">稍微优化了一下:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用指南"><span class="nav-number">3.2.</span> <span class="nav-text">使用指南</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode8-3之前的打包"><span class="nav-number">1.</span> <span class="nav-text">XCode8.3之前的打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XCode9之后的打包"><span class="nav-number">2.</span> <span class="nav-text">XCode9之后的打包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Clean-Build-Cache"><span class="nav-number">2.0.1.</span> <span class="nav-text">Clean Build Cache:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译-生成-xcarchive"><span class="nav-number">2.0.2.</span> <span class="nav-text">编译,生成.xcarchive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将-xcarchive生成-IPA"><span class="nav-number">2.0.3.</span> <span class="nav-text">将.xcarchive生成.IPA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本化"><span class="nav-number">3.</span> <span class="nav-text">脚本化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#稍微优化了一下"><span class="nav-number">3.0.1.</span> <span class="nav-text">稍微优化了一下:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用指南"><span class="nav-number">3.0.2.</span> <span class="nav-text">使用指南</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
