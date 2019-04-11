@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Paulswith·__dobby&#39;s Blogs</title>
+  <title>In &#39;flight of thought&#39;</title>
   
-  <subtitle>I just wanna improve myself.</subtitle>
+  <subtitle>保持前进.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>Paulswith __dobby</name>
+    <name>SSK</name>
     
   </author>
   
