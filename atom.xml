@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-20T12:50:49.000Z</updated>
+  <updated>2018-06-20T12:37:52.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2019/08/17/configs/sorts/"/>
+    <id>http://yoursite.com/2019/08/17/configs/sorts/</id>
+    <published>2019-08-17T00:36:55.523Z</published>
+    <updated>2018-06-20T12:37:52.000Z</updated>
+    
+    <content type="html"><![CDATA[{"":["1-24-原则.md","xcode9之后的打包方式.md","机器学习迁移模型到ios.md","迁移学习inceptionv3.md","部署tensorflow到colaboratory.md","tensorflow数据集制作实战.md","ios重签名脚本的0到1.md","mac上的mysql踩坑记.md","tensorflow数据集-dataset-api.md","wda玩微信跳一跳.md","探探逆向之旅.md","mac逆向-窗口管理divvy.md","unread逆向-去除阅读限制.md","seleniumandrequest辅助爬虫.md","砸壳最稳dumpdecrypted.md","去除oplayerlite广告提示-越狱机.md","clutch对app进行砸壳.md","小tip之mac动态背景.md","plist文件-在脚本中的操作.md","shell脚本中如何捕获异常.md","oc中常用的延迟执行代码方法.md","brewupgrade-提示ruby版本低.md","git-命令行上的常规操作.md","instruments命令行监控.md","验证码识别整理.md","我怎么从0到1搭建了这个hexo-blog.md","hello-world.md","1-24-原则","xcode9之后的打包方式","seleniumandrequest辅助爬虫","部署tensorflow到colaboratory","我怎么从0到1搭建了这个hexo-blog","brewupgrade-提示ruby版本低","去除oplayerlite广告提示-越狱机","unread逆向-去除阅读限制","tensorflow数据集制作实战","instruments命令行监控","砸壳最稳dumpdecrypted","ios重签名脚本的0到1","验证码识别整理","mac逆向-窗口管理divvy","clutch对app进行砸壳","迁移学习inceptionv3","plist文件-在脚本中的操作","wda玩微信跳一跳","shell脚本中如何捕获异常","git-命令行上的常规操作","机器学习迁移模型到ios","mac上的mysql踩坑记","oc中常用的延迟执行代码方法","小tip之mac动态背景","探探逆向之旅","tensorflow数据集-dataset-api"],"__positions":{"ios重签名脚本的0到1.md":7,"instruments命令行监控.md":24,"砸壳最稳dumpdecrypted":38,"小tip之mac动态背景":51,"验证码识别整理":40,"验证码识别整理.md":25,"tensorflow数据集-dataset-api.md":9,"去除oplayerlite广告提示-越狱机":34,"brewupgrade-提示ruby版本低":33,"1-24-原则.md":1,"clutch对app进行砸壳.md":17,"mac逆向-窗口管理divvy.md":12,"git-命令行上的常规操作":47,"xcode9之后的打包方式":29,"seleniumandrequest辅助爬虫":30,"git-命令行上的常规操作.md":23,"我怎么从0到1搭建了这个hexo-blog.md":26,"mac逆向-窗口管理divvy":41,"我怎么从0到1搭建了这个hexo-blog":32,"oc中常用的延迟执行代码方法.md":21,"tensorflow数据集-dataset-api":53,"机器学习迁移模型到ios":48,"1-24-原则":28,"unread逆向-去除阅读限制":35,"oc中常用的延迟执行代码方法":50,"tensorflow数据集制作实战.md":6,"seleniumandrequest辅助爬虫.md":14,"小tip之mac动态背景.md":18,"机器学习迁移模型到ios.md":3,"shell脚本中如何捕获异常.md":20,"部署tensorflow到colaboratory":31,"mac上的mysql踩坑记.md":8,"探探逆向之旅.md":11,"砸壳最稳dumpdecrypted.md":15,"wda玩微信跳一跳.md":10,"迁移学习inceptionv3.md":4,"wda玩微信跳一跳":45,"xcode9之后的打包方式.md":2,"去除oplayerlite广告提示-越狱机.md":16,"shell脚本中如何捕获异常":46,"unread逆向-去除阅读限制.md":13,"plist文件-在脚本中的操作":44,"clutch对app进行砸壳":42,"hello-world.md":27,"brewupgrade-提示ruby版本低.md":22,"部署tensorflow到colaboratory.md":5,"instruments命令行监控":37,"ios重签名脚本的0到1":39,"探探逆向之旅":52,"mac上的mysql踩坑记":49,"tensorflow数据集制作实战":36,"plist文件-在脚本中的操作.md":19,"迁移学习inceptionv3":43},"__raw_positions":{"ios重签名脚本的0到1.md":7,"砸壳最稳dumpdecrypted":38,"tensorflow数据集-dataset-api":53,"验证码识别整理":40,"plist文件-在脚本中的操作":44,"验证码识别整理.md":25,"tensorflow数据集-dataset-api.md":9,"去除oplayerlite广告提示-越狱机":34,"brewupgrade-提示ruby版本低":33,"1-24-原则.md":1,"clutch对app进行砸壳.md":17,"clutch对app进行砸壳":42,"git-命令行上的常规操作":47,"xcode9之后的打包方式":29,"seleniumandrequest辅助爬虫":30,"ios重签名脚本的0到1":39,"我怎么从0到1搭建了这个hexo-blog.md":26,"mac逆向-窗口管理divvy":41,"我怎么从0到1搭建了这个hexo-blog":32,"部署tensorflow到colaboratory":31,"小tip之mac动态背景":51,"mac上的mysql踩坑记":49,"机器学习迁移模型到ios":48,"1-24-原则":28,"unread逆向-去除阅读限制":35,"oc中常用的延迟执行代码方法":50,"tensorflow数据集制作实战.md":6,"seleniumandrequest辅助爬虫.md":14,"小tip之mac动态背景.md":18,"机器学习迁移模型到ios.md":3,"shell脚本中如何捕获异常.md":20,"mac逆向-窗口管理divvy.md":12,"mac上的mysql踩坑记.md":8,"探探逆向之旅.md":11,"砸壳最稳dumpdecrypted.md":15,"wda玩微信跳一跳.md":10,"wda玩微信跳一跳":45,"xcode9之后的打包方式.md":2,"去除oplayerlite广告提示-越狱机.md":16,"shell脚本中如何捕获异常":46,"unread逆向-去除阅读限制.md":13,"迁移学习inceptionv3.md":4,"oc中常用的延迟执行代码方法.md":21,"hello-world.md":27,"brewupgrade-提示ruby版本低.md":22,"部署tensorflow到colaboratory.md":5,"instruments命令行监控":37,"git-命令行上的常规操作.md":23,"探探逆向之旅":52,"instruments命令行监控.md":24,"tensorflow数据集制作实战":36,"plist文件-在脚本中的操作.md":19,"迁移学习inceptionv3":43}}]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        {&quot;&quot;:[&quot;1-24-原则.md&quot;,&quot;xcode9之后的打包方式.md&quot;,&quot;机器学习迁移模型到ios.md&quot;,&quot;迁移学习inceptionv3.md&quot;,&quot;部署tensorflow到colaboratory.md&quot;,&quot;tensorflow数据集制作实战.md&quot;,&quot;ios重签名脚本的
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/08/17/hello-world/"/>
+    <id>http://yoursite.com/2019/08/17/hello-world/</id>
+    <published>2019-08-17T00:29:04.251Z</published>
+    <updated>2017-10-31T07:36:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>1/24-&lt;原则&gt;</title>
@@ -42,34 +84,13 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/06/05/configs/sorts/"/>
-    <id>http://yoursite.com/2018/06/05/configs/sorts/</id>
-    <published>2018-06-05T05:49:41.000Z</published>
-    <updated>2018-06-20T12:37:52.000Z</updated>
-    
-    <content type="html"><![CDATA[{"":["1-24-原则.md","xcode9之后的打包方式.md","机器学习迁移模型到ios.md","迁移学习inceptionv3.md","部署tensorflow到colaboratory.md","tensorflow数据集制作实战.md","ios重签名脚本的0到1.md","mac上的mysql踩坑记.md","tensorflow数据集-dataset-api.md","wda玩微信跳一跳.md","探探逆向之旅.md","mac逆向-窗口管理divvy.md","unread逆向-去除阅读限制.md","seleniumandrequest辅助爬虫.md","砸壳最稳dumpdecrypted.md","去除oplayerlite广告提示-越狱机.md","clutch对app进行砸壳.md","小tip之mac动态背景.md","plist文件-在脚本中的操作.md","shell脚本中如何捕获异常.md","oc中常用的延迟执行代码方法.md","brewupgrade-提示ruby版本低.md","git-命令行上的常规操作.md","instruments命令行监控.md","验证码识别整理.md","我怎么从0到1搭建了这个hexo-blog.md","hello-world.md","1-24-原则","xcode9之后的打包方式","seleniumandrequest辅助爬虫","部署tensorflow到colaboratory","我怎么从0到1搭建了这个hexo-blog","brewupgrade-提示ruby版本低","去除oplayerlite广告提示-越狱机","unread逆向-去除阅读限制","tensorflow数据集制作实战","instruments命令行监控","砸壳最稳dumpdecrypted","ios重签名脚本的0到1","验证码识别整理","mac逆向-窗口管理divvy","clutch对app进行砸壳","迁移学习inceptionv3","plist文件-在脚本中的操作","wda玩微信跳一跳","shell脚本中如何捕获异常","git-命令行上的常规操作","机器学习迁移模型到ios","mac上的mysql踩坑记","oc中常用的延迟执行代码方法","小tip之mac动态背景","探探逆向之旅","tensorflow数据集-dataset-api"],"__positions":{"ios重签名脚本的0到1.md":7,"instruments命令行监控.md":24,"砸壳最稳dumpdecrypted":38,"小tip之mac动态背景":51,"验证码识别整理":40,"验证码识别整理.md":25,"tensorflow数据集-dataset-api.md":9,"去除oplayerlite广告提示-越狱机":34,"brewupgrade-提示ruby版本低":33,"1-24-原则.md":1,"clutch对app进行砸壳.md":17,"mac逆向-窗口管理divvy.md":12,"git-命令行上的常规操作":47,"xcode9之后的打包方式":29,"seleniumandrequest辅助爬虫":30,"git-命令行上的常规操作.md":23,"我怎么从0到1搭建了这个hexo-blog.md":26,"mac逆向-窗口管理divvy":41,"我怎么从0到1搭建了这个hexo-blog":32,"oc中常用的延迟执行代码方法.md":21,"tensorflow数据集-dataset-api":53,"机器学习迁移模型到ios":48,"1-24-原则":28,"unread逆向-去除阅读限制":35,"oc中常用的延迟执行代码方法":50,"tensorflow数据集制作实战.md":6,"seleniumandrequest辅助爬虫.md":14,"小tip之mac动态背景.md":18,"机器学习迁移模型到ios.md":3,"shell脚本中如何捕获异常.md":20,"部署tensorflow到colaboratory":31,"mac上的mysql踩坑记.md":8,"探探逆向之旅.md":11,"砸壳最稳dumpdecrypted.md":15,"wda玩微信跳一跳.md":10,"迁移学习inceptionv3.md":4,"wda玩微信跳一跳":45,"xcode9之后的打包方式.md":2,"去除oplayerlite广告提示-越狱机.md":16,"shell脚本中如何捕获异常":46,"unread逆向-去除阅读限制.md":13,"plist文件-在脚本中的操作":44,"clutch对app进行砸壳":42,"hello-world.md":27,"brewupgrade-提示ruby版本低.md":22,"部署tensorflow到colaboratory.md":5,"instruments命令行监控":37,"ios重签名脚本的0到1":39,"探探逆向之旅":52,"mac上的mysql踩坑记":49,"tensorflow数据集制作实战":36,"plist文件-在脚本中的操作.md":19,"迁移学习inceptionv3":43},"__raw_positions":{"ios重签名脚本的0到1.md":7,"砸壳最稳dumpdecrypted":38,"tensorflow数据集-dataset-api":53,"验证码识别整理":40,"plist文件-在脚本中的操作":44,"验证码识别整理.md":25,"tensorflow数据集-dataset-api.md":9,"去除oplayerlite广告提示-越狱机":34,"brewupgrade-提示ruby版本低":33,"1-24-原则.md":1,"clutch对app进行砸壳.md":17,"clutch对app进行砸壳":42,"git-命令行上的常规操作":47,"xcode9之后的打包方式":29,"seleniumandrequest辅助爬虫":30,"ios重签名脚本的0到1":39,"我怎么从0到1搭建了这个hexo-blog.md":26,"mac逆向-窗口管理divvy":41,"我怎么从0到1搭建了这个hexo-blog":32,"部署tensorflow到colaboratory":31,"小tip之mac动态背景":51,"mac上的mysql踩坑记":49,"机器学习迁移模型到ios":48,"1-24-原则":28,"unread逆向-去除阅读限制":35,"oc中常用的延迟执行代码方法":50,"tensorflow数据集制作实战.md":6,"seleniumandrequest辅助爬虫.md":14,"小tip之mac动态背景.md":18,"机器学习迁移模型到ios.md":3,"shell脚本中如何捕获异常.md":20,"mac逆向-窗口管理divvy.md":12,"mac上的mysql踩坑记.md":8,"探探逆向之旅.md":11,"砸壳最稳dumpdecrypted.md":15,"wda玩微信跳一跳.md":10,"wda玩微信跳一跳":45,"xcode9之后的打包方式.md":2,"去除oplayerlite广告提示-越狱机.md":16,"shell脚本中如何捕获异常":46,"unread逆向-去除阅读限制.md":13,"迁移学习inceptionv3.md":4,"oc中常用的延迟执行代码方法.md":21,"hello-world.md":27,"brewupgrade-提示ruby版本低.md":22,"部署tensorflow到colaboratory.md":5,"instruments命令行监控":37,"git-命令行上的常规操作.md":23,"探探逆向之旅":52,"instruments命令行监控.md":24,"tensorflow数据集制作实战":36,"plist文件-在脚本中的操作.md":19,"迁移学习inceptionv3":43}}]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        {&quot;&quot;:[&quot;1-24-原则.md&quot;,&quot;xcode9之后的打包方式.md&quot;,&quot;机器学习迁移模型到ios.md&quot;,&quot;迁移学习inceptionv3.md&quot;,&quot;部署tensorflow到colaboratory.md&quot;,&quot;tensorflow数据集制作实战.md&quot;,&quot;ios重签名脚本的
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>xcode9之后的打包方式</title>
     <link href="http://yoursite.com/2018/06/05/xcode9%E4%B9%8B%E5%90%8E%E7%9A%84%E6%89%93%E5%8C%85%E6%96%B9%E5%BC%8F/"/>
     <id>http://yoursite.com/2018/06/05/xcode9之后的打包方式/</id>
     <published>2018-06-05T02:10:38.000Z</published>
     <updated>2018-06-20T12:49:53.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="XCode8-3之前的打包"><a href="#XCode8-3之前的打包" class="headerlink" title="XCode8.3之前的打包"></a>XCode8.3之前的打包</h2><p><a href="https://github.com/webfrogs/xcode_shell/blob/master/ipa-build" target="_blank" rel="external">https://github.com/webfrogs/xcode_shell/blob/master/ipa-build</a><br>阅读链接上的这个脚本, 可以理解构建三部曲为:</p><ol><li>Clean build cache</li><li>编译出.archive </li><li>xcrun打包为.ipa文件</li></ol><p>第三步是和XCode9差异最大的地方, 先记住这里:<br><img src="/2018/06/05/xcode9之后的打包方式/xcrun.png" alt=""></p><h2 id="XCode9之后的打包"><a href="#XCode9之后的打包" class="headerlink" title="XCode9之后的打包"></a>XCode9之后的打包</h2><p>听说是8.3之后就不一样的了.<br>细化上面的三个步骤为:</p><h4 id="Clean-Build-Cache"><a href="#Clean-Build-Cache" class="headerlink" title="Clean Build Cache:"></a>Clean Build Cache:</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration</div></pre></td></tr></table></figure><p>与xcode8无任何差异.</p><h4 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span>configuration -archivePath $archivePath -destination generic/platform=ios \</div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p><h4 id="将-xcarchive生成-IPA"><a href="#将-xcarchive生成-IPA" class="headerlink" title="将.xcarchive生成.IPA"></a>将.xcarchive生成.IPA</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath $archivePath \</div><div class="line">-exportPath $exportPath -destination generic/platform=ios \</div><div class="line">-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates</div></pre></td></tr></table></figure><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br><img src="/2018/06/05/xcode9之后的打包方式/plist.png" alt=""></p><p>我确信你按照我的复制去执行, 基本很难打包成功, 如果想要打包成功, 你得用XCode手动打包一遍, 选择对应的打包方式<code>method</code>, 然后生成的路径下, 就附带了这个<code>ExportOptions.plist</code>:</p><ol><li>打开xcode, Product -&gt; Archive 等待编译完成, 自己弹出可选框</li><li>如图操作导出:<br><img src="/2018/06/05/xcode9之后的打包方式/exportPlist.png" alt=""></li></ol><p>成功后, 同级目录下就存在<code>ExportOptions.plist</code>文件了, 其中默认bitCode是YES的, 你可以选择改为NO开提升效率.</p><h2 id="脚本化"><a href="#脚本化" class="headerlink" title="脚本化"></a>脚本化</h2><p>脚本地址: <a href="https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9" target="_blank" rel="external">https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9</a></p><h4 id="稍微优化了一下"><a href="#稍微优化了一下" class="headerlink" title="稍微优化了一下:"></a>稍微优化了一下:</h4><ol><li>添加<code>xcpretty</code>美化xcodebuild出来的那团东西, 安装请执行<code>gem install xcpretty</code></li><li>所有操作,有添加日志记录,你需要制定日志路径</li><li>若打包后的目录下存在类似的旧包, <code>判断方式是监测是否存在与scheme同名的文件</code>, 有的话备份. 你需要制定部分后存储的路径.<br>展示效果:<br><img src="/2018/06/05/xcode9之后的打包方式/xcode9之后的打包方式" alt=""></li></ol><h4 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h4><ul><li>根目录下执行 <code>xcodebuild -list</code>, 把下面<code>user-define</code>这些配置下:<br><img src="/2018/06/05/xcode9之后的打包方式/config.png" alt=""></li><li>项目根目录生成<code>package</code>文件夹, 将<strong>脚本</strong>和<strong>ExportOptions.plist</strong>放进去.</li><li>给脚本添加执行权限<code>chmod +x package.sh</code>, 执行.</li></ul><p>补充: 我直接项目是<code>.xcworkspace</code>的, 因为很少有项目还是单target的吧~ 如果是, 你需要自行改下, 或email我~(dobby确实还是懒)</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="XCode8-3之前的打包"><a href="#XCode8-3之前的打包" class="headerlink" title="XCode8.3之前的打包"></a>XCode8.3之前的打包</h2><p><a href="https://github.com/webfrogs/xcode_shell/blob/master/ipa-build" target="_blank" rel="external">https://github.com/webfrogs/xcode_shell/blob/master/ipa-build</a><br>阅读链接上的这个脚本, 可以理解构建三部曲为:</p><ol><li>Clean build cache</li><li>编译出.archive </li><li>xcrun打包为.ipa文件</li></ol><p>第三步是和XCode9差异最大的地方, 先记住这里:<br><img src="/2018/06/05/xcode9之后的打包方式/xcrun.png" alt=""></p><h2 id="XCode9之后的打包"><a href="#XCode9之后的打包" class="headerlink" title="XCode9之后的打包"></a>XCode9之后的打包</h2><p>听说是8.3之后就不一样的了.<br>细化上面的三个步骤为:</p><h4 id="Clean-Build-Cache"><a href="#Clean-Build-Cache" class="headerlink" title="Clean Build Cache:"></a>Clean Build Cache:</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration</div></pre></td></tr></table></figure><p>与xcode8无任何差异.</p><h4 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span><span class="bash">configuration -archivePath <span class="variable">$archivePath</span> -destination generic/platform=ios \</span></div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p><h4 id="将-xcarchive生成-IPA"><a href="#将-xcarchive生成-IPA" class="headerlink" title="将.xcarchive生成.IPA"></a>将.xcarchive生成.IPA</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath $archivePath \</div><div class="line">-exportPath $exportPath -destination generic/platform=ios \</div><div class="line">-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates</div></pre></td></tr></table></figure><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br><img src="/2018/06/05/xcode9之后的打包方式/plist.png" alt=""></p><p>我确信你按照我的复制去执行, 基本很难打包成功, 如果想要打包成功, 你得用XCode手动打包一遍, 选择对应的打包方式<code>method</code>, 然后生成的路径下, 就附带了这个<code>ExportOptions.plist</code>:</p><ol><li>打开xcode, Product -&gt; Archive 等待编译完成, 自己弹出可选框</li><li>如图操作导出:<br><img src="/2018/06/05/xcode9之后的打包方式/exportPlist.png" alt=""></li></ol><p>成功后, 同级目录下就存在<code>ExportOptions.plist</code>文件了, 其中默认bitCode是YES的, 你可以选择改为NO开提升效率.</p><h2 id="脚本化"><a href="#脚本化" class="headerlink" title="脚本化"></a>脚本化</h2><p>脚本地址: <a href="https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9" target="_blank" rel="external">https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9</a></p><h4 id="稍微优化了一下"><a href="#稍微优化了一下" class="headerlink" title="稍微优化了一下:"></a>稍微优化了一下:</h4><ol><li>添加<code>xcpretty</code>美化xcodebuild出来的那团东西, 安装请执行<code>gem install xcpretty</code></li><li>所有操作,有添加日志记录,你需要制定日志路径</li><li>若打包后的目录下存在类似的旧包, <code>判断方式是监测是否存在与scheme同名的文件</code>, 有的话备份. 你需要制定部分后存储的路径.<br>展示效果:<br><img src="/2018/06/05/xcode9之后的打包方式/xcode9之后的打包方式" alt=""></li></ol><h4 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h4><ul><li>根目录下执行 <code>xcodebuild -list</code>, 把下面<code>user-define</code>这些配置下:<br><img src="/2018/06/05/xcode9之后的打包方式/config.png" alt=""></li><li>项目根目录生成<code>package</code>文件夹, 将<strong>脚本</strong>和<strong>ExportOptions.plist</strong>放进去.</li><li>给脚本添加执行权限<code>chmod +x package.sh</code>, 执行.</li></ul><p>补充: 我直接项目是<code>.xcworkspace</code>的, 因为很少有项目还是单target的吧~ 如果是, 你需要自行改下, 或email我~(dobby确实还是懒)</p>]]></content>
     
     <summary type="html">
     
@@ -519,34 +540,6 @@
     
     
       <category term="iosDev" scheme="http://yoursite.com/tags/iosDev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>plist文件-在脚本中的操作</title>
-    <link href="http://yoursite.com/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2017/11/14/plist文件-在脚本中的操作/</id>
-    <published>2017-11-14T11:30:39.000Z</published>
-    <updated>2017-11-14T12:03:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件</p></blockquote><h3 id="method-ONE"><a href="#method-ONE" class="headerlink" title="method_ONE"></a>method_ONE</h3><h4 id="内容截取并保存临时文件中"><a href="#内容截取并保存临时文件中" class="headerlink" title="内容截取并保存临时文件中"></a>内容截取并保存临时文件中</h4><p>先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间<br><img src="/2017/11/14/plist文件-在脚本中的操作/all.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security cms -D -i ./original.mobileprovision | grep --after-context=20 "&lt;key&gt;Entitlements&lt;/key&gt;"  &gt; /tmp/tmp_provision</div></pre></td></tr></table></figure></p><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p><h4 id="python进行正则匹配-过滤dict之后的内容"><a href="#python进行正则匹配-过滤dict之后的内容" class="headerlink" title="python进行正则匹配,过滤dict之后的内容"></a>python进行正则匹配,过滤dict之后的内容</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">provision=`python -c "from re import findall,compile,S;data=open('/tmp/tmp_provision','r').read();print findall(compile(r'&lt;dict&gt;.*&lt;/dict&gt;',S),data)[0];"`</div></pre></td></tr></table></figure><h4 id="最后重定向到一个-plist文件中"><a href="#最后重定向到一个-plist文件中" class="headerlink" title="最后重定向到一个.plist文件中"></a>最后重定向到一个.plist文件中</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;&lt;plist version="1.0"&gt;'$provision'&lt;/plist&gt;' &gt; Entitlements.plist</div></pre></td></tr></table></figure><blockquote><p>这个方法虽然可以, 但是其中第三部, 必须要格外注意字符的使用, 不然就格式不对,导致重定向出来的无法识别为.plist</p></blockquote><h3 id="method-TWO"><a href="#method-TWO" class="headerlink" title="method_TWO"></a>method_TWO</h3><h4 id="重定向为一个-plist"><a href="#重定向为一个-plist" class="headerlink" title="重定向为一个.plist"></a>重定向为一个.plist</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist</div></pre></td></tr></table></figure><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p><h4 id="提取内容生成"><a href="#提取内容生成" class="headerlink" title="提取内容生成"></a>提取内容生成</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/libexec/PlistBuddy -x -c "Print Entitlements" ProvisionProfile.plist &gt; Entitlements.plist</div></pre></td></tr></table></figure><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p><blockquote><p>这个方法比上面的稳妥不知道多少倍, 但是第一个的方法是自己钻研</p></blockquote><h3 id="plist文件的增删改查"><a href="#plist文件的增删改查" class="headerlink" title=".plist文件的增删改查"></a>.plist文件的增删改查</h3><p><img src="/2017/11/14/plist文件-在脚本中的操作/plutil.png" alt=""><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">plutil -p ./ProvisionProfile.plist  #查看</div><div class="line">plutil -insert Insert -string "insert data here" ./ProvisionProfile.plist    #增</div><div class="line">plutil -replace Insert -string "change  data here" ./ProvisionProfile.plist  #替换</div></pre></td></tr></table></figure></p><blockquote><p>列举的就诸如此类,plutil是一个.plist官方推荐的好工具</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;method-ONE&quot;&gt;&lt;a href=&quot;#method-ON
-      
-    
-    </summary>
-    
-      <category term="Unix" scheme="http://yoursite.com/categories/Unix/"/>
-    
-    
-      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
     
   </entry>
   
