@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/exportPlist.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/xcode9之后的打包方式">
 <meta property="og:image" content="http://yoursite.com/2018/06/05/xcode9之后的打包方式/config.png">
-<meta property="og:updated_time" content="2018-06-20T12:49:53.000Z">
+<meta property="og:updated_time" content="2019-12-19T03:54:21.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xcode9之后的打包方式">
 <meta name="twitter:description" content="XCode8.3之前的打包https://github.com/webfrogs/xcode_shell/blob/master/ipa-build阅读链接上的这个脚本, 可以理解构建三部曲为:  Clean build cache 编译出.archive  xcrun打包为.ipa文件  第三步是和XCode9差异最大的地方, 先记住这里: XCode9之后的打包听说是8.3之后就不一样的了.细">
@@ -87,9 +87,9 @@ var themeMenus = {};
 
   themeMenus["/archives"] = "Archives"; 
 
-  themeMenus["/categories"] = "Kategorien"; 
+  themeMenus["/categories"] = "Catégories"; 
 
-  themeMenus["/tags"] = "Tags"; 
+  themeMenus["/tags"] = "Mot-clés"; 
 
   themeMenus["/about"] = "About"; 
 
@@ -124,9 +124,9 @@ var themeMenus = {};
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Kategorien</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Catégories</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Mot-clés</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
                     
@@ -212,7 +212,7 @@ var themeMenus = {};
 <h2 id="XCode9之后的打包"><a href="#XCode9之后的打包" class="headerlink" title="XCode9之后的打包"></a>XCode9之后的打包</h2><p>听说是8.3之后就不一样的了.<br>细化上面的三个步骤为:</p>
 <h4 id="Clean-Build-Cache"><a href="#Clean-Build-Cache" class="headerlink" title="Clean Build Cache:"></a>Clean Build Cache:</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration</div></pre></td></tr></table></figure>
 <p>与xcode8无任何差异.</p>
-<h4 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span>configuration -archivePath $archivePath -destination generic/platform=ios \</div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure>
+<h4 id="编译-生成-xcarchive"><a href="#编译-生成-xcarchive" class="headerlink" title="编译,生成.xcarchive"></a>编译,生成.xcarchive</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild archive -workspace $workspace -scheme $scheme -configuration \</div><div class="line"><span class="meta">$</span><span class="bash">configuration -archivePath <span class="variable">$archivePath</span> -destination generic/platform=ios \</span></div><div class="line">CODE_SIGN_IDENTITY="$code_sign_indentity"</div></pre></td></tr></table></figure>
 <p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
 <h4 id="将-xcarchive生成-IPA"><a href="#将-xcarchive生成-IPA" class="headerlink" title="将.xcarchive生成.IPA"></a>将.xcarchive生成.IPA</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xcodebuild -exportArchive -archivePath $archivePath \</div><div class="line">-exportPath $exportPath -destination generic/platform=ios \</div><div class="line">-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates</div></pre></td></tr></table></figure>
 <p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br><img src="/2018/06/05/xcode9之后的打包方式/plist.png" alt=""></p>
@@ -280,7 +280,7 @@ var themeMenus = {};
 <nav id="article-nav">
   
     <a href="/2018/06/20/读书记-原则/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           读书记-&lt;原则&gt;
@@ -290,7 +290,7 @@ var themeMenus = {};
   
   
     <a href="/2018/02/25/机器学习迁移模型到IOS/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">机器学习迁移模型到IOS</div>
     </a>
   
@@ -317,7 +317,7 @@ var themeMenus = {};
 
   <div class="clearfix container">
       <div class="site-info">
-	      &copy; 2019 In &#39;flight of thought&#39; All Rights Reserved.
+	      &copy; 2020 In &#39;flight of thought&#39; All Rights Reserved.
           
             <span id="busuanzi_container_site_uv">
               本站访客数<span id="busuanzi_value_site_uv"></span>人次  

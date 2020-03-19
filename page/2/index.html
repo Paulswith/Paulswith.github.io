@@ -77,9 +77,9 @@ var themeMenus = {};
 
   themeMenus["/archives"] = "Archives"; 
 
-  themeMenus["/categories"] = "Kategorien"; 
+  themeMenus["/categories"] = "Catégories"; 
 
-  themeMenus["/tags"] = "Tags"; 
+  themeMenus["/tags"] = "Mot-clés"; 
 
   themeMenus["/about"] = "About"; 
 
@@ -114,9 +114,9 @@ var themeMenus = {};
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Kategorien</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Catégories</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Mot-clés</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
                     
@@ -165,6 +165,74 @@ var themeMenus = {};
       <div id="content" class="outer">
         
           <section id="main">
+  
+    <article id="post-mac逆向-窗口管理Divvy"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/12/03/mac逆向-窗口管理Divvy/">mac逆向-窗口管理Divvy</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/12/03/mac逆向-窗口管理Divvy/" class="article-date">
+	  <time datetime="2017-12-03T09:57:54.000Z" itemprop="datePublished">December 3, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Divvy个人感觉是最棒的一款窗口管理软件了~, 但是它动不动就会提示个五秒的窗口让你注册License,最近小试牛刀完IOSApp, 它给我提供一个入门的机会…</p>
+</blockquote>
+<h3 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h3><p><img src="/2017/12/03/mac逆向-窗口管理Divvy/predic.png" alt=""><br>mac上的逆向其实比较省, 你不需要额外的砸壳,直接就能能从包里面拿到执行文件.<br>class-dump 头文件.<br>用Hopper打开,反汇编一下方便待会查看.<br>然后神器依旧是monkeyDev, 它帮我们省去注入.dylib 和 重签名等”繁杂步骤”~</p>
+<h3 id="入口分析"><a href="#入口分析" class="headerlink" title="入口分析"></a>入口分析</h3><p>本来大多数的步骤一定是从view开始, 有一款神器就[interface inspector], 但总会报错一些乱七八糟的问题,暂时还没调好, 于是乎我粗糙的从hopper搜索”Register”,(如果一开始搜的是首字母小写的话可能不会饶那么弯…),结果是这样子的,<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/first.png" alt=""><br>也查到其他无关的,最后确定就是这里,伪代码和汇编看并没有看出什么头绪,于是乎先看看有没有调用这里这个类相关.</p>
+<p>追踪前,这里有一款强大的工具说下:<br><code>frida-trace</code>: frida-trace -m “-[PTHotKeyCenter <em>]”  Divvy<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/frida.png" alt=""><br>用法是frida-trace -m “&lt;+类方法/-实例方法&gt;[类名 方法名&lt;</em>代表全部&gt;]”  <ps aux查询到的允许名=""><br>执行后它会自动帮你生成跟踪的js文件,然后监听所指定的方法.</ps></p>
+<p>一开始觉得吧, PTHotKeyCenter不像是很关键的类, 也是没怎么写Mac的App的原因,但还是监听了一下:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/trace.png" alt=""><br>我尝试打开它,然后随便输入一串号码注册, 发现他怎么整都只打印这些, 而且就在我使用快捷键的时候~<br>随意也明白了,这就是”热键”,仅此而已…</p>
+<h3 id="动态调试"><a href="#动态调试" class="headerlink" title="动态调试"></a>动态调试</h3><p>进行到这里其实是无头绪的, 然后想着是从mondev进行动态调试,看看能不能从调用栈看看这里的情况.<br>想着hook哪个方法的时候,脑子冒个灵光,想到了这个view的展示, 我就输入”)show”看看有没有什么可疑的,结果:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/show.png" alt=""> 十分意外第一个方法,很明显这个方法应该是展示注册这个View的,而且还待会参数时间.<br>如果是这个方法果然没错, 那么我可能得到,一是找不到更好的hook方法,duration的参数改为最少的时间,或者可以尝试return这部展示的操作. 其次先Hook下看看调用栈,是什么决定它展示也是可以的, 于是开始我的Hook代码.<br>MonkeyDev默认是subStrate的hook方法代码, 当然也是可以替换成其它的(按道理当然可以~):<br>这是一开始的代码:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/array.png" alt=""><br>但是允许会报错,其中需要修改:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">static void newHookFunc(AppController* self,SEL _cmd,id array)&#123; // &#125;</div><div class="line">                    //replacet to | //下面</div><div class="line">static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2)&#123; // &#125;</div><div class="line">// 需要指明多少个参数, 不知道参数类型就使用泛型id</div></pre></td></tr></table></figure></p>
+<p>build一下且进入调试后, 用时在<code>static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2){</code> 这里Xcode断点一下:<br>但如果直接执行还需要做两部:</p>
+<ul>
+<li>关闭原程序</li>
+<li>如果类似这种辅助类APP,需要到系统中关闭它的辅助项.</li>
+<li>可能你还不熟悉如何进入调试macApp ,那快去翻一下MonkeyDev的wiki,或者见文末</li>
+</ul>
+<p>然后进入注册页面,果不其然的断点触发.然后我打印了一下调用栈:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/stack.png" alt=""><br>是的,一眼看去都是非Divvy调用栈的可用信息~ 有点陷入僵局了.</p>
+<h3 id="人品才是最高逆向"><a href="#人品才是最高逆向" class="headerlink" title="人品才是最高逆向"></a>人品才是最高逆向</h3><p>有点朦胧的时候, 我回到<code>- (void)showLicensingWindow:(id)arg1 withTimeoutDuration:(int)arg2;</code>这个方法中, 结果真的很意外,其中有个地方很雷人:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/ok.png" alt=""><br><code>- (BOOL)verifyLicense;</code>这真的不能再明白的一个方法了,不管是不是依然开始Hook一下.mac的逆向就是各种Hook~<br>hook代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#import &quot;Divvy.h&quot;</div><div class="line">#import &quot;substrate.h&quot;</div><div class="line"></div><div class="line">@class AppController;</div><div class="line"></div><div class="line">static BOOL (*originFunc)(AppController*,SEL,id);</div><div class="line">static BOOL newHookFunc(AppController* self,SEL _cmd,id array)&#123;</div><div class="line">    return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">static void __attribute__((constructor)) initialize(void) &#123;</div><div class="line">    MSHookMessageEx(objc_getClass(&quot;AppController&quot;),@selector(verifyLicense), (IMP)&amp;newHookFunc, (IMP*)&amp;originFunc);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>依然Build一下跑起来, 真的很意外,因为启动的时候默认也是要弹一次注册框的, 这次启动并没有,启动后直接什么也展示(而且我忘记断点了). 手动选到注册框看一下怎么肥事:<br><img src="/2017/12/03/mac逆向-窗口管理Divvy/finish.png" alt=""><br>真的很意外, 就像小黄书的作者狗神中说的,运气也是逆向的一部分.嗨森~</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>谁说人品不是逆向的一部分呢, 实践就能找到快乐.第一次Mac的调试竟然这么快就收获自我成就感,赚到了.<br>App的话我打包上传到<a href="https://github.com/Paulswith/ToolsScript/tree/master/Divvy_windowManagerTool" target="_blank" rel="external">这里</a></p>
+<p>特别鸣谢大佬协助:<br><a href="https://github.com/AloneMonkey/MonkeyDev/wiki/Mac%E5%BA%94%E7%94%A8%E6%8F%92%E4%BB%B6" target="_blank" rel="external">monkeyDev之MAC应用</a><br><a href="http://www.alonemonkey.com/2017/05/31/get-start-with-mac-reverse/" target="_blank" rel="external">庆哥的一篇文章走进MAC逆向</a><br><a href=""><code>膜庆哥</code></a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/reverseEngineering/">reverseEngineering</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macApp-Divvy破解/">macApp-Divvy破解</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
   
     <article id="post-Unread逆向-去除阅读限制"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
@@ -366,7 +434,7 @@ var themeMenus = {};
 <h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><h4 id="code"><a href="#code" class="headerlink" title="code"></a>code</h4><p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/tweek.png" alt=""></p>
 <p>让个惊讶的tweak.xm代码:<br>“当然我这样子处理应该是会引起某些问题了, 但这是目前我分析到的能力”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">%hook OlimSoftUtility</div><div class="line"></div><div class="line">+ (BOOL)isUpgraded &#123;</div><div class="line">	%log;</div><div class="line">	// NSLog(@&quot;replace this method!!!!!!!!!!!!!!!!!!!&quot;);</div><div class="line">	return YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line">%end</div></pre></td></tr></table></figure></p>
 <p>Makefile代码:<br>我指定了IP 和 Port, 待会可以在直接调用 make install 进行安装<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">export THEOS_DEVICE_IP=localhost    </div><div class="line">export THEOS_DEVICE_PORT=2222</div><div class="line">export ARCHS=armv7</div><div class="line">export TARGET=iphone:clang:latest:8.0</div><div class="line">export THEOS_MAKE_PATH=/opt/theos/makefiles</div><div class="line">export THEOS=/opt/theos</div><div class="line"></div><div class="line">include $(THEOS)/makefiles/common.mk</div><div class="line"></div><div class="line">TWEAK_NAME = removeOplayerAds</div><div class="line">removeOplayerAds_FILES = Tweak.xm</div><div class="line"></div><div class="line">include $(THEOS_MAKE_PATH)/tweak.mk</div><div class="line"></div><div class="line">after-install::</div><div class="line">	install.exec "killall -9 SpringBoard"</div></pre></td></tr></table></figure></p>
-<h4 id="一些小坑点"><a href="#一些小坑点" class="headerlink" title="一些小坑点"></a>一些小坑点</h4><h4 id="没找到dpkg-deb"><a href="#没找到dpkg-deb" class="headerlink" title="没找到dpkg-deb:"></a>没找到dpkg-deb:</h4><p>dpkg-deb的原名是/opt/theos/bin/dm.pl, 你需要把它的名字改为dpkg-deb,然后执行下面的语句<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">➜  removeoplayerads make package</div><div class="line">==&gt; Error: /Applications/Xcode.app/Contents/Developer/usr/bin/make package requires dpkg-deb.</div><div class="line">make: *** [internal-package-check] Error 1</div><div class="line"><span class="meta">#</span>## 决绝方法</div><div class="line">➜  removeoplayerads sudo perl -i -pe 'y|\r||d' /opt/theos/bin/dpkg-deb</div><div class="line">Password:</div></pre></td></tr></table></figure></p>
+<h4 id="一些小坑点"><a href="#一些小坑点" class="headerlink" title="一些小坑点"></a>一些小坑点</h4><h4 id="没找到dpkg-deb"><a href="#没找到dpkg-deb" class="headerlink" title="没找到dpkg-deb:"></a>没找到dpkg-deb:</h4><p>dpkg-deb的原名是/opt/theos/bin/dm.pl, 你需要把它的名字改为dpkg-deb,然后执行下面的语句<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">➜  removeoplayerads make package</div><div class="line">==&gt; Error: /Applications/Xcode.app/Contents/Developer/usr/bin/make package requires dpkg-deb.</div><div class="line">make: *** [internal-package-check] Error 1</div><div class="line"><span class="meta">#</span><span class="bash"><span class="comment">## 决绝方法</span></span></div><div class="line">➜  removeoplayerads sudo perl -i -pe 'y|\r||d' /opt/theos/bin/dpkg-deb</div><div class="line">Password:</div></pre></td></tr></table></figure></p>
 <h4 id="BundleID最准确的获取方法"><a href="#BundleID最准确的获取方法" class="headerlink" title="BundleID最准确的获取方法"></a>BundleID最准确的获取方法</h4><p>cycript 进入到目标APP进程后:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[NSBundle mainBundle] bundleIdentifier]</div></pre></td></tr></table></figure></p>
 <h4 id="汇编查询"><a href="#汇编查询" class="headerlink" title="汇编查询"></a>汇编查询</h4><p>干货, 大全!!!<br><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cihbjcag.html" target="_blank" rel="external">http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cihbjcag.html</a></p>
 <h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="/2017/11/24/去除OplayerLite广告提示-越狱机/0ads.png" alt=""></p>
@@ -800,79 +868,11 @@ var themeMenus = {};
     
 
   
-    <article id="post-OC中常用的延迟执行代码方法"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/11/08/OC中常用的延迟执行代码方法/">OC中常用的延迟执行代码方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/11/08/OC中常用的延迟执行代码方法/" class="article-date">
-	  <time datetime="2017-11-08T11:12:41.000Z" itemprop="datePublished">November 8, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="写于篇头"><a href="#写于篇头" class="headerlink" title="写于篇头"></a>写于篇头</h3><blockquote>
-<p>很多时候我们在代码中延迟执行代码, 情况分很多种,列一下我常用的在哪些情况</p>
-</blockquote>
-<h3 id="performSelector"><a href="#performSelector" class="headerlink" title="performSelector"></a>performSelector</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/1.png" alt=""></p>
-<blockquote>
-<p>很多时候用于延迟展示动画,例如转场动画等, 小延迟来产生的视觉误差,达到动画之美.  </p>
-</blockquote>
-<h3 id="NSTimer-scheduled"><a href="#NSTimer-scheduled" class="headerlink" title="NSTimer scheduled"></a>NSTimer scheduled</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/2.png" alt=""></p>
-<blockquote>
-<p>常用来一些页面的定时器, 例如一些App上的广告倒计时, NSTimer可以定时执行一些动作. 且repeats参数,可以决定这里的循环. </p>
-</blockquote>
-<p><img src="/2017/11/08/OC中常用的延迟执行代码方法/t2.png" alt=""></p>
-<blockquote>
-<p>注意Timer本身是被Runloop强引用的,所以如果是定义为property,用weak修饰.<br>然后可在<code>invalidate</code>中停止和销毁</p>
-</blockquote>
-<h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/3.png" alt=""></p>
-<blockquote>
-<p>gcd中可以指定线程, 常用来做异步的处理,不阻塞主线的操作, 例如延迟网络加载so on. </p>
-</blockquote>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Objective-C/">Objective-C</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iosDev/">iosDev</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">zurück</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">weiter</a>
+    <a class="extend prev" rel="prev" href="/">Précédent</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Suivant</a>
   </nav>
 
 </section>
@@ -884,9 +884,9 @@ var themeMenus = {};
     <form class="search-form">
         <label style="width: 75%;">
             <span class="screen-reader-text">Search for:</span>
-            <input type="search" class="search-field" style="height: 42px;" placeholder=" Suche…" value="" name="s" title="Search for:">
+            <input type="search" class="search-field" style="height: 42px;" placeholder=" Rechercher…" value="" name="s" title="Search for:">
         </label>
-        <input type="submit" class="search-form-submit" value="Suche">
+        <input type="submit" class="search-form-submit" value="Rechercher">
     </form>
     <div class="ins-search">
     <div class="ins-search-mask"></div>
@@ -957,10 +957,22 @@ var themeMenus = {};
     
   <div class="widget_athemes_tabs">
     <ul id="widget-tab" class="clearfix widget-tab-nav">
-      <li class="active"><a>letzter Beitrag</a></li>
+      <li class="active"><a>Articles récents</a></li>
     </ul>
     <div class="widget">
       <ul>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/10/14/aliyun-ddns设置定时监控更新/">aliyun-ddns设置定时监控更新</a></h6>
+              <span>October 14, 2019</span>
+            </div>
+
+          </li>
         
           <li class="clearfix">
 
@@ -1022,18 +1034,6 @@ var themeMenus = {};
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2018/01/20/TensorFlow数据集制作实战/">TensorFlow数据集制作实战</a></h6>
-              <span>January 20, 2018</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1041,9 +1041,9 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorien</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MachineLearning/">MachineLearning</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unix/">Unix</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/macTools/">macTools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reverseEngineering/">reverseEngineering</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MachineLearning/">MachineLearning</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyProgram/">MyProgram</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unix/">Unix</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/macTools/">macTools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reverseEngineering/">reverseEngineering</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1051,9 +1051,9 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018年读的书/">2018年读的书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Colaboratory/">Colaboratory</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brewupgradeError/">brewupgradeError</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iosDev/">iosDev</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macApp-Divvy破解/">macApp-Divvy破解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macTools/">macTools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testTools/">testTools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/verificationCode/">verificationCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战去除广告/">实战去除广告</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/砸壳/">砸壳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迁移学习/">迁移学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迁移学习移植IOS/">迁移学习移植IOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向UNREAD/">逆向UNREAD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向探探/">逆向探探</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018年读的书/">2018年读的书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Colaboratory/">Colaboratory</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDNS/">DDNS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brewupgradeError/">brewupgradeError</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iosDev/">iosDev</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macApp-Divvy破解/">macApp-Divvy破解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macTools/">macTools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testTools/">testTools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/verificationCode/">verificationCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战去除广告/">实战去除广告</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/砸壳/">砸壳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迁移学习/">迁移学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迁移学习移植IOS/">迁移学习移植IOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向UNREAD/">逆向UNREAD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向探探/">逆向探探</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1061,19 +1061,19 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/2018年读的书/" style="font-size: 10px;">2018年读的书</a> <a href="/tags/Colaboratory/" style="font-size: 10px;">Colaboratory</a> <a href="/tags/TensorFlow/" style="font-size: 20px;">TensorFlow</a> <a href="/tags/brewupgradeError/" style="font-size: 10px;">brewupgradeError</a> <a href="/tags/iosDev/" style="font-size: 20px;">iosDev</a> <a href="/tags/macApp-Divvy破解/" style="font-size: 10px;">macApp-Divvy破解</a> <a href="/tags/macTools/" style="font-size: 10px;">macTools</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/testTools/" style="font-size: 10px;">testTools</a> <a href="/tags/verificationCode/" style="font-size: 10px;">verificationCode</a> <a href="/tags/实战去除广告/" style="font-size: 10px;">实战去除广告</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/砸壳/" style="font-size: 20px;">砸壳</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/迁移学习/" style="font-size: 10px;">迁移学习</a> <a href="/tags/迁移学习移植IOS/" style="font-size: 20px;">迁移学习移植IOS</a> <a href="/tags/逆向UNREAD/" style="font-size: 10px;">逆向UNREAD</a> <a href="/tags/逆向探探/" style="font-size: 10px;">逆向探探</a>
+      <a href="/tags/2018年读的书/" style="font-size: 10px;">2018年读的书</a> <a href="/tags/Colaboratory/" style="font-size: 10px;">Colaboratory</a> <a href="/tags/DDNS/" style="font-size: 10px;">DDNS</a> <a href="/tags/TensorFlow/" style="font-size: 20px;">TensorFlow</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/brewupgradeError/" style="font-size: 10px;">brewupgradeError</a> <a href="/tags/iosDev/" style="font-size: 20px;">iosDev</a> <a href="/tags/macApp-Divvy破解/" style="font-size: 10px;">macApp-Divvy破解</a> <a href="/tags/macTools/" style="font-size: 10px;">macTools</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/testTools/" style="font-size: 10px;">testTools</a> <a href="/tags/verificationCode/" style="font-size: 10px;">verificationCode</a> <a href="/tags/实战去除广告/" style="font-size: 10px;">实战去除广告</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/砸壳/" style="font-size: 20px;">砸壳</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/迁移学习/" style="font-size: 10px;">迁移学习</a> <a href="/tags/迁移学习移植IOS/" style="font-size: 20px;">迁移学习移植IOS</a> <a href="/tags/逆向UNREAD/" style="font-size: 10px;">逆向UNREAD</a> <a href="/tags/逆向探探/" style="font-size: 10px;">逆向探探</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1087,7 +1087,7 @@ var themeMenus = {};
 
   <div class="clearfix container">
       <div class="site-info">
-	      &copy; 2019 In &#39;flight of thought&#39; All Rights Reserved.
+	      &copy; 2020 In &#39;flight of thought&#39; All Rights Reserved.
           
             <span id="busuanzi_container_site_uv">
               本站访客数<span id="busuanzi_value_site_uv"></span>人次  
