@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>探探逆向之旅 | In &#39;flight of thought&#39;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="逆向探探" />
+  
+  
+  
+  
+  <meta name="keywords" content="逆向探探">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探探逆向之旅">
+<meta property="og:url" content="http://yoursite.com/posts/f951603a/index.html">
+<meta property="og:site_name" content="In &#39;flight of thought&#39;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/genggai.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/geng.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/flex.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/syscall.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/xuxu.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/access.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/close.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/user.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/hong.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/value.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/huameizi.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/dingyi.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/use.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/fenxi.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/location.png">
+<meta property="og:image" content="http://yoursite.com/posts/f951603a/galiao.png">
+<meta property="og:updated_time" content="2020-03-19T08:15:28.285Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="探探逆向之旅">
+<meta name="twitter:image" content="http://yoursite.com/posts/f951603a/genggai.png">
+  
+    <link rel="alternate" href="/atom.xml" title="In &#39;flight of thought&#39;" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "c696510b523841e638bb8225e25825e42e181bbf",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+</head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "Home"; 
+
+  themeMenus["/archives"] = "Archives"; 
+
+  themeMenus["/categories"] = "Kategorien"; 
+
+  themeMenus["/tags"] = "Tags"; 
+
+  themeMenus["/about"] = "About"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="In &#39;flight of thought&#39;" rel="home"> In &#39;flight of thought&#39; </a>
+            
+          </h1>
+
+          
+            <div class="site-description">Paulswith&#39;s blog</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Kategorien</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-探探逆向之旅" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      探探逆向之旅
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/posts/f951603a/" class="article-date">
+	  <time datetime="2017-12-18T07:27:30.000Z" itemprop="datePublished">December 18, 2017</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一阵子下来才明白,逆向其实会上瘾,尤其是我这种~ 天生就爱搞破坏的坏孩子来讲<br>探探是一个社交APP, 似乎不少人在上面找到另一半的. 这种卡片社交简单,背后隐藏的推荐逻辑,筛选逻辑才是它能如此盛名的原因.<br>要重点说明,这些需求是我一产品的同学给我提的, 绝非个人偏好~ 我不是那种人…</p>
+</blockquote>
+<h3 id="梗概"><a href="#梗概" class="headerlink" title="梗概"></a>梗概</h3><h4 id="先上下图"><a href="#先上下图" class="headerlink" title="先上下图"></a>先上下图</h4><p>(功能入口在 新手引导-&gt;探探怎么玩-&gt; ):<br><img src="/posts/f951603a/genggai.png" alt=""><br>这是目前逆向后我给它新增的功能,因为工作也比较忙,就没有新增过多的需求,但是整个App的架构逻辑其实已经很清晰了, 基本可以合理的新增一些需求在里面, 这也说明探探的开发架构逻辑挺棒的.</p>
+<h4 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h4><p><img src="/posts/f951603a/geng.png" alt=""><br>下方是一个简单的tableview, 功能的启动都在这里,当然功能是有互斥和优先级的, </p>
+<ul>
+<li>同时开启无条件选妹和选妹子onlyStudent, 无条件选妹子优先. </li>
+<li>为了更好的效果在主页的地方选妹子,我最后采取的是模拟点击likeButton,在NSTimer中执行,当刷的人对已拉取用户求余==0的时候停止, 如果不想停止就把infinite打开,这是一个疯狂的爬取,没有停止的线性条件,除非杀APP. 为什么这么做呢, 因为我把自动拉取的信息默认是保存到Document/cache.txt里面, 主要是照片的url和部分简介</li>
+<li>自动尬聊采用的是图灵的API, 你拿到源码后需要替换为您的key, 谷歌搜索”图灵机器人”,打开后进入到某个想聊天的窗口, 它如果收到信息会自动跟她尬聊.</li>
+<li>上方是用Mapkit,新增Mapview在上方,用来更改定位,然后下面的打开(不过测了下证明这块功能还有点问题的,有兴趣的哥们继续挖掘下)</li>
+</ul>
+<h3 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h3><h4 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h4><ul>
+<li>依然是最酷的<a href="https://github.com/AloneMonkey/MonkeyDev" target="_blank" rel="external">MonkeyDev </a></li>
+<li><a href="https://github.com/Flipboard/FLEX" target="_blank" rel="external">FLEX</a>(reveal过期了,这是一个很棒的替代品), 下载后编译一下, 然后按照monkeyDev中wifi加入第三方库的方式操作即可</li>
+<li><a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="external">frida-ios-dump</a> 还是庆哥出品,砸壳后顺带把整个APP导出</li>
+<li>其它的全程是cycript+LLDB调戏 就不累述了…<br><img src="/posts/f951603a/flex.png" alt=""> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#import &lt;FLEX/FLEXManager.h&gt;</div><div class="line">// open it in here</div><div class="line"> [[FLEXManager sharedManager] showExplorer];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>导入库之后,在注入成功的这个通知回调里,启动这个方法</p>
+<h4 id="调试遇到的问题"><a href="#调试遇到的问题" class="headerlink" title="调试遇到的问题"></a>调试遇到的问题</h4><p>探探是有反调试的, 用的是sysctl. 很强<br>那么你调试的时候需要讲MonkeyDev里面的打开, 这个反反调试检测默认是关闭的,原因注释上有<br><img src="/posts/f951603a/syscall.png" alt=""></p>
+<h4 id="从需求粗发的debug"><a href="#从需求粗发的debug" class="headerlink" title="从需求粗发的debug"></a>从需求粗发的debug</h4><p>逆向App,我一般的套路都是酱紫.<br>设计需求 -&gt;  需求在哪里会展示 -&gt; 从view到Controller-&gt; controller方法猜测 -&gt; 结合monkeyDev进行方法trace -&gt; 确认需求方法 -&gt; hopper找方法地址 -&gt;  LLDB调试下断点 -&gt; 查看调用栈(bt) -&gt; 然后开始埋点尝试hook<br><img src="/posts/f951603a/xuxu.png" alt=""><br>用笔记在记录每次你发现的新宇宙(虽然开始的很早,实际没有时间弄它…)</p>
+<h3 id="HookKKK"><a href="#HookKKK" class="headerlink" title="HookKKK"></a>HookKKK</h3><h4 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h4><h5 id="hook位置"><a href="#hook位置" class="headerlink" title="hook位置:"></a>hook位置:</h5><p>入口开关之所以选在 [新手引导-&gt;探探怎么玩-&gt;], 因为很符合呀,介绍都免了<br><img src="/posts/f951603a/access.png" alt=""><br>就是找到控制器后,发现这里是tableview , 直接hook了tableview的代理方法, == 0的时候进入.</p>
+<h5 id="UI层设计"><a href="#UI层设计" class="headerlink" title="UI层设计:"></a>UI层设计:</h5><p>上方是mapview, 这本身就是一个内存问题,地图App都知道, 所以在dismiss的位置,需要很”干净”的把它清理一下.<br><img src="/posts/f951603a/close.png" alt=""><br>下方是tableView, 还是很简单cell注册来循环利用,省点内存</p>
+<h4 id="人物存储的方式"><a href="#人物存储的方式" class="headerlink" title="人物存储的方式"></a>人物存储的方式</h4><p>探探采取CoreData进行本地存储,用户的模型是<code>UserObject</code><br><img src="/posts/f951603a/user.png" alt=""><br>简要一些浅层面我所看到的:</p>
+<ul>
+<li>其实又有<code>ProfileInfo</code>存储用户的一些社会内容, 里面又包含学校信息在模型<code>StudiesInfo</code>和工作信息模型<code>WorkInfo</code></li>
+<li><code>LocationInfo</code>是用户的地理信息</li>
+<li><code>MembershipInfo</code>似乎探探在一轮融资后要开启会员模式是真的</li>
+<li><code>SettingsInfo</code>主要是你自己的一些信息,就是设置里面的,包含要不要阻拦联系人等</li>
+<li>其他深一点层面诸如<code>RelationshipObject</code>/<code>HiddenUsersCollection</code>,等着有需要的去挖掘<br>其实这些都能座位你来筛选的网格,只不过你想怎么操作罢了</li>
+</ul>
+<h4 id="自动划妹子"><a href="#自动划妹子" class="headerlink" title="自动划妹子"></a>自动划妹子</h4><p><code>P1HomeNearbyViewController</code>是我们一进去的时候的控制器,我在<code>viewDidAppear</code>是时候进行了逻辑判断, 逻辑设置项来自<code>自定义入口</code>所写到的本地缓存,<code>1 - 0</code>字符串存储的方式进行boolValue处理:<br>全局的几个定义:<br><img src="/posts/f951603a/hong.png" alt=""><br>设置YES(1) or NO(0) 来存储:<br><img src="/posts/f951603a/value.png" alt=""><br>那么通过这样子,我们就能进行全局的逻辑判断了:<br><img src="/posts/f951603a/huameizi.png" alt=""></p>
+<p>其中,我把这些我需要hook用到的头文件,从class-dump出来的抽出来, 进行@interface一下,来欺骗编译器,如果是@property就不需要继承什么, 如果是方法,报错的话可能需要继承NSObject或其他已定义的:<br><img src="/posts/f951603a/dingyi.png" alt=""></p>
+<p>用起来的时候就跟正向开发很像了,你熟悉的味道:<br><img src="/posts/f951603a/use.png" alt=""><br>其中有尝试刷妹子这里,如果直接调用响应后的方法刷卡片, 会有一系列问题,最后认怂直接是模拟点击的.而且为什么用NSTimer而不是for循环之类呢,可能就是runloop层的概念了,当前运行NOPro,有兴趣的自行调戏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[likeButton sendActionsForControlEvents:[likeButton allControlEvents]];</div></pre></td></tr></table></figure></p>
+<h4 id="改定位"><a href="#改定位" class="headerlink" title="改定位"></a>改定位</h4><p>该定位和大多数的App一样,但是探探有点麻烦的是我一直就没有刷出来地图过, (听说是触发”擦肩而过”这个业务逻辑才会展示地图),业务不熟真的很不好玩~<br>因为上层展示卡片的控制器是<code>P1HomeLookingViewController</code>,我直接trace到他有返回了信息:<br><img src="/posts/f951603a/fenxi.png" alt=""></p>
+<p>所以我也姑且很粗糙的做了hook,Mapview保存到配置的经纬度,在这里转为double值并返回:<br><img src="/posts/f951603a/location.png" alt=""></p>
+<p>手动创建自定义的CLLocation对象,返回给它,核心方法:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CLLocation *lacationInfo = [[CLLocation alloc] initWithLatitude:latitude.doubleValue longitude:longitude.doubleValue];</div></pre></td></tr></table></figure></p>
+<h4 id="自动尬聊"><a href="#自动尬聊" class="headerlink" title="自动尬聊"></a>自动尬聊</h4><p>尬聊是一门技术, 猿不懂, 那找会的来帮忙吧~~<br>目前实现的单个尬聊, 多个尬聊尚存在问题, 且在有限的时间内就给到这样子的需求了<br><img src="/posts/f951603a/galiao.png" alt=""><br>网络请求很粗糙了使用了NSURLSession,但能保证内存是不会问题.<br><code>#pragma mark - HOOK =&gt; &quot;-[P1ConversationTableView controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:]&quot;</code><br>这个方法其实未必是很合理hook地点, 原因是存在多次抛的通知, 我进行了过滤后才拿到那条到底是她刚才发的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ConversationObject *conversation = [self conversationObject];</div><div class="line">NSComparisonResult compareResult = [[conversation latestReceivedTime] compare:[conversation latestReadMessageCreatedTime]];</div><div class="line">if (compareResult == NSOrderedDescending &amp;&amp; !conversation.isRead &amp;&amp; ![arg2.owner isCurrentUser]) &#123;</div><div class="line">            NSString *message = conversation.messageCollection.latestNormalMessage.message;</div><div class="line">            NSString *lastMessage = [TT_CONFIG objectForKey:LAST_MESSAGE];</div><div class="line">            if (![lastMessage isEqualToString:message]) &#123;  //  这里会收到重复的通知 ,可能这里并不是最佳hook的位置</div></pre></td></tr></table></figure></p>
+<ul>
+<li>conversation是消息的模型,每条信息对应一个conversation,第一个过滤<code>本条消息的创建时间</code> 和 <code>上条已读消息的创建时间</code>比对</li>
+<li>消息不能是已读</li>
+<li>消息的发送者不是自己</li>
+<li>本条消息和配置的消息不同(确认是新的消息后回保存到配置,完整字符串比较)</li>
+</ul>
+<p>在确认是最新消息后, 通过图灵机器人的接口, POST请求出去,剩下的就是解包-&gt; 调方法发回去,其中主要的是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">P1MessagesViewController *messageVC = (P1MessagesViewController *)[self.superview nextResponder];</div></pre></td></tr></table></figure></p>
+<p>发送消息的方法在P1MessagesViewController,为了找到它,可真是废了一把劲, 最后就是这么简单</p>
+<p>ano: 尬聊木有真实妹子,都是探探小助手帮的我 谢谢哦</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>逆向真的会让人上瘾 , 主要的是保持你”猥琐的”好奇心~ , 工具的使用可能都差不多,训练的是一种敏感, 对方法敏感诸如此类呀<br>从逆向我们能快速知道别人的需求做了什么,  快速了解别人的业务等,是一种很高效快速的熟悉方式.<br>至此告一段落,代码直接见我的GIT <a href="https://github.com/Paulswith/ToolsScript/tree/master/tantan_project" target="_blank" rel="external">tantan_project</a></p>
+<p>[<code>仅供学习,注意尺度</code>]</p>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/reverseEngineering/">reverseEngineering</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/逆向探探/">逆向探探</a></li></ul>
+
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC80NzA1OC8yMzU1OA==">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/bed8ad9b/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          wda玩微信跳一跳
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/c7bad175/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">mac逆向-窗口管理Divvy</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#梗概"><span class="nav-number">1.</span> <span class="nav-text">梗概</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先上下图"><span class="nav-number">1.1.</span> <span class="nav-text">先上下图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能简介"><span class="nav-number">1.2.</span> <span class="nav-text">功能简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始调试"><span class="nav-number">2.</span> <span class="nav-text">开始调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调试工具"><span class="nav-number">2.1.</span> <span class="nav-text">调试工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试遇到的问题"><span class="nav-number">2.2.</span> <span class="nav-text">调试遇到的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从需求粗发的debug"><span class="nav-number">2.3.</span> <span class="nav-text">从需求粗发的debug</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HookKKK"><span class="nav-number">3.</span> <span class="nav-text">HookKKK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#入口"><span class="nav-number">3.1.</span> <span class="nav-text">入口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hook位置"><span class="nav-number">3.1.1.</span> <span class="nav-text">hook位置:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UI层设计"><span class="nav-number">3.1.2.</span> <span class="nav-text">UI层设计:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#人物存储的方式"><span class="nav-number">3.2.</span> <span class="nav-text">人物存储的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动划妹子"><span class="nav-number">3.3.</span> <span class="nav-text">自动划妹子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改定位"><span class="nav-number">3.4.</span> <span class="nav-text">改定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动尬聊"><span class="nav-number">3.5.</span> <span class="nav-text">自动尬聊</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 In &#39;flight of thought&#39; All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

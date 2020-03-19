@@ -77,9 +77,9 @@ var themeMenus = {};
 
   themeMenus["/archives"] = "Archives"; 
 
-  themeMenus["/categories"] = "Catégories"; 
+  themeMenus["/categories"] = "Kategorien"; 
 
-  themeMenus["/tags"] = "Mot-clés"; 
+  themeMenus["/tags"] = "Tags"; 
 
   themeMenus["/about"] = "About"; 
 
@@ -114,9 +114,9 @@ var themeMenus = {};
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Catégories</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Kategorien</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Mot-clés</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
                     
@@ -174,7 +174,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/11/08/OC中常用的延迟执行代码方法/">OC中常用的延迟执行代码方法</a>
+      <a class="article-title" href="/posts/6350b04d/">OC中常用的延迟执行代码方法</a>
     </h1>
   
 
@@ -182,7 +182,7 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/11/08/OC中常用的延迟执行代码方法/" class="article-date">
+	Posted on <a href="/posts/6350b04d/" class="article-date">
 	  <time datetime="2017-11-08T11:12:41.000Z" itemprop="datePublished">November 8, 2017</time>
 	</a>
 
@@ -190,26 +190,36 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="写于篇头"><a href="#写于篇头" class="headerlink" title="写于篇头"></a>写于篇头</h3><blockquote>
-<p>很多时候我们在代码中延迟执行代码, 情况分很多种,列一下我常用的在哪些情况</p>
-</blockquote>
-<h3 id="performSelector"><a href="#performSelector" class="headerlink" title="performSelector"></a>performSelector</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/1.png" alt=""></p>
-<blockquote>
-<p>很多时候用于延迟展示动画,例如转场动画等, 小延迟来产生的视觉误差,达到动画之美.  </p>
-</blockquote>
-<h3 id="NSTimer-scheduled"><a href="#NSTimer-scheduled" class="headerlink" title="NSTimer scheduled"></a>NSTimer scheduled</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/2.png" alt=""></p>
-<blockquote>
-<p>常用来一些页面的定时器, 例如一些App上的广告倒计时, NSTimer可以定时执行一些动作. 且repeats参数,可以决定这里的循环. </p>
-</blockquote>
-<p><img src="/2017/11/08/OC中常用的延迟执行代码方法/t2.png" alt=""></p>
-<blockquote>
-<p>注意Timer本身是被Runloop强引用的,所以如果是定义为property,用weak修饰.<br>然后可在<code>invalidate</code>中停止和销毁</p>
-</blockquote>
-<h3 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h3><p><img src="/2017/11/08/OC中常用的延迟执行代码方法/3.png" alt=""></p>
-<blockquote>
-<p>gcd中可以指定线程, 常用来做异步的处理,不阻塞主线的操作, 例如延迟网络加载so on. </p>
-</blockquote>
+        
 
+          
+            <div class="entry-summary" style="margin-left:0;">
+            写于篇头
+很多时候我们在代码中延迟执行代码, 情况分很多种,列一下我常用的在哪些情况
+
+performSelector
+
+很多时候用于延迟展示动画,例如转场动画等, 小延迟来产生的视觉误差,达到动画之美.  
+
+NSTimer scheduled
+
+常用来一些页面的定时器, 例如一些App上的广告倒计时, NSTimer可以定时执行一些动作. 且repeats参数,可以决定这里的循环. 
+
+
+
+注意Timer本身是被Runloop强引用的,所以如果是定义为property,用weak修饰.然后可在invalidate中停止和销毁
+
+GCD
+
+gcd中可以指定线程, 常用来做异步的处理,不阻塞主线的操作, 例如延迟网络加载so on. 
+
+          
+
+        
+          <p class="article-more-link">
+            <a href="/posts/6350b04d/#more">Continue Reading →</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -242,7 +252,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/11/08/brewupgrade-提示ruby版本低/">brewupgrade-提示ruby版本低</a>
+      <a class="article-title" href="/posts/d42cc397/">brewupgrade-提示ruby版本低</a>
     </h1>
   
 
@@ -250,7 +260,7 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/11/08/brewupgrade-提示ruby版本低/" class="article-date">
+	Posted on <a href="/posts/d42cc397/" class="article-date">
 	  <time datetime="2017-11-08T10:40:41.000Z" itemprop="datePublished">November 8, 2017</time>
 	</a>
 
@@ -258,35 +268,40 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="干嘛写"><a href="#干嘛写" class="headerlink" title="干嘛写?"></a>干嘛写?</h3><blockquote>
-<p>mac自带了很多的开发环境,ruby python java so on~~, 但版本有时候低了, 又不能直接升级系统的这些,昨天brew upgrade的时候提示了ruby版本低,mark这个小tip</p>
-</blockquote>
-<h3 id="Error-like-that"><a href="#Error-like-that" class="headerlink" title="Error like that"></a>Error like that</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/tishi.png" alt=""></p>
-<blockquote>
-<p>你在<code>brew upgrade</code>的时候报了这样的错误</p>
-</blockquote>
-<h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/old_version.png" alt=""></p>
-<blockquote>
-<p>官网都到2.4+了,确实older</p>
-</blockquote>
-<h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/which_ruby.png" alt=""></p>
-<blockquote>
-<p>因为是系统自带,which看到是在/usr/bin/下的</p>
-</blockquote>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/resove.png" alt=""></p>
-<blockquote>
-<p>可以试试, 两行, 完美解决,当然也会有解决不了的, 往下看</p>
-</blockquote>
-<h3 id="怎么解决的"><a href="#怎么解决的" class="headerlink" title="怎么解决的?"></a>怎么解决的?</h3><p><img src="/2017/11/08/brewupgrade-提示ruby版本低/find.png" alt=""></p>
-<blockquote>
-<p>可以从结果完美运行知道, brew 运行的时候不会指定要哪个目录下的ruby,直接是ruby —</p>
-<p>没有解决的是什么情况呢? 这时候你which ruby看到的应该与我不同, 它依然显示是/usr/bin/下面的</p>
-<p>因为 <code>[环境变量在同样名词的情况下, 是会存在覆盖的. ]</code>, 你可以打开你的.bash_profile 或 .zshrc 配置文件下, export PATH=<strong>*</strong>, 是不是把/usr/local/bin/ 的顺序, 放在了/usr/bin的前面了. </p>
-</blockquote>
-<h3 id="mac大法好"><a href="#mac大法好" class="headerlink" title="mac大法好"></a>mac大法好</h3><blockquote>
-<p>小tip,没什么料, 点点滴滴点点</p>
-</blockquote>
+        
 
+          
+            <div class="entry-summary" style="margin-left:0;">
+            干嘛写?
+mac自带了很多的开发环境,ruby python java so on~~, 但版本有时候低了, 又不能直接升级系统的这些,昨天brew upgrade的时候提示了ruby版本低,mark这个小tip
+
+Error like that
+
+你在brew upgrade的时候报了这样的错误
+
+version
+
+官网都到2.4+了,确实older
+
+which
+
+因为是系统自带,which看到是在/usr/bin/下的
+
+解决方法
+
+可以试试, 两行, 完美解决,当然也会有解决不了的, 往下看
+
+怎么解决的?
+
+可以从结果完美运行知道, brew 运行的时候不会指定要哪个目录下的ruby,直接是ruby —
+没有解决的是什么情况呢? 这时候你which ruby看到的应该与我不同...
+          
+
+        
+          <p class="article-more-link">
+            <a href="/posts/d42cc397/#more">Continue Reading →</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -319,7 +334,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/11/05/验证码识别整理/">验证码识别整理</a>
+      <a class="article-title" href="/posts/4ce459cb/">验证码识别整理</a>
     </h1>
   
 
@@ -327,7 +342,7 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/11/05/验证码识别整理/" class="article-date">
+	Posted on <a href="/posts/4ce459cb/" class="article-date">
 	  <time datetime="2017-11-05T07:48:39.000Z" itemprop="datePublished">November 5, 2017</time>
 	</a>
 
@@ -335,25 +350,26 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下"><a href="#最近兴趣蔓延-打算对一验证码进行攻破识别-这也是爬虫高阶的课程-于是乎找了些资料-这里总结一下" class="headerlink" title="最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下."></a>最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.</h3><h3 id="验证码识别的大杀器是tesseract君"><a href="#验证码识别的大杀器是tesseract君" class="headerlink" title="验证码识别的大杀器是tesseract君"></a>验证码识别的大杀器是<code>tesseract</code>君</h3><p><img src="/2017/11/05/验证码识别整理/tesseract.png" alt="tesseract"><br><a href="http://www.zmonster.me/2015/04/17/tesseract-install-usage.html" target="_blank" rel="external">tesseract指南中文版-link</a></p>
-<h3 id="但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情"><a href="#但是它处理的能力有限-对于验证码图片咱们必须先走一篇预处理流程后再扔给它-安装tesseract也就是一行brew的事情" class="headerlink" title="但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情"></a>但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情</h3><p><img src="/2017/11/05/验证码识别整理/tesseract_install.png" alt="tesseract"></p>
-<h3 id="预处理常规有哪些呢"><a href="#预处理常规有哪些呢" class="headerlink" title="预处理常规有哪些呢?"></a>预处理常规有哪些呢?</h3><ul>
-<li>灰度化</li>
-<li>二值化</li>
-<li>去除干扰线</li>
-</ul>
-<h3 id="图片处理库"><a href="#图片处理库" class="headerlink" title="图片处理库"></a>图片处理库</h3><p> Pillow (简称PIL)是一个强大的图片处理库, 具体的文档和官方网站可参考<br><a href="https://pillow.readthedocs.io/en/latest/index.html" target="_blank" rel="external">Pillow文档</a> - <a href="https://python-pillow.org/" target="_blank" rel="external">Pillow官网</a> - <a href="https://github.com/python-pillow/Pillow" target="_blank" rel="external">Pillow_GitHub</a><br><img src="/2017/11/05/验证码识别整理/pil_install.png" alt="安装方法"></p>
-<h3 id="灰度化"><a href="#灰度化" class="headerlink" title="灰度化"></a>灰度化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#example_image = Image.open('/tmp/example.png')   #打开一张图片</span></div><div class="line">gray_image = example_image.convert(<span class="string">"L"</span>)</div></pre></td></tr></table></figure>
-<p>convert传入model=”L”的时候, 会转换图片的RGB,返回一张灰度的图片<br><img src="/2017/11/05/验证码识别整理/model_L.png" alt=""></p>
-<h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarizing_image</span><span class="params">(gray_image,threshold)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    传入一张灰度图,进行二值化处理</span></div><div class="line"><span class="string">    :param gray_image: convert之后的灰度图</span></div><div class="line"><span class="string">    :param threshold:二值化阈值, 我对我的目标图片进行不同尝试,发现`180`的时候能拿到比较理想的值</span></div><div class="line"><span class="string">    :return: 二值化后的图片</span></div><div class="line"><span class="string">    """</span></div><div class="line">    pixel_data = gray_image.load()</div><div class="line">    w, h = gray_image.size</div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(h):</div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(w):</div><div class="line">            <span class="keyword">if</span> pixel_data[x, y] &lt; threshold:</div><div class="line">                pixel_data[x, y] = <span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                pixel_data[x, y] = <span class="number">255</span></div><div class="line">    <span class="keyword">return</span> gray_image</div></pre></td></tr></table></figure>
-<p>以该阈值为分界划分黑白, 查了下拿到的资料, 有设置为127的, 160的, 以哪种为标准呢? 个人觉得是想要的验证码比较清晰的程度就可以了, 这一块你可以多试试, 我尝试在120-180的区间给到的都比较满意. </p>
-<h3 id="去除干扰线"><a href="#去除干扰线" class="headerlink" title="去除干扰线"></a>去除干扰线</h3><p>这里的方法看到不少,参考简书的作者比较粗暴的方式进行了处理<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">depoint</span><span class="params">(binarizing_image)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    对于像素值&gt;245的邻域像素，判别为属于背景色，\</span></div><div class="line"><span class="string">    如果一个像素上下左右4各像素值有超过2个像素属于背景色，那么该像素就是噪声。</span></div><div class="line"><span class="string">    jianshu_link: "http://www.jianshu.com/p/41127bf90ca9"</span></div><div class="line"><span class="string">    :param binarizing_image:</span></div><div class="line"><span class="string">    :return:</span></div><div class="line"><span class="string">    """</span></div><div class="line">    pixdata = binarizing_image.load()</div><div class="line">    w,h = binarizing_image.size</div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">1</span>,h<span class="number">-1</span>):</div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,w<span class="number">-1</span>):</div><div class="line">            count = <span class="number">0</span></div><div class="line">            <span class="keyword">if</span> pixdata[x,y<span class="number">-1</span>] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x,y+<span class="number">1</span>] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x<span class="number">-1</span>,y] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> pixdata[x+<span class="number">1</span>,y] &gt; <span class="number">245</span>:</div><div class="line">                count = count + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> count &gt; <span class="number">2</span>:</div><div class="line">                pixdata[x,y] = <span class="number">255</span></div><div class="line">    <span class="keyword">return</span> binarizing_image</div></pre></td></tr></table></figure></p>
-<h3 id="处理后的图片转文字"><a href="#处理后的图片转文字" class="headerlink" title="处理后的图片转文字"></a>处理后的图片转文字</h3><p>图片转文字实际就是文章开头的tesseract , 不过大牛把它集成在pytesser这个库中,我们命令的调用方法如下:<br><img src="/2017/11/05/验证码识别整理/out_put.png" alt=""></p>
-<p>化繁为简,pytesser一行代码告诉你文字中的图片, 当然前提是必须要安装tesseract<br>用法如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#图片文件直接转</span></div><div class="line"><span class="keyword">print</span> pytesser.image_file_to_string(<span class="string">'after_revole_image.jpg'</span>) </div><div class="line"><span class="comment">#这是PIL打开后的图片</span></div><div class="line"><span class="keyword">print</span> pytesser.image_to_string(image)</div></pre></td></tr></table></figure></p>
-<p><a href="http://code.google.com/p/pytesser/" target="_blank" rel="external">pytesser-下载链接</a> - <a href="https://my.oschina.net/jhao104/blog/647326" target="_blank" rel="external">pytesser安装遇到坑?</a></p>
-<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性?"></a>局限性?</h3><p>简单的图片,识别率可破50%, 稍微复杂的图片, 基本是挂彩的. 有解决方案吗? 看到AI训练的模式可以较强的处理 . 这是一个方向. </p>
-<h5 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h5><p><a href="http://www.jianshu.com/p/41127bf90ca9" target="_blank" rel="external">http://www.jianshu.com/p/41127bf90ca9</a><br><a href="http://aducode.github.io/posts/2014-07-08/python_identification_verification_code.html" target="_blank" rel="external">http://aducode.github.io/posts/2014-07-08/python_identification_verification_code.html</a></p>
+        
 
+          
+            <div class="entry-summary" style="margin-left:0;">
+            最近兴趣蔓延, 打算对一验证码进行攻破识别,这也是爬虫高阶的课程. 于是乎找了些资料, 这里总结一下.验证码识别的大杀器是tesseract君tesseract指南中文版-link
+但是它处理的能力有限, 对于验证码图片咱们必须先走一篇预处理流程后再扔给它. 安装tesseract也就是一行brew的事情
+预处理常规有哪些呢?
+灰度化
+二值化
+去除干扰线
+
+图片处理库 Pillow (简称PIL)是一个强大的图片处理库, 具体的文档和官方网站可参考Pillow文档 - Pillow官网 - Pillow_GitHub
+灰度化12#example_image = Image.open('/tmp/example.png')   #打开一张图片gray_image = example_im...
+          
+
+        
+          <p class="article-more-link">
+            <a href="/posts/4ce459cb/#more">Continue Reading →</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -386,7 +402,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/10/31/instruments命令行监控/">instruments命令行监控</a>
+      <a class="article-title" href="/posts/20091818/">instruments命令行监控</a>
     </h1>
   
 
@@ -394,7 +410,7 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/10/31/instruments命令行监控/" class="article-date">
+	Posted on <a href="/posts/20091818/" class="article-date">
 	  <time datetime="2017-10-31T13:11:26.000Z" itemprop="datePublished">October 31, 2017</time>
 	</a>
 
@@ -402,29 +418,21 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限) </em></p>
-<p><em>遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化监控, 提取出instrument的数据来完成性能的监控,完成对app某迭代阶段, 或者整个app周期的性能走势.</em></p>
-<p><code>&lt;!---------------我是内容分割线---------------------------------------&gt;</code></p>
-<h3 id="what’s-instruments"><a href="#what’s-instruments" class="headerlink" title="what’s  instruments"></a>what’s  instruments</h3><p>instruments是instrument命令行的工具, 在执行自动化的我们需要它来监控程序拿到数据.</p>
-<h3 id="如何启动"><a href="#如何启动" class="headerlink" title="如何启动:"></a>如何启动:</h3><p><img src="/2017/10/31/instruments命令行监控/cap.png" alt=""></p>
-<ul>
-<li>-w           “UUID” 这里是真机的uuid</li>
-<li>-t            “template”   后缀是.tracetemplace , 是想要录制的模板,整个在下面详解</li>
-<li>-D           “save_trace”  完成录制后存储的位置, 为.trace文件, 与普通录制一致</li>
-<li>App的bunldeID </li>
-<li>-v           看help, 是说记录日志的,实际也没看到打印日志</li>
-</ul>
-<h3 id="现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢"><a href="#现在我们如何拿到-tracetemplace录制模板-和-录制能保存的-trace文件呢" class="headerlink" title="现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?"></a>现在我们如何拿到.tracetemplace录制模板 和 录制能保存的.trace文件呢?</h3><p>其实很简单~  可惜我踩了一些坑才过来.<br>首先启动instrument app -&gt; 空模板 -&gt;  右上角新增想要的录制的模板(想说的是, 理论上是全部都可以录制, 自己挖坑跳跳才知道) .<br><img src="/2017/10/31/instruments命令行监控/add_tem.png" alt=""></p>
-<p>左上角File -&gt; SaveAsTemplate , 存储, 拿到录制模板<code>.tracetemplace</code> :<br><img src="/2017/10/31/instruments命令行监控/as_tem.png" alt=""><br>Command+S, 存储, 拿到录制结束后, 会存储的<code>.trace</code>;</p>
-<blockquote>
-<p>这里为什么要这样子执行, 因为要保证.trace 和 .tracetemplace 一致,才能保存录制结果</p>
-</blockquote>
-<h3 id="拿到设备的UUID"><a href="#拿到设备的UUID" class="headerlink" title="拿到设备的UUID"></a>拿到设备的UUID</h3><p><code>instruments -s</code>可以拿到, 或者<code>xcrun simctl list</code> (是活动的设备会在后面提示(Booted)) </p>
-<h3 id="如果你连bundleID都不知道"><a href="#如果你连bundleID都不知道" class="headerlink" title="如果你连bundleID都不知道~"></a>如果你连bundleID都不知道~</h3><p><code>ios-deploy -B</code>可以拿到连接设备的全部bundleID , 如果你的电脑没有ios-deploy, <code>brew install ios-deplo</code>, 大多情况下我这一步是啰嗦了.</p>
-<h3 id="其他部分instruments-参数参考"><a href="#其他部分instruments-参数参考" class="headerlink" title="其他部分instruments 参数参考"></a>其他部分instruments 参数参考</h3><p><img src="/2017/10/31/instruments命令行监控/guide_all.png" alt=""></p>
-<h3 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题?"></a>遗留问题?</h3><p>我尚未在模拟器上运行成功,  希望有运行成功的联系交流. </p>
-<h2 id="拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行"><a href="#拿到以上的数据后-就可以按照我最上面的参数拼接启动了-Xcode8-完美运行" class="headerlink" title="拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行"></a>拿到以上的数据后, 就可以按照我最上面的参数拼接启动了, Xcode8 完美运行</h2><h2 id="后序呢-怎么实现title上的想法"><a href="#后序呢-怎么实现title上的想法" class="headerlink" title="后序呢? 怎么实现title上的想法"></a>后序呢? 怎么实现title上的想法</h2><p>有接触一篇github, 作者似乎是逆向实现了,但代码也好久没更新了, 但是我本地暂未成功解析<br><a href="https://github.com/Qusic/TraceUtility" target="_blank" rel="external">TraceUtility</a><br><a href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=0ahUKEwjyiabL65rXAhWBsJQKHa0WDLgQFgglMAA&amp;url=http%3a%2f%2fwww%2ecnblogs%2ecom%2fhyddd%2fp%2f5329608%2ehtml&amp;usg=AOvVaw2PasSIoEIDhnu52mlh62bt" target="_blank" rel="external">博文地址</a></p>
-<h2 id="序已经开始了-目前的OC还没接触逆向-现在这一枪打响了"><a href="#序已经开始了-目前的OC还没接触逆向-现在这一枪打响了" class="headerlink" title="序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~"></a>序已经开始了,目前的OC还没接触逆向,  现在这一枪打响了~~</h2>
+        
+
+          
+            <div class="entry-summary" style="margin-left:0;">
+            周日的时候去听了一段小分享, 内容还算精彩, 把Android在性能监控方面,自动化方面,设备独立运行自动化都能讲解的很棒. adb这个原生的轮子确实很棒.(也是要root权限) 
+遗憾的是ios方面的在我当前涉及的圈子,发现能去这样子做, 并且开源出来的很少(我知道你们会说越狱就能解决一切问题, 那我沉默).   ios性能, 手动可以通过instrument来监控, 想做的就是全面的性能自动化监控, 提取出instrument的数据来完成性能的监控,完成对app某迭代阶段, 或者整个app周期的性能走势.
+&lt;!---------------我是内容分割线---------------------------------------&gt;
+what’s  instrument...
+          
+
+        
+          <p class="article-more-link">
+            <a href="/posts/20091818/#more">Continue Reading →</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -453,7 +461,7 @@ var themeMenus = {};
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">Précédent</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">zurück</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 </section>
@@ -465,9 +473,9 @@ var themeMenus = {};
     <form class="search-form">
         <label style="width: 75%;">
             <span class="screen-reader-text">Search for:</span>
-            <input type="search" class="search-field" style="height: 42px;" placeholder=" Rechercher…" value="" name="s" title="Search for:">
+            <input type="search" class="search-field" style="height: 42px;" placeholder=" Suche…" value="" name="s" title="Search for:">
         </label>
-        <input type="submit" class="search-form-submit" value="Rechercher">
+        <input type="submit" class="search-form-submit" value="Suche">
     </form>
     <div class="ins-search">
     <div class="ins-search-mask"></div>
@@ -538,7 +546,7 @@ var themeMenus = {};
     
   <div class="widget_athemes_tabs">
     <ul id="widget-tab" class="clearfix widget-tab-nav">
-      <li class="active"><a>Articles récents</a></li>
+      <li class="active"><a>letzter Beitrag</a></li>
     </ul>
     <div class="widget">
       <ul>
@@ -549,7 +557,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/10/14/aliyun-ddns设置定时监控更新/">aliyun-ddns设置定时监控更新</a></h6>
+              <h6 style="margin: 0;"><a href="/posts/625554dc/">aliyun-ddns设置定时监控更新</a></h6>
               <span>October 14, 2019</span>
             </div>
 
@@ -561,7 +569,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2018/06/20/读书记-原则/">读书记-&lt;原则&gt;</a></h6>
+              <h6 style="margin: 0;"><a href="/posts/a417e45b/">读书记-&lt;原则&gt;</a></h6>
               <span>June 20, 2018</span>
             </div>
 
@@ -573,7 +581,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2018/06/05/xcode9之后的打包方式/">xcode9之后的打包方式</a></h6>
+              <h6 style="margin: 0;"><a href="/posts/87a25bc2/">xcode9之后的打包方式</a></h6>
               <span>June 5, 2018</span>
             </div>
 
@@ -585,7 +593,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2018/02/25/机器学习迁移模型到IOS/">机器学习迁移模型到IOS</a></h6>
+              <h6 style="margin: 0;"><a href="/posts/4dc5ff20/">机器学习迁移模型到IOS</a></h6>
               <span>February 25, 2018</span>
             </div>
 
@@ -597,7 +605,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2018/02/24/迁移学习InceptionV3/">迁移学习InceptionV3</a></h6>
+              <h6 style="margin: 0;"><a href="/posts/c218aae9/">迁移学习InceptionV3</a></h6>
               <span>February 24, 2018</span>
             </div>
 
@@ -609,7 +617,7 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2018/02/01/部署TensorFlow到Colaboratory/">部署TensorFlow到Colaboratory</a></h6>
+              <h6 style="margin: 0;"><a href="/posts/84cb4cdb/">部署TensorFlow到Colaboratory</a></h6>
               <span>February 1, 2018</span>
             </div>
 
@@ -622,7 +630,7 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Kategorien</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MachineLearning/">MachineLearning</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyProgram/">MyProgram</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Objective-C/">Objective-C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unix/">Unix</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/macTools/">macTools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/reverseEngineering/">reverseEngineering</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">1</span></li></ul>
     </div>
@@ -632,7 +640,7 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018年读的书/">2018年读的书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Colaboratory/">Colaboratory</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDNS/">DDNS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brewupgradeError/">brewupgradeError</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iosDev/">iosDev</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macApp-Divvy破解/">macApp-Divvy破解</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macTools/">macTools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/testTools/">testTools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/verificationCode/">verificationCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战去除广告/">实战去除广告</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/砸壳/">砸壳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迁移学习/">迁移学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/迁移学习移植IOS/">迁移学习移植IOS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向UNREAD/">逆向UNREAD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向探探/">逆向探探</a><span class="tag-list-count">1</span></li></ul>
     </div>
@@ -642,7 +650,7 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/2018年读的书/" style="font-size: 10px;">2018年读的书</a> <a href="/tags/Colaboratory/" style="font-size: 10px;">Colaboratory</a> <a href="/tags/DDNS/" style="font-size: 10px;">DDNS</a> <a href="/tags/TensorFlow/" style="font-size: 20px;">TensorFlow</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/brewupgradeError/" style="font-size: 10px;">brewupgradeError</a> <a href="/tags/iosDev/" style="font-size: 20px;">iosDev</a> <a href="/tags/macApp-Divvy破解/" style="font-size: 10px;">macApp-Divvy破解</a> <a href="/tags/macTools/" style="font-size: 10px;">macTools</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/testTools/" style="font-size: 10px;">testTools</a> <a href="/tags/verificationCode/" style="font-size: 10px;">verificationCode</a> <a href="/tags/实战去除广告/" style="font-size: 10px;">实战去除广告</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/砸壳/" style="font-size: 20px;">砸壳</a> <a href="/tags/自动化/" style="font-size: 10px;">自动化</a> <a href="/tags/迁移学习/" style="font-size: 10px;">迁移学习</a> <a href="/tags/迁移学习移植IOS/" style="font-size: 20px;">迁移学习移植IOS</a> <a href="/tags/逆向UNREAD/" style="font-size: 10px;">逆向UNREAD</a> <a href="/tags/逆向探探/" style="font-size: 10px;">逆向探探</a>
     </div>
@@ -651,7 +659,7 @@ var themeMenus = {};
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
 
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li></ul>
