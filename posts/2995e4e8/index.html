@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>ios重签名脚本的0到1 | In &#39;flight of thought&#39;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用123451  12345.&#x2F;resign.sh &#x2F;Users&#x2F;dobby&#x2F;Desktop&#x2F;微信-已砸壳.ipa  &#x2F;Users&#x2F;dobby&#x2F;Desktop&#x2F;original.mobileprovision  com.weixin.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ios重签名脚本的0到1">
+<meta property="og:url" content="https://blog.eternaless.top/posts/2995e4e8/index.html">
+<meta property="og:site_name" content="In &#39;flight of thought&#39;">
+<meta property="og:description" content="对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码  Profile 使用123451  12345.&#x2F;resign.sh &#x2F;Users&#x2F;dobby&#x2F;Desktop&#x2F;微信-已砸壳.ipa  &#x2F;Users&#x2F;dobby&#x2F;Desktop&#x2F;original.mobileprovision  com.weixin.">
+<meta property="og:locale">
+<meta property="og:image" content="https://blog.eternaless.top/images/sign_profile.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/signstr.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/type.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/install.png">
+<meta property="article:published_time" content="2017-11-14T12:03:21.000Z">
+<meta property="article:modified_time" content="2020-03-19T08:15:28.000Z">
+<meta property="article:author" content="AKARIZO">
+<meta property="article:tag" content="iosDev">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.eternaless.top/images/sign_profile.png">
+  
+    <link rel="alternate" href="/atom.xml" title="In 'flight of thought'" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">In &#39;flight of thought&#39;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一步一个脚印</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.eternaless.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2017-11-14-2995e4e8-ios重签名脚本的0到1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/2995e4e8/" class="article-date">
+  <time class="dt-published" datetime="2017-11-14T12:03:21.000Z" itemprop="datePublished">2017-11-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Unix/">Unix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      ios重签名脚本的0到1
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文<br>感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码</p>
+</blockquote>
+<h3 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a><a href="#Profile" title="Profile"></a>Profile</h3><p><img src="/images/sign_profile.png"></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a><a href="#%E4%BD%BF%E7%94%A8" title="使用"></a>使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
+<li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
+<li>$3 是否修改bundleID,默认是原先的</li>
+</ul>
+<p><img src="/images/signstr.png"></p>
+<blockquote>
+<p>脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">security find-identity -v -p codesigning</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\\(正版\\)/Payload/MQQSecure.app/MQQSecure | grep cryptid</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></blockquote>
+<h3 id="mobileProvision生成Entitlements-plist"><a href="#mobileProvision生成Entitlements-plist" class="headerlink" title="mobileProvision生成Entitlements.plist"></a><a href="#mobileProvision%E7%94%9F%E6%88%90Entitlements-plist" title="mobileProvision生成Entitlements.plist"></a>mobileProvision生成Entitlements.plist</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">security cms -D -i $provision &gt; ProvisionProfile.plist </span><br><span class="line"></span><br><span class="line">/usr/libexec/PlistBuddy -x -c &quot;Print Entitlements&quot; ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见<a target="_blank" rel="noopener" href="https://paulswith.github.io/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/">plist文件-在脚本中的操作</a></p>
+<h3 id="mobileProvision拷贝为embedded-mobileprovision"><a href="#mobileProvision拷贝为embedded-mobileprovision" class="headerlink" title="mobileProvision拷贝为embedded.mobileprovision"></a><a href="#mobileProvision%E6%8B%B7%E8%B4%9D%E4%B8%BAembedded-mobileprovision" title="mobileProvision拷贝为embedded.mobileprovision"></a>mobileProvision拷贝为embedded.mobileprovision</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">cp $provision $appPlace/embedded.mobileprovision</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="是否概要更改BundleID"><a href="#是否概要更改BundleID" class="headerlink" title="是否概要更改BundleID"></a><a href="#%E6%98%AF%E5%90%A6%E6%A6%82%E8%A6%81%E6%9B%B4%E6%94%B9BundleID" title="是否概要更改BundleID"></a>是否概要更改BundleID</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">if \[\[ $3 \]\]; then</span><br><span class="line"></span><br><span class="line">plutil -replace CFBundleIdentifier -string &quot;$3&quot; $appPlace/Info.plist</span><br><span class="line"></span><br><span class="line">reBundleID=\`plutil -p $appPlace/Info.plist | grep &#x27;CFBundleIdentifier&#x27; \`</span><br><span class="line"></span><br><span class="line">echo &quot;Log info : you wanna replace to: $&#123;reBundleID&#125;&quot;</span><br><span class="line"></span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p>
+<h3 id="删除影响签名文件"><a href="#删除影响签名文件" class="headerlink" title="删除影响签名文件"></a><a href="#%E5%88%A0%E9%99%A4%E5%BD%B1%E5%93%8D%E7%AD%BE%E5%90%8D%E6%96%87%E4%BB%B6" title="删除影响签名文件"></a>删除影响签名文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">5</span><br><span class="line"></span><br><span class="line">6</span><br><span class="line"></span><br><span class="line">7</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">plutil -remove CFBundleREsourceSpecification $appPlace/Info.plist   #删除签名源文件相关</span><br><span class="line"></span><br><span class="line">rm -rf $appPlace/Watch  #发现watch插件必现失败,这个必须删除了</span><br><span class="line"></span><br><span class="line">rm -rf $appPlace/PlugIns #发现PlugIns插件必现失败,这个必须删除了,就算下面重签也不管的, 坑超多</span><br><span class="line"></span><br><span class="line">codesignInfo=\`find $appPlace -name &quot;CodeResources&quot; \`</span><br><span class="line"></span><br><span class="line">for i in $codesignInfo; do</span><br><span class="line"></span><br><span class="line">rm -f $i</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对Info.plist里面的CFBundleREsourceSpecification这个key删除,具体不知道做了什么,IosAppSigner也这么做了</li>
+<li>Watch和Plugins这两个文件,我曾试过对他们都进行重签名, 但依然不管用, 相关坑大概是独立性,可以跳转到<a target="_blank" rel="noopener" href="https://nianxi.net/ios/dump-decrypted-ios-app-extensions.html">念茜女神</a>的博文了解</li>
+<li>源文件的_CodeSignature&#x2F;CodeResources也进行了全局删除,签名后会自动生成这个文件</li>
+</ul>
+<h3 id="开始重签"><a href="#开始重签" class="headerlink" title="开始重签"></a><a href="#%E5%BC%80%E5%A7%8B%E9%87%8D%E7%AD%BE" title="开始重签"></a>开始重签</h3><h4 id="第一步-相关lib-framework签名"><a href="#第一步-相关lib-framework签名" class="headerlink" title="第一步,相关lib-framework签名"></a><a href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E7%9B%B8%E5%85%B3lib-framework%E7%AD%BE%E5%90%8D" title="第一步,相关lib-framework签名"></a>第一步,相关lib-framework签名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">4</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">allShouldSign=\` find $appPlace -name &quot;\*.appex&quot; &amp;&amp; find $appPlace  -name &quot;\*.framework&quot; &amp;&amp; find $appPlace  -name &quot;\*.dylib&quot; &amp;&amp; find $appPlace/\* -name &quot;\*.app&quot; \` #最上层的先不签</span><br><span class="line"></span><br><span class="line">for i in $allShouldSign; do</span><br><span class="line"></span><br><span class="line">codesign -fs &quot;$&#123;signStr&#125;&quot; --no-strict --entitlements=/tmp/project\_resign/Entitlements.plist $i</span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>对上方类型都进行一篇搜索,得到绝对路径后进行重签名<br><img src="/images/type.png"></p>
+<blockquote>
+<p>这是iosAppResigner中,作者对着全部的类型都检索了一遍,我并完全覆盖,如果你踩到了坑,可以试试把类型都加上</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="核心包签名"><a href="#核心包签名" class="headerlink" title="核心包签名"></a><a href="#%E6%A0%B8%E5%BF%83%E5%8C%85%E7%AD%BE%E5%90%8D" title="核心包签名"></a>核心包签名</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">codesign -vvv -fs &quot;$signStr&quot; --no-strict --entitlements=/tmp/project\_resign/Entitlements.plist $appPlace</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="打包为ipa"><a href="#打包为ipa" class="headerlink" title="打包为ipa"></a><a href="#%E6%89%93%E5%8C%85%E4%B8%BAipa" title="打包为ipa"></a>打包为ipa</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">cd $tempPlace</span><br><span class="line"></span><br><span class="line">zip -qry sign.ipa ./Payload</span><br><span class="line"></span><br><span class="line">mv $tempPlace/sign.ipa ~/Desktop</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>因为打包的时候是递归形式的, 指定绝对路径会踩坑,注意就行</li>
+</ul>
+<h3 id="安装试试"><a href="#安装试试" class="headerlink" title="安装试试"></a><a href="#%E5%AE%89%E8%A3%85%E8%AF%95%E8%AF%95" title="安装试试"></a>安装试试</h3><p><img src="/images/install.png"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Paulswith/ToolsScript/tree/master/iosResign">- - -附源码github链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.eternaless.top/posts/2995e4e8/" data-id="cuidJwq9oGIwXuW4AN4-HAHTr" data-title="ios重签名脚本的0到1" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iosDev/" rel="tag">iosDev</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/41806146/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          小tip之mac动态背景
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/5d73e3e5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">plist文件-在脚本中的操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MachineLearning/">MachineLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyProgram/">MyProgram</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unix/">Unix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/macTools/">macTools</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reverseEngineering/">reverseEngineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6/" rel="tag">2018年读的书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Colaboratory/" rel="tag">Colaboratory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDNS/" rel="tag">DDNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iosDev/" rel="tag">iosDev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macApp-Divvy%E7%A0%B4%E8%A7%A3/" rel="tag">macApp-Divvy破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macTools/" rel="tag">macTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/" rel="tag">实战去除广告</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A0%B8%E5%A3%B3/" rel="tag">砸壳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/" rel="tag">迁移学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8DIOS/" rel="tag">迁移学习移植IOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91UNREAD/" rel="tag">逆向UNREAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2/" rel="tag">逆向探探</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6/" style="font-size: 10px;">2018年读的书</a> <a href="/tags/Colaboratory/" style="font-size: 10px;">Colaboratory</a> <a href="/tags/DDNS/" style="font-size: 10px;">DDNS</a> <a href="/tags/TensorFlow/" style="font-size: 20px;">TensorFlow</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/iosDev/" style="font-size: 10px;">iosDev</a> <a href="/tags/macApp-Divvy%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">macApp-Divvy破解</a> <a href="/tags/macTools/" style="font-size: 10px;">macTools</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/" style="font-size: 10px;">实战去除广告</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%A0%B8%E5%A3%B3/" style="font-size: 20px;">砸壳</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">迁移学习</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8DIOS/" style="font-size: 20px;">迁移学习移植IOS</a> <a href="/tags/%E9%80%86%E5%90%91UNREAD/" style="font-size: 10px;">逆向UNREAD</a> <a href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2/" style="font-size: 10px;">逆向探探</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/625554dc/">aliyun-ddns设置定时监控更新</a>
+          </li>
+        
+          <li>
+            <a href="/posts/a417e45b/">读书记-&lt;原则&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/posts/87a25bc2/">xcode9之后的打包方式</a>
+          </li>
+        
+          <li>
+            <a href="/posts/4dc5ff20/">机器学习迁移模型到IOS</a>
+          </li>
+        
+          <li>
+            <a href="/posts/c218aae9/">迁移学习InceptionV3</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 AKARIZO<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

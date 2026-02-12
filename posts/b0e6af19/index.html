@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>clutch对app进行砸壳 | In &#39;flight of thought&#39;</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.  什么是壳一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="clutch对app进行砸壳">
+<meta property="og:url" content="https://blog.eternaless.top/posts/b0e6af19/index.html">
+<meta property="og:site_name" content="In &#39;flight of thought&#39;">
+<meta property="og:description" content="逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.  什么是壳一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文">
+<meta property="og:locale">
+<meta property="og:image" content="https://blog.eternaless.top/images/remote.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/copyto.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/usafe.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/searchBD.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/nofound.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/succeed.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/getzip.png">
+<meta property="og:image" content="https://blog.eternaless.top/images/6.png">
+<meta property="article:published_time" content="2017-11-17T01:55:29.000Z">
+<meta property="article:modified_time" content="2020-03-19T08:15:28.000Z">
+<meta property="article:author" content="AKARIZO">
+<meta property="article:tag" content="砸壳">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.eternaless.top/images/remote.png">
+  
+    <link rel="alternate" href="/atom.xml" title="In 'flight of thought'" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">In &#39;flight of thought&#39;</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一步一个脚印</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.eternaless.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2017-11-17-b0e6af19-clutch对app进行砸壳" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/posts/b0e6af19/" class="article-date">
+  <time class="dt-published" datetime="2017-11-17T01:55:29.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/reverseEngineering/">reverseEngineering</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      clutch对app进行砸壳
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>逆向学习相关,实战一下对app的砸壳,砸壳必须要越狱手机哦.</p>
+</blockquote>
+<h3 id="什么是壳"><a href="#什么是壳" class="headerlink" title="什么是壳"></a><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A3%B3" title="什么是壳"></a>什么是壳</h3><p>一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.<br>怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文件查看:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">otool -l targetBinary | grep cryptid</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>得到的结果如果是1则是未砸壳的, 0是已砸壳.<br>还有一种情况是一些App支持多种架构的,可能会展示多个cryptid&#x3D;1&#x2F;0, 在哪个平台跑就砸哪个.</p>
+</blockquote>
+<h3 id="确定目标后安装App"><a href="#确定目标后安装App" class="headerlink" title="确定目标后安装App"></a><a href="#%E7%A1%AE%E5%AE%9A%E7%9B%AE%E6%A0%87%E5%90%8E%E5%AE%89%E8%A3%85App" title="确定目标后安装App"></a>确定目标后安装App</h3><p>我这里以麦当劳App(听说改名金拱门)为例,从appStore下载安装.</p>
+<h3 id="编译clutch二进制文件"><a href="#编译clutch二进制文件" class="headerlink" title="编译clutch二进制文件"></a><a href="#%E7%BC%96%E8%AF%91clutch%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6" title="编译clutch二进制文件"></a>编译clutch二进制文件</h3><p>clutch神器<a target="_blank" rel="noopener" href="https://github.com/KJCracks/Clutch">下载地址</a>, 下载编译后允许会得到一个二进制文件, 这里不累述哈, 或者你可以直接从我的<a target="_blank" rel="noopener" href="https://github.com/Paulswith/ToolsScript">git地址</a>clone我编译后的,在clutch_binary文件下.</p>
+<h3 id="拷贝clutch到设备"><a href="#拷贝clutch到设备" class="headerlink" title="拷贝clutch到设备"></a><a href="#%E6%8B%B7%E8%B4%9Dclutch%E5%88%B0%E8%AE%BE%E5%A4%87" title="拷贝clutch到设备"></a>拷贝clutch到设备</h3><h4 id="连接手机"><a href="#连接手机" class="headerlink" title="连接手机"></a><a href="#%E8%BF%9E%E6%8E%A5%E6%89%8B%E6%9C%BA" title="连接手机"></a>连接手机</h4><p><img src="/images/remote.png"><br>我这里用iproxy从22映射到2222端口,并整个过程保持. 右边线尝试登录下,默认密码是alpine, 其他情况就自行谷歌帮助,我相信这没什么难度.  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">iproxy 2222 22</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">ssh root@localhost -p 2222</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>测试连接成功后输入 <code>exit</code> 退出,接着下一步</p>
+<h4 id="scp拷贝到手机"><a href="#scp拷贝到手机" class="headerlink" title="scp拷贝到手机"></a><a href="#scp%E6%8B%B7%E8%B4%9D%E5%88%B0%E6%89%8B%E6%9C%BA" title="scp拷贝到手机"></a>scp拷贝到手机</h4><p>scp(secure copy) 支持ssh协议远程拷贝, 我们用它拷贝到设备上, 前提是上面的<br>的测试成功了.  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">scp -P 2222 ./clutch root@localhost:/usr/bin/</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/copyto.png"><br>如果这样子的话就成功了, &#x2F;usr&#x2F;bin&#x2F;默认已经在环境变量查找内, 拷贝到这里可以省事很多多.</p>
+<h4 id="找到目标"><a href="#找到目标" class="headerlink" title="找到目标"></a><a href="#%E6%89%BE%E5%88%B0%E7%9B%AE%E6%A0%87" title="找到目标"></a>找到目标</h4><p>先介绍下clutch用法:<br><img src="/images/usafe.png"><br>推荐<code>ios-deploy -B</code>可以获取bundleID, <code>brew install ios-deploy</code>就可以安装了.<br><img src="/images/searchBD.png"><br>例如我这里的目标是麦当劳app, 尝试搜一下<code>mc</code>,果不其然就是它了.<br>拿到的bundleID就是<code>com.mcdonalds.gma</code><br>(嗯, 还有个grep的方法更简单,但是我真的不知道它是麦当劳, 因为他显示的是Arch,所以靠谱的话就还是上面,BundleID基本会跟名称一直吧)<br><img src="/images/nofound.png"></p>
+<h4 id="开始砸壳"><a href="#开始砸壳" class="headerlink" title="开始砸壳"></a><a href="#%E5%BC%80%E5%A7%8B%E7%A0%B8%E5%A3%B3" title="开始砸壳"></a>开始砸壳</h4><p>连接设备<code>ssh root@localhost -p 2222</code><br>进入命令行后输入:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">clutch -b com.mcdonalds.gma</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/succeed.png"><br>看到这样子的情况的话就是成功了,注意这里粉红色部分, 还给出了砸成功之后的存储路径,我们拷贝下它</p>
+<h4 id="把成果拿到本地验证"><a href="#把成果拿到本地验证" class="headerlink" title="把成果拿到本地验证"></a><a href="#%E6%8A%8A%E6%88%90%E6%9E%9C%E6%8B%BF%E5%88%B0%E6%9C%AC%E5%9C%B0%E9%AA%8C%E8%AF%81" title="把成果拿到本地验证"></a>把成果拿到本地验证</h4><p>方法有很多, 例如用ifunbox打开上面的路径,直接拿出来, 但是我的9.3.5的没有办法在Ifunbox查看系统目录, 所以用下路的这个方法<br><img src="/images/getzip.png"><br>–&gt; 就是压缩然后scp到本地</p>
+<h3 id="验收"><a href="#验收" class="headerlink" title="验收"></a><a href="#%E9%AA%8C%E6%94%B6" title="验收"></a>验收</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">1</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">otool -l tagerBinary | grep cryptid</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/6.png"><br>意料之中的cryptid&#x3D;0<br>为啥只显示一个,因为它只有一个架构<code>arm_v7</code></p>
+<p><code>[后面的话把逆向的轮子方法一并列出]</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.eternaless.top/posts/b0e6af19/" data-id="cuidFIQNEAomUOAhc5QZZNfdN" data-title="clutch对app进行砸壳" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A0%B8%E5%A3%B3/" rel="tag">砸壳</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/posts/d52bef8c/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          seleniumANDrequest辅助爬虫
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/41806146/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">小tip之mac动态背景</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MachineLearning/">MachineLearning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyProgram/">MyProgram</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Unix/">Unix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/macTools/">macTools</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reverseEngineering/">reverseEngineering</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6/" rel="tag">2018年读的书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Colaboratory/" rel="tag">Colaboratory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDNS/" rel="tag">DDNS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iosDev/" rel="tag">iosDev</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macApp-Divvy%E7%A0%B4%E8%A7%A3/" rel="tag">macApp-Divvy破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/macTools/" rel="tag">macTools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/" rel="tag">实战去除广告</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A0%B8%E5%A3%B3/" rel="tag">砸壳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/" rel="tag">迁移学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8DIOS/" rel="tag">迁移学习移植IOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91UNREAD/" rel="tag">逆向UNREAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2/" rel="tag">逆向探探</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6/" style="font-size: 10px;">2018年读的书</a> <a href="/tags/Colaboratory/" style="font-size: 10px;">Colaboratory</a> <a href="/tags/DDNS/" style="font-size: 10px;">DDNS</a> <a href="/tags/TensorFlow/" style="font-size: 20px;">TensorFlow</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/iosDev/" style="font-size: 10px;">iosDev</a> <a href="/tags/macApp-Divvy%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">macApp-Divvy破解</a> <a href="/tags/macTools/" style="font-size: 10px;">macTools</a> <a href="/tags/shell/" style="font-size: 20px;">shell</a> <a href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/" style="font-size: 10px;">实战去除广告</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="/tags/%E7%A0%B8%E5%A3%B3/" style="font-size: 20px;">砸壳</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">迁移学习</a> <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8DIOS/" style="font-size: 20px;">迁移学习移植IOS</a> <a href="/tags/%E9%80%86%E5%90%91UNREAD/" style="font-size: 10px;">逆向UNREAD</a> <a href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2/" style="font-size: 10px;">逆向探探</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/625554dc/">aliyun-ddns设置定时监控更新</a>
+          </li>
+        
+          <li>
+            <a href="/posts/a417e45b/">读书记-&lt;原则&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/posts/87a25bc2/">xcode9之后的打包方式</a>
+          </li>
+        
+          <li>
+            <a href="/posts/4dc5ff20/">机器学习迁移模型到IOS</a>
+          </li>
+        
+          <li>
+            <a href="/posts/c218aae9/">迁移学习InceptionV3</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 AKARIZO<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
