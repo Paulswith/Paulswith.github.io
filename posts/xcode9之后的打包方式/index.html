@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>xcode9之后的打包方式 | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">xcode9之后的打包方式</h1>
+
+<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>1 Mins read
+  </div>
+
+  <div class="flex items-center gap-1">
+      <i class="fas fa-calendar"></i>
+      <time datetime="2018-06-05T10:10:38&#43;08:00">June 5, 2018</time>
+    </div>
+  
+
+  <div class="flex items-center gap-1">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/machinelearning/" class=" text-xs font-medium transition 
+         hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      MachineLearning
+    </a>
+    
+    
+  </div>
+</div><article class="prose dark:prose-invert max-w-none"><h2 id="xcode83之前的打包">
+<a href="#XCode8-3%e4%b9%8b%e5%89%8d%e7%9a%84%e6%89%93%e5%8c%85"
+   >
+   
+</a>XCode8.3之前的打包</h2>
+<p>
+<a href="https://github.com/webfrogs/xcode_shell/blob/master/ipa-build"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/webfrogs/xcode_shell/blob/master/ipa-build
+</a><br>
+阅读链接上的这个脚本, 可以理解构建三部曲为:</p>
+<ol>
+<li>Clean build cache</li>
+<li>编译出.archive</li>
+<li>xcrun打包为.ipa文件</li>
+</ol>
+<p>第三步是和XCode9差异最大的地方, 先记住这里:<br>
+<img src="xcrun.png" alt=""></p>
+<h2 id="xcode9之后的打包">
+<a href="#XCode9%e4%b9%8b%e5%90%8e%e7%9a%84%e6%89%93%e5%8c%85"
+   >
+   
+</a>XCode9之后的打包</h2>
+<p>听说是8.3之后就不一样的了.<br>
+细化上面的三个步骤为:</p>
+<h4 id="clean-build-cache">
+<a href="#Clean-Build-Cache"
+   >
+   
+</a>Clean Build Cache:</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration
+</code></pre><p>与xcode8无任何差异.</p>
+<h4 id="编译生成xcarchive">
+<a href="#%e7%bc%96%e8%af%91-%e7%94%9f%e6%88%90-xcarchive"
+   >
+   
+</a>编译,生成.xcarchive</h4>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild archive -workspace $workspace -scheme $scheme -configuration \\
+
+$configuration -archivePath $archivePath -destination generic/platform=ios \\
+
+CODE\_SIGN\_IDENTITY=&#34;$code\_sign\_indentity&#34;
+</code></pre><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
+<h4 id="将xcarchive生成ipa">
+<a href="#%e5%b0%86-xcarchive%e7%94%9f%e6%88%90-IPA"
+   >
+   
+</a>将.xcarchive生成.IPA</h4>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild -exportArchive -archivePath $archivePath \\
+
+\-exportPath $exportPath -destination generic/platform=ios \\
+
+\-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates
+</code></pre><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br>
+<img src="plist.png" alt=""></p>
+<p>我确信你按照我的复制去执行, 基本很难打包成功, 如果想要打包成功, 你得用XCode手动打包一遍, 选择对应的打包方式<code>method</code>, 然后生成的路径下, 就附带了这个<code>ExportOptions.plist</code>:</p>
+<ol>
+<li>打开xcode, Product -&gt; Archive 等待编译完成, 自己弹出可选框</li>
+<li>如图操作导出:<br>
+<img src="exportPlist.png" alt=""></li>
+</ol>
+<p>成功后, 同级目录下就存在<code>ExportOptions.plist</code>文件了, 其中默认bitCode是YES的, 你可以选择改为NO开提升效率.</p>
+<h2 id="脚本化">
+<a href="#%e8%84%9a%e6%9c%ac%e5%8c%96"
+   >
+   
+</a>脚本化</h2>
+<p>脚本地址: 
+<a href="https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/Paulswith/ToolsScript/tree/master/package_script_xcode9
+</a></p>
+<h4 id="稍微优化了一下">
+<a href="#%e7%a8%8d%e5%be%ae%e4%bc%98%e5%8c%96%e4%ba%86%e4%b8%80%e4%b8%8b"
+   >
+   
+</a>稍微优化了一下:</h4>
+<ol>
+<li>添加<code>xcpretty</code>美化xcodebuild出来的那团东西, 安装请执行<code>gem install xcpretty</code></li>
+<li>所有操作,有添加日志记录,你需要制定日志路径</li>
+<li>若打包后的目录下存在类似的旧包, <code>判断方式是监测是否存在与scheme同名的文件</code>, 有的话备份. 你需要制定部分后存储的路径.<br>
+展示效果:<br>
+<img src="/images/xcode9%E4%B9%8B%E5%90%8E%E7%9A%84%E6%89%93%E5%8C%85%E6%96%B9%E5%BC%8F" alt=""></li>
+</ol>
+<h4 id="使用指南">
+<a href="#%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97"
+   >
+   
+</a>使用指南</h4>
+<ul>
+<li>根目录下执行 <code>xcodebuild -list</code>, 把下面<code>user-define</code>这些配置下:<br>
+<img src="config.png" alt=""></li>
+<li>项目根目录生成<code>package</code>文件夹, 将<strong>脚本</strong>和<strong>ExportOptions.plist</strong>放进去.</li>
+<li>给脚本添加执行权限<code>chmod +x package.sh</code>, 执行.</li>
+</ul>
+<p>补充: 我直接项目是<code>.xcworkspace</code>的, 因为很少有项目还是单target的吧~ 如果是, 你需要自行改下, 或email我~(dobby确实还是懒)</p>
+</article>
+<br>
+    <div class="flex flex-wrap items-center gap-2">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8Dios/"
+           class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        迁移学习移植IOS
+      </a>
+    </div>
+<br></section></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

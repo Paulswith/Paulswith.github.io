@@ -1,1 +1,552 @@
-<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="renderer" content="webkit"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="google-site-verification" content="TZE0rZyIqLl10trYu3BWBWa1Vmz6HFwhb2OcNEK4u-s"><link rel="shortcut icon" href="/img/favicon.ico"><title>In &#39;flight of thought&#39;</title><meta name="description" content="mark" life, mark story about growth!><meta name="keywords" content="Blog,Paulswith,BigData,QAR"><link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css"><link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 8.1.1"></head><body id="bodyx"><div class="hd logodiv"><img src="/img/male.png" class="logopng" alt="logo"><p class="logot">In &#39;flight of thought&#39; <span class="logo_2"></span></p><h3 class="words" style="font-weight:700;font-family:Georgia">Don&#39;t fear failure. Fear Average.</h3><p></p></div><div class="hd"><ol class="breadcrumb"><li><a class="ba" href="/About">关于我👀</a></li><li><a class="ba" href="https://blog.eternaless.top">访问主站🎉</a></li><li><a class="ba" target="_blank" rel="noopener" href="https://github.com/Paulswith">GitHub🐒</a></li><script src="/libs/jquery.min.js"></script><script src="/js/search.js"></script><form class="site-search-form"><i class="fa fa-search" id="search-logo"><input type="text" id="local-search-input" class="st-search-input"></i></form><div id="local-search-result" class="local-search-result-cls"></div><script type="text/javascript" id="local.search.active">var inputArea=document.querySelector("#local-search-input"),getSearchFile=function(){searchFunc("/search.xml","local-search-input","local-search-result")};inputArea.onfocus=function(){getSearchFile()};var $resetButton=$("#search-form .fa-times"),$resultArea=$("#local-search-result");inputArea.oninput=function(){$resetButton.show()},resetSearch=function(){$resultArea.html(""),document.querySelector("#search-form").reset(),$resetButton.hide(),$(".no-result").hide()},inputArea.onkeydown=function(){if(13==event.keyCode)return!1},$resultArea.bind("DOMNodeRemoved DOMNodeInserted",(function(e){$(e.target).text()?$(".no-result").hide():$(".no-result").show(100)}))</script></ol><hr></div><div class="hd"><div class="titlex"><p><span class="jing"></span><span style="color:#6d9ee7"> 公元</span> 2017年 🕛</p></div><a class="flink" href="/posts/5d73e3e5/"><div class="list"><div class="postname">plist文件-在脚本中的操作</div><div class="posttime">November 14th</div></div></a><a class="flink" href="/posts/a3c9aaf0/"><div class="list"><div class="postname">shell脚本中如何捕获异常</div><div class="posttime">November 14th</div></div></a></div><div class="footer" id="footer"><p></p><h4>版权所有 © 2020 | 作者: Paulswith(AKARIZO) | 主题 By <a class="theme-author" target="_blank" rel="noopener" href="https://github.com/Xunzhuo/hexo-theme-coder" style="font-size:14px;color:#969696">Coder</a></h4><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">本站浏览总访问量: <span id="busuanzi_value_site_pv"></span></span> <span class="post-meta-divider">|</span> <span id="busuanzi_container_site_uv">本站访问人数: <span id="busuanzi_value_site_uv"></span></span> <label class="el-switch el-switch-blue el-switch-sm" style="vertical-align:sub"><input type="checkbox" name="switch" id="update_style"> <span class="el-switch-style"></span></label><p></p></div><input type="hidden" id="web_style" value="light"> <input type="hidden" id="valine_appid"> <input type="hidden" id="valine_appKey"><script src="/libs/jquery.min.js"></script><script src="/libs/highlight/highlight.pack.js"></script><script src="//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script><script src="/js/js.js"></script><style type="text/css">.v *{color:#698fca}.v .vlist .vcard .vhead .vsys{color:#3a3e4a}.v .vlist .vcard .vh .vmeta .vat{color:#638fd5}.v .vlist .vcard .vhead .vnick{color:#6ba1ff}.v a{color:#8696b1}.v .vlist .vcard .vhead .vnick:hover{color:#669bfc}</style><script type="text/javascript" color="173,174,173" opacity="1" zindex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script></body></html>
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>Shell | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                bg-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr_30%] gap-6"><section id="posts" class="space-y-2">
+  <h1 class="text-2xl mb-6">SHELL</h1>
+  <ul class="space-y-2">
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">plist文件-在脚本中的操作</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>背景是写一个自动签名的脚本, 真的是从0到1的踩坑记, 其中需要对.provision文件进行签名信息截取, 并生成.plist文件</p>
+</blockquote>
+<h3 id="method_one">
+<a href="#method-ONE"
+   >
+   
+</a>method_ONE</h3>
+<h4 id="内容截取并保存临时文件中">
+<a href="#%e5%86%85%e5%ae%b9%e6%88%aa%e5%8f%96%e5%b9%b6%e4%bf%9d%e5%ad%98%e4%b8%b4%e6%97%b6%e6%96%87%e4%bb%b6%e4%b8%ad"
+   >
+   
+</a>内容截取并保存临时文件中</h4>
+<p>先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间<br>
+<img src="all.png" alt=""></p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+security cms -D -i ./original.mobileprovision | grep --after-context=20 &#34;Entitlements&#34;  &gt; /tmp/tmp\_provision
+</code></pre><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p>
+<h4 id="python进行正则匹配过滤dict之后的内容">
+<a href="#python%e8%bf%9b%e8%a1%8c%e6%ad%a3%e5%88%99%e5%8c%b9%e9%85%8d-%e8%bf%87%e6%bb%a4dict%e4%b9%8b%e5%90%8e%e7%9a%84%e5%86%85%e5%ae%b9"
+   >
+   
+</a>python进行正则匹配,过滤dict之后的内容</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+provision=\`python -c &#34;from re import findall,compile,S;data=open(&#39;/tmp/tmp\_provision&#39;,&#39;r&#39;).read();print findall(compile(r&#39;.\*&#39;,S),data)\[0\];&#34;\`
+</code></pre><h4 id="最后重定向到一个plist文件中">
+<a href="#%e6%9c%80%e5%90%8e%e9%87%8d%e5%ae%9a%e5%90%91%e5%88%b0%e4%b8%80%e4%b8%aa-plist%e6%96%87%e4%bb%b6%e4%b8%ad"
+   >
+   
+</a>最后重定向到一个.plist文件中</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+echo &#39;&#39;$provision&#39;&#39; &gt; Entitlements.plist
+</code></pre><blockquote>
+<p>这个方法虽然可以, 但是其中第三部, 必须要格外注意字符的使用, 不然就格式不对,导致重定向出来的无法识别为.plist</p>
+</blockquote>
+<h3 id="method_two">
+<a href="#method-TWO"
+   >
+   
+</a>method_TWO</h3>
+<h4 id="重定向为一个plist">
+<a href="#%e9%87%8d%e5%ae%9a%e5%90%91%e4%b8%ba%e4%b8%80%e4%b8%aa-plist"
+   >
+   
+</a>重定向为一个.plist</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
+</code></pre><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p>
+<h4 id="提取内容生成">
+<a href="#%e6%8f%90%e5%8f%96%e5%86%85%e5%ae%b9%e7%94%9f%e6%88%90"
+   >
+   
+</a>提取内容生成</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+/usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; Entitlements.plist
+</code></pre><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Nov 14, 2017</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">Unix</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/" class="absolute inset-0 z-0" aria-label="Read more aboutplist文件-在脚本中的操作"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">shell脚本中如何捕获异常</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?<br>
+答案是 <code>#?</code> : <code>用于捕获上一条命令的状态,0的状态为正常,1为异常</code><br>
+自己在整理shell的时候遇到一些坑, 把它的规范列一下</p>
+</blockquote>
+<h3 id="和echo输出命令要注意">
+<a href="#%e5%92%8cecho%e8%be%93%e5%87%ba%e5%91%bd%e4%bb%a4%e8%a6%81%e6%b3%a8%e6%84%8f"
+   >
+   
+</a>#?和echo输出命令要注意</h3>
+<p><img src="echo1.png" alt=""><br>
+这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是<code>echo $?</code>应该给到是1<br>
+但是看看执行结果:<br>
+<img src="echo2.png" alt=""><br>
+看到输出的结果是0, 原因在于<code>echo</code>上, <code>echo</code>包了这一层命令, 只要<code>echo</code>直接将这命令打印在终端, 就是完整的完成工作,根本没有异常可言.</p>
+<h3 id="修复">
+<a href="#%e4%bf%ae%e5%a4%8d"
+   >
+   
+</a>修复</h3>
+<p>当然是去除<code>echo</code>直接输出, 但是还是要注意的是, <code>$?</code>仅仅提示是上一条,这里必须十分谨慎.列下能捕获到异常:<br>
+<img src="fix1.png" alt=""><br>
+<img src="fix2.png" alt=""><br>
+可以看到输出是1了, 确认命令使用没问题后,就可以进行逻辑处理.</p>
+<h3 id="避免">
+<a href="#%e9%81%bf%e5%85%8d"
+   >
+   
+</a>避免</h3>
+<p>这是完整的逻辑代码:<br>
+<img src="full1.png" alt=""><br>
+更好的避免, 将允许的条件, 并到逻辑与:<br>
+<img src="full2.png" alt=""></p>
+<p><code>[shell大法好]</code></p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Nov 14, 2017</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">Unix</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/shell%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8/" class="absolute inset-0 z-0" aria-label="Read more aboutshell脚本中如何捕获异常"></a>
+</article>
+
+
+    
+  </ul>
+</section><aside id="sidebar-right" aria-label="Sidebar"
+        class="hidden lg:block sticky  rounded shadow   
+              "><div class="space-y-2">
+<div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow mt-2">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-file"></i>
+  <p class="text-md mb-0">RECENT POSTS</p>
+  </span>
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <ul class="space-y-2 text-sm">
+    
+    <li class="line-clamp-1">
+      <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A4%B1%E6%8E%A7/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        读书笔记-失控
+      </a>
+    </li>
+    
+    <li class="line-clamp-1">
+      <a href="/posts/claudecode%E7%94%A8%E4%B8%8A%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        ClaudeCode用上高性价比的国产大模型
+      </a>
+    </li>
+    
+    <li class="line-clamp-1">
+      <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%88%9B%E6%96%B0%E4%B8%8E%E4%BC%81%E4%B8%9A%E5%AE%B6%E7%B2%BE%E7%A5%9E/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        读书笔记-创新与企业家精神
+      </a>
+    </li>
+    
+  </ul>
+</div><div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
+
+  <a href="/categories/" class="text-md mb-0 block text-gray-900 dark:text-white">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-folder"></i>
+      CATEGORIES
+    </span>
+  </a>
+
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <div class="flex flex-wrap gap-2">
+    
+    <a href="/categories/books" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Books  (3) 
+    </a>
+    
+    <a href="/categories/machinelearning" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Machinelearning  (6) 
+    </a>
+    
+    <a href="/categories/mactools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Mactools  (1) 
+    </a>
+    
+    <a href="/categories/myprogram" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Myprogram  (1) 
+    </a>
+    
+    <a href="/categories/python" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Python  (2) 
+    </a>
+    
+    <a href="/categories/reverseengineering" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Reverseengineering  (6) 
+    </a>
+    
+    <a href="/categories/tools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Tools  (1) 
+    </a>
+    
+    <a href="/categories/unix" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Unix  (3) 
+    </a>
+    
+  </div>
+</div><div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
+  <a href="/tags/" class="text-md  mb-0 block text-gray-900 dark:text-white">
+      <span class="flex items-center gap-2">
+      <i class="fas fa-tags"></i>
+    TAGS
+    </span>
+  </a>
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <div class="flex flex-wrap gap-2 ">
+    
+    <a href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      2018年读的书  (1) 
+    </a>
+    
+    <a href="/tags/2025%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      2025年读的书  (2) 
+    </a>
+    
+    <a href="/tags/claude" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      claude  (1) 
+    </a>
+    
+    <a href="/tags/colaboratory" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      colaboratory  (1) 
+    </a>
+    
+    <a href="/tags/ddns" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      ddns  (1) 
+    </a>
+    
+    <a href="/tags/iosdev" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      iosdev  (1) 
+    </a>
+    
+    <a href="/tags/llm" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      llm  (1) 
+    </a>
+    
+    <a href="/tags/macapp-divvy%E7%A0%B4%E8%A7%A3" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      macapp-divvy破解  (1) 
+    </a>
+    
+    <a href="/tags/mactools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      mactools  (1) 
+    </a>
+    
+    <a href="/tags/shell" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      shell  (2) 
+    </a>
+    
+    <a href="/tags/tensorflow" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      tensorflow  (2) 
+    </a>
+    
+    <a href="/tags/windows" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      windows  (1) 
+    </a>
+    
+    <a href="/tags/%E5%87%AF%E6%96%87%E5%87%AF%E5%88%A9" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      凯文·凯利  (1) 
+    </a>
+    
+    <a href="/tags/%E5%88%9B%E6%96%B0%E4%B8%8E%E4%BC%81%E4%B8%9A%E5%AE%B6%E7%B2%BE%E7%A5%9E" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      创新与企业家精神  (1) 
+    </a>
+    
+    <a href="/tags/%E5%8E%9F%E5%88%99" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      原则  (1) 
+    </a>
+    
+    <a href="/tags/%E5%A4%B1%E6%8E%A7" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      失控  (1) 
+    </a>
+    
+    <a href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      实战去除广告  (1) 
+    </a>
+    
+    <a href="/tags/%E7%88%AC%E8%99%AB" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      爬虫  (1) 
+    </a>
+    
+    <a href="/tags/%E7%A0%B8%E5%A3%B3" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      砸壳  (2) 
+    </a>
+    
+    <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      自动化  (1) 
+    </a>
+    
+    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      读书笔记  (3) 
+    </a>
+    
+    <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      迁移学习  (1) 
+    </a>
+    
+    <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8Dios" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      迁移学习移植ios  (2) 
+    </a>
+    
+    <a href="/tags/%E9%80%86%E5%90%91unread" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      逆向unread  (1) 
+    </a>
+    
+    <a href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      逆向探探  (1) 
+    </a>
+    
+  </div>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow mb-4">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-globe"></i>
+    <p class="text-md mb-0">SOCIAL</p>
+    </span>
+    <hr class="border-t border-2 border-blue-500 dark:border-blue-400">
+    <div class="mt-1.5 flex space-x-4 justify-center border-b border-gray-300 dark:border-gray-700 pb-2"><a href="mailto:jevo747@outlook.com" aria-label="Email"
+            class="text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+        </a><a href="https://github.com/https://github.com/Paulswith" target="_blank" aria-label="GitHub"
+            class="text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition">
+            <i data-lucide="github" class="w-5 h-5"></i>
+        </a></div>
+
+    <div class="mt-2 space-y-1"></div>
+</div></div>
+
+
+</aside></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

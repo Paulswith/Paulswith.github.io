@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Colaboratory on Blog</title>
+    <link>https://blog.eternaless.top/tags/colaboratory/</link>
+    <description>Recent content in Colaboratory on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Feb 2018 14:48:23 +0800</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/tags/colaboratory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>部署TensorFlow到Colaboratory</title>
+      <link>https://blog.eternaless.top/posts/%E9%83%A8%E7%BD%B2tensorflow%E5%88%B0colaboratory/</link>
+      <pubDate>Thu, 01 Feb 2018 14:48:23 +0800</pubDate>
+      <guid>https://blog.eternaless.top/posts/%E9%83%A8%E7%BD%B2tensorflow%E5%88%B0colaboratory/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;一个二分类的机器学习, 用TensorFlow写的, 刚好看到google提供的免费褥羊毛GPU, 虽然坑很多, 但还是部署上去了,GPU效率真的比CPU强的多多.&lt;br&gt;&#xA;&#xA;&lt;a href=&#34;https://colab.research.google.com/notebook#fileId=/v2/external/notebooks/io.ipynb&amp;amp;scrollTo=sOm9PFrT8mGG&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   官方完整的帮助连接&#xA;&lt;/a&gt;在这里,注意上面的代码是基于Python2的, 我用的python3&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;数据集准备&#34;&gt;&#xA;&lt;a href=&#34;#%e6%95%b0%e6%8d%ae%e9%9b%86%e5%87%86%e5%a4%87&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;数据集准备&lt;/h3&gt;&#xA;&lt;h4 id=&#34;csv之类的轻量数据集&#34;&gt;&#xA;&lt;a href=&#34;#CSV%e4%b9%8b%e7%b1%bb%e7%9a%84%e8%bd%bb%e9%87%8f%e6%95%b0%e6%8d%ae%e9%9b%86&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;CSV之类的轻量数据集&lt;/h4&gt;&#xA;&lt;p&gt;PASS, 有即可&lt;/p&gt;&#xA;&lt;h4 id=&#34;tfrecord重量数据集&#34;&gt;&#xA;&lt;a href=&#34;#TFRecord%e9%87%8d%e9%87%8f%e6%95%b0%e6%8d%ae%e9%9b%86&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;TFRecord重量数据集&lt;/h4&gt;&#xA;&lt;p&gt;可以类似我这样子, 将数据存储到目录下&lt;code&gt;Datasets&lt;/code&gt;下, 推荐tar压缩&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;tar zcvf Datasets.gz Datasets&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;自行配置好谷歌Drive, 链接&#xA;&lt;a href=&#34;https://www.google.com/drive/&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   https://www.google.com/drive/&#xA;&lt;/a&gt;&lt;br&gt;&#xA;下载符合电脑版本, 把数据集存入同步到云端.&lt;/p&gt;&#xA;&lt;h3 id=&#34;如何上传&#34;&gt;&#xA;&lt;a href=&#34;#%e5%a6%82%e4%bd%95%e4%b8%8a%e4%bc%a0&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;如何上传&lt;/h3&gt;&#xA;&lt;p&gt;打开你的Colaboratory-new一个jupyter脚本.&lt;/p&gt;&#xA;&lt;h4 id=&#34;小文件上传&#34;&gt;&#xA;&lt;a href=&#34;#%e5%b0%8f%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;小文件上传&lt;/h4&gt;&#xA;&lt;p&gt;&lt;em&gt;for Python2:&lt;/em&gt;&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&#xA;2&#xA;&#xA;3&#xA;&#xA;4&#xA;&#xA;5&#xA;&#xA;6&#xA;&#xA;7&#xA;&#xA;8&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;from google.colab import files&#xA;&#xA;\# 你需填的:&#xA;&#xA;FILE\_NAME = &amp;#39;想保存到Colaboratory的文件名&amp;#39;&#xA;&#xA;uploaded = files.upload()&#xA;&#xA;with open(FILE\_NAME, &amp;#39;wb&amp;#39;) as file:&#xA;&#xA;    file.write(uploaded\[uploaded.keys()\[0\]\])&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;but for Python3:&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

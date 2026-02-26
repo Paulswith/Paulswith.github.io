@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>去除OplayerLite广告提示-越狱机 | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">去除OplayerLite广告提示-越狱机</h1>
+
+<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  </div>
+
+  <div class="flex items-center gap-1">
+      <i class="fas fa-calendar"></i>
+      <time datetime="2017-11-24T17:56:29&#43;08:00">November 24, 2017</time>
+    </div>
+  
+
+  <div class="flex items-center gap-1">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/reverseengineering/" class=" text-xs font-medium transition 
+         hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      ReverseEngineering
+    </a>
+    
+    
+  </div>
+</div><article class="prose dark:prose-invert max-w-none"><blockquote>
+<p>最近在学习逆向相关的实践+踩坑, 庆哥的视频中一个课程是对于OPlayerLite进行进行广告处理了, 因为是去年的课程App也更新了逻辑, 我沿着先辈的道路把坑撸了一把, mark这场一天一夜的战斗.</p>
+</blockquote>
+<h3 id="分析层级结构">
+<a href="#%e5%88%86%e6%9e%90%e5%b1%82%e7%ba%a7%e7%bb%93%e6%9e%84"
+   >
+   
+</a>分析层级结构</h3>
+<h4 id="定位目标对象">
+<a href="#%e5%ae%9a%e4%bd%8d%e7%9b%ae%e6%a0%87%e5%af%b9%e8%b1%a1"
+   >
+   
+</a>定位目标对象</h4>
+<p>连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的view,上面有一行文本”Buy the full version to remove ads?”<br>
+这时候我们连接到cycript打印下层级:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+UIApp.keyWindow.recursiveDescription().toString()
+</code></pre><p><img src="fe.png" alt=""><br>
+由于我已去除了过了,又从App Store重新下载, 发现还是没有广告,图片暂时就没哈<br>
+其中有引起我们注意的层级是:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+</code></pre><pre tabindex="0"><code>
+
+|    |    | \&gt;
+
+|    |    |    | \&gt;
+
+|    |    |    |    | \&gt;
+
+|    |    |    | \&gt;
+</code></pre><p>其中<code>UILabel: 0x176b1380</code>中的text属性跟我们看到的ads上是一样的,它的同级view是UIButton, 父view是UIView .<br>
+因为咱们要解决的目标是view, 尤为关注是这里的frame.size, 它们都是<code>320 50</code>, label也是height=50. 把这部分截图保存下来,待会查找的时候需要用到</p>
+<h4 id="正向分析设计">
+<a href="#%e6%ad%a3%e5%90%91%e5%88%86%e6%9e%90%e8%ae%be%e8%ae%a1"
+   >
+   
+</a>正向分析设计</h4>
+<blockquote>
+<p>划重点: 从正向的开发的角度, 分析它是如何设计的</p>
+</blockquote>
+<p>如果是我开发君, 我的伪代码大概如下</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+</code></pre><pre tabindex="0"><code>
+
+if  (!payBuyFullViersion)  {
+
+    AdsView \*adsview =  \[\[AdsView alloc\] init\];
+
+    \[self.palyerView addSubview:adsview\]
+
+}
+</code></pre><p>可能其他的逻辑未必跟我符合. 但是一定必然的是, 这个adsView 必须是addSubview上去的,addSubview是UIKit中view的方法, 咱们需要静态分析这个地址, 通过断点来查看它对应的调用者/参数, 从而拿到地址,来定位到OplayerLite</p>
+<h3 id="静态分析">
+<a href="#%e9%9d%99%e6%80%81%e5%88%86%e6%9e%90"
+   >
+   
+</a>静态分析</h3>
+<h4 id="从uikit入手">
+<a href="#%e4%bb%8eUIKit%e5%85%a5%e6%89%8b"
+   >
+   
+</a>从UIKit入手</h4>
+<p>我们需要用到lldb, 连接到设备, 查看UIKit的存储地址, 然后通过IDA查看addSubview:的静态代码地址.<br>
+本地先映射一下 <code>iproxy 1234 1234</code> , 然后越狱启动<code>debugserver *:1234 -a</code><br>
+<img src="debugS.png" alt=""><br>
+本地连接:<br>
+<img src="lldb.png" alt=""></p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+im list -o -f
+</code></pre><p><img src="offset.png" alt=""><br>
+得到了Oplayer lite的偏移地址和UIKit偏移地址<br>
+同时我们看到了UIKit的文件地址(可能有的地址是在设备上, 那么你需要拷贝到本地,不想这样子就连一下Xcode,你就会在本地看到它了)</p>
+<p>IDA分析UIKit, 并获取addSubview:的地址:<br>
+<img src="viewadd.png" alt=""><br>
+在lldb下断点,记得加上上面看到的偏移,如:<br>
+<img src="bradd.png" alt=""><br>
+然后进入到播放界面触发断点</p>
+<h4 id="体力活查询">
+<a href="#%e4%bd%93%e5%8a%9b%e6%b4%bb%e6%9f%a5%e8%af%a2"
+   >
+   
+</a>体力活查询</h4>
+<p>因为上面我们讲到<br>
+<code>[self.palyerView addSubview:adsview]</code><br>
+这里的adsView是作为参数的,所以我们需要Print object r2<br>
+漫长的开始 <code>c</code>和粘贴 <code>po $r2</code>,一遍持续一遍注意看打印出来的frame,是不是有我们符合的<code>frame=(n,n,320,50)</code><br>
+这可能会很漫长,取决于当前页面子元素数量和人品~</p>
+<p>…….<br>
+当你发现frame跟我们所看到符合的时候,那么基本就可以确认是它了.同时有个地方要注意:<br>
+你需要看到这个地址来自于Oplayer lite才可以, 否则执行以下<code>ni</code>,执行下一条汇编直到看见它<br>
+<img src="fit.png" alt=""><br>
+而第一条指令的地址就是我们要的地址, 减去我们上面的偏移地址,拿到静态代码的地址.</p>
+<h3 id="分析目标静态代码">
+<a href="#%e5%88%86%e6%9e%90%e7%9b%ae%e6%a0%87%e9%9d%99%e6%80%81%e4%bb%a3%e7%a0%81"
+   >
+   
+</a>分析目标静态代码</h3>
+<h4 id="对逻辑静态分析">
+<a href="#%e5%af%b9%e9%80%bb%e8%be%91%e9%9d%99%e6%80%81%e5%88%86%e6%9e%90"
+   >
+   
+</a>对逻辑静态分析</h4>
+<p>通过上面拿到的地址, 我们可以看到这里是一个实例方法<br>
+<code>-[PlayViewController addAds_OnLocalAds]</code><br>
+<img src="addfun.png" alt=""><br>
+不是很仔细的看了一遍伪代码,这个方法是被调用来展示view,但是否展示的逻辑并不在这里, 我们需要看谁是它的调用方, 因为删掉之前的断点,重新在<code>-[PlayViewController addAds_OnLocalAds]</code>这个方法上下断点, 依然加上偏移地址(这里的偏移地址已经是OPlayerlite了).</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+</code></pre><pre tabindex="0"><code>
+
+br s -a &#39;0x00052000+0x002A49F8&#39;
+
+#断点触发后, 打印lr寄存器的值
+
+p/x $lr
+</code></pre><p>LR寄存器(R14)可以理解当代码段执行完毕后要回到调用者的地址.<br>
+通过LR寄存器得到的值, 我们减去偏移地址,可以得到调用者在静态代码的位置.<br>
+<img src="spass.png" alt=""><br>
+依然借助IDA分析, 可以看到msg_send的一些部分是相关的设置方向, frame, getWidth等方法, 而调用的位置就在viewWillAppear:这里.</p>
+<h4 id="寻找绕弯的方法">
+<a href="#%e5%af%bb%e6%89%be%e7%bb%95%e5%bc%af%e7%9a%84%e6%96%b9%e6%b3%95"
+   >
+   
+</a>寻找绕弯的方法</h4>
+<p>现在, 我们定位到了调用添加广告View的代码块, 继续往上翻,能不能找到帮助我们跳过这里的逻辑呢?<br>
+果然, 神器就是神器, 留意左边这根线:<br>
+<img src="findMethod.png" alt=""><br>
+辅助IDA的伪代码,我们还能发现些神马:<br>
+<img src="jumpCode.png" alt=""></p>
+<blockquote>
+<p>这里的两个跳转对应了两个逻辑判断分支, 我在图片中表明了, 逻辑2的情况其实稍加复杂, 但我在逻辑1发现了关键点:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+if ( !((unsigned int)+\[OlimSoftUtility isUpgraded\](&amp;OBJC\_CLASS\_\_\_OlimSoftUtility, &#34;isUpgraded&#34;, a3) &amp; 0xFF) )
+</code></pre></blockquote>
+<p>伪代码的意思是<code>+[OlimSoftUtility isUpgraded]</code>的返回值和 #0xFF 进行了逻辑与的运算, 理解到 #0xFF 是非0类型必为真, 而现在只需要<code>+[OlimSoftUtility isUpgraded]</code>能返回真即可跳过这段代码. 这个猜想是否正确,毕竟是伪代码,所以需要对汇编部分进行确认:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+</code></pre><pre tabindex="0"><code>
+
+\_\_text:0029D2F8     BLX.W           \_objc\_msgSend ; +\[OlimSoftUtility isUpgraded\]
+
+\_\_text:0029D2FC     TST.W           R0, #0xFF
+</code></pre><p>第一行很容易看出是发送了消息,也就是刚才说的调用了<code>+[OlimSoftUtility isUpgraded]</code>这个方法, 而第二行, 将第一行<code>+[OlimSoftUtility isUpgraded]</code> 返回值 与 0xFF进行了 <code>TST</code>指令, 对于目前汇编的底子不硬,通过查询资料得知:</p>
+<blockquote>
+<p>TST 指令对 Rn 中的值和 Operand2 的值按位进行“与”运算。 除了结果会被丢弃以外，这与 ANDS 指令功能相同。</p>
+</blockquote>
+<p>那么就基本能确定结论了:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+</code></pre><pre tabindex="0"><code>
+
+if ( (\[OlimSoftUtility isUpgraded\] &amp;&amp; 0xFF) == NO ) {
+
+    // 添加广告
+
+}
+
+// 0xFF 固定为YES
+</code></pre><h4 id="头文件最终确认">
+<a href="#%e5%a4%b4%e6%96%87%e4%bb%b6%e6%9c%80%e7%bb%88%e7%a1%ae%e8%ae%a4"
+   >
+   
+</a>头文件最终确认</h4>
+<p>找到class-dump 出的头文件目录:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+grep -rn &#34;isUpgraded&#34; ./headers
+</code></pre><p><img src="findH.png" alt=""><br>
+<img src="H1.png" alt=""><br>
+发现它就是一个类方法,很纯粹.那么也不用太多想法, 试试就试试了.</p>
+<h3 id="编写代码">
+<a href="#%e7%bc%96%e5%86%99%e4%bb%a3%e7%a0%81"
+   >
+   
+</a>编写代码</h3>
+<h4 id="code">
+<a href="#code"
+   >
+   
+</a>code</h4>
+<p><img src="tweek.png" alt=""></p>
+<p>让个惊讶的tweak.xm代码:<br>
+“当然我这样子处理应该是会引起某些问题了, 但这是目前我分析到的能力”</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+</code></pre><pre tabindex="0"><code>
+
+%hook OlimSoftUtility
+
+\+ (BOOL)isUpgraded {
+
+%log;
+
+// NSLog(@&#34;replace this method!!!!!!!!!!!!!!!!!!!&#34;);
+
+return YES;
+
+}
+
+%end
+</code></pre><p>Makefile代码:<br>
+我指定了IP 和 Port, 待会可以在直接调用 make install 进行安装</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+</code></pre><pre tabindex="0"><code>
+
+export THEOS\_DEVICE\_IP=localhost    
+
+export THEOS\_DEVICE\_PORT=2222
+
+export ARCHS=armv7
+
+export TARGET=iphone:clang:latest:8.0
+
+export THEOS\_MAKE\_PATH=/opt/theos/makefiles
+
+export THEOS=/opt/theos
+
+include $(THEOS)/makefiles/common.mk
+
+TWEAK\_NAME = removeOplayerAds
+
+removeOplayerAds\_FILES = Tweak.xm
+
+include $(THEOS\_MAKE\_PATH)/tweak.mk
+
+after-install::
+
+install.exec &#34;killall -9 SpringBoard&#34;
+</code></pre><h4 id="一些小坑点">
+<a href="#%e4%b8%80%e4%ba%9b%e5%b0%8f%e5%9d%91%e7%82%b9"
+   >
+   
+</a>一些小坑点</h4>
+<h4 id="没找到dpkg-deb">
+<a href="#%e6%b2%a1%e6%89%be%e5%88%b0dpkg-deb"
+   >
+   
+</a>没找到dpkg-deb:</h4>
+<p>dpkg-deb的原名是/opt/theos/bin/dm.pl, 你需要把它的名字改为dpkg-deb,然后执行下面的语句</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+</code></pre><pre tabindex="0"><code>
+
+➜  removeoplayerads make package
+
+\==&gt; Error: /Applications/Xcode.app/Contents/Developer/usr/bin/make package requires dpkg-deb.
+
+make: \*\*\* \[internal-package-check\] Error 1
+
+#\## 决绝方法
+
+➜  removeoplayerads sudo perl -i -pe &#39;y|\\r||d&#39; /opt/theos/bin/dpkg-deb
+
+Password:
+</code></pre><h4 id="bundleid最准确的获取方法">
+<a href="#BundleID%e6%9c%80%e5%87%86%e7%a1%ae%e7%9a%84%e8%8e%b7%e5%8f%96%e6%96%b9%e6%b3%95"
+   >
+   
+</a>BundleID最准确的获取方法</h4>
+<p>cycript 进入到目标APP进程后:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+\[\[NSBundle mainBundle\] bundleIdentifier\]
+</code></pre><h4 id="汇编查询">
+<a href="#%e6%b1%87%e7%bc%96%e6%9f%a5%e8%af%a2"
+   >
+   
+</a>汇编查询</h4>
+<p>干货, 大全!!!<br>
+
+<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cihbjcag.html"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cihbjcag.html
+</a></p>
+<h3 id="效果图">
+<a href="#%e6%95%88%e6%9e%9c%e5%9b%be"
+   >
+   
+</a>效果图</h3>
+<p><img src="0ads.png" alt=""></p>
+<p><code>[没什么比实践到的收获有成就感了,它是继续前行的动力之一]</code></p>
+</article>
+<br>
+    <div class="flex flex-wrap items-center gap-2">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/"
+           class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        实战去除广告
+      </a>
+    </div>
+<br></section></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

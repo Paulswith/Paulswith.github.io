@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>shell脚本中如何捕获异常 | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">shell脚本中如何捕获异常</h1>
+
+<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>1 Mins read
+  </div>
+
+  <div class="flex items-center gap-1">
+      <i class="fas fa-calendar"></i>
+      <time datetime="2017-11-14T18:56:50&#43;08:00">November 14, 2017</time>
+    </div>
+  
+
+  <div class="flex items-center gap-1">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/unix/" class=" text-xs font-medium transition 
+         hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Unix
+    </a>
+    
+    
+  </div>
+</div><article class="prose dark:prose-invert max-w-none"><blockquote>
+<p>在高级语言的时候,我们可以使用捕获异常的语句, 进行catch, 并和谐的处理, 但是shell是没有类似keyword的, 如何解决?<br>
+答案是 <code>#?</code> : <code>用于捕获上一条命令的状态,0的状态为正常,1为异常</code><br>
+自己在整理shell的时候遇到一些坑, 把它的规范列一下</p>
+</blockquote>
+<h3 id="和echo输出命令要注意">
+<a href="#%e5%92%8cecho%e8%be%93%e5%87%ba%e5%91%bd%e4%bb%a4%e8%a6%81%e6%b3%a8%e6%84%8f"
+   >
+   
+</a>#?和echo输出命令要注意</h3>
+<p><img src="echo1.png" alt=""><br>
+这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是<code>echo $?</code>应该给到是1<br>
+但是看看执行结果:<br>
+<img src="echo2.png" alt=""><br>
+看到输出的结果是0, 原因在于<code>echo</code>上, <code>echo</code>包了这一层命令, 只要<code>echo</code>直接将这命令打印在终端, 就是完整的完成工作,根本没有异常可言.</p>
+<h3 id="修复">
+<a href="#%e4%bf%ae%e5%a4%8d"
+   >
+   
+</a>修复</h3>
+<p>当然是去除<code>echo</code>直接输出, 但是还是要注意的是, <code>$?</code>仅仅提示是上一条,这里必须十分谨慎.列下能捕获到异常:<br>
+<img src="fix1.png" alt=""><br>
+<img src="fix2.png" alt=""><br>
+可以看到输出是1了, 确认命令使用没问题后,就可以进行逻辑处理.</p>
+<h3 id="避免">
+<a href="#%e9%81%bf%e5%85%8d"
+   >
+   
+</a>避免</h3>
+<p>这是完整的逻辑代码:<br>
+<img src="full1.png" alt=""><br>
+更好的避免, 将允许的条件, 并到逻辑与:<br>
+<img src="full2.png" alt=""></p>
+<p><code>[shell大法好]</code></p>
+</article>
+<br>
+    <div class="flex flex-wrap items-center gap-2">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/shell/"
+           class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        Shell
+      </a>
+    </div>
+<br></section></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

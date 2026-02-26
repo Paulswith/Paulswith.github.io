@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>逆向-UNREAD去除阅读限制 | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">逆向-UNREAD去除阅读限制</h1>
+
+<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  </div>
+
+  <div class="flex items-center gap-1">
+      <i class="fas fa-calendar"></i>
+      <time datetime="2017-11-28T21:25:31&#43;08:00">November 28, 2017</time>
+    </div>
+  
+
+  <div class="flex items-center gap-1">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/reverseengineering/" class=" text-xs font-medium transition 
+         hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      ReverseEngineering
+    </a>
+    
+    
+  </div>
+</div><article class="prose dark:prose-invert max-w-none"><blockquote>
+<p>背景 : UNREAD是一款很棒的RSS阅读器, 免费版本有50条阅读的限制. 强化在非越狱机上的逆向之旅<br>
+因为是巩固逆向的知识阶段,踩坑是必然的, 但是多么绕的就不讲了, 但是要mark最后走对这个方式,后面也要逐渐总结对的方法</p>
+</blockquote>
+<h3 id="准备工作">
+<a href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c"
+   >
+   
+</a>准备工作</h3>
+<p>UNREAD要求ios10以上才可以下载,所以我的935设备无法下载也无法砸壳, 所幸的是PP助手能搜到,不过版本低了0.2, 用起来没差别.</p>
+<blockquote>
+<p>确认需求 : 去除阅读限制</p>
+</blockquote>
+<h3 id="分析">
+<a href="#%e5%88%86%e6%9e%90"
+   >
+   
+</a>分析</h3>
+<h4 id="正向分析思路">
+<a href="#%e6%ad%a3%e5%90%91%e5%88%86%e6%9e%90%e6%80%9d%e8%b7%af"
+   >
+   
+</a>正向分析思路</h4>
+<p><img src="no.webp" alt=""><br>
+如果是我设计呢:<br>
+目标是个tableview , “UNLOCK UNREAD”这一cell显示了当前剩余可阅读的数量.每次点击进入文章阅读的时候,可读数量 -= 1; 有一个模型来记录这里的数量,<br>
+在tableview这个控制器,viewWillApear:的时候刷新row.</p>
+<p>当时想的是:<br>
+那么如果是tableiview, dataSource方法必然有tableview:cellForRowAtIndexPath:被调用, 如果能找到模型,直接hook模型的调用或许是第一思路.但是熬到三点还没睡我才明白我踩坑了, 这里不累赘了,一把泪.</p>
+<h4 id="view层嵌入">
+<a href="#view%e5%b1%82%e5%b5%8c%e5%85%a5"
+   >
+   
+</a>view层嵌入</h4>
+<p>从monkeyDev启动项目,拖入我们的APP后启动到设备上, 默认是会注入reveal动态库的, APP启动成功后, 进入到主页, 然后mac启动reveal:<br>
+<img src="reveal.webp" alt=""><br>
+<img src="ravealVC.webp" alt=""></p>
+<p>reveal启动后点到我们目标view,可以看到这是一个tableview的cell,”50 ARTICLES LEFT”是cellContentView的label, 查看右边, 我们能看到这个页面的控制器.<br>
+“NSRHomeViewController”</p>
+<h4 id="分析控制器">
+<a href="#%e5%88%86%e6%9e%90%e6%8e%a7%e5%88%b6%e5%99%a8"
+   >
+   
+</a>分析控制器</h4>
+<p>把class-dump出来的头文件拖到Xcode项目, 搜一下”NSRHomeViewController.h”可以看到这个头文件, 所幸头文件不多,我有了部分时间慢慢看这些方法,尝试发现敏感名称, 其中最让我敏感的是这个:<br>
+<img src="array.webp" alt=""><br>
+<img src="method.webp" alt=""><br>
+第二个方法这未免太明显~, 其它大概也预览了一下, 图一看到是NSArray, 或许会存储数据的模型.</p>
+<h4 id="断点可疑调用">
+<a href="#%e6%96%ad%e7%82%b9%e5%8f%af%e7%96%91%e8%b0%83%e7%94%a8"
+   >
+   
+</a>断点可疑调用</h4>
+<p>二进制文件拉到Hopper反汇编后, 搜一下三个方法</p>
+<blockquote>
+<p>moreItems &amp; setMoreItems &amp; updateUnlockInfo</p>
+</blockquote>
+<p>获取它们的静态地址后,在LLDB查看下初始偏移地址, 加上并断点这三位.<br>
+分析的时候知道, 它是在点击文章阅读的时候才减一. 那么现在就进入文章里面,触发我们的断点. 果不其然它触发了,查看一下调用栈:<br>
+<img src="stack.webp" alt=""></p>
+<p>其中#0一定是我们当前被调用的方法, 那是谁呢?<br>
+嗯,就是<code>updateUnlockInfo</code><br>
+<img src="soudao.webp" alt=""><br>
+回溯上层的调用栈, 初步我们先查看下这些Unread模块的栈,看看是否我们调用的信息.分别减去初始偏移量后他们依次是:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+</code></pre><pre tabindex="0"><code>
+
+\-\[UNRPermissionManager setRemainingCount:\]
+
+\-\[UNRPermissionManager permissionToReadArticleWithUniqueID:\]
+
+\-\[UNRArticlesListViewController showArticleViewer\]
+
+\-\[UNRArticlesListViewController deadEndTapTimerFired:\]
+</code></pre><h4 id="逻辑梳理">
+<a href="#%e9%80%bb%e8%be%91%e6%a2%b3%e7%90%86"
+   >
+   
+</a>逻辑梳理</h4>
+<p>hopper查看一下updateUnlockInfo的伪代码:<br>
+<img src="updateINFO.webp" alt=""><br>
+发现它只是负责调用reloadSection这个刷新动作,说明数据操作在上层<br>
+因此继而hopper查看一下 <code>setRemainingCount:</code><br>
+<img src="remain.webp" alt=""><br>
+我们可以看到他的参数只有一个,而且是unsinged long long 类型, 猜测他是又负责调用传递的参数,而这个参数可能就是需要更新的数量.<br>
+那么线索就继续追溯到上层调用<code>permissionToReadArticleWithUniqueID</code>, 从hopper找到并查看,翻开伪代码可以看到如下:<br>
+<img src="remainFromHere.webp" alt=""><br>
+setRemainingCount:是这里调的, 而且发现UNREAD不仅记录未使用的次数,还记录了已使用的次数,如果过早的Hook<code>setRemainingCount:</code>应该是起不了作用的.<br>
+仔细观察这一代码段,发现这里只有一个return出口,且存在多个逻辑判断跳转分支,可以配合hopper的逻辑视图看到:<br>
+<img src="jumpPic.webp" alt=""></p>
+<blockquote>
+<p>从伪代码结合汇编来看, 这里就是我们的目标了, 但我们怎么挑选这些分支呢? 个人觉得是三点:<br>
+1 首先我们知道我们要hook,大多时候是针对方法, 如果一个分支的逻辑是被某个特定的方法可以扭转的,基本上它就是我们想要的.<br>
+2 其次是对整个逻辑改动最小的, 不要影响其他的功能实现.<br>
+3 我们能比较稳妥确定的逻辑.猜可不能解决所有问题.</p>
+</blockquote>
+<h4 id="分析hook点">
+<a href="#%e5%88%86%e6%9e%90hook%e7%82%b9"
+   >
+   
+</a>分析hook点</h4>
+<p>这里其实也是比较贪婪操作了, <code>?&lt;</code> 看图:<br>
+<img src="UP.webp" alt=""><br>
+对比后发现第一个分支的逻辑比较清晰:<br>
+<code>storeCountry</code>返回了一个string类型, 与0x100289de0这个地址的值进行了比较, 如果相等则直接跳转到地址<code>0x10013e714</code>,并赋值为<code>0x1</code>即不为假的, 继而跳转到<code>0x10013e718</code>,返回真.<br>
+从最简单的来看,这个方法绕开<code>remainingCount</code>不会导致阅读文章的时候可阅读数量 -= 1. 其实到这里基本就能实现我们的功能了, 只要让<code>storeCountry</code>返回0x100289de0一样的字符串就可以了.<br>
+so , 继续看看<code>storeCountry</code>的返回逻辑,依旧常规Hopper搜方法:<br>
+<img src="store.webp" alt=""><br>
+从UNRKeyChain获取的一个字符串,如果等于”:happysquid:”的话就返回”:happysquid:”,不然就返回这个<code>&amp;0x100284130</code>, 就这两种情况.</p>
+<p>0x100289de0是一个静态地址,直接搜一下:<br>
+<img src="place.webp" alt=""><br>
+也是”:happysquid:”, 到这里基本就可以大胆试一试了.</p>
+<h3 id="hook代码">
+<a href="#hook%e4%bb%a3%e7%a0%81"
+   >
+   
+</a>hook代码</h3>
+<p>全部的Hook代码如下, copy执行即:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+</code></pre><pre tabindex="0"><code>
+
+@interface UNRIAPManager
+
+\- (NSString \*) storeCountry;
+
+@end
+
+CHDeclareClass(UNRIAPManager)
+
+CHOptimizedMethod(0, self, NSString\*, UNRIAPManager,storeCountry){
+
+    NSLog(@&#34;is hook succeed? -- -------------------&#34;);
+
+    return @&#34;:happysquid:&#34;;
+
+}
+
+CHConstructor{
+
+    CHLoadLateClass(UNRIAPManager);
+
+    CHClassHook(0, UNRIAPManager, storeCountry);
+
+}
+</code></pre><blockquote>
+<p>思路就是直接Hook<code>storeCountry</code>,让其永远返回”:happysquid:”,这里似乎也是比较粗糙的做法(如何这里是后台动态下发呢? ),但换个思路想, 这里返回”:happysquid:”,逻辑的意思就是 “I’m the VIP” 的暗号,既然如此何乐不为. 碰碰运气跑一下看看. 这不就是逆向的随机性乐趣所在吗…<br>
+尝试就是收获,目前自用并未发现问题.几乎天天在这里APP里面看前辈文章的,稳的</p>
+</blockquote>
+<p>看下执行效果:<br>
+<img src="succeed.webp" alt=""><br>
+半意外收获,这里的提示语也没有了,所以说明我的猜测是对的.<br>
+其实hook代码的就这么几行, 但是逻辑的分析却耗了我一个熬到3点钟的晚上, 小小成就给自己泡一杯咖啡吧.</p>
+<h3 id="简单总结下">
+<a href="#%e7%ae%80%e5%8d%95%e6%80%bb%e7%bb%93%e4%b8%8b"
+   >
+   
+</a>简单总结下</h3>
+<h4 id="乐观的">
+<a href="#%e4%b9%90%e8%a7%82%e7%9a%84"
+   >
+   
+</a>乐观的</h4>
+<p>1 成功的入口主要是<code>updateUnlickInfo</code>这个清晰可爱的方法和方法的调用栈, 我们可以通过调用栈来回溯层次调用逻辑,找到可以被hook的突破口.<br>
+2 实战才是领悟真谛的唯一途径. 通过本次实战, 逆向的思路更加清晰了, hopper一些反汇编工具调整好正确打开的姿势.</p>
+<h4 id="悲观的">
+<a href="#%e6%82%b2%e8%a7%82%e7%9a%84"
+   >
+   
+</a>悲观的</h4>
+<p>1 本次逆向的时候比较长,大约耗费15个小时+(失去的还有很差的脸色),其中对于monkeyDev集成不太熟练,LLDB插件chisel是个可以提升点.<br>
+2 UNREAD如此明文的存储确实在安全的思路太过单纯了,或许在新版本已经修复了(这是从PP助手下载的1.6,新版本的是1.8的样子).</p>
+<p>[<code>逆向之旅NICE</code>]<br>
+后面会谈谈如何加密敏感数据.</p>
+</article>
+<br>
+    <div class="flex flex-wrap items-center gap-2">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/%E9%80%86%E5%90%91unread/"
+           class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        逆向UNREAD
+      </a>
+    </div>
+<br></section></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

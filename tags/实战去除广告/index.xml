@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>实战去除广告 on Blog</title>
+    <link>https://blog.eternaless.top/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/</link>
+    <description>Recent content in 实战去除广告 on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Nov 2017 17:56:29 +0800</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>去除OplayerLite广告提示-越狱机</title>
+      <link>https://blog.eternaless.top/posts/%E5%8E%BB%E9%99%A4oplayerlite%E5%B9%BF%E5%91%8A%E6%8F%90%E7%A4%BA-%E8%B6%8A%E7%8B%B1%E6%9C%BA/</link>
+      <pubDate>Fri, 24 Nov 2017 17:56:29 +0800</pubDate>
+      <guid>https://blog.eternaless.top/posts/%E5%8E%BB%E9%99%A4oplayerlite%E5%B9%BF%E5%91%8A%E6%8F%90%E7%A4%BA-%E8%B6%8A%E7%8B%B1%E6%9C%BA/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;最近在学习逆向相关的实践+踩坑, 庆哥的视频中一个课程是对于OPlayerLite进行进行广告处理了, 因为是去年的课程App也更新了逻辑, 我沿着先辈的道路把坑撸了一把, mark这场一天一夜的战斗.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;分析层级结构&#34;&gt;&#xA;&lt;a href=&#34;#%e5%88%86%e6%9e%90%e5%b1%82%e7%ba%a7%e7%bb%93%e6%9e%84&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;分析层级结构&lt;/h3&gt;&#xA;&lt;h4 id=&#34;定位目标对象&#34;&gt;&#xA;&lt;a href=&#34;#%e5%ae%9a%e4%bd%8d%e7%9b%ae%e6%a0%87%e5%af%b9%e8%b1%a1&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;定位目标对象&lt;/h4&gt;&#xA;&lt;p&gt;连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的view,上面有一行文本”Buy the full version to remove ads?”&lt;br&gt;&#xA;这时候我们连接到cycript打印下层级:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;UIApp.keyWindow.recursiveDescription().toString()&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;fe.png&#34; alt=&#34;&#34;&gt;&lt;br&gt;&#xA;由于我已去除了过了,又从App Store重新下载, 发现还是没有广告,图片暂时就没哈&lt;br&gt;&#xA;其中有引起我们注意的层级是:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&#xA;2&#xA;&#xA;3&#xA;&#xA;4&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;|    |    | \&amp;gt;&#xA;&#xA;|    |    |    | \&amp;gt;&#xA;&#xA;|    |    |    |    | \&amp;gt;&#xA;&#xA;|    |    |    | \&amp;gt;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;其中&lt;code&gt;UILabel: 0x176b1380&lt;/code&gt;中的text属性跟我们看到的ads上是一样的,它的同级view是UIButton, 父view是UIView .&lt;br&gt;&#xA;因为咱们要解决的目标是view, 尤为关注是这里的frame.size, 它们都是&lt;code&gt;320 50&lt;/code&gt;, label也是height=50. 把这部分截图保存下来,待会查找的时候需要用到&lt;/p&gt;&#xA;&lt;h4 id=&#34;正向分析设计&#34;&gt;&#xA;&lt;a href=&#34;#%e6%ad%a3%e5%90%91%e5%88%86%e6%9e%90%e8%ae%be%e8%ae%a1&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;正向分析设计&lt;/h4&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;划重点: 从正向的开发的角度, 分析它是如何设计的&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;如果是我开发君, 我的伪代码大概如下&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

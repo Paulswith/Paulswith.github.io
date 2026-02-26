@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Blog</title>
+    <link>https://blog.eternaless.top/categories/</link>
+    <description>Recent content in Categories on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 26 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Books</title>
+      <link>https://blog.eternaless.top/categories/books/</link>
+      <pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://blog.eternaless.top/categories/books/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tools</title>
+      <link>https://blog.eternaless.top/categories/tools/</link>
+      <pubDate>Wed, 25 Feb 2026 14:30:41 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/tools/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MyProgram</title>
+      <link>https://blog.eternaless.top/categories/myprogram/</link>
+      <pubDate>Mon, 14 Oct 2019 13:43:33 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/myprogram/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MachineLearning</title>
+      <link>https://blog.eternaless.top/categories/machinelearning/</link>
+      <pubDate>Tue, 05 Jun 2018 10:10:38 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/machinelearning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://blog.eternaless.top/categories/python/</link>
+      <pubDate>Sat, 30 Dec 2017 13:20:31 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ReverseEngineering</title>
+      <link>https://blog.eternaless.top/categories/reverseengineering/</link>
+      <pubDate>Mon, 18 Dec 2017 15:27:30 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/reverseengineering/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MacTools</title>
+      <link>https://blog.eternaless.top/categories/mactools/</link>
+      <pubDate>Thu, 16 Nov 2017 20:16:58 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/mactools/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unix</title>
+      <link>https://blog.eternaless.top/categories/unix/</link>
+      <pubDate>Tue, 14 Nov 2017 20:03:21 +0800</pubDate>
+      <guid>https://blog.eternaless.top/categories/unix/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

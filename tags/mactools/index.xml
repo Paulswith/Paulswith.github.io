@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MacTools on Blog</title>
+    <link>https://blog.eternaless.top/tags/mactools/</link>
+    <description>Recent content in MacTools on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 16 Nov 2017 20:16:58 +0800</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/tags/mactools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>小tip之mac动态背景</title>
+      <link>https://blog.eternaless.top/posts/%E5%B0%8Ftip%E4%B9%8Bmac%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF/</link>
+      <pubDate>Thu, 16 Nov 2017 20:16:58 +0800</pubDate>
+      <guid>https://blog.eternaless.top/posts/%E5%B0%8Ftip%E4%B9%8Bmac%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;作为一个mac粉, 动态背景怎么能少,现在分享一个小tip,有兴趣的往下看&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;app安装&#34;&gt;&#xA;&lt;a href=&#34;#app%e5%ae%89%e8%a3%85&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;app安装&lt;/h3&gt;&#xA;&lt;p&gt;其实事情是一款App就可以搞定了, 但是好像国内搜不到, 我把它压缩传到了我的github上,你可以clone git, 然后在DymaticWallpaper里面找到它,解压并安装即可.&lt;br&gt;&#xA;git 地址: &#xA;&lt;a href=&#34;https://github.com/Paulswith/ToolsScript.git&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   https://github.com/Paulswith/ToolsScript.git&#xA;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;使用&#34;&gt;&#xA;&lt;a href=&#34;#%e4%bd%bf%e7%94%a8&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;使用&lt;/h3&gt;&#xA;&lt;p&gt;安装后, 在屏幕上上方的状态栏可以看到它, 选择点击下载即可, 但它的资源真的很糟糕&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;主要是分辨率太低&lt;/li&gt;&#xA;&lt;li&gt;没有对比就没有伤害,对比我待会给你讲的这些资源它真的很逊&lt;/li&gt;&#xA;&lt;li&gt;处女座就是挑,大佬们,我说的是我…&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;用最酷的视频替换它&#34;&gt;&#xA;&lt;a href=&#34;#%e7%94%a8%e6%9c%80%e9%85%b7%e7%9a%84%e8%a7%86%e9%a2%91%e6%9b%bf%e6%8d%a2%e5%ae%83&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;用最酷的视频替换它&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;&lt;a href=&#34;http://a1.phobos.apple.com/us/r1000/000/Features/atv/AutumnResources/videos/entries.json&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   点我跳转到视频源地址&#xA;&lt;/a&gt;&lt;br&gt;&#xA;我在一篇&#xA;&lt;a href=&#34;https://paulswith.github.io/2017/11/16/mac%E4%B8%8A%E7%9A%84Mysql%E8%B8%A9%E5%9D%91%E8%AE%B0/&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   博文&#xA;&lt;/a&gt;中还针对它进数据库存储,因为真是稀缺~ 似乎一段时间还会更新一次, 资源的贡献者是国外的一位大牛&#xA;&lt;a href=&#34;https://github.com/JohnCoates/Aerial&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   johnCoates&#xA;&lt;/a&gt;.&lt;br&gt;&#xA;可能他的作品是可以用的,但是一直有问题,才用这个app替代.&lt;/p&gt;&#xA;&lt;h4 id=&#34;选取视频并下载&#34;&gt;&#xA;&lt;a href=&#34;#%e9%80%89%e5%8f%96%e8%a7%86%e9%a2%91%e5%b9%b6%e4%b8%8b%e8%bd%bd&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;选取视频并下载&lt;/h4&gt;&#xA;&lt;p&gt;&lt;img src=&#34;url.webp&#34; alt=&#34;&#34;&gt;&lt;br&gt;&#xA;浏览器打开下载到本地&lt;/p&gt;&#xA;&lt;h4 id=&#34;执行替换&#34;&gt;&#xA;&lt;a href=&#34;#%e6%89%a7%e8%a1%8c%e6%9b%bf%e6%8d%a2&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;执行替换&lt;/h4&gt;&#xA;&lt;p&gt;改名为1.mp4(严格大小写),拖到LiveDesktopPro的这个路径,例如我:&lt;br&gt;&#xA;&lt;code&gt;/Applications/LiveDesktop Pro.app/Contents/Resources&lt;/code&gt;&lt;br&gt;&#xA;&lt;img src=&#34;path.webp&#34; alt=&#34;&#34;&gt;&lt;br&gt;&#xA;需要权限,输入确认即可&lt;br&gt;&#xA;一共允许1,2,3,4个文件替换, 依然是改为.mp4的后缀, 不管方法土不土,就是可行.&lt;br&gt;&#xA;现在重进打开App,选择视频1,即可看到刚才视频了.&lt;/p&gt;&#xA;&lt;p&gt;没有找到好的gif转换软件, png将就,这是我选的视频,白天黑夜都使用.&lt;br&gt;&#xA;&lt;img src=&#34;bg.webp&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>TensorFlow数据集制作实战 | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">TensorFlow数据集制作实战</h1>
+
+<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  </div>
+
+  <div class="flex items-center gap-1">
+      <i class="fas fa-calendar"></i>
+      <time datetime="2018-01-20T15:52:53&#43;08:00">January 20, 2018</time>
+    </div>
+  
+
+  <div class="flex items-center gap-1">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/machinelearning/" class=" text-xs font-medium transition 
+         hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      MachineLearning
+    </a>
+    
+    
+  </div>
+</div><article class="prose dark:prose-invert max-w-none"><blockquote>
+<p>这是实战篇,往下看先</p>
+</blockquote>
+<h4 id="当前数据">
+<a href="#%e5%bd%93%e5%89%8d%e6%95%b0%e6%8d%ae"
+   >
+   
+</a>当前数据</h4>
+<p><img src="all_data.png" alt=""><br>
+当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹</p>
+<ul>
+<li>数据1 -&gt; 大概是1600+张</li>
+<li>数据0 -&gt; 大概是160+张</li>
+</ul>
+<p>比例是10:1左右, 而数量1800+上来看也不是很理想, 我这里为了省事是直接水平翻转图片, 得到1800*2(待会见代码). 当然为了避免欠拟合情况当然更好的方法是挖掘更多的资源.</p>
+<h4 id="根据文件夹标签化图片">
+<a href="#%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%a4%b9%e6%a0%87%e7%ad%be%e5%8c%96%e5%9b%be%e7%89%87"
+   >
+   
+</a>根据文件夹标签化图片</h4>
+<p>头部一些声明:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+</code></pre><pre tabindex="0"><code>
+
+\# -\*- coding:utf-8 -\*-
+
+\_\_author = &#39;dobby&#39;
+
+import tensorflow as tf
+
+import os
+
+import random
+
+from PIL import Image
+
+plane\_path = &#39;/Users/dobby/Documents/data\_img/plane&#39;
+
+UNplane\_path = &#39;/Users/dobby/Documents/data\_img/UNplane&#39;
+
+records\_path = &#39;/Users/dobby/Documents/data\_img/train.tfrecords&#39;
+
+dataset\_list = \[\]
+</code></pre><p>遍历这两个文件夹, 如果是plane文件夹,那里面存储是label=1的图片, 反之是0. 进行标签化<br>
+存储方式为(image_path, label)的元组 一起存储在dataset_list数组中</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+</code></pre><pre tabindex="0"><code>
+
+def classic\_data(path):
+
+    \# 根据目录标签数据
+
+    if path == plane\_path:
+
+        label = 1
+
+    else:
+
+        label = 0
+
+    file\_list =  os.listdir(path)
+
+    for each in file\_list:
+
+        if each\[:5\] != &#39;plane&#39;:
+
+            continue
+
+        im\_full\_path = os.path.join(path, each)
+
+        dataset\_list.append((im\_full\_path, label))
+</code></pre><h4 id="转为数据集">
+<a href="#%e8%bd%ac%e4%b8%ba%e6%95%b0%e6%8d%ae%e9%9b%86"
+   >
+   
+</a>转为数据集</h4>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+
+33
+
+34
+
+35
+
+36
+
+37
+
+38
+
+39
+
+40
+
+41
+
+42
+
+43
+
+44
+
+45
+</code></pre><pre tabindex="0"><code>
+
+def create\_record(data\_list, should\_transpose=False):
+
+    &#34;&#34;&#34;
+
+     图片转为bytes写入
+
+     字符串也是bytes
+
+     1/0 Int
+
+    &#34;&#34;&#34;
+
+    counter = 0
+
+     \# 新建一个写入session
+
+    writer = tf.python\_io.TFRecordWriter(records\_path)
+
+    for path,label in data\_list:
+
+        counter += 1
+
+        print(&#34;{i},{j}\\n&#34;.format(i=path, j=label))
+
+        \# 打开图片
+
+        img = Image.open(path)
+
+        \# 将图片统一大小
+
+        img = img.resize((300, 300))
+
+        \# 转换为bytes
+
+        img\_raw = img.tobytes()
+
+        data = tf.train.Example(
+
+            features=tf.train.Features(
+
+                feature={
+
+                    &#39;label&#39;:tf.train.Feature(int64\_list=tf.train.Int64List(value=\[label\])), \# 0/1 分类,所以是INT
+
+                    &#39;image&#39;:tf.train.Feature(bytes\_list=tf.train.BytesList(value=\[img\_raw\])) \# 字符串/图片/语音用bytes
+
+                }
+
+            )
+
+        )
+
+        writer.write(data.SerializeToString())
+
+        if should\_transpose:
+
+            counter += 1
+
+            \# 将图片左右翻转后生成一张新的图片,label不变,
+
+            rot\_img = img.transpose(Image.FLIP\_LEFT\_RIGHT)
+
+            rot\_img\_raw = rot\_img.tobytes()
+
+            data\_2 = tf.train.Example(
+
+                features=tf.train.Features(
+
+                    feature={
+
+                        &#39;label&#39;:tf.train.Feature(int64\_list=tf.train.Int64List(value=\[label\])),
+
+                        &#39;image&#39;:tf.train.Feature(bytes\_list=tf.train.BytesList(value=\[rot\_img\_raw\]))
+
+                    }
+
+                )
+
+            )
+
+            writer.write(data\_2.SerializeToString())
+
+    writer.close()
+
+    print(&#34;写入数据集-DONE, 共存{}个数据&#34;.format(counter))
+</code></pre><ul>
+<li><code>writer = tf.python_io.TFRecordWriter(records_path)</code>启动一个写入TFRecord句柄, 遍历数组取出图片和label, 将图片设置统一大小并转为bytes.</li>
+<li><code>tf.train.Example(tf.train.Features)</code>是核心的处理代码, Example成TensorFlow的特定规则数据, 通过使用TFRecordWriter写入到TFRecord中.Example包含一个键值对数据结构(与dict相同), 使用属性features记录, 因此, 初始化时必须传入这个features参数</li>
+<li><code>writer.write(data.SerializeToString())</code>把Example序列成字符串写入TFRecord</li>
+<li><code>should_transpose=False</code>参数用来配置是否水平翻转图片, 并令数据扩大一倍</li>
+<li>当然关于TFRecord的写入具体规则, 如果需要可以参考该链接
+<a href="http://blog.csdn.net/qq_39037910/article/details/72900308"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   Tensorflow: 文件读写
+</a></li>
+</ul>
+<h4 id="测试是否写入成功">
+<a href="#%e6%b5%8b%e8%af%95%e6%98%af%e5%90%a6%e5%86%99%e5%85%a5%e6%88%90%e5%8a%9f"
+   >
+   
+</a>测试是否写入成功</h4>
+<p>执行函数代码, 需要注意, 我提前将数据存储在python的列表中的, 可以使用<code>random.shuffle</code>进行数据的洗牌</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+</code></pre><pre tabindex="0"><code>
+
+classic\_data(plane\_path)
+
+classic\_data(UNplane\_path)
+
+random.shuffle(dataset\_list)
+
+create\_record(dataset\_list, should\_transpose=True)
+</code></pre><p>结果:<br>
+<img src="succeed.png" alt=""></p>
+<p>可以看到数据洗牌, 而且数据*2, 都成功做到了.<br>
+<img src="tu.png" alt=""></p>
+</article>
+<br>
+    <div class="flex flex-wrap items-center gap-2">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/tensorflow/"
+           class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        TensorFlow
+      </a>
+    </div>
+<br></section></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

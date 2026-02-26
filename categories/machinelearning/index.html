@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>MachineLearning | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                bg-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr_30%] gap-6"><section id="posts" class="space-y-2">
+  <h1 class="text-2xl mb-6">MACHINELEARNING</h1>
+  <ul class="space-y-2">
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">xcode9之后的打包方式</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><h2 id="xcode83之前的打包">
+<a href="#XCode8-3%e4%b9%8b%e5%89%8d%e7%9a%84%e6%89%93%e5%8c%85"
+   >
+   
+</a>XCode8.3之前的打包</h2>
+<p>
+<a href="https://github.com/webfrogs/xcode_shell/blob/master/ipa-build"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/webfrogs/xcode_shell/blob/master/ipa-build
+</a><br>
+阅读链接上的这个脚本, 可以理解构建三部曲为:</p>
+<ol>
+<li>Clean build cache</li>
+<li>编译出.archive</li>
+<li>xcrun打包为.ipa文件</li>
+</ol>
+<p>第三步是和XCode9差异最大的地方, 先记住这里:<br>
+<img src="xcrun.png" alt=""></p>
+<h2 id="xcode9之后的打包">
+<a href="#XCode9%e4%b9%8b%e5%90%8e%e7%9a%84%e6%89%93%e5%8c%85"
+   >
+   
+</a>XCode9之后的打包</h2>
+<p>听说是8.3之后就不一样的了.<br>
+细化上面的三个步骤为:</p>
+<h4 id="clean-build-cache">
+<a href="#Clean-Build-Cache"
+   >
+   
+</a>Clean Build Cache:</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configuration
+</code></pre><p>与xcode8无任何差异.</p>
+<h4 id="编译生成xcarchive">
+<a href="#%e7%bc%96%e8%af%91-%e7%94%9f%e6%88%90-xcarchive"
+   >
+   
+</a>编译,生成.xcarchive</h4>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild archive -workspace $workspace -scheme $scheme -configuration \\
+
+$configuration -archivePath $archivePath -destination generic/platform=ios \\
+
+CODE\_SIGN\_IDENTITY=&#34;$code\_sign\_indentity&#34;
+</code></pre><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
+<h4 id="将xcarchive生成ipa">
+<a href="#%e5%b0%86-xcarchive%e7%94%9f%e6%88%90-IPA"
+   >
+   
+</a>将.xcarchive生成.IPA</h4>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild -exportArchive -archivePath $archivePath \\
+
+\-exportPath $exportPath -destination generic/platform=ios \\
+
+\-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates
+</code></pre><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br>
+<img src="plist.png" alt=""></p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Jun 5, 2018</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">MachineLearning</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/xcode9%E4%B9%8B%E5%90%8E%E7%9A%84%E6%89%93%E5%8C%85%E6%96%B9%E5%BC%8F/" class="absolute inset-0 z-0" aria-label="Read more aboutxcode9之后的打包方式"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">机器学习迁移模型到IOS</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>
+<a href="https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://paulswith.github.io/2018/02/24/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0InceptionV3/
+</a> 上文记录了如何从一个别人训练好的模型, 切入我们自己的图片, 改为我们自己的模型.<br>
+本来以为移植到手机很简单, 但是不简单的是我的模型本身就是迁移学习别人的模型,有很多莫名其面的坑, 在CoreML经历了N个坑后,1点14分我搞掂了.</p>
+</blockquote>
+<p><strong>项目源码和转换源码已经上传到git.</strong><br>
+
+<a href="https://github.com/Paulswith/machineLearningIntro/tree/master/classification_101"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/Paulswith/machineLearningIntro/tree/master/classification_101
+</a></p>
+<h3 id="转化为mlmodel">
+<a href="#%e8%bd%ac%e5%8c%96%e4%b8%bamlmodel"
+   >
+   
+</a>转化为mlmodel</h3>
+<p>说说转换为mlmodel的工具有两个:</p>
+<ul>
+<li>coremltools, 它目前只支持五种模型的转换, 不包括tensorflow:<br>
+<img src="tools.png" alt=""></li>
+<li>若你跟我一样是tensorflow , 那么必须使用tfcoreml<br>
+
+<a href="https://github.com/tf-coreml"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/tf-coreml
+</a> 有安装方法.<br>
+转换Example: 
+<a href="https://github.com/tf-coreml/tf-coreml/tree/master/examples"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/tf-coreml/tf-coreml/tree/master/examples
+</a></li>
+</ul>
+<p><strong>接着往下看:</strong></p>
+<h4 id="是否是graph-pb">
+<a href="#%e6%98%af%e5%90%a6%e6%98%afgraph-pb"
+   >
+   
+</a>是否是graph-pb?</h4>
+<p>如果你跟我一样, 训练的模型, 从tensorflow的代码保存下来的, 调用的:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+saver.save(sess, MODEL\_SAVEPATH, global\_step=50)
+</code></pre><p>它并不会保存出一个pb文件, 其中的.meta也需要其他方式转换似乎也可以, 我没有尝试过.<br>
+用这个方法, 你需要在上方代码的下面加两行,就可以继续:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+</code></pre><pre tabindex="0"><code>
+
+if i %SAVE\_EPOCH == 0:
+
+                    tf.train.write\_graph(sess.graph, MODEL\_SAVE\_DIR, &#39;model.pbtxt&#39;)
+</code></pre><h4 id="pdtxt固化为pd">
+<a href="#pdtxt%e5%9b%ba%e5%8c%96%e4%b8%bapd"
+   >
+   
+</a>pdtxt固化为pd</h4>
+<p>操作参考链接
+<a href="https://www.jianshu.com/p/091415b114e2"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://www.jianshu.com/p/091415b114e2
+</a><br>
+我是直接使用的bezel, 编译tensorflow源码后, 直接使用, 其中参数跟着填, 需要注意的是output_node:<br>
+<img src="guhua.png" alt=""></p>
+<h4 id="导入化图">
+<a href="#%e5%af%bc%e5%85%a5%e5%8c%96%e5%9b%be"
+   >
+   
+</a>导入化图</h4>
+<p>导入图和查看图的节点信息:<br>
+如果你的图不属于pb文件, 那么就会在导入图的时候报错的.</p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Feb 25, 2018</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">MachineLearning</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%81%E7%A7%BB%E6%A8%A1%E5%9E%8B%E5%88%B0ios/" class="absolute inset-0 z-0" aria-label="Read more about机器学习迁移模型到IOS"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">迁移学习InceptionV3</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>手动画过AlexNet类似的模型,直接在后面加了一层[,class]的全连接层, 结果预测准确率是90%左右. 当然不是很满意. 于是乎开始各种方法寻求最准的CNN<br>
+偶然间发现通过迁移学习大赛上高分的作品,进行迁移学习可以让我们拥有更精准的准确率,于是有了本文.<br>
+总结:: 学会如何迁移优秀的模型来为自己所用!<br>
+<strong>文章讲述的colab源码已经共享, 请点击下方链接查看即可.</strong><br>
+
+<a href="https://drive.google.com/file/d/1ahJtJvuHDGh4oS4lyNG0NdtqZuyns4J6/view?usp=sharing"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://drive.google.com/file/d/1ahJtJvuHDGh4oS4lyNG0NdtqZuyns4J6/view?usp=sharing
+</a></p>
+</blockquote>
+<h4 id="迁移准备">
+<a href="#%e8%bf%81%e7%a7%bb%e5%87%86%e5%a4%87"
+   >
+   
+</a>迁移准备</h4>
+<h5 id="模型选择准备">
+<a href="#%e6%a8%a1%e5%9e%8b%e9%80%89%e6%8b%a9%e5%87%86%e5%a4%87"
+   >
+   
+</a>模型选择准备</h5>
+<p>首先当然是选择一款高效的模型,查阅了部分资料, 发现googleNet是2014年ILSVRC挑战赛获得冠军, 错误率降低到6.67%, 另一个名字也是InceptionV1, V3就是它优化后的第三代, 错误率更低<br>
+模型下载:<br>
+
+<a href="https://storage.googleapis.com/download.tensorflow.org/models/inception_dec_2015.zip"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://storage.googleapis.com/download.tensorflow.org/models/inception_dec_2015.zip
+</a> 并解压得到.pd文件</p>
+<p>执行下方代码, 可以打印出pb文件的全部节点:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+</code></pre><pre tabindex="0"><code>
+
+tf\_model\_path = &#39;/Users/dobby/Desktop/inception\_dec\_2015/tensorflow\_inception\_graph.pb&#39;
+
+with open(tf\_model\_path, &#39;rb&#39;) as f:
+
+    serialized = f.read()
+
+tf.reset\_default\_graph()
+
+original\_gdef = tf.GraphDef()
+
+original\_gdef.ParseFromString(serialized)
+
+##2 可以在这里查看到全部的图信息(前提是你有转换成功)
+
+with tf.Graph().as\_default() as g:
+
+    tf.import\_graph\_def(original\_gdef, name=&#39;&#39;)
+
+    ops = g.get\_operations()
+
+    try:
+
+        for i in range(10000):
+
+            print(&#39;op id {} : op name: {}, op type: &#34;{}&#34;&#39;.format(str(i),ops\[i\].name, ops\[i\].type))
+
+    except:
+
+        pass
+</code></pre><p>需要关注的输入层:</p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Feb 24, 2018</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">MachineLearning</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0inceptionv3/" class="absolute inset-0 z-0" aria-label="Read more about迁移学习InceptionV3"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">部署TensorFlow到Colaboratory</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>一个二分类的机器学习, 用TensorFlow写的, 刚好看到google提供的免费褥羊毛GPU, 虽然坑很多, 但还是部署上去了,GPU效率真的比CPU强的多多.<br>
+
+<a href="https://colab.research.google.com/notebook#fileId=/v2/external/notebooks/io.ipynb&amp;scrollTo=sOm9PFrT8mGG"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   官方完整的帮助连接
+</a>在这里,注意上面的代码是基于Python2的, 我用的python3</p>
+</blockquote>
+<h3 id="数据集准备">
+<a href="#%e6%95%b0%e6%8d%ae%e9%9b%86%e5%87%86%e5%a4%87"
+   >
+   
+</a>数据集准备</h3>
+<h4 id="csv之类的轻量数据集">
+<a href="#CSV%e4%b9%8b%e7%b1%bb%e7%9a%84%e8%bd%bb%e9%87%8f%e6%95%b0%e6%8d%ae%e9%9b%86"
+   >
+   
+</a>CSV之类的轻量数据集</h4>
+<p>PASS, 有即可</p>
+<h4 id="tfrecord重量数据集">
+<a href="#TFRecord%e9%87%8d%e9%87%8f%e6%95%b0%e6%8d%ae%e9%9b%86"
+   >
+   
+</a>TFRecord重量数据集</h4>
+<p>可以类似我这样子, 将数据存储到目录下<code>Datasets</code>下, 推荐tar压缩</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+tar zcvf Datasets.gz Datasets
+</code></pre><p>自行配置好谷歌Drive, 链接
+<a href="https://www.google.com/drive/"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://www.google.com/drive/
+</a><br>
+下载符合电脑版本, 把数据集存入同步到云端.</p>
+<h3 id="如何上传">
+<a href="#%e5%a6%82%e4%bd%95%e4%b8%8a%e4%bc%a0"
+   >
+   
+</a>如何上传</h3>
+<p>打开你的Colaboratory-new一个jupyter脚本.</p>
+<h4 id="小文件上传">
+<a href="#%e5%b0%8f%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0"
+   >
+   
+</a>小文件上传</h4>
+<p><em>for Python2:</em></p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+</code></pre><pre tabindex="0"><code>
+
+from google.colab import files
+
+\# 你需填的:
+
+FILE\_NAME = &#39;想保存到Colaboratory的文件名&#39;
+
+uploaded = files.upload()
+
+with open(FILE\_NAME, &#39;wb&#39;) as file:
+
+    file.write(uploaded\[uploaded.keys()\[0\]\])
+</code></pre><p><em>but for Python3:</em></p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Feb 1, 2018</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">MachineLearning</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/%E9%83%A8%E7%BD%B2tensorflow%E5%88%B0colaboratory/" class="absolute inset-0 z-0" aria-label="Read more about部署TensorFlow到Colaboratory"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">TensorFlow数据集制作实战</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>这是实战篇,往下看先</p>
+</blockquote>
+<h4 id="当前数据">
+<a href="#%e5%bd%93%e5%89%8d%e6%95%b0%e6%8d%ae"
+   >
+   
+</a>当前数据</h4>
+<p><img src="all_data.png" alt=""><br>
+当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹</p>
+<ul>
+<li>数据1 -&gt; 大概是1600+张</li>
+<li>数据0 -&gt; 大概是160+张</li>
+</ul>
+<p>比例是10:1左右, 而数量1800+上来看也不是很理想, 我这里为了省事是直接水平翻转图片, 得到1800*2(待会见代码). 当然为了避免欠拟合情况当然更好的方法是挖掘更多的资源.</p>
+<h4 id="根据文件夹标签化图片">
+<a href="#%e6%a0%b9%e6%8d%ae%e6%96%87%e4%bb%b6%e5%a4%b9%e6%a0%87%e7%ad%be%e5%8c%96%e5%9b%be%e7%89%87"
+   >
+   
+</a>根据文件夹标签化图片</h4>
+<p>头部一些声明:</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+</code></pre><pre tabindex="0"><code>
+
+\# -\*- coding:utf-8 -\*-
+
+\_\_author = &#39;dobby&#39;
+
+import tensorflow as tf
+
+import os
+
+import random
+
+from PIL import Image
+
+plane\_path = &#39;/Users/dobby/Documents/data\_img/plane&#39;
+
+UNplane\_path = &#39;/Users/dobby/Documents/data\_img/UNplane&#39;
+
+records\_path = &#39;/Users/dobby/Documents/data\_img/train.tfrecords&#39;
+
+dataset\_list = \[\]
+</code></pre><p>遍历这两个文件夹, 如果是plane文件夹,那里面存储是label=1的图片, 反之是0. 进行标签化<br>
+存储方式为(image_path, label)的元组 一起存储在dataset_list数组中</p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Jan 20, 2018</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">MachineLearning</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/tensorflow%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%B6%E4%BD%9C%E5%AE%9E%E6%88%98/" class="absolute inset-0 z-0" aria-label="Read more aboutTensorFlow数据集制作实战"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">TensorFlow数据集-Dataset-API</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>TensorFlow在学习的时候, 它是有一个mnist数据集让我们学习的. 通过batch_size来每轮数据训练的大小, 现在打算将一个我们实际的数据转换为跟mnist数据集一样的效果</p>
+</blockquote>
+<h4 id="内存中自定义数据">
+<a href="#%e5%86%85%e5%ad%98%e4%b8%ad%e8%87%aa%e5%ae%9a%e4%b9%89%e6%95%b0%e6%8d%ae"
+   >
+   
+</a>内存中自定义数据</h4>
+<blockquote>
+<p>Dataset-API是1.3版引入的, 支持从内存中/硬盘中生成数据集.</p>
+</blockquote>
+<ul>
+<li>
+<p>一维数组<br>
+直接就是给到一维数组, 生成数据集</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+</code></pre><pre tabindex="0"><code>
+
+dataset = tf.data.Dataset.from\_tensor\_slices(np.array(\[1.0, 2.0, 3.0, 4.0, 5.0\]))
+
+out\_put=&#34;&#34;&#34;&#34;
+
+1.0
+
+2.0
+
+3.0
+
+4.0
+
+5.0
+
+&#34;&#34;&#34;
+</code></pre></li>
+<li>
+<p>多维数组, size=(5,2) , 可以理解为(count, dimension)</p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+</code></pre><pre tabindex="0"><code>
+
+dataset = tf.data.Dataset.from\_tensor\_slices(np.random.uniform(size=(5, 2)))
+
+out\_put=&#34;&#34;&#34;
+
+\[ 0.01721917  0.4621821 \]
+
+\[ 0.58484623  0.13534625\]
+
+\[ 0.83591111  0.01397783\]
+
+\[ 0.88934806  0.97464257\]
+
+\[ 0.76707649  0.42036516\]
+
+&#34;&#34;&#34;
+</code></pre></li>
+<li>
+<p>元组</p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Jan 20, 2018</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">MachineLearning</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/tensorflow%E6%95%B0%E6%8D%AE%E9%9B%86-dataset-api/" class="absolute inset-0 z-0" aria-label="Read more aboutTensorFlow数据集-Dataset-API"></a>
+</article>
+
+
+    
+  </ul>
+</section><aside id="sidebar-right" aria-label="Sidebar"
+        class="hidden lg:block sticky  rounded shadow   
+              "><div class="space-y-2">
+<div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow mt-2">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-file"></i>
+  <p class="text-md mb-0">RECENT POSTS</p>
+  </span>
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <ul class="space-y-2 text-sm">
+    
+    <li class="line-clamp-1">
+      <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A4%B1%E6%8E%A7/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        读书笔记-失控
+      </a>
+    </li>
+    
+    <li class="line-clamp-1">
+      <a href="/posts/claudecode%E7%94%A8%E4%B8%8A%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        ClaudeCode用上高性价比的国产大模型
+      </a>
+    </li>
+    
+    <li class="line-clamp-1">
+      <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%88%9B%E6%96%B0%E4%B8%8E%E4%BC%81%E4%B8%9A%E5%AE%B6%E7%B2%BE%E7%A5%9E/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        读书笔记-创新与企业家精神
+      </a>
+    </li>
+    
+  </ul>
+</div><div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
+
+  <a href="/categories/" class="text-md mb-0 block text-gray-900 dark:text-white">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-folder"></i>
+      CATEGORIES
+    </span>
+  </a>
+
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <div class="flex flex-wrap gap-2">
+    
+    <a href="/categories/books" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Books  (3) 
+    </a>
+    
+    <a href="/categories/machinelearning" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Machinelearning  (6) 
+    </a>
+    
+    <a href="/categories/mactools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Mactools  (1) 
+    </a>
+    
+    <a href="/categories/myprogram" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Myprogram  (1) 
+    </a>
+    
+    <a href="/categories/python" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Python  (2) 
+    </a>
+    
+    <a href="/categories/reverseengineering" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Reverseengineering  (6) 
+    </a>
+    
+    <a href="/categories/tools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Tools  (1) 
+    </a>
+    
+    <a href="/categories/unix" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Unix  (3) 
+    </a>
+    
+  </div>
+</div><div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
+  <a href="/tags/" class="text-md  mb-0 block text-gray-900 dark:text-white">
+      <span class="flex items-center gap-2">
+      <i class="fas fa-tags"></i>
+    TAGS
+    </span>
+  </a>
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <div class="flex flex-wrap gap-2 ">
+    
+    <a href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      2018年读的书  (1) 
+    </a>
+    
+    <a href="/tags/2025%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      2025年读的书  (2) 
+    </a>
+    
+    <a href="/tags/claude" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      claude  (1) 
+    </a>
+    
+    <a href="/tags/colaboratory" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      colaboratory  (1) 
+    </a>
+    
+    <a href="/tags/ddns" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      ddns  (1) 
+    </a>
+    
+    <a href="/tags/iosdev" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      iosdev  (1) 
+    </a>
+    
+    <a href="/tags/llm" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      llm  (1) 
+    </a>
+    
+    <a href="/tags/macapp-divvy%E7%A0%B4%E8%A7%A3" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      macapp-divvy破解  (1) 
+    </a>
+    
+    <a href="/tags/mactools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      mactools  (1) 
+    </a>
+    
+    <a href="/tags/shell" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      shell  (2) 
+    </a>
+    
+    <a href="/tags/tensorflow" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      tensorflow  (2) 
+    </a>
+    
+    <a href="/tags/windows" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      windows  (1) 
+    </a>
+    
+    <a href="/tags/%E5%87%AF%E6%96%87%E5%87%AF%E5%88%A9" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      凯文·凯利  (1) 
+    </a>
+    
+    <a href="/tags/%E5%88%9B%E6%96%B0%E4%B8%8E%E4%BC%81%E4%B8%9A%E5%AE%B6%E7%B2%BE%E7%A5%9E" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      创新与企业家精神  (1) 
+    </a>
+    
+    <a href="/tags/%E5%8E%9F%E5%88%99" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      原则  (1) 
+    </a>
+    
+    <a href="/tags/%E5%A4%B1%E6%8E%A7" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      失控  (1) 
+    </a>
+    
+    <a href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      实战去除广告  (1) 
+    </a>
+    
+    <a href="/tags/%E7%88%AC%E8%99%AB" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      爬虫  (1) 
+    </a>
+    
+    <a href="/tags/%E7%A0%B8%E5%A3%B3" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      砸壳  (2) 
+    </a>
+    
+    <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      自动化  (1) 
+    </a>
+    
+    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      读书笔记  (3) 
+    </a>
+    
+    <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      迁移学习  (1) 
+    </a>
+    
+    <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8Dios" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      迁移学习移植ios  (2) 
+    </a>
+    
+    <a href="/tags/%E9%80%86%E5%90%91unread" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      逆向unread  (1) 
+    </a>
+    
+    <a href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      逆向探探  (1) 
+    </a>
+    
+  </div>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow mb-4">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-globe"></i>
+    <p class="text-md mb-0">SOCIAL</p>
+    </span>
+    <hr class="border-t border-2 border-blue-500 dark:border-blue-400">
+    <div class="mt-1.5 flex space-x-4 justify-center border-b border-gray-300 dark:border-gray-700 pb-2"><a href="mailto:jevo747@outlook.com" aria-label="Email"
+            class="text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+        </a><a href="https://github.com/https://github.com/Paulswith" target="_blank" aria-label="GitHub"
+            class="text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition">
+            <i data-lucide="github" class="w-5 h-5"></i>
+        </a></div>
+
+    <div class="mt-2 space-y-1"></div>
+</div></div>
+
+
+</aside></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

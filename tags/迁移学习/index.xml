@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>迁移学习 on Blog</title>
+    <link>https://blog.eternaless.top/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 迁移学习 on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 24 Feb 2018 10:37:01 +0800</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>迁移学习InceptionV3</title>
+      <link>https://blog.eternaless.top/posts/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0inceptionv3/</link>
+      <pubDate>Sat, 24 Feb 2018 10:37:01 +0800</pubDate>
+      <guid>https://blog.eternaless.top/posts/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0inceptionv3/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;手动画过AlexNet类似的模型,直接在后面加了一层[,class]的全连接层, 结果预测准确率是90%左右. 当然不是很满意. 于是乎开始各种方法寻求最准的CNN&lt;br&gt;&#xA;偶然间发现通过迁移学习大赛上高分的作品,进行迁移学习可以让我们拥有更精准的准确率,于是有了本文.&lt;br&gt;&#xA;总结:: 学会如何迁移优秀的模型来为自己所用!&lt;br&gt;&#xA;&lt;strong&gt;文章讲述的colab源码已经共享, 请点击下方链接查看即可.&lt;/strong&gt;&lt;br&gt;&#xA;&#xA;&lt;a href=&#34;https://drive.google.com/file/d/1ahJtJvuHDGh4oS4lyNG0NdtqZuyns4J6/view?usp=sharing&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   https://drive.google.com/file/d/1ahJtJvuHDGh4oS4lyNG0NdtqZuyns4J6/view?usp=sharing&#xA;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h4 id=&#34;迁移准备&#34;&gt;&#xA;&lt;a href=&#34;#%e8%bf%81%e7%a7%bb%e5%87%86%e5%a4%87&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;迁移准备&lt;/h4&gt;&#xA;&lt;h5 id=&#34;模型选择准备&#34;&gt;&#xA;&lt;a href=&#34;#%e6%a8%a1%e5%9e%8b%e9%80%89%e6%8b%a9%e5%87%86%e5%a4%87&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;模型选择准备&lt;/h5&gt;&#xA;&lt;p&gt;首先当然是选择一款高效的模型,查阅了部分资料, 发现googleNet是2014年ILSVRC挑战赛获得冠军, 错误率降低到6.67%, 另一个名字也是InceptionV1, V3就是它优化后的第三代, 错误率更低&lt;br&gt;&#xA;模型下载:&lt;br&gt;&#xA;&#xA;&lt;a href=&#34;https://storage.googleapis.com/download.tensorflow.org/models/inception_dec_2015.zip&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   https://storage.googleapis.com/download.tensorflow.org/models/inception_dec_2015.zip&#xA;&lt;/a&gt; 并解压得到.pd文件&lt;/p&gt;&#xA;&lt;p&gt;执行下方代码, 可以打印出pb文件的全部节点:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&#xA;2&#xA;&#xA;3&#xA;&#xA;4&#xA;&#xA;5&#xA;&#xA;6&#xA;&#xA;7&#xA;&#xA;8&#xA;&#xA;9&#xA;&#xA;10&#xA;&#xA;11&#xA;&#xA;12&#xA;&#xA;13&#xA;&#xA;14&#xA;&#xA;15&#xA;&#xA;16&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;tf\_model\_path = &amp;#39;/Users/dobby/Desktop/inception\_dec\_2015/tensorflow\_inception\_graph.pb&amp;#39;&#xA;&#xA;with open(tf\_model\_path, &amp;#39;rb&amp;#39;) as f:&#xA;&#xA;    serialized = f.read()&#xA;&#xA;tf.reset\_default\_graph()&#xA;&#xA;original\_gdef = tf.GraphDef()&#xA;&#xA;original\_gdef.ParseFromString(serialized)&#xA;&#xA;##2 可以在这里查看到全部的图信息(前提是你有转换成功)&#xA;&#xA;with tf.Graph().as\_default() as g:&#xA;&#xA;    tf.import\_graph\_def(original\_gdef, name=&amp;#39;&amp;#39;)&#xA;&#xA;    ops = g.get\_operations()&#xA;&#xA;    try:&#xA;&#xA;        for i in range(10000):&#xA;&#xA;            print(&amp;#39;op id {} : op name: {}, op type: &amp;#34;{}&amp;#34;&amp;#39;.format(str(i),ops\[i\].name, ops\[i\].type))&#xA;&#xA;    except:&#xA;&#xA;        pass&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;需要关注的输入层:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IosDev on Blog</title>
+    <link>https://blog.eternaless.top/tags/iosdev/</link>
+    <description>Recent content in IosDev on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 14 Nov 2017 20:03:21 +0800</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/tags/iosdev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ios重签名脚本的0到1</title>
+      <link>https://blog.eternaless.top/posts/ios%E9%87%8D%E7%AD%BE%E5%90%8D%E8%84%9A%E6%9C%AC%E7%9A%840%E5%88%B01/</link>
+      <pubDate>Tue, 14 Nov 2017 20:03:21 +0800</pubDate>
+      <guid>https://blog.eternaless.top/posts/ios%E9%87%8D%E7%AD%BE%E5%90%8D%E8%84%9A%E6%9C%AC%E7%9A%840%E5%88%B01/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文&lt;br&gt;&#xA;感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;profile&#34;&gt;&#xA;&lt;a href=&#34;#Profile&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;Profile&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.eternaless.top/images/sign_profile.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;使用&#34;&gt;&#xA;&lt;a href=&#34;#%e4%bd%bf%e7%94%a8&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;使用&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;&#xA;&lt;li&gt;$1 需要砸壳过的ipa,从PP助手下载即可&lt;/li&gt;&#xA;&lt;li&gt;$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成&lt;/li&gt;&#xA;&lt;li&gt;$3 是否修改bundleID,默认是原先的&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://blog.eternaless.top/images/signstr.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;security find-identity -v -p codesigning&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\\(正版\\)/Payload/MQQSecure.app/MQQSecure | grep cryptid&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;mobileprovision生成entitlementsplist&#34;&gt;&#xA;&lt;a href=&#34;#mobileProvision%e7%94%9f%e6%88%90Entitlements-plist&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;mobileProvision生成Entitlements.plist&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&#xA;2&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;security cms -D -i $provision &amp;gt; ProvisionProfile.plist &#xA;&#xA;/usr/libexec/PlistBuddy -x -c &amp;#34;Print Entitlements&amp;#34; ProvisionProfile.plist &amp;gt; $tempPlace/Entitlements.plist&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见&#xA;&lt;a href=&#34;https://paulswith.github.io/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/&#34;&#xA;   &#xA;     target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&#xA;   &gt;&#xA;   plist文件-在脚本中的操作&#xA;&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

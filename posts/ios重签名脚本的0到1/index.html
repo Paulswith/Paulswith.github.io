@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>ios重签名脚本的0到1 | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">ios重签名脚本的0到1</h1>
+
+<div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  </div>
+
+  <div class="flex items-center gap-1">
+      <i class="fas fa-calendar"></i>
+      <time datetime="2017-11-14T20:03:21&#43;08:00">November 14, 2017</time>
+    </div>
+  
+
+  <div class="flex items-center gap-1">
+    <i class="fas fa-folder"></i>
+    
+    <a href="/categories/unix/" class=" text-xs font-medium transition 
+         hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Unix
+    </a>
+    
+    
+  </div>
+</div><article class="prose dark:prose-invert max-w-none"><blockquote>
+<p>对重签名脚本进行了规范的踩坑 , 挤出一个微笑后写下这篇博文<br>
+感谢Google, 感谢我生涩的swift 之阅读IosAppResigner源码</p>
+</blockquote>
+<h3 id="profile">
+<a href="#Profile"
+   >
+   
+</a>Profile</h3>
+<p><img src="/images/sign_profile.png" alt=""></p>
+<h3 id="使用">
+<a href="#%e4%bd%bf%e7%94%a8"
+   >
+   
+</a>使用</h3>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign
+</code></pre><ul>
+<li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
+<li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
+<li>$3 是否修改bundleID,默认是原先的</li>
+</ul>
+<p><img src="/images/signstr.png" alt=""></p>
+<blockquote>
+<p>脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+security find-identity -v -p codesigning
+</code></pre><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\\(正版\\)/Payload/MQQSecure.app/MQQSecure | grep cryptid
+</code></pre></blockquote>
+<h3 id="mobileprovision生成entitlementsplist">
+<a href="#mobileProvision%e7%94%9f%e6%88%90Entitlements-plist"
+   >
+   
+</a>mobileProvision生成Entitlements.plist</h3>
+<pre tabindex="0"><code>
+
+1
+
+2
+</code></pre><pre tabindex="0"><code>
+
+security cms -D -i $provision &gt; ProvisionProfile.plist 
+
+/usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist
+</code></pre><p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见
+<a href="https://paulswith.github.io/2017/11/14/plist%E6%96%87%E4%BB%B6-%E5%9C%A8%E8%84%9A%E6%9C%AC%E4%B8%AD%E7%9A%84%E6%93%8D%E4%BD%9C/"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   plist文件-在脚本中的操作
+</a></p>
+<h3 id="mobileprovision拷贝为embeddedmobileprovision">
+<a href="#mobileProvision%e6%8b%b7%e8%b4%9d%e4%b8%baembedded-mobileprovision"
+   >
+   
+</a>mobileProvision拷贝为embedded.mobileprovision</h3>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+cp $provision $appPlace/embedded.mobileprovision
+</code></pre><h3 id="是否概要更改bundleid">
+<a href="#%e6%98%af%e5%90%a6%e6%a6%82%e8%a6%81%e6%9b%b4%e6%94%b9BundleID"
+   >
+   
+</a>是否概要更改BundleID</h3>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+</code></pre><pre tabindex="0"><code>
+
+if \[\[ $3 \]\]; then
+
+plutil -replace CFBundleIdentifier -string &#34;$3&#34; $appPlace/Info.plist
+
+reBundleID=\`plutil -p $appPlace/Info.plist | grep &#39;CFBundleIdentifier&#39; \`
+
+echo &#34;Log info : you wanna replace to: ${reBundleID}&#34;
+
+fi
+</code></pre><p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p>
+<h3 id="删除影响签名文件">
+<a href="#%e5%88%a0%e9%99%a4%e5%bd%b1%e5%93%8d%e7%ad%be%e5%90%8d%e6%96%87%e4%bb%b6"
+   >
+   
+</a>删除影响签名文件</h3>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+</code></pre><pre tabindex="0"><code>
+
+plutil -remove CFBundleREsourceSpecification $appPlace/Info.plist   #删除签名源文件相关
+
+rm -rf $appPlace/Watch  #发现watch插件必现失败,这个必须删除了
+
+rm -rf $appPlace/PlugIns #发现PlugIns插件必现失败,这个必须删除了,就算下面重签也不管的, 坑超多
+
+codesignInfo=\`find $appPlace -name &#34;CodeResources&#34; \`
+
+for i in $codesignInfo; do
+
+rm -f $i
+
+done
+</code></pre><ul>
+<li>对Info.plist里面的CFBundleREsourceSpecification这个key删除,具体不知道做了什么,IosAppSigner也这么做了</li>
+<li>Watch和Plugins这两个文件,我曾试过对他们都进行重签名, 但依然不管用, 相关坑大概是独立性,可以跳转到
+<a href="https://nianxi.net/ios/dump-decrypted-ios-app-extensions.html"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   念茜女神
+</a>的博文了解</li>
+<li>源文件的_CodeSignature/CodeResources也进行了全局删除,签名后会自动生成这个文件</li>
+</ul>
+<h3 id="开始重签">
+<a href="#%e5%bc%80%e5%a7%8b%e9%87%8d%e7%ad%be"
+   >
+   
+</a>开始重签</h3>
+<h4 id="第一步相关lib-framework签名">
+<a href="#%e7%ac%ac%e4%b8%80%e6%ad%a5-%e7%9b%b8%e5%85%b3lib-framework%e7%ad%be%e5%90%8d"
+   >
+   
+</a>第一步,相关lib-framework签名</h4>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+</code></pre><pre tabindex="0"><code>
+
+allShouldSign=\` find $appPlace -name &#34;\*.appex&#34; &amp;&amp; find $appPlace  -name &#34;\*.framework&#34; &amp;&amp; find $appPlace  -name &#34;\*.dylib&#34; &amp;&amp; find $appPlace/\* -name &#34;\*.app&#34; \` #最上层的先不签
+
+for i in $allShouldSign; do
+
+codesign -fs &#34;${signStr}&#34; --no-strict --entitlements=/tmp/project\_resign/Entitlements.plist $i
+
+done
+</code></pre><ul>
+<li>
+<p>对上方类型都进行一篇搜索,得到绝对路径后进行重签名<br>
+<img src="/images/type.png" alt=""></p>
+<blockquote>
+<p>这是iosAppResigner中,作者对着全部的类型都检索了一遍,我并完全覆盖,如果你踩到了坑,可以试试把类型都加上</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="核心包签名">
+<a href="#%e6%a0%b8%e5%bf%83%e5%8c%85%e7%ad%be%e5%90%8d"
+   >
+   
+</a>核心包签名</h4>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+codesign -vvv -fs &#34;$signStr&#34; --no-strict --entitlements=/tmp/project\_resign/Entitlements.plist $appPlace
+</code></pre><h3 id="打包为ipa">
+<a href="#%e6%89%93%e5%8c%85%e4%b8%baipa"
+   >
+   
+</a>打包为ipa</h3>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+</code></pre><pre tabindex="0"><code>
+
+cd $tempPlace
+
+zip -qry sign.ipa ./Payload
+
+mv $tempPlace/sign.ipa ~/Desktop
+</code></pre><ul>
+<li>因为打包的时候是递归形式的, 指定绝对路径会踩坑,注意就行</li>
+</ul>
+<h3 id="安装试试">
+<a href="#%e5%ae%89%e8%a3%85%e8%af%95%e8%af%95"
+   >
+   
+</a>安装试试</h3>
+<p><img src="/images/install.png" alt=""></p>
+<p>
+<a href="https://github.com/Paulswith/ToolsScript/tree/master/iosResign"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   - - -附源码github链接
+</a></p>
+</article>
+<br>
+    <div class="flex flex-wrap items-center gap-2">
+      <i class="fas fa-tags"></i>
+      
+        <a href="/tags/iosdev/"
+           class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        IosDev
+      </a>
+    </div>
+<br></section></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+

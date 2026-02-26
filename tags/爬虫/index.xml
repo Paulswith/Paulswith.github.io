@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>爬虫 on Blog</title>
+    <link>https://blog.eternaless.top/tags/%E7%88%AC%E8%99%AB/</link>
+    <description>Recent content in 爬虫 on Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Nov 2017 19:42:20 +0800</lastBuildDate>
+    <atom:link href="https://blog.eternaless.top/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>seleniumANDrequest辅助爬虫</title>
+      <link>https://blog.eternaless.top/posts/seleniumandrequest%E8%BE%85%E5%8A%A9%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Thu, 23 Nov 2017 19:42:20 +0800</pubDate>
+      <guid>https://blog.eternaless.top/posts/seleniumandrequest%E8%BE%85%E5%8A%A9%E7%88%AC%E8%99%AB/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;爬虫写多了时候会发现, 很多的时候总是有些问题被阻挡, 虽然越来越多的AI诸如此类的工具也正在破解升级, 但在在小型的爬虫之前,selenium可以帮助我们辅助一些代码层无法越过的坑,拿到完整的cookies, 让客户端对我们身份证验证已通过之后,移交到深层的代码里, 进行操作.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;先用selenium拿到最真实的cookies&#34;&gt;&#xA;&lt;a href=&#34;#%e5%85%88%e7%94%a8selenium%e6%8b%bf%e5%88%b0%e6%9c%80%e7%9c%9f%e5%ae%9e%e7%9a%84cookies&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;先用selenium拿到最真实的cookies&lt;/h3&gt;&#xA;&lt;p&gt;似乎这没什么好讲的, 贴下我的代码截图吧…&lt;br&gt;&#xA;selenium小封装:&lt;br&gt;&#xA;&lt;img src=&#34;login_selenium.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;小爬虫的时候或许都可以跳过这一步, 你可以进行一个长时间的sleep,手工进行登录,填入验证码等&lt;/p&gt;&#xA;&lt;h3 id=&#34;cookies移交&#34;&gt;&#xA;&lt;a href=&#34;#cookies%e7%a7%bb%e4%ba%a4&#34;&#xA;   &gt;&#xA;   &#xA;&lt;/a&gt;cookies移交&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;1&#xA;&#xA;2&#xA;&#xA;3&#xA;&#xA;4&#xA;&#xA;5&#xA;&#xA;6&#xA;&#xA;7&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#xA;&#xA;def set\_session\_cookie(self):&#xA;&#xA;    &amp;#34;&amp;#34;&amp;#34;&#xA;&#xA;    cookie 移植到 session,方便后续操作&#xA;&#xA;    &amp;#34;&amp;#34;&amp;#34;&#xA;&#xA;    self.driver.get(&amp;#39;http://url&amp;#39;)&#xA;&#xA;    for subCookie in self.driver.get\_cookies():&#xA;&#xA;        self.session.cookies.set(subCookie\[u&amp;#39;name&amp;#39;\], self.driver.get\_cookie(subCookie\[u&amp;#39;name&amp;#39;\])\[&amp;#39;value&amp;#39;\])&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;self.driver.get_cookies() 得到是一个数组, 我们遍历这个数组, 拿到name-value , 对移交的session的进行cookies设置.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html class=""
+id="theme-root" 
+lang="en-us" 
+dir="ltr">
+
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-name" content="tailroad" />
+<title>Python | Blog</title>
+<meta name="description" content="">
+<link rel="shortcut icon" href="/favicon.ico">
+<script>
+  document.documentElement.classList.toggle(
+  "dark",
+  localStorage.theme === "dark" ||
+    (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
+);
+</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+
+<body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+  <div class="px-4 py-2 lg:px-6">
+    <div class="flex items-center justify-between ">      
+      <div class="flex items-center space-x-2">
+        <a href="/"  title="Blog"  rel="home"
+          class="flex items-center">
+          
+          <div class="flex flex-col leading-tight">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">Blog</span>
+          </div>
+          
+        </a>
+      </div>
+
+      <nav class="flex flex-wrap gap-4 text-sm">
+        
+<nav class="flex flex-wrap gap-4 text-sm">
+  
+    
+    
+    
+    
+
+    <a href="/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Blog</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/categories/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                bg-gray-300 text-gray-900 dark:bg-gray-700 dark:text-white
+              ">
+      
+      <span>Categories</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/tags/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>Tags</span>
+    </a>
+  
+    
+    
+    
+    
+
+    <a href="/about/"
+       class="flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors duration-200
+              
+                text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800
+              ">
+      
+      <span>About</span>
+    </a>
+  
+</nav>
+      </nav>
+
+      <div class="flex items-center space-x-4">  
+          <div class="flex items-center border border-gray-600 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <input id="searchInput" type="text" placeholder="Search..." aria-label="Search Articles"
+          class="bg-transparent focus:outline-none text-sm text-gray-900 dark:text-white placeholder-gray-400" />                  
+        <kbd id="search-shortcut" class="ml-3 text-xs font-mono text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded">
+        
+      </kbd>
+      </div>
+          <button id="theme-toggle"
+            class="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 cursor-pointer"
+            aria-label="Toggle theme">
+            <i id="theme-icon-light" data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+            <i id="theme-icon-dark" data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          </button>
+        </div>
+    </div>    
+  </div>
+</header><main id="main-content" class="w-full" role="main">
+    <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr_30%] gap-6"><section id="posts" class="space-y-2">
+  <h1 class="text-2xl mb-6">PYTHON</h1>
+  <ul class="space-y-2">
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">wda玩微信跳一跳</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>… 等我写完这个脚本,刷到了372分, 才发现Android的大佬们早就有一套操作了, 似乎想法都差不多,我的环境是在ios-mac上执行</p>
+</blockquote>
+<h3 id="安装环境">
+<a href="#%e5%ae%89%e8%a3%85%e7%8e%af%e5%a2%83"
+   >
+   
+</a>安装环境</h3>
+<h4 id="webdriveragent">
+<a href="#WebDriverAgent"
+   >
+   
+</a>WebDriverAgent</h4>
+<p>
+<a href="https://github.com/facebook/WebDriverAgent"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/facebook/WebDriverAgent
+</a><br>
+facebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点<br>
+需要一些环境依赖,代码clone下来之后, 得在项目路径下执行下:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+./Scripts/bootstrap.sh
+</code></pre><p>xcode打开,选择Target是WebDriverAgentRunner,Test到手机(签名用个人Appid就可以,然后Test到手机后,信任一下证书)<br>
+<img src="wdaAgent.png" alt=""></p>
+<h4 id="facebook-wda">
+<a href="#facebook-wda"
+   >
+   
+</a>facebook-wda</h4>
+<p>
+<a href="https://github.com/openatx/facebook-wda"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   https://github.com/openatx/facebook-wda
+</a><br>
+wda,一个python脚本,配合WebDriverAgent使用,便捷的安装方法:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+sudo pip install --pre facebook-wda
+</code></pre><h4 id="测试下环境">
+<a href="#%e6%b5%8b%e8%af%95%e4%b8%8b%e7%8e%af%e5%a2%83"
+   >
+   
+</a>测试下环境</h4>
+<p>用个终端端口转发下(iproxy 可以通过 brew install usbmuxd安装):</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+iproxy 8100 8100
+</code></pre><p>用以下命令启动下WebDriverAgent,你需要改下下方的name=你自己的手机名:</p>
+<pre tabindex="0"><code>
+
+1
+</code></pre><pre tabindex="0"><code>
+
+xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination &#39;platform=iOS,name=YourDeviceName&#39; test
+</code></pre><p>看到输出这个就启动正常了:<br>
+<img src="startAgent.png" alt=""></p>
+<p>另开个终端,启动下python,如下测试下:<br>
+<img src="pyhonTest.png" alt=""></p>
+<h3 id="脚本实现">
+<a href="#%e8%84%9a%e6%9c%ac%e5%ae%9e%e7%8e%b0"
+   >
+   
+</a>脚本实现:</h3>
+<p>
+<a href="https://github.com/Paulswith/ToolsScript/tree/master/Wechat_jump_game"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   git代码地址-python3.6.3
+</a></p>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+11
+
+12
+
+13
+
+14
+
+15
+
+16
+
+17
+
+18
+
+19
+
+20
+
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+27
+
+28
+
+29
+
+30
+
+31
+
+32
+</code></pre><pre tabindex="0"><code>
+
+IMAGE\_PLACE = &#39;/tmp/screen.png&#39;
+
+each\_pixel\_d = 0.00190
+
+c = wda.Client()
+
+s = c.session(&#39;com.tencent.xin&#39;)
+
+input(&#34;请自行切换到游戏里面的界面,回车即可开始&#34;)
+
+def change\_to\_duration(position\_list):
+
+    &#34;&#34;&#34;
+
+    勾股定理 求d=C=开根号(A^2+B^2)
+
+    &#34;&#34;&#34;
+
+    if not position\_list:
+
+        return
+
+    x1,y1 = position\_list\[0\]
+
+    x2,y2 = position\_list\[1\]
+
+    the\_d = math.sqrt(math.pow(y2 - y1, 2) + math.pow(x2 - x1, 2))
+
+    return float(&#39;%.3f&#39; % (the\_d \* each\_pixel\_d))
+
+if \_\_name\_\_ == &#39;\_\_main\_\_&#39;:
+
+    while 1:
+
+        x = c.screenshot(IMAGE\_PLACE)
+
+        if not os.path.exists(IMAGE\_PLACE):
+
+            continue
+
+        \# time.sleep(1)  #图片就算在了,渲染还没结束,这1秒阻塞就给了吧,或者不给,为渲染正常的以下方阴影为准
+
+        pl.imshow(pl.array(Image.open(IMAGE\_PLACE)))
+
+        position\_list = pl.ginput(2,timeout=2147483647)
+
+        pl.ion()
+
+        duration = change\_to\_duration(position\_list)
+
+        pl.ioff()
+
+        if duration and os.path.exists(IMAGE\_PLACE):
+
+            s.tap\_hold(200, 200, duration=duration)
+
+            os.remove(IMAGE\_PLACE)
+</code></pre><p>首先进入到游戏页面,截图到本地<br>
+使用plt.imshow展示这张图片, 通过plt.ginput我们点击的两个点会被记录下来,<br>
+我们通过分析这两个点, 得到小人到对面物体的地点:<br>
+嗯, 勾股定理:<br>
+<img src="calcuC.png" alt=""></p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Dec 30, 2017</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">Python</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/wda%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/" class="absolute inset-0 z-0" aria-label="Read more aboutwda玩微信跳一跳"></a>
+</article>
+
+
+    
+      <article class="group relative">
+    <div
+        class="grid min-h-32 grid-cols-[1fr_auto] gap-4 rounded-md border border-gray-200 bg-white p-4 shadow-sm transition duration-300  dark:border-gray-700 dark:bg-gray-800 group-hover:bg-gray-200 dark:group-hover:bg-gray-500 group-hover:shadow-md">
+        <div id="content" class="flex flex-col justify-between">
+            <div>
+                <header class="mb-2">
+                    <div class="flex items-center justify-between">
+                         
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">seleniumANDrequest辅助爬虫</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><blockquote>
+<p>爬虫写多了时候会发现, 很多的时候总是有些问题被阻挡, 虽然越来越多的AI诸如此类的工具也正在破解升级, 但在在小型的爬虫之前,selenium可以帮助我们辅助一些代码层无法越过的坑,拿到完整的cookies, 让客户端对我们身份证验证已通过之后,移交到深层的代码里, 进行操作.</p>
+</blockquote>
+<h3 id="先用selenium拿到最真实的cookies">
+<a href="#%e5%85%88%e7%94%a8selenium%e6%8b%bf%e5%88%b0%e6%9c%80%e7%9c%9f%e5%ae%9e%e7%9a%84cookies"
+   >
+   
+</a>先用selenium拿到最真实的cookies</h3>
+<p>似乎这没什么好讲的, 贴下我的代码截图吧…<br>
+selenium小封装:<br>
+<img src="login_selenium.png" alt=""></p>
+<p>小爬虫的时候或许都可以跳过这一步, 你可以进行一个长时间的sleep,手工进行登录,填入验证码等</p>
+<h3 id="cookies移交">
+<a href="#cookies%e7%a7%bb%e4%ba%a4"
+   >
+   
+</a>cookies移交</h3>
+<pre tabindex="0"><code>
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+</code></pre><pre tabindex="0"><code>
+
+def set\_session\_cookie(self):
+
+    &#34;&#34;&#34;
+
+    cookie 移植到 session,方便后续操作
+
+    &#34;&#34;&#34;
+
+    self.driver.get(&#39;http://url&#39;)
+
+    for subCookie in self.driver.get\_cookies():
+
+        self.session.cookies.set(subCookie\[u&#39;name&#39;\], self.driver.get\_cookie(subCookie\[u&#39;name&#39;\])\[&#39;value&#39;\])
+</code></pre><p>self.driver.get_cookies() 得到是一个数组, 我们遍历这个数组, 拿到name-value , 对移交的session的进行cookies设置.</p></div></header>
+            </div>
+            <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>Nov 23, 2017</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-folder"></i>
+                    <div class="justify-end"><span
+                            class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800 dark:bg-blue-800 dark:text-blue-100">Python</span></div>
+                </span></footer>
+        </div></div>
+    <a href="/posts/seleniumandrequest%E8%BE%85%E5%8A%A9%E7%88%AC%E8%99%AB/" class="absolute inset-0 z-0" aria-label="Read more aboutseleniumANDrequest辅助爬虫"></a>
+</article>
+
+
+    
+  </ul>
+</section><aside id="sidebar-right" aria-label="Sidebar"
+        class="hidden lg:block sticky  rounded shadow   
+              "><div class="space-y-2">
+<div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow mt-2">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-file"></i>
+  <p class="text-md mb-0">RECENT POSTS</p>
+  </span>
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <ul class="space-y-2 text-sm">
+    
+    <li class="line-clamp-1">
+      <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%A4%B1%E6%8E%A7/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        读书笔记-失控
+      </a>
+    </li>
+    
+    <li class="line-clamp-1">
+      <a href="/posts/claudecode%E7%94%A8%E4%B8%8A%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94%E7%9A%84%E5%9B%BD%E4%BA%A7%E5%A4%A7%E6%A8%A1%E5%9E%8B/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        ClaudeCode用上高性价比的国产大模型
+      </a>
+    </li>
+    
+    <li class="line-clamp-1">
+      <a href="/posts/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E5%88%9B%E6%96%B0%E4%B8%8E%E4%BC%81%E4%B8%9A%E5%AE%B6%E7%B2%BE%E7%A5%9E/"
+        class=" hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+        读书笔记-创新与企业家精神
+      </a>
+    </li>
+    
+  </ul>
+</div><div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
+
+  <a href="/categories/" class="text-md mb-0 block text-gray-900 dark:text-white">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-folder"></i>
+      CATEGORIES
+    </span>
+  </a>
+
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <div class="flex flex-wrap gap-2">
+    
+    <a href="/categories/books" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Books  (3) 
+    </a>
+    
+    <a href="/categories/machinelearning" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Machinelearning  (6) 
+    </a>
+    
+    <a href="/categories/mactools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Mactools  (1) 
+    </a>
+    
+    <a href="/categories/myprogram" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Myprogram  (1) 
+    </a>
+    
+    <a href="/categories/python" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Python  (2) 
+    </a>
+    
+    <a href="/categories/reverseengineering" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Reverseengineering  (6) 
+    </a>
+    
+    <a href="/categories/tools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Tools  (1) 
+    </a>
+    
+    <a href="/categories/unix" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+        border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      Unix  (3) 
+    </a>
+    
+  </div>
+</div><div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
+  <a href="/tags/" class="text-md  mb-0 block text-gray-900 dark:text-white">
+      <span class="flex items-center gap-2">
+      <i class="fas fa-tags"></i>
+    TAGS
+    </span>
+  </a>
+  <hr class="border-t border-2 border-blue-500 dark:border-blue-400 mb-2">
+  <div class="flex flex-wrap gap-2 ">
+    
+    <a href="/tags/2018%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      2018年读的书  (1) 
+    </a>
+    
+    <a href="/tags/2025%E5%B9%B4%E8%AF%BB%E7%9A%84%E4%B9%A6" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      2025年读的书  (2) 
+    </a>
+    
+    <a href="/tags/claude" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      claude  (1) 
+    </a>
+    
+    <a href="/tags/colaboratory" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      colaboratory  (1) 
+    </a>
+    
+    <a href="/tags/ddns" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      ddns  (1) 
+    </a>
+    
+    <a href="/tags/iosdev" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      iosdev  (1) 
+    </a>
+    
+    <a href="/tags/llm" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      llm  (1) 
+    </a>
+    
+    <a href="/tags/macapp-divvy%E7%A0%B4%E8%A7%A3" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      macapp-divvy破解  (1) 
+    </a>
+    
+    <a href="/tags/mactools" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      mactools  (1) 
+    </a>
+    
+    <a href="/tags/shell" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      shell  (2) 
+    </a>
+    
+    <a href="/tags/tensorflow" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      tensorflow  (2) 
+    </a>
+    
+    <a href="/tags/windows" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      windows  (1) 
+    </a>
+    
+    <a href="/tags/%E5%87%AF%E6%96%87%E5%87%AF%E5%88%A9" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      凯文·凯利  (1) 
+    </a>
+    
+    <a href="/tags/%E5%88%9B%E6%96%B0%E4%B8%8E%E4%BC%81%E4%B8%9A%E5%AE%B6%E7%B2%BE%E7%A5%9E" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      创新与企业家精神  (1) 
+    </a>
+    
+    <a href="/tags/%E5%8E%9F%E5%88%99" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      原则  (1) 
+    </a>
+    
+    <a href="/tags/%E5%A4%B1%E6%8E%A7" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      失控  (1) 
+    </a>
+    
+    <a href="/tags/%E5%AE%9E%E6%88%98%E5%8E%BB%E9%99%A4%E5%B9%BF%E5%91%8A" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      实战去除广告  (1) 
+    </a>
+    
+    <a href="/tags/%E7%88%AC%E8%99%AB" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      爬虫  (1) 
+    </a>
+    
+    <a href="/tags/%E7%A0%B8%E5%A3%B3" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      砸壳  (2) 
+    </a>
+    
+    <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      自动化  (1) 
+    </a>
+    
+    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      读书笔记  (3) 
+    </a>
+    
+    <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      迁移学习  (1) 
+    </a>
+    
+    <a href="/tags/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E7%A7%BB%E6%A4%8Dios" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      迁移学习移植ios  (2) 
+    </a>
+    
+    <a href="/tags/%E9%80%86%E5%90%91unread" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      逆向unread  (1) 
+    </a>
+    
+    <a href="/tags/%E9%80%86%E5%90%91%E6%8E%A2%E6%8E%A2" class="inline-block px-3 py-1 rounded-full text-xs font-medium transition 
+            border hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">
+      逆向探探  (1) 
+    </a>
+    
+  </div>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow mb-4">
+    <span class="flex items-center gap-2">
+      <i class="fas fa-globe"></i>
+    <p class="text-md mb-0">SOCIAL</p>
+    </span>
+    <hr class="border-t border-2 border-blue-500 dark:border-blue-400">
+    <div class="mt-1.5 flex space-x-4 justify-center border-b border-gray-300 dark:border-gray-700 pb-2"><a href="mailto:jevo747@outlook.com" aria-label="Email"
+            class="text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+        </a><a href="https://github.com/https://github.com/Paulswith" target="_blank" aria-label="GitHub"
+            class="text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition">
+            <i data-lucide="github" class="w-5 h-5"></i>
+        </a></div>
+
+    <div class="mt-2 space-y-1"></div>
+</div></div>
+
+
+</aside></div>
+    </div> 
+</main>
+  <footer class="border-t border-gray-200 dark:border-gray-700"><div class="flex flex-row text-xs text-gray-500 dark:text-gray-400 items-center px-4 lg:px-6">
+  <div class="w-full">
+    &copy; 2026 Blog.
+    <span>Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700">Hugo</a> and <a href="https://github.com/Sathishbs/Tailroad/" class="hover:border-transparent hover:bg-purple-600 hover:text-white active:bg-purple-700" rel="nofollow noopener" target="_blank">Tailroad</a> theme.</span>
+  </div>
+  <div class="flex space-x-2 ">
+    
+  </div>
+</div>
+</footer><button id="scrollTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700 transition duration-300"
+        aria-label="Scroll to top">
+  ^
+</button><script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
+      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
+      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
+      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
+      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+</html>
+
+
+
