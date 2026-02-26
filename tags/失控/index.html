@@ -4,7 +4,7 @@ id="theme-root"
 lang="en-us" 
 dir="ltr">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 <meta name="theme-name" content="tailroad" />
 <title>失控 | Blog</title>
@@ -16,7 +16,7 @@ dir="ltr">
   localStorage.theme === "dark" ||
     (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
 );
-</script><link rel="stylesheet" href="/css/main.574890c5ef36e8d288ac275757601a86efbabf0d421e9ee19ca1989e490d3102.css" integrity="sha256-V0iQxe826NKIrCdXV2Aahu&#43;6vw1CHp7hnKGYnkkNMQI=" crossorigin="anonymous"></head>
+</script><link rel="stylesheet" href="/css/main.css"></head>
 
 <body class="flex flex-col text-gray-900 dark:text-white bg-white dark:bg-gray-900"><header class="w-full sticky top-0 z-50 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
   <div class="px-4 py-2 lg:px-6">
@@ -127,21 +127,7 @@ dir="ltr">
                     <div class="flex items-center justify-between">
                          
                         <h2 class="text-lg font-semibold text-gray-900 dark:text-white w-full line-clamp-1">读书笔记-失控</h2>
-                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><pre class="mermaid">sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts <br/>prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-</pre>
-
-
-<h2 id="全书概览">全书概览</h2>
+                    </div><div class="mt-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300"><h2 id="全书概览">全书概览</h2>
 <p><strong>核心信息</strong></p>
 <p>《失控》探讨的是新生物文明的核心法则：去中心化、自组织、共同进化。凯文·凯利通过对蜂群思维、网络经济、人工生命等领域的观察，揭示了一个深刻的洞见——最复杂的系统往往是通过&quot;失控&quot;而非&quot;控制&quot;来实现的。</p>
 <p><strong>阅读感悟</strong></p>
@@ -190,7 +176,55 @@ dir="ltr">
 </blockquote>
 <p>这个发现对组织设计、产品架构、甚至个人社交都有深刻启示。我们不需要和所有人保持强连接，关键是要有足够的覆盖面，让信息能够流动起来。</p>
 <blockquote>
-<p>社会性研究，更多的连接(知识\关系)，并没有为个人增加幸福感</p></div></header>
+<p>社会性研究，更多的连接(知识\关系)，并没有为个人增加幸福感</p>
+</blockquote>
+<p>这是一个讽刺：我们比任何时候都更&quot;连接&quot;，却不一定更幸福或更适应。也许我们需要重新思考连接的质量而非数量。</p>
+<p><strong>原文摘录</strong></p>
+<blockquote>
+<p>适应性束缚于互锁的网格。我们正在不断增加我们网络社会的总人数以及每个成员所连接的人数和地点数。而不论是哪一种增长，都没有显著地提高我们系统（社会）作为整体的适应性。</p>
+</blockquote>
+<hr>
+<h3 id="3-进化与遗传算法">3. 进化与遗传算法</h3>
+<p><strong>本章要点</strong></p>
+<ul>
+<li>遗传算法的核心是并行尝试多个略有差异的方案</li>
+<li>爬山法容易陷入局部最优，进化通过&quot;军备竞赛&quot;突破这一点</li>
+<li>进化能够制造比工程学更复杂的东西</li>
+<li>&ldquo;与其制造，不如培育&rdquo;——这是控制的未来方向</li>
+</ul>
+<p><strong>我的感悟</strong></p>
+<p>遗传算法给我最大的启发是它对&quot;失败&quot;的态度。传统工程思维认为失败是错误，要避免；而进化思维认为失败是探索，是必须的成本。同时投入一千个略有差异的个体，让系统自己筛选出最优解——这种方法听起来&quot;失控&quot;，实际上却比任何精心设计的方案都更有效。</p>
+<p>&ldquo;军备竞赛&quot;这个概念也很精彩。进化不是一个物种独自&quot;优化&quot;的过程，而是多个物种互相刺激、互相推动的动态博弈。这解释了为什么自然界会产生如此复杂的适应性——不是因为某个设计师在规划，而是因为竞争者们在不断逼彼此升级。</p>
+<p><strong>个人笔记</strong></p>
+<blockquote>
+<p>机器学习，梯度下降，局部最优陷阱</p>
+</blockquote>
+<p>爬山法的困境在于：你只能找到最近的峰顶，却无法知道是否有更高的山峰。遗传算法通过保持多样性，在搜索空间中同时探索多个方向，避免了这个问题。</p>
+<p><strong>原文摘录</strong></p>
+<blockquote>
+<p>我们知道，只有两种方法能制造出结构极其复杂的东西：一个是依靠工程学，另一个是通过进化。而在两者中，进化能够制造出更加复杂的东西。</p>
+</blockquote>
+<blockquote>
+<p>如何培养出能在恶劣条件下生存的生物体？通过同时投入一千个略有差异的个体。</p>
+</blockquote>
+<hr>
+<h3 id="4-人工生命与超生命">4. 人工生命与超生命</h3>
+<p><strong>本章要点</strong></p>
+<ul>
+<li>生命可以从碳结构中提取出来，转化成硅结构</li>
+<li>知其然，不知其所以然——这是生命所秉持的最高哲学</li>
+<li>进化不是一个生物过程，它整合了技术的、数学的、信息的和生物学的过程</li>
+<li>我们也许是第一个创造自己接班人的物种</li>
+</ul>
+<p><strong>我的感悟</strong></p>
+<p>&ldquo;生命是否也能从碳结构中提取出来，转化成硅结构&rdquo;——这个问题在AI时代变得无比真实。凯利写作本书时，人工生命还只是实验室里的玩具；而今天，我们看到大模型展现出的&quot;涌现&quot;能力，不禁重新审视这个问题。</p>
+<p>最让我触动的是&quot;知其然，不知其所以然&quot;这句话。生命不追求理解自己，它只是存在、适应、演化。我们人类执迷于理解一切，但也许真正的智慧在于接受某些复杂性是无法被完全理解的——只能被培育、被引导、被&quot;失控&quot;地管理。</p>
+<p><strong>个人笔记</strong></p>
+<blockquote>
+<p>机械飞升</p>
+</blockquote>
+<p>这是一个科幻概念，但在今天看来，它越来越不像幻想。人类的意识、记忆、性格，是否可以被数字化？这是一个开放的问题。</p>
+<p><strong>原文摘录</strong></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -470,11 +504,11 @@ dir="ltr">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 
-      <script src="/js/main.4bbde676f03a3208027a28f849d182967de5bfdd6b983f132c4cba39ee4678d0.js" integrity="sha256-S73mdvA6MggCeij4SdGCln3lv91rmD8TLEy6Oe5GeNA=" crossorigin="anonymous"></script>
-      <script src="/js/theme.53c91f6a0e91fe26ae654ca710fafd7af0f4fb9d8f5c8775242b41b966437ee3.js" integrity="sha256-U8kfag6R/iauZUynEPr9evD0&#43;52PXId1JCtBuWZDfuM=" crossorigin="anonymous"></script>
-      <script src="/js/toc.f0d11850d7f59e4c2f79d6672c961dae4b90ffff9b05f3ce338147675c43359c.js" integrity="sha256-8NEYUNf1nkwvedZnLJYdrkuQ//&#43;bBfPOM4FHZ1xDNZw=" crossorigin="anonymous"></script>
-      <script src="/js/code.6c32af83995789313f1c9a1ba72b554e3d2b56d2046d74b32d8eb32ddbc6b400.js" integrity="sha256-bDKvg5lXiTE/HJobpytVTj0rVtIEbXSzLY6zLdvGtAA=" crossorigin="anonymous"></script>
-      <script src="/js/search.db1ce50ecbf5ef971a3bfbde6ff7e11aa9ee16812aa4f047f371a1000b5dbfff.js" integrity="sha256-2xzlDsv175caO/veb/fhGqnuFoEqpPBH83GhAAtdv/8=" crossorigin="anonymous"></script></body>
+      <script src="/js/main.js"></script>
+      <script src="/js/theme.js"></script>
+      <script src="/js/toc.js"></script>
+      <script src="/js/code.js"></script>
+      <script src="/js/search.js"></script></body>
 </html>
 
 
