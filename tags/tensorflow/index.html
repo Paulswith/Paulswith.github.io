@@ -135,7 +135,7 @@ dir="ltr">
    >
    
 </a>当前数据</h4>
-<p><img src="all_data.png" alt=""><br>
+<p><img src="all_data.webp" alt=""><br>
 当前我有这些图片数据, 分为是飞机(plane_)和不是飞机(plane_false)的二分类数据集原图.分别存在两个不同的文件夹</p>
 <ul>
 <li>数据1 -&gt; 大概是1600+张</li>
@@ -148,54 +148,95 @@ dir="ltr">
    
 </a>根据文件夹标签化图片</h4>
 <p>头部一些声明:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-</code></pre><pre tabindex="0"><code>
-
-\# -\*- coding:utf-8 -\*-
-
-\_\_author = &#39;dobby&#39;
-
-import tensorflow as tf
-
-import os
-
-import random
-
-from PIL import Image
-
-plane\_path = &#39;/Users/dobby/Documents/data\_img/plane&#39;
-
-UNplane\_path = &#39;/Users/dobby/Documents/data\_img/UNplane&#39;
-
-records\_path = &#39;/Users/dobby/Documents/data\_img/train.tfrecords&#39;
-
-dataset\_list = \[\]
-</code></pre><p>遍历这两个文件夹, 如果是plane文件夹,那里面存储是label=1的图片, 反之是0. 进行标签化<br>
-存储方式为(image_path, label)的元组 一起存储在dataset_list数组中</p></div></header>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+</span></span><span style="display:flex;"><span>plane_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/dobby/Documents/data_img/plane&#39;</span>
+</span></span><span style="display:flex;"><span>UNplane_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/dobby/Documents/data_img/UNplane&#39;</span>
+</span></span><span style="display:flex;"><span>records_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/dobby/Documents/data_img/train.tfrecords&#39;</span>
+</span></span><span style="display:flex;"><span>dataset_list <span style="color:#f92672">=</span> []
+</span></span></code></pre></div><p>遍历这两个文件夹, 如果是plane文件夹,那里面存储是label=1的图片, 反之是0. 进行标签化<br>
+存储方式为(image_path, label)的元组 一起存储在dataset_list数组中</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">classic_data</span>(path):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 根据目录标签数据</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> path <span style="color:#f92672">==</span> plane_path:
+</span></span><span style="display:flex;"><span>        label <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        label <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    file_list <span style="color:#f92672">=</span>  os<span style="color:#f92672">.</span>listdir(path)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> each <span style="color:#f92672">in</span> file_list:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> each[:<span style="color:#ae81ff">5</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;plane&#39;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        im_full_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(path, each)
+</span></span><span style="display:flex;"><span>        dataset_list<span style="color:#f92672">.</span>append((im_full_path, label))
+</span></span></code></pre></div><h4 id="转为数据集">
+<a href="#%e8%bd%ac%e4%b8%ba%e6%95%b0%e6%8d%ae%e9%9b%86"
+   >
+   
+</a>转为数据集</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_record</span>(data_list, should_transpose<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     图片转为bytes写入
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     字符串也是bytes
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">     1/0 Int
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    counter <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e"># 新建一个写入session</span>
+</span></span><span style="display:flex;"><span>    writer <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>python_io<span style="color:#f92672">.</span>TFRecordWriter(records_path)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> path,label <span style="color:#f92672">in</span> data_list:
+</span></span><span style="display:flex;"><span>        counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{i}</span><span style="color:#e6db74">,</span><span style="color:#e6db74">{j}</span><span style="color:#e6db74">n&#34;</span><span style="color:#f92672">.</span>format(i<span style="color:#f92672">=</span>path, j<span style="color:#f92672">=</span>label))
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 打开图片</span>
+</span></span><span style="display:flex;"><span>        img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(path)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 将图片统一大小</span>
+</span></span><span style="display:flex;"><span>        img <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>resize((<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">300</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 转换为bytes</span>
+</span></span><span style="display:flex;"><span>        img_raw <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>tobytes()
+</span></span><span style="display:flex;"><span>        data <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Example(
+</span></span><span style="display:flex;"><span>            features<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Features(
+</span></span><span style="display:flex;"><span>                feature<span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;label&#39;</span>:tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Feature(int64_list<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Int64List(value<span style="color:#f92672">=</span>[label])), <span style="color:#75715e"># 0/1 分类,所以是INT</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#39;image&#39;</span>:tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Feature(bytes_list<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>BytesList(value<span style="color:#f92672">=</span>[img_raw])) <span style="color:#75715e"># 字符串/图片/语音用bytes</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>        writer<span style="color:#f92672">.</span>write(data<span style="color:#f92672">.</span>SerializeToString())
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> should_transpose:
+</span></span><span style="display:flex;"><span>            counter <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 将图片左右翻转后生成一张新的图片,label不变,</span>
+</span></span><span style="display:flex;"><span>            rot_img <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>transpose(Image<span style="color:#f92672">.</span>FLIP_LEFT_RIGHT)
+</span></span><span style="display:flex;"><span>            rot_img_raw <span style="color:#f92672">=</span> rot_img<span style="color:#f92672">.</span>tobytes()
+</span></span><span style="display:flex;"><span>            data_2 <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Example(
+</span></span><span style="display:flex;"><span>                features<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Features(
+</span></span><span style="display:flex;"><span>                    feature<span style="color:#f92672">=</span>{
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#39;label&#39;</span>:tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Feature(int64_list<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Int64List(value<span style="color:#f92672">=</span>[label])),
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#39;image&#39;</span>:tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Feature(bytes_list<span style="color:#f92672">=</span>tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>BytesList(value<span style="color:#f92672">=</span>[rot_img_raw]))
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                )
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            writer<span style="color:#f92672">.</span>write(data_2<span style="color:#f92672">.</span>SerializeToString())
+</span></span><span style="display:flex;"><span>    writer<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;写入数据集-DONE, 共存</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">个数据&#34;</span><span style="color:#f92672">.</span>format(counter))
+</span></span></code></pre></div><ul>
+<li><code>writer = tf.python_io.TFRecordWriter(records_path)</code>启动一个写入TFRecord句柄, 遍历数组取出图片和label, 将图片设置统一大小并转为bytes.</li>
+<li><code>tf.train.Example(tf.train.Features)</code>是核心的处理代码, Example成TensorFlow的特定规则数据, 通过使用TFRecordWriter写入到TFRecord中.Example包含一个键值对数据结构(与dict相同), 使用属性features记录, 因此, 初始化时必须传入这个features参数</li>
+<li><code>writer.write(data.SerializeToString())</code>把Example序列成字符串写入TFRecord</li>
+<li><code>should_transpose=False</code>参数用来配置是否水平翻转图片, 并令数据扩大一倍</li>
+<li>当然关于TFRecord的写入具体规则, 如果需要可以参考该链接
+<a href="http://blog.csdn.net/qq_39037910/article/details/72900308"
+   
+     target="_blank" rel="noopener noreferrer"
+   >
+   Tensorflow: 文件读写
+</a></li>
+</ul>
+<h4 id="测试是否写入成功">
+<a href="#%e6%b5%8b%e8%af%95%e6%98%af%e5%90%a6%e5%86%99%e5%85%a5%e6%88%90%e5%8a%9f"
+   >
+   
+</a>测试是否写入成功</h4>
+<p>执行函数代码, 需要注意, 我提前将数据存储在python的列表中的, 可以使用<code>random.shuffle</code>进行数据的洗牌</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -233,83 +274,47 @@ dataset\_list = \[\]
 <p>Dataset-API是1.3版引入的, 支持从内存中/硬盘中生成数据集.</p>
 </blockquote>
 <ul>
-<li>
-<p>一维数组<br>
-直接就是给到一维数组, 生成数据集</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(np.array(\[1.0, 2.0, 3.0, 4.0, 5.0\]))
-
-out\_put=&#34;&#34;&#34;&#34;
-
-1.0
-
-2.0
-
-3.0
-
-4.0
-
-5.0
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>多维数组, size=(5,2) , 可以理解为(count, dimension)</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(np.random.uniform(size=(5, 2)))
-
-out\_put=&#34;&#34;&#34;
-
-\[ 0.01721917  0.4621821 \]
-
-\[ 0.58484623  0.13534625\]
-
-\[ 0.83591111  0.01397783\]
-
-\[ 0.88934806  0.97464257\]
-
-\[ 0.76707649  0.42036516\]
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>元组</p></div></header>
+<li>一维数组<br>
+直接就是给到一维数组, 生成数据集</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices(
+</span></span><span style="display:flex;"><span>    (np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">5.0</span>]), np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>)))
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">元组的形式:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(1.0, array([ 0.41459922,  0.75492457]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(2.0, array([ 0.47954237,  0.93916116]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(3.0, array([ 0.70576017,  0.58064858]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(4.0, array([ 0.8239234 ,  0.92814029]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(5.0, array([ 0.03073594,  0.16718188]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>字典<br>
+字典的格式给到,结果也是字典, 按照key索引(<strong>这种用的比较多一些</strong>)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices(
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;a&#34;</span>: np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">5.0</span>]),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;b&#34;</span>: np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">字典的形式:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 1.0, &#39;b&#39;: array([ 0.15337225,  0.97730736])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 2.0, &#39;b&#39;: array([ 0.89860896,  0.95473649])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 3.0, &#39;b&#39;: array([ 0.79198725,  0.84507321])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 4.0, &#39;b&#39;: array([ 0.27289686,  0.56223038])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 5.0, &#39;b&#39;: array([ 0.19825011,  0.44183586])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><h4 id="两种输出验证方式">
+<a href="#%e4%b8%a4%e7%a7%8d%e8%be%93%e5%87%ba%e9%aa%8c%e8%af%81%e6%96%b9%e5%bc%8f"
+   >
+   
+</a>两种输出验证方式</h4>
+<blockquote>
+<p>当内存中数据生成后, 我们通过这两种方式来验证下<br>
+<code>dataset</code>来自上方代码</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

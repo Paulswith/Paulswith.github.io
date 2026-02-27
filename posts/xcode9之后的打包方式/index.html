@@ -155,7 +155,7 @@ dir="ltr">
 <li>xcrun打包为.ipa文件</li>
 </ol>
 <p>第三步是和XCode9差异最大的地方, 先记住这里:<br>
-<img src="xcrun.png" alt=""></p>
+<img src="xcrun.webp" alt=""></p>
 <h2 id="xcode9之后的打包">
 <a href="#XCode9%e4%b9%8b%e5%90%8e%e7%9a%84%e6%89%93%e5%8c%85"
    >
@@ -180,47 +180,25 @@ xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configura
    >
    
 </a>编译,生成.xcarchive</h4>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-xcodebuild archive -workspace $workspace -scheme $scheme -configuration \\
-
-$configuration -archivePath $archivePath -destination generic/platform=ios \\
-
-CODE\_SIGN\_IDENTITY=&#34;$code\_sign\_indentity&#34;
-</code></pre><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>xcodebuild archive -workspace $workspace -scheme $scheme -configuration 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>$configuration -archivePath $archivePath -destination generic/platform<span style="color:#f92672">=</span>ios 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>CODE_SIGN_IDENTITY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$code_sign_indentity<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
 <h4 id="将xcarchive生成ipa">
 <a href="#%e5%b0%86-xcarchive%e7%94%9f%e6%88%90-IPA"
    >
    
 </a>将.xcarchive生成.IPA</h4>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-xcodebuild -exportArchive -archivePath $archivePath \\
-
-\-exportPath $exportPath -destination generic/platform=ios \\
-
-\-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates
-</code></pre><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br>
-<img src="plist.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>xcodebuild -exportArchive -archivePath $archivePath 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>-exportPath $exportPath -destination generic/platform<span style="color:#f92672">=</span>ios 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates
+</span></span></code></pre></div><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br>
+<img src="plist.webp" alt=""></p>
 <p>我确信你按照我的复制去执行, 基本很难打包成功, 如果想要打包成功, 你得用XCode手动打包一遍, 选择对应的打包方式<code>method</code>, 然后生成的路径下, 就附带了这个<code>ExportOptions.plist</code>:</p>
 <ol>
 <li>打开xcode, Product -&gt; Archive 等待编译完成, 自己弹出可选框</li>
 <li>如图操作导出:<br>
-<img src="exportPlist.png" alt=""></li>
+<img src="exportPlist.webp" alt=""></li>
 </ol>
 <p>成功后, 同级目录下就存在<code>ExportOptions.plist</code>文件了, 其中默认bitCode是YES的, 你可以选择改为NO开提升效率.</p>
 <h2 id="脚本化">
@@ -254,11 +232,11 @@ xcodebuild -exportArchive -archivePath $archivePath \\
 </a>使用指南</h4>
 <ul>
 <li>根目录下执行 <code>xcodebuild -list</code>, 把下面<code>user-define</code>这些配置下:<br>
-<img src="config.png" alt=""></li>
+<img src="config.webp" alt=""></li>
 <li>项目根目录生成<code>package</code>文件夹, 将<strong>脚本</strong>和<strong>ExportOptions.plist</strong>放进去.</li>
 <li>给脚本添加执行权限<code>chmod +x package.sh</code>, 执行.</li>
 </ul>
-<p>补充: 我直接项目是<code>.xcworkspace</code>的, 因为很少有项目还是单target的吧~ 如果是, 你需要自行改下, 或email我~(dobby确实还是懒)</p>
+<p>补充: 我直接项目是<code>.xcworkspace</code>的, 因为很少有项目还是单target的吧~ 如果是, 你需要自行改下</p>
 </article>
 <br>
     <div class="flex flex-wrap items-center gap-2">

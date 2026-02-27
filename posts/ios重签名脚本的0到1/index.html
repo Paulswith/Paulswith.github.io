@@ -117,7 +117,7 @@ dir="ltr">
     <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">ios重签名脚本的0到1</h1>
 
 <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
-  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>1 Mins read
   </div>
 
   <div class="flex items-center gap-1">
@@ -145,53 +145,31 @@ dir="ltr">
    >
    
 </a>Profile</h3>
-<p><img src="/images/sign_profile.png" alt=""></p>
+<p><img src="/images/sign_profile.webp" alt=""></p>
 <h3 id="使用">
 <a href="#%e4%bd%bf%e7%94%a8"
    >
    
 </a>使用</h3>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./resign.sh /Users/akarizo/Desktop/微信-已砸壳.ipa  /Users/akarizo/Desktop/original.mobileprovision  com.weixin.resign
+</span></span></code></pre></div><ul>
 <li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
 <li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
 <li>$3 是否修改bundleID,默认是原先的</li>
 </ul>
-<p><img src="/images/signstr.png" alt=""></p>
+<p><img src="/images/signstr.webp" alt=""></p>
 <blockquote>
 <p>脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security find-identity -v -p codesigning
-</code></pre><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\\(正版\\)/Payload/MQQSecure.app/MQQSecure | grep cryptid
-</code></pre></blockquote>
-<h3 id="mobileprovision生成entitlementsplist">
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security find-identity -v -p codesigning
+</span></span></code></pre></div><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手<span style="color:#f92672">(</span>正版<span style="color:#f92672">)</span>/Payload/MQQSecure.app/MQQSecure | grep cryptid
+</span></span></code></pre></div><h3 id="mobileprovision生成entitlementsplist">
 <a href="#mobileProvision%e7%94%9f%e6%88%90Entitlements-plist"
    >
    
 </a>mobileProvision生成Entitlements.plist</h3>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i $provision &gt; ProvisionProfile.plist 
+<pre tabindex="0"><code>security cms -D -i $provision &gt; ProvisionProfile.plist 
 
 /usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist
 </code></pre><p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见
@@ -206,76 +184,31 @@ security cms -D -i $provision &gt; ProvisionProfile.plist
    >
    
 </a>mobileProvision拷贝为embedded.mobileprovision</h3>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-cp $provision $appPlace/embedded.mobileprovision
-</code></pre><h3 id="是否概要更改bundleid">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp $provision $appPlace/embedded.mobileprovision
+</span></span></code></pre></div><h3 id="是否概要更改bundleid">
 <a href="#%e6%98%af%e5%90%a6%e6%a6%82%e8%a6%81%e6%9b%b4%e6%94%b9BundleID"
    >
    
 </a>是否概要更改BundleID</h3>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-</code></pre><pre tabindex="0"><code>
-
-if \[\[ $3 \]\]; then
-
-plutil -replace CFBundleIdentifier -string &#34;$3&#34; $appPlace/Info.plist
-
-reBundleID=\`plutil -p $appPlace/Info.plist | grep &#39;CFBundleIdentifier&#39; \`
-
-echo &#34;Log info : you wanna replace to: ${reBundleID}&#34;
-
-fi
-</code></pre><p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $3 <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>plutil -replace CFBundleIdentifier -string <span style="color:#e6db74">&#34;</span>$3<span style="color:#e6db74">&#34;</span> $appPlace/Info.plist
+</span></span><span style="display:flex;"><span>reBundleID<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>plutil -p $appPlace/Info.plist | grep <span style="color:#e6db74">&#39;CFBundleIdentifier&#39;</span> <span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Log info : you wanna replace to: </span><span style="color:#e6db74">${</span>reBundleID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p>
 <h3 id="删除影响签名文件">
 <a href="#%e5%88%a0%e9%99%a4%e5%bd%b1%e5%93%8d%e7%ad%be%e5%90%8d%e6%96%87%e4%bb%b6"
    >
    
 </a>删除影响签名文件</h3>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-</code></pre><pre tabindex="0"><code>
-
-plutil -remove CFBundleREsourceSpecification $appPlace/Info.plist   #删除签名源文件相关
-
-rm -rf $appPlace/Watch  #发现watch插件必现失败,这个必须删除了
-
-rm -rf $appPlace/PlugIns #发现PlugIns插件必现失败,这个必须删除了,就算下面重签也不管的, 坑超多
-
-codesignInfo=\`find $appPlace -name &#34;CodeResources&#34; \`
-
-for i in $codesignInfo; do
-
-rm -f $i
-
-done
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>plutil -remove CFBundleREsourceSpecification $appPlace/Info.plist   <span style="color:#75715e">#删除签名源文件相关</span>
+</span></span><span style="display:flex;"><span>rm -rf $appPlace/Watch  <span style="color:#75715e">#发现watch插件必现失败,这个必须删除了</span>
+</span></span><span style="display:flex;"><span>rm -rf $appPlace/PlugIns <span style="color:#75715e">#发现PlugIns插件必现失败,这个必须删除了,就算下面重签也不管的, 坑超多</span>
+</span></span><span style="display:flex;"><span>codesignInfo<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>find $appPlace -name <span style="color:#e6db74">&#34;CodeResources&#34;</span> <span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i in $codesignInfo; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    rm -f $i
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><ul>
 <li>对Info.plist里面的CFBundleREsourceSpecification这个key删除,具体不知道做了什么,IosAppSigner也这么做了</li>
 <li>Watch和Plugins这两个文件,我曾试过对他们都进行重签名, 但依然不管用, 相关坑大概是独立性,可以跳转到
 <a href="https://nianxi.net/ios/dump-decrypted-ios-app-extensions.html"
@@ -296,28 +229,14 @@ done
    >
    
 </a>第一步,相关lib-framework签名</h4>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-allShouldSign=\` find $appPlace -name &#34;\*.appex&#34; &amp;&amp; find $appPlace  -name &#34;\*.framework&#34; &amp;&amp; find $appPlace  -name &#34;\*.dylib&#34; &amp;&amp; find $appPlace/\* -name &#34;\*.app&#34; \` #最上层的先不签
-
-for i in $allShouldSign; do
-
-codesign -fs &#34;${signStr}&#34; --no-strict --entitlements=/tmp/project\_resign/Entitlements.plist $i
-
-done
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>allShouldSign<span style="color:#f92672">=</span><span style="color:#e6db74">`</span> find $appPlace -name <span style="color:#e6db74">&#34;*.appex&#34;</span> <span style="color:#f92672">&amp;&amp;</span> find $appPlace  -name <span style="color:#e6db74">&#34;*.framework&#34;</span> <span style="color:#f92672">&amp;&amp;</span> find $appPlace  -name <span style="color:#e6db74">&#34;*.dylib&#34;</span> <span style="color:#f92672">&amp;&amp;</span> find $appPlace/* -name <span style="color:#e6db74">&#34;*.app&#34;</span> <span style="color:#e6db74">`</span> <span style="color:#75715e">#最上层的先不签</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i in $allShouldSign; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    codesign -fs <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>signStr<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> --no-strict --entitlements<span style="color:#f92672">=</span>/tmp/project_resign/Entitlements.plist $i
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div><ul>
 <li>
 <p>对上方类型都进行一篇搜索,得到绝对路径后进行重签名<br>
-<img src="/images/type.png" alt=""></p>
+<img src="/images/type.webp" alt=""></p>
 <blockquote>
 <p>这是iosAppResigner中,作者对着全部的类型都检索了一遍,我并完全覆盖,如果你踩到了坑,可以试试把类型都加上</p>
 </blockquote>
@@ -328,32 +247,16 @@ done
    >
    
 </a>核心包签名</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-codesign -vvv -fs &#34;$signStr&#34; --no-strict --entitlements=/tmp/project\_resign/Entitlements.plist $appPlace
-</code></pre><h3 id="打包为ipa">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>codesign -vvv -fs <span style="color:#e6db74">&#34;</span>$signStr<span style="color:#e6db74">&#34;</span> --no-strict --entitlements<span style="color:#f92672">=</span>/tmp/project_resign/Entitlements.plist $appPlace
+</span></span></code></pre></div><h3 id="打包为ipa">
 <a href="#%e6%89%93%e5%8c%85%e4%b8%baipa"
    >
    
 </a>打包为ipa</h3>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-cd $tempPlace
-
-zip -qry sign.ipa ./Payload
-
-mv $tempPlace/sign.ipa ~/Desktop
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd $tempPlace
+</span></span><span style="display:flex;"><span>zip -qry sign.ipa ./Payload
+</span></span><span style="display:flex;"><span>mv $tempPlace/sign.ipa ~/Desktop
+</span></span></code></pre></div><ul>
 <li>因为打包的时候是递归形式的, 指定绝对路径会踩坑,注意就行</li>
 </ul>
 <h3 id="安装试试">
@@ -361,7 +264,7 @@ mv $tempPlace/sign.ipa ~/Desktop
    >
    
 </a>安装试试</h3>
-<p><img src="/images/install.png" alt=""></p>
+<p><img src="/images/install.webp" alt=""></p>
 <p>
 <a href="https://github.com/Paulswith/ToolsScript/tree/master/iosResign"
    

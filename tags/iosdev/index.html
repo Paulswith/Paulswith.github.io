@@ -136,53 +136,31 @@ dir="ltr">
    >
    
 </a>Profile</h3>
-<p><img src="/images/sign_profile.png" alt=""></p>
+<p><img src="/images/sign_profile.webp" alt=""></p>
 <h3 id="使用">
 <a href="#%e4%bd%bf%e7%94%a8"
    >
    
 </a>使用</h3>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./resign.sh /Users/akarizo/Desktop/微信-已砸壳.ipa  /Users/akarizo/Desktop/original.mobileprovision  com.weixin.resign
+</span></span></code></pre></div><ul>
 <li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
 <li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
 <li>$3 是否修改bundleID,默认是原先的</li>
 </ul>
-<p><img src="/images/signstr.png" alt=""></p>
+<p><img src="/images/signstr.webp" alt=""></p>
 <blockquote>
 <p>脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security find-identity -v -p codesigning
-</code></pre><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\\(正版\\)/Payload/MQQSecure.app/MQQSecure | grep cryptid
-</code></pre></blockquote>
-<h3 id="mobileprovision生成entitlementsplist">
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security find-identity -v -p codesigning
+</span></span></code></pre></div><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手<span style="color:#f92672">(</span>正版<span style="color:#f92672">)</span>/Payload/MQQSecure.app/MQQSecure | grep cryptid
+</span></span></code></pre></div><h3 id="mobileprovision生成entitlementsplist">
 <a href="#mobileProvision%e7%94%9f%e6%88%90Entitlements-plist"
    >
    
 </a>mobileProvision生成Entitlements.plist</h3>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i $provision &gt; ProvisionProfile.plist 
+<pre tabindex="0"><code>security cms -D -i $provision &gt; ProvisionProfile.plist 
 
 /usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist
 </code></pre><p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见
@@ -191,7 +169,24 @@ security cms -D -i $provision &gt; ProvisionProfile.plist
      target="_blank" rel="noopener noreferrer"
    >
    plist文件-在脚本中的操作
-</a></p></div></header>
+</a></p>
+<h3 id="mobileprovision拷贝为embeddedmobileprovision">
+<a href="#mobileProvision%e6%8b%b7%e8%b4%9d%e4%b8%baembedded-mobileprovision"
+   >
+   
+</a>mobileProvision拷贝为embedded.mobileprovision</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp $provision $appPlace/embedded.mobileprovision
+</span></span></code></pre></div><h3 id="是否概要更改bundleid">
+<a href="#%e6%98%af%e5%90%a6%e6%a6%82%e8%a6%81%e6%9b%b4%e6%94%b9BundleID"
+   >
+   
+</a>是否概要更改BundleID</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $3 <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>plutil -replace CFBundleIdentifier -string <span style="color:#e6db74">&#34;</span>$3<span style="color:#e6db74">&#34;</span> $appPlace/Info.plist
+</span></span><span style="display:flex;"><span>reBundleID<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>plutil -p $appPlace/Info.plist | grep <span style="color:#e6db74">&#39;CFBundleIdentifier&#39;</span> <span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Log info : you wanna replace to: </span><span style="color:#e6db74">${</span>reBundleID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

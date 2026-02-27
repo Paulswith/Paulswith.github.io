@@ -135,7 +135,7 @@ dir="ltr">
    >
    
 </a>工具准备</h3>
-<p><img src="predic.png" alt=""><br>
+<p><img src="predic.webp" alt=""><br>
 mac上的逆向其实比较省, 你不需要额外的砸壳,直接就能能从包里面拿到执行文件.<br>
 class-dump 头文件.<br>
 用Hopper打开,反汇编一下方便待会查看.<br>
@@ -146,15 +146,15 @@ class-dump 头文件.<br>
    
 </a>入口分析</h3>
 <p>本来大多数的步骤一定是从view开始, 有一款神器就[interface inspector], 但总会报错一些乱七八糟的问题,暂时还没调好, 于是乎我粗糙的从hopper搜索”Register”,(如果一开始搜的是首字母小写的话可能不会饶那么弯…),结果是这样子的,<br>
-<img src="first.png" alt=""><br>
+<img src="first.webp" alt=""><br>
 也查到其他无关的,最后确定就是这里,伪代码和汇编看并没有看出什么头绪,于是乎先看看有没有调用这里这个类相关.</p>
 <p>追踪前,这里有一款强大的工具说下:<br>
 <code>frida-trace</code>: frida-trace -m “-[PTHotKeyCenter _]” Divvy<br>
-<img src="frida.png" alt=""><br>
+<img src="frida.webp" alt=""><br>
 用法是frida-trace -m “&lt;+类方法/-实例方法&gt;[类名 方法名&lt;_代表全部&gt;]”<br>
 执行后它会自动帮你生成跟踪的js文件,然后监听所指定的方法.</p>
 <p>一开始觉得吧, PTHotKeyCenter不像是很关键的类, 也是没怎么写Mac的App的原因,但还是监听了一下:<br>
-<img src="trace.png" alt=""><br>
+<img src="trace.webp" alt=""><br>
 我尝试打开它,然后随便输入一串号码注册, 发现他怎么整都只打印这些, 而且就在我使用快捷键的时候~<br>
 随意也明白了,这就是”热键”,仅此而已…</p>
 <h3 id="动态调试">
@@ -164,31 +164,18 @@ class-dump 头文件.<br>
 </a>动态调试</h3>
 <p>进行到这里其实是无头绪的, 然后想着是从mondev进行动态调试,看看能不能从调用栈看看这里的情况.<br>
 想着hook哪个方法的时候,脑子冒个灵光,想到了这个view的展示, 我就输入”)show”看看有没有什么可疑的,结果:<br>
-<img src="show.png" alt=""> 十分意外第一个方法,很明显这个方法应该是展示注册这个View的,而且还待会参数时间.<br>
+<img src="show.webp" alt=""> 十分意外第一个方法,很明显这个方法应该是展示注册这个View的,而且还待会参数时间.<br>
 如果是这个方法果然没错, 那么我可能得到,一是找不到更好的hook方法,duration的参数改为最少的时间,或者可以尝试return这部展示的操作. 其次先Hook下看看调用栈,是什么决定它展示也是可以的, 于是开始我的Hook代码.<br>
 MonkeyDev默认是subStrate的hook方法代码, 当然也是可以替换成其它的(按道理当然可以~):<br>
 这是一开始的代码:<br>
-<img src="array.png" alt=""><br>
+<img src="array.webp" alt=""><br>
 但是允许会报错,其中需要修改:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-static void newHookFunc(AppController\* self,SEL \_cmd,id array){ // }
-
-                    //replacet to | //下面
-
-static void newHookFunc(AppController\* self,SEL \_cmd,id arg1, id arg2){ // }
-
-// 需要指明多少个参数, 不知道参数类型就使用泛型id
-</code></pre><p>build一下且进入调试后, 用时在<code>static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2){</code> 这里Xcode断点一下:<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">newHookFunc</span>(AppController<span style="color:#f92672">*</span> self,<span style="color:#66d9ef">SEL</span> _cmd,<span style="color:#66d9ef">id</span> array){ }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//replacet to | //下面
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 需要指明多少个参数, 不知道参数类型就使用泛型id
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">newHookFunc</span>(AppController<span style="color:#f92672">*</span> self,<span style="color:#66d9ef">SEL</span> _cmd,<span style="color:#66d9ef">id</span> arg1, <span style="color:#66d9ef">id</span> arg2){ }
+</span></span></code></pre></div><p>build一下且进入调试后, 用时在<code>static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2){</code> 这里Xcode断点一下:<br>
 但如果直接执行还需要做两部:</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">

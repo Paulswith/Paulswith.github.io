@@ -158,7 +158,7 @@ dir="ltr">
    https://github.com/stefanesser/dumpdecrypted
 </a><br>
 下载后<code>make</code>一下会生成一个.dylib<br>
-<img src="build.png" alt=""></p>
+<img src="build.webp" alt=""></p>
 <h3 id="拷贝到设备上">
 <a href="#%e6%8b%b7%e8%b4%9d%e5%88%b0%e8%ae%be%e5%a4%87%e4%b8%8a"
    >
@@ -173,12 +173,7 @@ dir="ltr">
    
 </a>获取App目录</h3>
 <p>启动下目标App,cycript到进程中, 输入:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-NSHomeDirectory()
+<pre tabindex="0"><code>NSHomeDirectory()
 </code></pre><h3 id="拷贝dylib到app目录">
 <a href="#%e6%8b%b7%e8%b4%9d-dylib%e5%88%b0App%e7%9b%ae%e5%bd%95"
    >
@@ -186,46 +181,26 @@ NSHomeDirectory()
 </a>拷贝.dylib到App目录</h3>
 <p>退出cycript,切换到App目录后:<br>
 拷贝.dylib 到得到的目录:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-cp /tmp/dumpdecrypted.dylib  .
+<pre tabindex="0"><code>cp /tmp/dumpdecrypted.dylib  .
 </code></pre><p>mible用户查看进程:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-su mobile    #切换普通用户
-</code></pre><p><img src="quit.png" alt=""></p>
+<pre tabindex="0"><code>su mobile    #切换普通用户
+</code></pre><p><img src="quit.webp" alt=""></p>
 <h3 id="开始砸壳">
 <a href="#%e5%bc%80%e5%a7%8b%e7%a0%b8%e5%a3%b3"
    >
    
 </a>开始砸壳</h3>
 <p>启动下App,然后:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址
-</code></pre><pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-DYLD\_INSERT\_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
-</code></pre><p><img src="perform.png" alt=""></p>
+<pre tabindex="0"><code>ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址
+</code></pre><pre tabindex="0"><code>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
+</code></pre><p><img src="perform.webp" alt=""></p>
 <h3 id="查看文件">
 <a href="#%e6%9f%a5%e7%9c%8b%e6%96%87%e4%bb%b6"
    >
    
 </a>查看文件</h3>
-<p><img src="end.png" alt=""><br>
-<img src="end2.png" alt=""></p>
+<p><img src="end.webp" alt=""><br>
+<img src="end2.webp" alt=""></p>
 </article>
 <br>
     <div class="flex flex-wrap items-center gap-2">

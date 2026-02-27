@@ -154,13 +154,8 @@ dir="ltr">
    
 </a>TFRecord重量数据集</h4>
 <p>可以类似我这样子, 将数据存储到目录下<code>Datasets</code>下, 推荐tar压缩</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-tar zcvf Datasets.gz Datasets
-</code></pre><p>自行配置好谷歌Drive, 链接
+<p><code>tar zcvf Datasets.gz Datasets</code></p>
+<p>自行配置好谷歌Drive, 链接
 <a href="https://www.google.com/drive/"
    
      target="_blank" rel="noopener noreferrer"
@@ -179,38 +174,43 @@ tar zcvf Datasets.gz Datasets
    >
    
 </a>小文件上传</h4>
-<p><em>for Python2:</em></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-from google.colab import files
-
-\# 你需填的:
-
-FILE\_NAME = &#39;想保存到Colaboratory的文件名&#39;
-
-uploaded = files.upload()
-
-with open(FILE\_NAME, &#39;wb&#39;) as file:
-
-    file.write(uploaded\[uploaded.keys()\[0\]\])
-</code></pre><p><em>but for Python3:</em></p></div></header>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> files
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 你需填的:</span>
+</span></span><span style="display:flex;"><span>FILE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;想保存到Colaboratory的文件名&#39;</span>
+</span></span><span style="display:flex;"><span>uploaded <span style="color:#f92672">=</span> files<span style="color:#f92672">.</span>upload()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(FILE_NAME, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(uploaded[list[uploaded<span style="color:#f92672">.</span>keys()][<span style="color:#ae81ff">0</span>]])
+</span></span></code></pre></div><blockquote>
+<p>对应的python执行上述代码后, 会出现<code>Choose file</code>按钮, 选择本地文件确认即可上传, 默认在当前路径, 可用<code>!ls -l</code>查看下</p>
+</blockquote>
+<h4 id="大文件上传">
+<a href="#%e5%a4%a7%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0"
+   >
+   
+</a>大文件上传</h4>
+<p><em>下面开始我就没有试过python2了,都是基于python3</em></p>
+<p>如果是大文件上传, 就按照前面的准备, 我们已经把文件传到了GoogleDrive云盘.<br>
+Now, 在浏览器打开Drive找到那个文件, 右键-&gt;查看共享链接: -&gt; 拷贝id=后面这个key, 粘贴到下方代码的位置<br>
+<img src="shareLinke.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 这行代码相当于unix,会去帮我们安装这个包</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>pip install <span style="color:#f92672">-</span>U <span style="color:#f92672">-</span>q PyDrive
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydrive.auth <span style="color:#f92672">import</span> GoogleAuth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydrive.drive <span style="color:#f92672">import</span> GoogleDrive
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> auth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> oauth2client.client <span style="color:#f92672">import</span> GoogleCredentials
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 你需填的:</span>
+</span></span><span style="display:flex;"><span>PACKAGE_ID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;key粘贴到这里&#39;</span>
+</span></span><span style="display:flex;"><span>PACKAGE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;drive文件的名字还是Colaboratory将存储的名字呢,你自己试试, 我就是填drive对应的名字&#39;</span>
+</span></span><span style="display:flex;"><span>auth<span style="color:#f92672">.</span>authenticate_user()
+</span></span><span style="display:flex;"><span>gauth <span style="color:#f92672">=</span> GoogleAuth()
+</span></span><span style="display:flex;"><span>gauth<span style="color:#f92672">.</span>credentials <span style="color:#f92672">=</span> GoogleCredentials<span style="color:#f92672">.</span>get_application_default()
+</span></span><span style="display:flex;"><span>drive <span style="color:#f92672">=</span> GoogleDrive(gauth)
+</span></span><span style="display:flex;"><span>downloaded <span style="color:#f92672">=</span> drive<span style="color:#f92672">.</span>CreateFile({<span style="color:#e6db74">&#39;id&#39;</span>:PACKAGE_ID})
+</span></span><span style="display:flex;"><span>downloaded<span style="color:#f92672">.</span>GetContentFile(PACKAGE_NAME)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Transpose succeed.&#39;</span>)
+</span></span></code></pre></div><blockquote>
+<p>执行上述代码, 会弹出一个授权链接和一个授权码输入框, 授权链接授权后会给你这串授权码,粘贴回车即可.依然可以用<code>!ls -l</code>查看下, <code>Colaboratory</code>有自带一些命令的, 在/bin下, 所以可以用tar命令进行解压:<code>tar czvf Datasets.gz</code></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

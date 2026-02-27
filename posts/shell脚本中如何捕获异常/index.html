@@ -146,10 +146,10 @@ dir="ltr">
    >
    
 </a>#?和echo输出命令要注意</h3>
-<p><img src="echo1.png" alt=""><br>
+<p><img src="echo1.webp" alt=""><br>
 这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是<code>echo $?</code>应该给到是1<br>
 但是看看执行结果:<br>
-<img src="echo2.png" alt=""><br>
+<img src="echo2.webp" alt=""><br>
 看到输出的结果是0, 原因在于<code>echo</code>上, <code>echo</code>包了这一层命令, 只要<code>echo</code>直接将这命令打印在终端, 就是完整的完成工作,根本没有异常可言.</p>
 <h3 id="修复">
 <a href="#%e4%bf%ae%e5%a4%8d"
@@ -157,8 +157,8 @@ dir="ltr">
    
 </a>修复</h3>
 <p>当然是去除<code>echo</code>直接输出, 但是还是要注意的是, <code>$?</code>仅仅提示是上一条,这里必须十分谨慎.列下能捕获到异常:<br>
-<img src="fix1.png" alt=""><br>
-<img src="fix2.png" alt=""><br>
+<img src="fix1.webp" alt=""><br>
+<img src="fix2.webp" alt=""><br>
 可以看到输出是1了, 确认命令使用没问题后,就可以进行逻辑处理.</p>
 <h3 id="避免">
 <a href="#%e9%81%bf%e5%85%8d"
@@ -166,9 +166,9 @@ dir="ltr">
    
 </a>避免</h3>
 <p>这是完整的逻辑代码:<br>
-<img src="full1.png" alt=""><br>
+<img src="full1.webp" alt=""><br>
 更好的避免, 将允许的条件, 并到逻辑与:<br>
-<img src="full2.png" alt=""></p>
+<img src="full2.webp" alt=""></p>
 <p><code>[shell大法好]</code></p>
 </article>
 <br>

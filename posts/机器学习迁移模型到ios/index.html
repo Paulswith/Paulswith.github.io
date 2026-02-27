@@ -162,7 +162,7 @@ dir="ltr">
 <p>说说转换为mlmodel的工具有两个:</p>
 <ul>
 <li>coremltools, 它目前只支持五种模型的转换, 不包括tensorflow:<br>
-<img src="tools.png" alt=""></li>
+<img src="tools.webp" alt=""></li>
 <li>若你跟我一样是tensorflow , 那么必须使用tfcoreml<br>
 
 <a href="https://github.com/tf-coreml"
@@ -186,25 +186,12 @@ dir="ltr">
    
 </a>是否是graph-pb?</h4>
 <p>如果你跟我一样, 训练的模型, 从tensorflow的代码保存下来的, 调用的:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-saver.save(sess, MODEL\_SAVEPATH, global\_step=50)
-</code></pre><p>它并不会保存出一个pb文件, 其中的.meta也需要其他方式转换似乎也可以, 我没有尝试过.<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>saver<span style="color:#f92672">.</span>save(sess, MODEL_SAVEPATH, global_step<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)
+</span></span></code></pre></div><p>它并不会保存出一个pb文件, 其中的.meta也需要其他方式转换似乎也可以, 我没有尝试过.<br>
 用这个方法, 你需要在上方代码的下面加两行,就可以继续:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-if i %SAVE\_EPOCH == 0:
-
-                    tf.train.write\_graph(sess.graph, MODEL\_SAVE\_DIR, &#39;model.pbtxt&#39;)
-</code></pre><h4 id="pdtxt固化为pd">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span>SAVE_EPOCH <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>write_graph(sess<span style="color:#f92672">.</span>graph, MODEL_SAVE_DIR, <span style="color:#e6db74">&#39;model.pbtxt&#39;</span>)
+</span></span></code></pre></div><h4 id="pdtxt固化为pd">
 <a href="#pdtxt%e5%9b%ba%e5%8c%96%e4%b8%bapd"
    >
    
@@ -217,7 +204,7 @@ if i %SAVE\_EPOCH == 0:
    https://www.jianshu.com/p/091415b114e2
 </a><br>
 我是直接使用的bezel, 编译tensorflow源码后, 直接使用, 其中参数跟着填, 需要注意的是output_node:<br>
-<img src="guhua.png" alt=""></p>
+<img src="guhua.webp" alt=""></p>
 <h4 id="导入化图">
 <a href="#%e5%af%bc%e5%85%a5%e5%8c%96%e5%9b%be"
    >
@@ -225,71 +212,22 @@ if i %SAVE\_EPOCH == 0:
 </a>导入化图</h4>
 <p>导入图和查看图的节点信息:<br>
 如果你的图不属于pb文件, 那么就会在导入图的时候报错的.</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-</code></pre><pre tabindex="0"><code>
-
-with open(TF\_MODEL\_FILE, &#39;rb&#39;) as f:
-
-    serialized = f.read()
-
-tf.reset\_default\_graph()
-
-original\_gdef = tf.GraphDef()
-
-original\_gdef.ParseFromString(serialized)
-
-##2 可以在这里查看到全部的图信息(前提是你有转换成功)
-
-with tf.Graph().as\_default() as g:
-
-    tf.import\_graph\_def(original\_gdef, name=&#39;&#39;)
-
-    ops = g.get\_operations()
-
-    try:
-
-        for i in range(10000):
-
-            print(&#39;op id {} : op name: {}, op type: &#34;{}&#34;&#39;.format(str(i),ops\[i\].name, ops\[i\].type))
-
-    except:
-
-        print(&#34;全部节点已打印完毕.&#34;)
-
-        pass
-</code></pre><h4 id="预处理节点">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(TF_MODEL_FILE, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    serialized <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>reset_default_graph()
+</span></span><span style="display:flex;"><span>original_gdef <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>GraphDef()
+</span></span><span style="display:flex;"><span>original_gdef<span style="color:#f92672">.</span>ParseFromString(serialized)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##2 可以在这里查看到全部的图信息(前提是你有转换成功)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Graph()<span style="color:#f92672">.</span>as_default() <span style="color:#66d9ef">as</span> g:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>import_graph_def(original_gdef, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    ops <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>get_operations()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;op id </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> : op name: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, op type: &#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;&#39;</span><span style="color:#f92672">.</span>format(str(i),ops[i]<span style="color:#f92672">.</span>name, ops[i]<span style="color:#f92672">.</span>type))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;全部节点已打印完毕.&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><h4 id="预处理节点">
 <a href="#%e9%a2%84%e5%a4%84%e7%90%86%e8%8a%82%e7%82%b9"
    >
    
@@ -297,59 +235,20 @@ with tf.Graph().as\_default() as g:
 <p>其实这一步个人不是很清楚很知道它做了什么,但确是不得不做的. 最后的大小看着也不像是”减包”<br>
 需要注意两点:</p>
 <ul>
-<li>
-<p>input_node_names: 这里填写的节点从上方的代码可以打印看得到的, 实际在训练模型的时候, 我们直接喂图片的节点是在”import/DecodeJpeg/contents”, 而这里”必须是import/Mul”.</p>
-</li>
-<li>
-<p>output_node_names: 因为模型是剪切拼接的, 这跟tensorflow直接调用是一样的节点.<br>
-<strong>最后生成一个完整的pb文件.</strong></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-</code></pre><pre tabindex="0"><code>
-
-input\_node\_names = \[&#39;import/Mul&#39;, &#39;BottleneckInputPlaceholder&#39;\]   \# 本来以为是import/DecodeJpeg/contents, 实际上是Mul(tfcoreml-git上说的)
-
-output\_node\_names = \[&#39;import/pool\_3/\_reshape&#39;,&#39;final\_train\_ops/softMax\_last&#39;\]  \# 想要保存的节点 , &#39;final\_train\_ops/softMax\_last&#39;
-
-gdef = strip\_unused\_lib.strip\_unused(
-
-        input\_graph\_def = original\_gdef,
-
-        input\_node\_names = input\_node\_names,
-
-        output\_node\_names = output\_node\_names,
-
-        placeholder\_type\_enum = dtypes.float32.as\_datatype\_enum)
-
-with gfile.GFile(FROZEN\_MODEL\_FILE, &#34;wb&#34;) as f:
-
-    f.write(gdef.SerializeToString())
-</code></pre></li>
+<li>input_node_names: 这里填写的节点从上方的代码可以打印看得到的, 实际在训练模型的时候, 我们直接喂图片的节点是在”import/DecodeJpeg/contents”, 而这里”必须是import/Mul”.</li>
+<li>output_node_names: 因为模型是剪切拼接的, 这跟tensorflow直接调用是一样的节点.<br>
+<strong>最后生成一个完整的pb文件.</strong></li>
 </ul>
-<h4 id="开始转换">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>input_node_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;import/Mul&#39;</span>, <span style="color:#e6db74">&#39;BottleneckInputPlaceholder&#39;</span>]   <span style="color:#75715e"># 本来以为是import/DecodeJpeg/contents, 实际上是Mul(tfcoreml-git上说的)</span>
+</span></span><span style="display:flex;"><span>output_node_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;import/pool_3/_reshape&#39;</span>,<span style="color:#e6db74">&#39;final_train_ops/softMax_last&#39;</span>]  <span style="color:#75715e"># 想要保存的节点 , &#39;final_train_ops/softMax_last&#39;</span>
+</span></span><span style="display:flex;"><span>gdef <span style="color:#f92672">=</span> strip_unused_lib<span style="color:#f92672">.</span>strip_unused(
+</span></span><span style="display:flex;"><span>        input_graph_def <span style="color:#f92672">=</span> original_gdef,
+</span></span><span style="display:flex;"><span>        input_node_names <span style="color:#f92672">=</span> input_node_names,
+</span></span><span style="display:flex;"><span>        output_node_names <span style="color:#f92672">=</span> output_node_names,
+</span></span><span style="display:flex;"><span>        placeholder_type_enum <span style="color:#f92672">=</span> dtypes<span style="color:#f92672">.</span>float32<span style="color:#f92672">.</span>as_datatype_enum)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> gfile<span style="color:#f92672">.</span>GFile(FROZEN_MODEL_FILE, <span style="color:#e6db74">&#34;wb&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(gdef<span style="color:#f92672">.</span>SerializeToString())
+</span></span></code></pre></div><h4 id="开始转换">
 <a href="#%e5%bc%80%e5%a7%8b%e8%bd%ac%e6%8d%a2"
    >
    
@@ -360,81 +259,29 @@ with gfile.GFile(FROZEN\_MODEL\_FILE, &#34;wb&#34;) as f:
 </li>
 <li>
 <p>output_tensor_names: 训练后得到的节点, 对应生成后的InceptionV3_output的两个属性</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-</code></pre><pre tabindex="0"><code>
-
-input\_tensor\_shapes = {
-
-                        &#34;import/Mul:0&#34;:\[1,299,299,3\],          \# batch size is 1
-
-                        &#34;BottleneckInputPlaceholder:0&#34;:\[1,2048\],
-
-                       }
-
-output\_tensor\_names = \[&#39;import/pool\_3/\_reshape:0&#39;,&#39;final\_train\_ops/softMax\_last:0&#39;\]
-
-\# Call the converter. This may take a while
-
-coreml\_model = tfcoreml.convert(
-
-        tf\_model\_path=FROZEN\_MODEL\_FILE,
-
-        mlmodel\_path=COREML\_MODEL\_FILE,
-
-        input\_name\_shape\_dict=input\_tensor\_shapes,
-
-        output\_feature\_names=output\_tensor\_names,
-
-        image\_input\_names = \[&#39;import/Mul:0&#39;\],
-
-        red\_bias = \-1,
-
-        green\_bias = \-1,
-
-        blue\_bias = \-1,
-
-        image\_scale = 2.0/255.0)
-</code></pre></li>
+</li>
 </ul>
-<blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>input_tensor_shapes <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;import/Mul:0&#34;</span>:[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">299</span>,<span style="color:#ae81ff">299</span>,<span style="color:#ae81ff">3</span>],          <span style="color:#75715e"># batch size is 1</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;BottleneckInputPlaceholder:0&#34;</span>:[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2048</span>],
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>output_tensor_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;import/pool_3/_reshape:0&#39;</span>,<span style="color:#e6db74">&#39;final_train_ops/softMax_last:0&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Call the converter. This may take a while</span>
+</span></span><span style="display:flex;"><span>coreml_model <span style="color:#f92672">=</span> tfcoreml<span style="color:#f92672">.</span>convert(
+</span></span><span style="display:flex;"><span>        tf_model_path<span style="color:#f92672">=</span>FROZEN_MODEL_FILE,
+</span></span><span style="display:flex;"><span>        mlmodel_path<span style="color:#f92672">=</span>COREML_MODEL_FILE,
+</span></span><span style="display:flex;"><span>        input_name_shape_dict<span style="color:#f92672">=</span>input_tensor_shapes,
+</span></span><span style="display:flex;"><span>        output_feature_names<span style="color:#f92672">=</span>output_tensor_names,
+</span></span><span style="display:flex;"><span>        image_input_names <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;import/Mul:0&#39;</span>],
+</span></span><span style="display:flex;"><span>        red_bias <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        green_bias <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        blue_bias <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        image_scale <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span><span style="color:#f92672">/</span><span style="color:#ae81ff">255.0</span>)
+</span></span></code></pre></div><blockquote>
 <p>上方具体的参数可以在方法看得到,后面四个参数就是我们输入图片时候的均值化, 还有个特殊的参数<code>class_labels</code>, output后的模型可以直接索引到标签, 但是在实践过程中, 我这个本身是迁移别人的学习的模型并起不到作用.</p>
 </blockquote>
 <p>执行完成后生成文件:<br>
-<img src="model.png" alt=""></p>
+<img src="model.webp" alt=""></p>
 <h3 id="ios-code调用">
 <a href="#ios-code%e8%b0%83%e7%94%a8"
    >
@@ -447,7 +294,7 @@ coreml\_model = tfcoreml.convert(
 </a>了解模型:</h4>
 <p>首先, 直接将inceptionV3.mlmodel拖入到工程:<br>
 导入头文件, <code>inceptionV3.h</code>, 点开查看:<br>
-<img src="inout.png" alt=""></p>
+<img src="inout.webp" alt=""></p>
 <p>他们之间的关系是, <strong>inception_v3_input导入 -&gt; 启动inception_v3.model训练 -&gt; 得到inception_v3_output</strong> 分别提供了一个实例化方法.</p>
 <h4 id="开始代码">
 <a href="#%e5%bc%80%e5%a7%8b%e4%bb%a3%e7%a0%81"
@@ -456,130 +303,36 @@ coreml\_model = tfcoreml.convert(
 </a>开始代码</h4>
 <p>首先确认他们之间的调用方向 层次, 我直接是参考tensorflow加载的顺序, 只要理解了, 就可以直接调用了:<br>
 这是Python的调用方法:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-poo3\_frist = sess.run(poo3, feed\_dict={inpiut\_x: image})   \# 按照模型的顺序要, 先喂给它图片, 然后图片提取到瓶颈的tensor
-
-result     = sess.run(predict, feed\_dict={change\_input:poo3\_frist}) \# 瓶颈的tensor再转入input传入, 得到我们最后的predict
-</code></pre><p>如果参照tensorflow加载模型的做法, 我们直接是一张图片, 得到一个run到pool3, 但实际CoreML只给我们生成了一个实例方法:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-\- (instancetype)initWithBottleneckInputPlaceholder\_\_0:(MLMultiArray \*)BottleneckInputPlaceholder\_\_0 import\_\_Mul\_\_0:(CVPixelBufferRef)import\_\_Mul\_\_0;
-</code></pre><p>方法必须要传入一个<code>MLMultiArray</code>, 而且shape必须一致的. 最后我直接调用<code>MLMultiArray</code>的方法,生成一个0值的2048shape</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>poo3_frist <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run(poo3, feed_dict<span style="color:#f92672">=</span>{inpiut_x: image})   <span style="color:#75715e"># 按照模型的顺序要, 先喂给它图片, 然后图片提取到瓶颈的tensor</span>
+</span></span><span style="display:flex;"><span>result     <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run(predict, feed_dict<span style="color:#f92672">=</span>{change_input:poo3_frist}) <span style="color:#75715e"># 瓶颈的tensor再转入input传入, 得到我们最后的predict</span>
+</span></span></code></pre></div><p>如果参照tensorflow加载模型的做法, 我们直接是一张图片, 得到一个run到pool3, 但实际CoreML只给我们生成了一个实例方法:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>- (<span style="color:#66d9ef">instancetype</span>)<span style="color:#a6e22e">initWithBottleneckInputPlaceholder__0:</span>(MLMultiArray <span style="color:#f92672">*</span>)BottleneckInputPlaceholder__0 <span style="color:#a6e22e">import__Mul__0:</span>(CVPixelBufferRef)import__Mul__0;
+</span></span></code></pre></div><p>方法必须要传入一个<code>MLMultiArray</code>, 而且shape必须一致的. 最后我直接调用<code>MLMultiArray</code>的方法,生成一个0值的2048shape</p>
 <p><strong>预测部分的, 完整核心代码</strong> 均有详细的注释说明</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-
-23
-
-24
-
-25
-
-26
-
-27
-
-28
-
-29
-</code></pre><pre tabindex="0"><code>
-
-\- (inception\_v3 \*)tfModel {
-
-    if (!\_tfModel) {
-
-        // 1 加载模型, 本身代码会调用init的时候, 方法会调用initWithContentsOfURL, 找到inception文件进行初始化
-
-        \_tfModel = \[\[inception\_v3 alloc\] init\];
-
-    }
-
-    return \_tfModel;
-
-}
-
-\- (NSString \*)predictWithFoodImage:(UIImage \*)foodImage
-
-{
-
-    // step1: 标准为size, 转为可传入的参数.
-
-    UIImage \*img = \[foodImage scaleToSize:CGSizeMake(299, 299)\];             // 转换为可传参的图片大小
-
-    CVPixelBufferRef refImage = \[\[UIImage new\] pixelBufferFromCGImage:img\];  // 转换为可传参的类型
-
-    // step2.1: 由于一开始是没有BottleneckInputPlaceholder, 直接0值初始一个传入
-
-    MLMultiArray \*holder = \[\[MLMultiArray alloc\] initWithShape:@\[@2048\] dataType:MLMultiArrayDataTypeDouble error:nil\];
-
-    // step2.2: 启动预测, 预测完成后得到import\_\_pool\_3\_\_\_reshape\_\_0
-
-    inception\_v3Output \*output = \[self.tfModel predictionFromBottleneckInputPlaceholder\_\_0:holder import\_\_Mul\_\_0:refImage error:nil\];
-
-    // step3: 从第二步, 完整得到了想要的BottleneckInputPlaceholder, 直接代入, 图片也代入.
-
-    inception\_v3Output \*output1 = \[self.tfModel predictionFromBottleneckInputPlaceholder\_\_0:output.import\_\_pool\_3\_\_\_reshape\_\_0 import\_\_Mul\_\_0:refImage error:nil\];
-
-    // step4: 从final\_train\_ops\_\_softMax\_last\_\_0提取预测结果
-
-    MLMultiArray \*\_\_final = output1.final\_train\_ops\_\_softMax\_last\_\_0;
-
-    return \[self poAccu:\_\_final\];
-
-}
-</code></pre><h4 id="调用摄像头进行图片获取">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>- (inception_v3 <span style="color:#f92672">*</span>)<span style="color:#a6e22e">tfModel</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>_tfModel) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 1 加载模型, 本身代码会调用init的时候, 方法会调用initWithContentsOfURL, 找到inception文件进行初始化
+</span></span></span><span style="display:flex;"><span>        _tfModel <span style="color:#f92672">=</span> [[inception_v3 alloc] init];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> _tfModel;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- (NSString <span style="color:#f92672">*</span>)<span style="color:#a6e22e">predictWithFoodImage:</span>(UIImage <span style="color:#f92672">*</span>)foodImage
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// step1: 标准为size, 转为可传入的参数.
+</span></span></span><span style="display:flex;"><span>    UIImage <span style="color:#f92672">*</span>img <span style="color:#f92672">=</span> [foodImage scaleToSize:CGSizeMake(<span style="color:#ae81ff">299</span>, <span style="color:#ae81ff">299</span>)];             <span style="color:#75715e">// 转换为可传参的图片大小
+</span></span></span><span style="display:flex;"><span>    CVPixelBufferRef refImage <span style="color:#f92672">=</span> [[UIImage new] pixelBufferFromCGImage:img];  <span style="color:#75715e">// 转换为可传参的类型
+</span></span></span><span style="display:flex;"><span>    <span style="color:#75715e">// step2.1: 由于一开始是没有BottleneckInputPlaceholder, 直接0值初始一个传入
+</span></span></span><span style="display:flex;"><span>    MLMultiArray <span style="color:#f92672">*</span>holder <span style="color:#f92672">=</span> [[MLMultiArray alloc] initWithShape:<span style="color:#ae81ff">@[</span><span style="color:#ae81ff">@2048</span><span style="color:#ae81ff">]</span> dataType:MLMultiArrayDataTypeDouble error:nil];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// step2.2: 启动预测, 预测完成后得到import__pool_3___reshape__0
+</span></span></span><span style="display:flex;"><span>    inception_v3Output <span style="color:#f92672">*</span>output <span style="color:#f92672">=</span> [self.tfModel predictionFromBottleneckInputPlaceholder__0:holder import__Mul__0:refImage error:nil];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// step3: 从第二步, 完整得到了想要的BottleneckInputPlaceholder, 直接代入, 图片也代入.
+</span></span></span><span style="display:flex;"><span>    inception_v3Output <span style="color:#f92672">*</span>output1 <span style="color:#f92672">=</span> [self.tfModel predictionFromBottleneckInputPlaceholder__0:output.import__pool_3___reshape__0 import__Mul__0:refImage error:nil];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// step4: 从final_train_ops__softMax_last__0提取预测结果
+</span></span></span><span style="display:flex;"><span>    MLMultiArray <span style="color:#f92672">*</span>__final <span style="color:#f92672">=</span> output1.final_train_ops__softMax_last__0;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [self poAccu:__final];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="调用摄像头进行图片获取">
 <a href="#%e8%b0%83%e7%94%a8%e6%91%84%e5%83%8f%e5%a4%b4%e8%bf%9b%e8%a1%8c%e5%9b%be%e7%89%87%e8%8e%b7%e5%8f%96"
    >
    
@@ -594,183 +347,56 @@ result     = sess.run(predict, feed\_dict={change\_input:poo3\_frist}) \# 瓶颈
 </a>, 提取了下代码:<br>
 主要逻辑:<br>
 拍照后重置大小展示到view, 异步进行模型预测, 回到主线程展示label结果.</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-
-23
-
-24
-
-25
-
-26
-
-27
-
-28
-
-29
-
-30
-
-31
-
-32
-
-33
-
-34
-
-35
-
-36
-
-37
-
-38
-
-39
-
-40
-
-41
-
-42
-
-43
-
-44
-</code></pre><pre tabindex="0"><code>
-
-//触发事件：拍照
-
-\- (void)addCamera
-
-{
-
-    UIImagePickerController \*picker = \[\[UIImagePickerController alloc\] init\];
-
-    picker.delegate = self;
-
-    picker.allowsEditing = YES; //可编辑
-
-    //判断是否可以打开照相机
-
-    if (\[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera\]) {
-
-        //摄像头
-
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-
-    } else { //否则打开照片库
-
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-
-    }
-
-    \[self presentViewController:picker animated:YES completion:nil\];
-
-}
-
-#pragma mark - UIImagePickerControllerDelegate
-
-//拍摄完成后要执行的代理方法
-
-\- (void)imagePickerController:(UIImagePickerController \*)picker didFinishPickingMediaWithInfo:(NSDictionary \*)info
-
-{
-
-    NSString \*mediaType = \[info objectForKey:UIImagePickerControllerMediaType\];
-
-    if (\[mediaType isEqualToString:@&#34;public.image&#34;\]) {
-
-        //得到照片
-
-        UIImage \*image = \[info objectForKey:UIImagePickerControllerOriginalImage\];
-
-        image = \[image scaleToSize:self.imageView.frame.size\];
-
-        self.imageView.image = image;
-
-        // 异步处理, 不要占用主线程:
-
-        dispatch\_async(dispatch\_queue\_create(0, 0), ^{
-
-            NSString \*preString = \[self.prediction predictWithFoodImage:image\];
-
-            dispatch\_async(dispatch\_get\_main\_queue(), ^{
-
-                self.preLabel.text = preString;
-
-            });
-
-        });
-
-    }
-
-    \[self dismissViewControllerAnimated:YES completion:nil\];
-
-}
-
-//进入拍摄页面点击取消按钮
-
-\- (void)imagePickerControllerDidCancel:(UIImagePickerController \*)picker
-
-{
-
-    \[self dismissViewControllerAnimated:YES completion:nil\];
-
-}
-</code></pre><h3 id="测试结果">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span><span style="color:#75715e">//触发事件：拍照
+</span></span></span><span style="display:flex;"><span>- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">addCamera</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UIImagePickerController <span style="color:#f92672">*</span>picker <span style="color:#f92672">=</span> [[UIImagePickerController alloc] init];
+</span></span><span style="display:flex;"><span>    picker.delegate <span style="color:#f92672">=</span> self;
+</span></span><span style="display:flex;"><span>    picker.allowsEditing <span style="color:#f92672">=</span> YES; <span style="color:#75715e">//可编辑
+</span></span></span><span style="display:flex;"><span>    <span style="color:#75715e">//判断是否可以打开照相机
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//摄像头
+</span></span></span><span style="display:flex;"><span>        picker.sourceType <span style="color:#f92672">=</span> UIImagePickerControllerSourceTypeCamera;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">//否则打开照片库
+</span></span></span><span style="display:flex;"><span>        picker.sourceType <span style="color:#f92672">=</span> UIImagePickerControllerSourceTypePhotoLibrary;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    [self presentViewController:picker animated:YES completion:nil];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma mark - UIImagePickerControllerDelegate
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//拍摄完成后要执行的代理方法
+</span></span></span><span style="display:flex;"><span>- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">imagePickerController:</span>(UIImagePickerController <span style="color:#f92672">*</span>)picker <span style="color:#a6e22e">didFinishPickingMediaWithInfo:</span>(NSDictionary <span style="color:#f92672">*</span>)info
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    NSString <span style="color:#f92672">*</span>mediaType <span style="color:#f92672">=</span> [info objectForKey:UIImagePickerControllerMediaType];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ([mediaType isEqualToString:<span style="color:#e6db74">@&#34;public.image&#34;</span>]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//得到照片
+</span></span></span><span style="display:flex;"><span>        UIImage <span style="color:#f92672">*</span>image <span style="color:#f92672">=</span> [info objectForKey:UIImagePickerControllerOriginalImage];
+</span></span><span style="display:flex;"><span>        image <span style="color:#f92672">=</span> [image scaleToSize:self.imageView.frame.size];
+</span></span><span style="display:flex;"><span>        self.imageView.image <span style="color:#f92672">=</span> image;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 异步处理, 不要占用主线程:
+</span></span></span><span style="display:flex;"><span>        dispatch_async(dispatch_queue_create(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), <span style="color:#f92672">^</span>{
+</span></span><span style="display:flex;"><span>            NSString <span style="color:#f92672">*</span>preString <span style="color:#f92672">=</span> [self.prediction predictWithFoodImage:image];
+</span></span><span style="display:flex;"><span>            dispatch_async(dispatch_get_main_queue(), <span style="color:#f92672">^</span>{
+</span></span><span style="display:flex;"><span>                self.preLabel.text <span style="color:#f92672">=</span> preString;
+</span></span><span style="display:flex;"><span>            });
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    [self dismissViewControllerAnimated:YES completion:nil];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//进入拍摄页面点击取消按钮
+</span></span></span><span style="display:flex;"><span>- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">imagePickerControllerDidCancel:</span>(UIImagePickerController <span style="color:#f92672">*</span>)picker
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    [self dismissViewControllerAnimated:YES completion:nil];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="测试结果">
 <a href="#%e6%b5%8b%e8%af%95%e7%bb%93%e6%9e%9c"
    >
    
 </a>测试结果</h3>
 <p>制作gif, 直接看图片: 或者上面链接从我的git上下载源码:<br>
-<img src="1.png" alt=""><img src="2.png" alt=""><img src="3.png" alt=""><img src="4.png" alt=""></p>
+<img src="1.webp" alt=""><img src="2.webp" alt=""><img src="3.webp" alt=""><img src="4.webp" alt=""></p>
 <p>[<code>好困, 该睡觉了...</code>]</p>
 </article>
 <br>

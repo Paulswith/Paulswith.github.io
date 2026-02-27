@@ -149,7 +149,7 @@ dir="ltr">
    https://github.com/stefanesser/dumpdecrypted
 </a><br>
 下载后<code>make</code>一下会生成一个.dylib<br>
-<img src="build.png" alt=""></p>
+<img src="build.webp" alt=""></p>
 <h3 id="拷贝到设备上">
 <a href="#%e6%8b%b7%e8%b4%9d%e5%88%b0%e8%ae%be%e5%a4%87%e4%b8%8a"
    >
@@ -164,12 +164,7 @@ dir="ltr">
    
 </a>获取App目录</h3>
 <p>启动下目标App,cycript到进程中, 输入:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-NSHomeDirectory()
+<pre tabindex="0"><code>NSHomeDirectory()
 </code></pre><h3 id="拷贝dylib到app目录">
 <a href="#%e6%8b%b7%e8%b4%9d-dylib%e5%88%b0App%e7%9b%ae%e5%bd%95"
    >
@@ -177,46 +172,26 @@ NSHomeDirectory()
 </a>拷贝.dylib到App目录</h3>
 <p>退出cycript,切换到App目录后:<br>
 拷贝.dylib 到得到的目录:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-cp /tmp/dumpdecrypted.dylib  .
+<pre tabindex="0"><code>cp /tmp/dumpdecrypted.dylib  .
 </code></pre><p>mible用户查看进程:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-su mobile    #切换普通用户
-</code></pre><p><img src="quit.png" alt=""></p>
+<pre tabindex="0"><code>su mobile    #切换普通用户
+</code></pre><p><img src="quit.webp" alt=""></p>
 <h3 id="开始砸壳">
 <a href="#%e5%bc%80%e5%a7%8b%e7%a0%b8%e5%a3%b3"
    >
    
 </a>开始砸壳</h3>
 <p>启动下App,然后:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址
-</code></pre><pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-DYLD\_INSERT\_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
-</code></pre><p><img src="perform.png" alt=""></p>
+<pre tabindex="0"><code>ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址
+</code></pre><pre tabindex="0"><code>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
+</code></pre><p><img src="perform.webp" alt=""></p>
 <h3 id="查看文件">
 <a href="#%e6%9f%a5%e7%9c%8b%e6%96%87%e4%bb%b6"
    >
    
 </a>查看文件</h3>
-<p><img src="end.png" alt=""><br>
-<img src="end2.png" alt=""></p></div></header>
+<p><img src="end.webp" alt=""><br>
+<img src="end2.webp" alt=""></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -252,13 +227,8 @@ DYLD\_INSERT\_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
 </a>什么是壳</h3>
 <p>一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.<br>
 怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文件查看:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-otool -l targetBinary | grep cryptid
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>otool -l targetBinary | grep cryptid
+</span></span></code></pre></div><blockquote>
 <p>得到的结果如果是1则是未砸壳的, 0是已砸壳.<br>
 还有一种情况是一些App支持多种架构的,可能会展示多个cryptid=1/0, 在哪个平台跑就砸哪个.</p>
 </blockquote>
@@ -296,28 +266,34 @@ otool -l targetBinary | grep cryptid
    >
    
 </a>连接手机</h4>
-<p><img src="remote.png" alt=""><br>
+<p><img src="remote.webp" alt=""><br>
 我这里用iproxy从22映射到2222端口,并整个过程保持. 右边线尝试登录下,默认密码是alpine, 其他情况就自行谷歌帮助,我相信这没什么难度.</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-iproxy 2222 22
-</code></pre><pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-ssh root@localhost -p 2222
-</code></pre><p>测试连接成功后输入 <code>exit</code> 退出,接着下一步</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iproxy <span style="color:#ae81ff">2222</span> <span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>ssh root@localhost -p <span style="color:#ae81ff">2222</span>
+</span></span></code></pre></div><p>测试连接成功后输入 <code>exit</code> 退出,接着下一步</p>
 <h4 id="scp拷贝到手机">
 <a href="#scp%e6%8b%b7%e8%b4%9d%e5%88%b0%e6%89%8b%e6%9c%ba"
    >
    
 </a>scp拷贝到手机</h4>
 <p>scp(secure copy) 支持ssh协议远程拷贝, 我们用它拷贝到设备上, 前提是上面的<br>
-的测试成功了.</p></div></header>
+的测试成功了.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp -P <span style="color:#ae81ff">2222</span> ./clutch root@localhost:/usr/bin/
+</span></span></code></pre></div><p><img src="copyto.webp" alt=""><br>
+如果这样子的话就成功了, /usr/bin/默认已经在环境变量查找内, 拷贝到这里可以省事很多多.</p>
+<h4 id="找到目标">
+<a href="#%e6%89%be%e5%88%b0%e7%9b%ae%e6%a0%87"
+   >
+   
+</a>找到目标</h4>
+<p>先介绍下clutch用法:<br>
+<img src="usafe.webp" alt=""><br>
+推荐<code>ios-deploy -B</code>可以获取bundleID, <code>brew install ios-deploy</code>就可以安装了.<br>
+<img src="searchBD.webp" alt=""><br>
+例如我这里的目标是麦当劳app, 尝试搜一下<code>mc</code>,果不其然就是它了.<br>
+拿到的bundleID就是<code>com.mcdonalds.gma</code><br>
+(嗯, 还有个grep的方法更简单,但是我真的不知道它是麦当劳, 因为他显示的是Arch,所以靠谱的话就还是上面,BundleID基本会跟名称一直吧)<br>
+<img src="nofound.webp" alt=""></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

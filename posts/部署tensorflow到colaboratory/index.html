@@ -117,7 +117,7 @@ dir="ltr">
     <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">部署TensorFlow到Colaboratory</h1>
 
 <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
-  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>1 Mins read
   </div>
 
   <div class="flex items-center gap-1">
@@ -163,13 +163,8 @@ dir="ltr">
    
 </a>TFRecord重量数据集</h4>
 <p>可以类似我这样子, 将数据存储到目录下<code>Datasets</code>下, 推荐tar压缩</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-tar zcvf Datasets.gz Datasets
-</code></pre><p>自行配置好谷歌Drive, 链接
+<p><code>tar zcvf Datasets.gz Datasets</code></p>
+<p>自行配置好谷歌Drive, 链接
 <a href="https://www.google.com/drive/"
    
      target="_blank" rel="noopener noreferrer"
@@ -188,69 +183,13 @@ tar zcvf Datasets.gz Datasets
    >
    
 </a>小文件上传</h4>
-<p><em>for Python2:</em></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-from google.colab import files
-
-\# 你需填的:
-
-FILE\_NAME = &#39;想保存到Colaboratory的文件名&#39;
-
-uploaded = files.upload()
-
-with open(FILE\_NAME, &#39;wb&#39;) as file:
-
-    file.write(uploaded\[uploaded.keys()\[0\]\])
-</code></pre><p><em>but for Python3:</em></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-from google.colab import files
-
-\# 你需填的:
-
-FILE\_NAME = &#39;想保存到Colaboratory的文件名&#39;
-
-uploaded = files.upload()
-
-with open(FILE\_NAME, &#39;wb&#39;) as file:
-
-    file.write(uploaded\[list\[uploaded.keys()\]\[0\]\])
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> files
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 你需填的:</span>
+</span></span><span style="display:flex;"><span>FILE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;想保存到Colaboratory的文件名&#39;</span>
+</span></span><span style="display:flex;"><span>uploaded <span style="color:#f92672">=</span> files<span style="color:#f92672">.</span>upload()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(FILE_NAME, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> file:
+</span></span><span style="display:flex;"><span>    file<span style="color:#f92672">.</span>write(uploaded[list[uploaded<span style="color:#f92672">.</span>keys()][<span style="color:#ae81ff">0</span>]])
+</span></span></code></pre></div><blockquote>
 <p>对应的python执行上述代码后, 会出现<code>Choose file</code>按钮, 选择本地文件确认即可上传, 默认在当前路径, 可用<code>!ls -l</code>查看下</p>
 </blockquote>
 <h4 id="大文件上传">
@@ -261,84 +200,25 @@ with open(FILE\_NAME, &#39;wb&#39;) as file:
 <p><em>下面开始我就没有试过python2了,都是基于python3</em></p>
 <p>如果是大文件上传, 就按照前面的准备, 我们已经把文件传到了GoogleDrive云盘.<br>
 Now, 在浏览器打开Drive找到那个文件, 右键-&gt;查看共享链接: -&gt; 拷贝id=后面这个key, 粘贴到下方代码的位置<br>
-<img src="shareLinke.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-</code></pre><pre tabindex="0"><code>
-
-\# 这行代码相当于unix,会去帮我们安装这个包
-
-!pip install -U -q PyDrive
-
-from pydrive.auth import GoogleAuth
-
-from pydrive.drive import GoogleDrive
-
-from google.colab import auth
-
-from oauth2client.client import GoogleCredentials
-
-\# 你需填的:
-
-PACKAGE\_ID = &#39;key粘贴到这里&#39;
-
-PACKAGE\_NAME = &#39;drive文件的名字还是Colaboratory将存储的名字呢,你自己试试, 我就是填drive对应的名字&#39;
-
-auth.authenticate\_user()
-
-gauth = GoogleAuth()
-
-gauth.credentials = GoogleCredentials.get\_application\_default()
-
-drive = GoogleDrive(gauth)
-
-downloaded = drive.CreateFile({&#39;id&#39;:PACKAGE\_ID})
-
-downloaded.GetContentFile(PACKAGE\_NAME)
-
-print(&#39;Transpose succeed.&#39;)
-</code></pre><blockquote>
+<img src="shareLinke.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 这行代码相当于unix,会去帮我们安装这个包</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>pip install <span style="color:#f92672">-</span>U <span style="color:#f92672">-</span>q PyDrive
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydrive.auth <span style="color:#f92672">import</span> GoogleAuth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pydrive.drive <span style="color:#f92672">import</span> GoogleDrive
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> auth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> oauth2client.client <span style="color:#f92672">import</span> GoogleCredentials
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 你需填的:</span>
+</span></span><span style="display:flex;"><span>PACKAGE_ID <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;key粘贴到这里&#39;</span>
+</span></span><span style="display:flex;"><span>PACKAGE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;drive文件的名字还是Colaboratory将存储的名字呢,你自己试试, 我就是填drive对应的名字&#39;</span>
+</span></span><span style="display:flex;"><span>auth<span style="color:#f92672">.</span>authenticate_user()
+</span></span><span style="display:flex;"><span>gauth <span style="color:#f92672">=</span> GoogleAuth()
+</span></span><span style="display:flex;"><span>gauth<span style="color:#f92672">.</span>credentials <span style="color:#f92672">=</span> GoogleCredentials<span style="color:#f92672">.</span>get_application_default()
+</span></span><span style="display:flex;"><span>drive <span style="color:#f92672">=</span> GoogleDrive(gauth)
+</span></span><span style="display:flex;"><span>downloaded <span style="color:#f92672">=</span> drive<span style="color:#f92672">.</span>CreateFile({<span style="color:#e6db74">&#39;id&#39;</span>:PACKAGE_ID})
+</span></span><span style="display:flex;"><span>downloaded<span style="color:#f92672">.</span>GetContentFile(PACKAGE_NAME)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Transpose succeed.&#39;</span>)
+</span></span></code></pre></div><blockquote>
 <p>执行上述代码, 会弹出一个授权链接和一个授权码输入框, 授权链接授权后会给你这串授权码,粘贴回车即可.依然可以用<code>!ls -l</code>查看下, <code>Colaboratory</code>有自带一些命令的, 在/bin下, 所以可以用tar命令进行解压:<code>tar czvf Datasets.gz</code></p>
 </blockquote>
 <h3 id="训练后的内容数据如何下载">
@@ -352,126 +232,38 @@ print(&#39;Transpose succeed.&#39;)
    >
    
 </a>小文件</h4>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-</code></pre><pre tabindex="0"><code>
-
-from google.colab import files
-
-\# 你需要填的:
-
-FILE\_PATH = &#39;下载的文件路径&#39;
-
-files.download(FILE\_PATH)
-</code></pre><blockquote>
-<p><em>尴尬脸</em> 简单吧,简单到写不下去了</p>
-</blockquote>
-<h4 id="大文件">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> files
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 你需要填的:</span>
+</span></span><span style="display:flex;"><span>FILE_PATH <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;下载的文件路径&#39;</span>
+</span></span><span style="display:flex;"><span>files<span style="color:#f92672">.</span>download(FILE_PATH)
+</span></span></code></pre></div><h4 id="大文件">
 <a href="#%e5%a4%a7%e6%96%87%e4%bb%b6"
    >
    
 </a>大文件</h4>
 <p>大文件还是推荐打包, tar:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-</code></pre><pre tabindex="0"><code>
-
-from google.colab import auth
-
-from googleapiclient.discovery import build
-
-from googleapiclient.http import MediaFileUpload
-
-\# 你需要填的:
-
-SAVE\_INTODRIVE\_NAME = &#39;想以什么名字保存到drive&#39;
-
-FILE\_PATH = &#39;想下载的文件路径&#39;
-
-auth.authenticate\_user()
-
-drive\_service = build(&#39;drive&#39;, &#39;v3&#39;)
-
-file\_metadata = {
-
-  &#39;name&#39;:SAVE\_INTODRIVE\_NAME,
-
-  &#39;mimeType&#39;: &#39;text/plain&#39;
-
-}
-
-media = MediaFileUpload(FILE\_PATH, 
-
-                        mimetype=&#39;text/plain&#39;,
-
-                        resumable=True)
-
-created = drive\_service.files().create(body=file\_metadata,
-
-                                       media\_body=media,
-
-                                       fields=&#39;id&#39;).execute()
-
-print(&#39;File ID: {}&#39;.format(created.get(&#39;id&#39;)))
-
-print(&#39;Transpose succeed.&#39;)
-</code></pre><h3 id="封装起来就轻松很多了">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> google.colab <span style="color:#f92672">import</span> auth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> googleapiclient.discovery <span style="color:#f92672">import</span> build
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> googleapiclient.http <span style="color:#f92672">import</span> MediaFileUpload
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 你需要填的:</span>
+</span></span><span style="display:flex;"><span>SAVE_INTODRIVE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;想以什么名字保存到drive&#39;</span>
+</span></span><span style="display:flex;"><span>FILE_PATH <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;想下载的文件路径&#39;</span>
+</span></span><span style="display:flex;"><span>auth<span style="color:#f92672">.</span>authenticate_user()
+</span></span><span style="display:flex;"><span>drive_service <span style="color:#f92672">=</span> build(<span style="color:#e6db74">&#39;drive&#39;</span>, <span style="color:#e6db74">&#39;v3&#39;</span>)
+</span></span><span style="display:flex;"><span>file_metadata <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;name&#39;</span>:SAVE_INTODRIVE_NAME,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;mimeType&#39;</span>: <span style="color:#e6db74">&#39;text/plain&#39;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>media <span style="color:#f92672">=</span> MediaFileUpload(FILE_PATH, 
+</span></span><span style="display:flex;"><span>                        mimetype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;text/plain&#39;</span>,
+</span></span><span style="display:flex;"><span>                        resumable<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>created <span style="color:#f92672">=</span> drive_service<span style="color:#f92672">.</span>files()<span style="color:#f92672">.</span>create(body<span style="color:#f92672">=</span>file_metadata,
+</span></span><span style="display:flex;"><span>                                       media_body<span style="color:#f92672">=</span>media,
+</span></span><span style="display:flex;"><span>                                       fields<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>execute()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;File ID: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(created<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;id&#39;</span>)))
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;Transpose succeed.&#39;</span>)
+</span></span></code></pre></div><h3 id="封装起来就轻松很多了">
 <a href="#%e5%b0%81%e8%a3%85%e8%b5%b7%e6%9d%a5%e5%b0%b1%e8%bd%bb%e6%9d%be%e5%be%88%e5%a4%9a%e4%ba%86"
    >
    
@@ -484,7 +276,7 @@ print(&#39;Transpose succeed.&#39;)
    >
    https://drive.google.com/file/d/1L7exa7j9ALc7J_PolwzNO3PlZDBmp4C-/view?usp=sharing
 </a><br>
-<img src="pack.png" alt=""></p>
+<img src="pack.webp" alt=""></p>
 </article>
 <br>
     <div class="flex flex-wrap items-center gap-2">

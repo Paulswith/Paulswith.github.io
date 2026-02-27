@@ -117,7 +117,7 @@ dir="ltr">
     <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">迁移学习InceptionV3</h1>
 
 <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
-  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>4 Mins read
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>3 Mins read
   </div>
 
   <div class="flex items-center gap-1">
@@ -169,74 +169,25 @@ dir="ltr">
    https://storage.googleapis.com/download.tensorflow.org/models/inception_dec_2015.zip
 </a> 并解压得到.pd文件</p>
 <p>执行下方代码, 可以打印出pb文件的全部节点:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-</code></pre><pre tabindex="0"><code>
-
-tf\_model\_path = &#39;/Users/dobby/Desktop/inception\_dec\_2015/tensorflow\_inception\_graph.pb&#39;
-
-with open(tf\_model\_path, &#39;rb&#39;) as f:
-
-    serialized = f.read()
-
-tf.reset\_default\_graph()
-
-original\_gdef = tf.GraphDef()
-
-original\_gdef.ParseFromString(serialized)
-
-##2 可以在这里查看到全部的图信息(前提是你有转换成功)
-
-with tf.Graph().as\_default() as g:
-
-    tf.import\_graph\_def(original\_gdef, name=&#39;&#39;)
-
-    ops = g.get\_operations()
-
-    try:
-
-        for i in range(10000):
-
-            print(&#39;op id {} : op name: {}, op type: &#34;{}&#34;&#39;.format(str(i),ops\[i\].name, ops\[i\].type))
-
-    except:
-
-        pass
-</code></pre><p>需要关注的输入层:</p>
-<p><img src="input.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tf_model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/akarizo/Desktop/inception_dec_2015/tensorflow_inception_graph.pb&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(tf_model_path, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    serialized <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>reset_default_graph()
+</span></span><span style="display:flex;"><span>original_gdef <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>GraphDef()
+</span></span><span style="display:flex;"><span>original_gdef<span style="color:#f92672">.</span>ParseFromString(serialized)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##2 可以在这里查看到全部的图信息(前提是你有转换成功)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Graph()<span style="color:#f92672">.</span>as_default() <span style="color:#66d9ef">as</span> g:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>import_graph_def(original_gdef, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    ops <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>get_operations()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;op id </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> : op name: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, op type: &#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;&#39;</span><span style="color:#f92672">.</span>format(str(i),ops[i]<span style="color:#f92672">.</span>name, ops[i]<span style="color:#f92672">.</span>type))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p>需要关注的输入层:</p>
+<p><img src="input.webp" alt=""></p>
 <p>和需要被修改最后一层的全连接层:<br>
-<img src="fl.png" alt=""></p>
+<img src="fl.webp" alt=""></p>
 <p>我们需要接入到这一层, 然后修改后面的node, 修改这一层原本是[2048, 1000] , 现在需要为我们自己的[2048, n_classes] , 我们自己需要分类的大小</p>
 <h5 id="训练环境准备">
 <a href="#%e8%ae%ad%e7%bb%83%e7%8e%af%e5%a2%83%e5%87%86%e5%a4%87"
@@ -251,133 +202,38 @@ with tf.Graph().as\_default() as g:
    https://paulswith.github.io/2018/02/01/%E9%83%A8%E7%BD%B2TensorFlow%E5%88%B0Colaboratory/
 </a></p>
 <p>免费的GPU当然很快, 但是坑超巨多, 如何你的VPN不稳定, 就很容易导致断连, 数据模型无法被保存,所以我封装一个小代码块, 在训练区间,保存之后调该方法上传到google-drive:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-
-23
-
-24
-
-25
-
-26
-
-27
-
-28
-
-29
-
-30
-
-31
-
-32
-</code></pre><pre tabindex="0"><code>
-
-def colab\_to\_drive(file\_path, save\_name):
-
-  &#39;&#39;&#39;
-
-   \*\* 从Colab到drive \*\* 
-
-  &#39;&#39;&#39;
-
-  auth.authenticate\_user()
-
-  drive\_service = build(&#39;drive&#39;, &#39;v3&#39;)
-
-  file\_metadata = {
-
-    &#39;name&#39;: save\_name,
-
-    &#39;mimeType&#39;: &#39;text/plain&#39;
-
-  }
-
-  media = MediaFileUpload(file\_path, 
-
-                          mimetype=&#39;text/plain&#39;,
-
-                          resumable=True)
-
-  drive\_service.files().create(body=file\_metadata,
-
-                               media\_body=media,
-
-                               fields=&#39;id&#39;).execute()
-
-  print(&#34;传输完成.&#34;)
-
-def upload\_demol():
-
-  &#39;&#39;&#39;
-
-   \*\* 封装上传 \*\*
-
-  &#39;&#39;&#39;
-
-  time\_str = datetime.now().strftime(&#39;\_%d\_%H\_%M\_%S&#39;)
-
-  name = &#39;RSM\_&#39;+time\_str+&#39;.gz&#39;
-
-  tar\_cmd = &#39;tar zcvf {a} {b}&#39;.format(a=name, b=MODEL\_SAVE\_DIR)
-
-  rm\_cmd  = &#39;rm -rf {}&#39;.format(name)
-
-  get\_ipython().system(tar\_cmd)
-
-  colab\_to\_drive(name, name)
-
-  get\_ipython().system(rm\_cmd)
-
-  print(&#34;上传成功,包名为&#34;,name)
-
-\# upload\_demol()
-</code></pre><h4 id="hardcode训练">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">colab_to_drive</span>(file_path, save_name):
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   ** 从Colab到drive ** 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>  auth<span style="color:#f92672">.</span>authenticate_user()
+</span></span><span style="display:flex;"><span>  drive_service <span style="color:#f92672">=</span> build(<span style="color:#e6db74">&#39;drive&#39;</span>, <span style="color:#e6db74">&#39;v3&#39;</span>)
+</span></span><span style="display:flex;"><span>  file_metadata <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;name&#39;</span>: save_name,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;mimeType&#39;</span>: <span style="color:#e6db74">&#39;text/plain&#39;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  media <span style="color:#f92672">=</span> MediaFileUpload(file_path, 
+</span></span><span style="display:flex;"><span>                          mimetype<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;text/plain&#39;</span>,
+</span></span><span style="display:flex;"><span>                          resumable<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>  drive_service<span style="color:#f92672">.</span>files()<span style="color:#f92672">.</span>create(body<span style="color:#f92672">=</span>file_metadata,
+</span></span><span style="display:flex;"><span>                               media_body<span style="color:#f92672">=</span>media,
+</span></span><span style="display:flex;"><span>                               fields<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;id&#39;</span>)<span style="color:#f92672">.</span>execute()
+</span></span><span style="display:flex;"><span>  print(<span style="color:#e6db74">&#34;传输完成.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">upload_demol</span>():
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   ** 封装上传 **
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>  time_str <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;_</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">_%H_%M_%S&#39;</span>)
+</span></span><span style="display:flex;"><span>  name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;RSM_&#39;</span><span style="color:#f92672">+</span>time_str<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;.gz&#39;</span>
+</span></span><span style="display:flex;"><span>  tar_cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tar zcvf </span><span style="color:#e6db74">{a}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{b}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(a<span style="color:#f92672">=</span>name, b<span style="color:#f92672">=</span>MODEL_SAVE_DIR)
+</span></span><span style="display:flex;"><span>  rm_cmd  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;rm -rf </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(name)
+</span></span><span style="display:flex;"><span>  get_ipython()<span style="color:#f92672">.</span>system(tar_cmd)
+</span></span><span style="display:flex;"><span>  colab_to_drive(name, name)
+</span></span><span style="display:flex;"><span>  get_ipython()<span style="color:#f92672">.</span>system(rm_cmd)
+</span></span><span style="display:flex;"><span>  print(<span style="color:#e6db74">&#34;上传成功,包名为&#34;</span>,name)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># upload_demol()</span>
+</span></span></code></pre></div><h4 id="hardcode训练">
 <a href="#hardCode%e8%ae%ad%e7%bb%83"
    >
    
@@ -393,125 +249,36 @@ def upload\_demol():
 十分感谢前人种树, 方法基本是通用的, 让我学会了如何迁移其他的模型</p>
 <hr>
 <p>但是跑起来是有地方会报错的, 做了修改:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-
-23
-
-24
-
-25
-
-26
-
-27
-
-28
-
-29
-</code></pre><pre tabindex="0"><code>
-
-def get\_test\_bottlenecks(sess,image\_lists,n\_class,jpeg\_data\_tensor,bottleneck\_tensor):
-
-    &#39;&#39;&#39;
-
-    获取全部的测试数据,计算输出
-
-    :param sess: 
-
-    :param image\_lists: 
-
-    :param n\_class: 
-
-    :param jpeg\_data\_tensor: 
-
-    :param bottleneck\_tensor: 
-
-    :return:                   瓶颈输出 &amp; label
-
-    &#39;&#39;&#39;
-
-    bottlenecks  = \[\]
-
-    ground\_truths = \[\]
-
-    label\_name\_list = list(image\_lists.keys())
-
-    \#  \*\* 原先方法会报错:
-
-    \#     for label\_index,label\_name in enumerate(image\_lists\[label\_name\_list\]):
-
-    \#  \*\*修改如下(3行):
-
-    label\_index = random.randrange(n\_class)  \# 标签索引随机生成
-
-    label\_name = label\_name\_list\[label\_index\]
-
-    label\_index= label\_name\_list.index(label\_name)
-
-   category = &#39;testing&#39;
-
-    for index, unused\_base\_name in enumerate(image\_lists\[label\_name\]\[category\]): \# 索引, {文件名}
-
-        bottleneck = get\_or\_create\_bottleneck(
-
-            sess, image\_lists, label\_name, index,
-
-            category, jpeg\_data\_tensor, bottleneck\_tensor)
-
-        ground\_truth = np.zeros(n\_class, dtype=np.float32)
-
-        ground\_truth\[label\_index\] = 1.0
-
-        bottlenecks.append(bottleneck)
-
-        ground\_truths.append(ground\_truth)
-
-    return bottlenecks, ground\_truths
-</code></pre><h4 id="迁移方法">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_test_bottlenecks</span>(sess,image_lists,n_class,jpeg_data_tensor,bottleneck_tensor):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    获取全部的测试数据,计算输出
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param sess: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param image_lists: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param n_class: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param jpeg_data_tensor: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param bottleneck_tensor: 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return:                   瓶颈输出 &amp; label
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    bottlenecks  <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    ground_truths <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    label_name_list <span style="color:#f92672">=</span> list(image_lists<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  ** 原先方法会报错:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#     for label_index,label_name in enumerate(image_lists[label_name_list]):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  **修改如下(3行):</span>
+</span></span><span style="display:flex;"><span>    label_index <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>randrange(n_class)  <span style="color:#75715e"># 标签索引随机生成</span>
+</span></span><span style="display:flex;"><span>    label_name <span style="color:#f92672">=</span> label_name_list[label_index]
+</span></span><span style="display:flex;"><span>    label_index<span style="color:#f92672">=</span> label_name_list<span style="color:#f92672">.</span>index(label_name)
+</span></span><span style="display:flex;"><span>   category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;testing&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> index, unused_base_name <span style="color:#f92672">in</span> enumerate(image_lists[label_name][category]): <span style="color:#75715e"># 索引, {文件名}</span>
+</span></span><span style="display:flex;"><span>        bottleneck <span style="color:#f92672">=</span> get_or_create_bottleneck(
+</span></span><span style="display:flex;"><span>            sess, image_lists, label_name, index,
+</span></span><span style="display:flex;"><span>            category, jpeg_data_tensor, bottleneck_tensor)
+</span></span><span style="display:flex;"><span>        ground_truth <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(n_class, dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>float32)
+</span></span><span style="display:flex;"><span>        ground_truth[label_index] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>        bottlenecks<span style="color:#f92672">.</span>append(bottleneck)
+</span></span><span style="display:flex;"><span>        ground_truths<span style="color:#f92672">.</span>append(ground_truth)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bottlenecks, ground_truths
+</span></span></code></pre></div><h4 id="迁移方法">
 <a href="#%e8%bf%81%e7%a7%bb%e6%96%b9%e6%b3%95"
    >
    
@@ -523,188 +290,64 @@ def get\_test\_bottlenecks(sess,image\_lists,n\_class,jpeg\_data\_tensor,bottlen
    
 </a>加载获取用得到的tensor</h5>
 <p>我们需要获取 图片的输入-&gt; 想断点的这两个节点的tensor</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-</code></pre><pre tabindex="0"><code>
-
-\# 1. 图加载模型
-
-with open(os.path.join(MODEL\_DIR, MODEL\_FILE), &#39;rb&#39;) as f:            
-
-        graph\_def = tf.GraphDef()                                        
-
-        graph\_def.ParseFromString(f.read())                               
-
-\# 2.导入图, 且从图上读取tensor, return\_elements=\[BOTTLENECK\_TENSOR\_NAME,JPEG\_DATA\_TENSOR\_NAME\]) 让返回这个tensor
-
-\# 方便我们runsession ,返回后续tensor
-
-bottleneck\_tensor,jpeg\_data\_tensor = tf.import\_graph\_def(            
-
-    graph\_def,
-
-    return\_elements=\[BOTTLENECK\_TENSOR\_NAME,JPEG\_DATA\_TENSOR\_NAME\])
+<pre tabindex="0"><code># 1. 图加载模型
+with open(os.path.join(MODEL_DIR, MODEL_FILE), &#39;rb&#39;) as f:            
+        graph_def = tf.GraphDef()                                        
+        graph_def.ParseFromString(f.read())                               
+# 2.导入图, 且从图上读取tensor, return_elements=[BOTTLENECK_TENSOR_NAME,JPEG_DATA_TENSOR_NAME]) 让返回这个tensor
+# 方便我们runsession ,返回后续tensor
+bottleneck_tensor,jpeg_data_tensor = tf.import_graph_def(            
+    graph_def,
+    return_elements=[BOTTLENECK_TENSOR_NAME,JPEG_DATA_TENSOR_NAME])
 </code></pre><h5 id="拿到断点tensor">
 <a href="#%e6%8b%bf%e5%88%b0%e6%96%ad%e7%82%b9tensor"
    >
    
 </a>拿到断点tensor</h5>
 <p>上面我们获取到了输入tensor和断点tensor, 操作的步骤如同我们直接调用它的模型是一样的, 按照它们先前的格式将图片输入,然后然后它在我们想要的断点节点返回内容</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-</code></pre><pre tabindex="0"><code>
-
-def run\_bottleneck\_on\_images(sess,image\_data,jpeg\_data\_tensor,bottleneck\_tensor):
-
-    &#39;&#39;&#39;
-
-    使用加载的训练好的Inception-v3模型处理一张图片，得到这个图片的特征向量。
-
-    :param sess:              会话句柄
-
-    :param image\_data:        图片文件句柄
-
-    :param jpeg\_data\_tensor:  输入张量句柄
-
-    :param bottleneck\_tensor: 瓶颈张量句柄
-
-    :return:                  瓶颈张量值
-
-    &#39;&#39;&#39;
-
-    bottleneck\_values = sess.run(bottleneck\_tensor,feed\_dict={jpeg\_data\_tensor:image\_data})
-
-    print(bottleneck\_values.shape) \# 从这里也能知道它返回的shape
-
-    bottleneck\_values = np.squeeze(bottleneck\_values)
-
-    return bottleneck\_values
-</code></pre><h5 id="定义新网络">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">run_bottleneck_on_images</span>(sess,image_data,jpeg_data_tensor,bottleneck_tensor):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    使用加载的训练好的Inception-v3模型处理一张图片，得到这个图片的特征向量。
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param sess:              会话句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param image_data:        图片文件句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param jpeg_data_tensor:  输入张量句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :param bottleneck_tensor: 瓶颈张量句柄
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    :return:                  瓶颈张量值
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    bottleneck_values <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run(bottleneck_tensor,feed_dict<span style="color:#f92672">=</span>{jpeg_data_tensor:image_data})
+</span></span><span style="display:flex;"><span>    print(bottleneck_values<span style="color:#f92672">.</span>shape) <span style="color:#75715e"># 从这里也能知道它返回的shape</span>
+</span></span><span style="display:flex;"><span>    bottleneck_values <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>squeeze(bottleneck_values)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> bottleneck_values
+</span></span></code></pre></div><h5 id="定义新网络">
 <a href="#%e5%ae%9a%e4%b9%89%e6%96%b0%e7%bd%91%e7%bb%9c"
    >
    
 </a>定义新网络</h5>
 <p>从上面拿到了需要断点的tensor, 它返回shape是[None, 2048], 第一坑placeholder留给它<br>
 第二个placeholder, 是我们的label, 只需要定义为[None, n_classes]</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-</code></pre><pre tabindex="0"><code>
-
-bottleneck\_input   = tf.placeholder(tf.float32, \[None,BOTTLENECK\_TENSOR\_SIZE\], name=&#39;BottleneckInputPlaceholder&#39;)
-
-ground\_truth\_input = tf.placeholder(tf.float32, \[None,n\_class\], name=&#39;GroundTruthInput&#39;)
-
-\# 上面的操作后,我们定义好自己的全连接层,接入即可
-
-with tf.name\_scope(&#39;final\_train\_ops&#39;):
-
-    \# Weight-bias初始化
-
-    Weights = tf.Variable(tf.truncated\_normal(\[BOTTLENECK\_TENSOR\_SIZE,n\_class\],stddev=0.001)) 
-
-    biases  = tf.Variable(tf.zeros(\[n\_class\]))
-
-    logits  = tf.matmul(bottleneck\_input,Weights) + biases
-
-    final\_tensor = tf.nn.softmax(logits, name=&#39;softMax\_last&#39;)
-
-tf.add\_to\_collection(name=&#39;final\_tensor&#39;, value=final\_tensor)
-</code></pre><h5 id="定义常规的优化器">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>bottleneck_input   <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32, [<span style="color:#66d9ef">None</span>,BOTTLENECK_TENSOR_SIZE], name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;BottleneckInputPlaceholder&#39;</span>)
+</span></span><span style="display:flex;"><span>ground_truth_input <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>placeholder(tf<span style="color:#f92672">.</span>float32, [<span style="color:#66d9ef">None</span>,n_class], name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;GroundTruthInput&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 上面的操作后,我们定义好自己的全连接层,接入即可</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>name_scope(<span style="color:#e6db74">&#39;final_train_ops&#39;</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Weight-bias初始化</span>
+</span></span><span style="display:flex;"><span>    Weights <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>truncated_normal([BOTTLENECK_TENSOR_SIZE,n_class],stddev<span style="color:#f92672">=</span><span style="color:#ae81ff">0.001</span>)) 
+</span></span><span style="display:flex;"><span>    biases  <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Variable(tf<span style="color:#f92672">.</span>zeros([n_class]))
+</span></span><span style="display:flex;"><span>    logits  <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>matmul(bottleneck_input,Weights) <span style="color:#f92672">+</span> biases
+</span></span><span style="display:flex;"><span>    final_tensor <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>softmax(logits, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;softMax_last&#39;</span>)
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>add_to_collection(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;final_tensor&#39;</span>, value<span style="color:#f92672">=</span>final_tensor)
+</span></span></code></pre></div><h5 id="定义常规的优化器">
 <a href="#%e5%ae%9a%e4%b9%89%e5%b8%b8%e8%a7%84%e7%9a%84%e4%bc%98%e5%8c%96%e5%99%a8"
    >
    
 </a>定义常规的优化器</h5>
 <p>这一步都是通用的, pass哈</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-</code></pre><pre tabindex="0"><code>
-
-cross\_entropy = tf.reduce\_mean(tf.nn.softmax\_cross\_entropy\_with\_logits\_v2(logits=logits,labels=ground\_truth\_input))
-
-train\_step    = tf.train.RMSPropOptimizer(LEARNING\_RATE).minimize(cross\_entropy)
-
-\# 正确率
-
-with tf.name\_scope(&#39;evaluation&#39;):
-
-    correct\_prediction = tf.equal(tf.argmax(final\_tensor,1,name=&#39;argmax\_softMax\_last&#39;),tf.argmax(ground\_truth\_input,1))
-
-    evaluation\_step    = tf.reduce\_mean(tf.cast(correct\_prediction,tf.float32))
-</code></pre><h4 id="踩过的坑">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>cross_entropy <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>softmax_cross_entropy_with_logits_v2(logits<span style="color:#f92672">=</span>logits,labels<span style="color:#f92672">=</span>ground_truth_input))
+</span></span><span style="display:flex;"><span>train_step    <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>RMSPropOptimizer(LEARNING_RATE)<span style="color:#f92672">.</span>minimize(cross_entropy)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 正确率</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>name_scope(<span style="color:#e6db74">&#39;evaluation&#39;</span>):
+</span></span><span style="display:flex;"><span>    correct_prediction <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>equal(tf<span style="color:#f92672">.</span>argmax(final_tensor,<span style="color:#ae81ff">1</span>,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;argmax_softMax_last&#39;</span>),tf<span style="color:#f92672">.</span>argmax(ground_truth_input,<span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>    evaluation_step    <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>reduce_mean(tf<span style="color:#f92672">.</span>cast(correct_prediction,tf<span style="color:#f92672">.</span>float32))
+</span></span></code></pre></div><h4 id="踩过的坑">
 <a href="#%e8%b8%a9%e8%bf%87%e7%9a%84%e5%9d%91"
    >
    
@@ -733,59 +376,22 @@ with tf.name\_scope(&#39;evaluation&#39;):
 </a>国外网络不稳定,导致容易掉线</h5>
 <p>因为colab是需要墙外访问, 当网络不稳定断开的时候, 我们重新进入环境就必须重启它, 导致跑着的变量代码必须重新启动. 这是很难办.最好用两个方法解决:<br>
 1, 让数据接着跑:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-</code></pre><pre tabindex="0"><code>
-
-with tf.Session() as sess:
-
-            sess.run(tf.global\_variables\_initializer())
-
-            saver = tf.train.Saver()
-
-            if keepon:
-
-                print(&#39;继续加载模型:&#39;)
-
-                saver.restore(sess, tf.train.latest\_checkpoint(MODEL\_SAVE\_DIR))
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Session() <span style="color:#66d9ef">as</span> sess:
+</span></span><span style="display:flex;"><span>    sess<span style="color:#f92672">.</span>run(tf<span style="color:#f92672">.</span>global_variables_initializer())
+</span></span><span style="display:flex;"><span>    saver <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>Saver()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> keepon:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;继续加载模型:&#39;</span>)
+</span></span><span style="display:flex;"><span>        saver<span style="color:#f92672">.</span>restore(sess, tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>latest_checkpoint(MODEL_SAVE_DIR))
+</span></span></code></pre></div><blockquote>
 <p>good job</p>
 </blockquote>
 <p>2, 善于保存,善于上传到driver</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-</code></pre><pre tabindex="0"><code>
-
-if i % 1000 == 0:
-
-                    print(&#34;进行存储上传&#34;)
-
-                    tf.train.write\_graph(sess.graph, MODEL\_SAVE\_DIR, &#39;model.pbtxt&#39;)
-
-                    upload\_demol()
-
-                saver.save(sess, MODEL\_SAVEPATH, global\_step=50) \# 50次保存一次
-</code></pre><h5 id="优化器的坑">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                    print(<span style="color:#e6db74">&#34;进行存储上传&#34;</span>)
+</span></span><span style="display:flex;"><span>                    tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>write_graph(sess<span style="color:#f92672">.</span>graph, MODEL_SAVE_DIR, <span style="color:#e6db74">&#39;model.pbtxt&#39;</span>)
+</span></span><span style="display:flex;"><span>                    upload_demol()
+</span></span><span style="display:flex;"><span>                saver<span style="color:#f92672">.</span>save(sess, MODEL_SAVEPATH, global_step<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>) <span style="color:#75715e"># 50次保存一次</span>
+</span></span></code></pre></div><h5 id="优化器的坑">
 <a href="#%e4%bc%98%e5%8c%96%e5%99%a8%e7%9a%84%e5%9d%91"
    >
    
@@ -800,160 +406,43 @@ if i % 1000 == 0:
    http://ycszen.github.io/2016/08/24/SGD%EF%BC%8CAdagrad%EF%BC%8CAdadelta%EF%BC%8CAdam%E7%AD%89%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93%E5%92%8C%E6%AF%94%E8%BE%83/
 </a></p>
 <p>替换为RMS后的效果很是不错(之所以有部分高震荡, 是因为断网重连后, 它还没适应下去,所以loss依然很高, 正常现象除非你网络稳定,loss也会很好看~)<br>
-<img src="loss.png" alt=""></p>
+<img src="loss.webp" alt=""></p>
 <h4 id="加载模型识别">
 <a href="#%e5%8a%a0%e8%bd%bd%e6%a8%a1%e5%9e%8b%e8%af%86%e5%88%ab"
    >
    
 </a>加载模型识别</h4>
 <p>识别率基本是满足的了, 达到了95%以上, 下一步是迁移到IOS的APP上, 拿张图片show一下看准不准:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-
-23
-
-24
-
-25
-
-26
-
-27
-
-28
-
-29
-
-30
-
-31
-
-32
-
-33
-
-34
-
-35
-
-36
-
-37
-
-38
-
-39
-
-40
-
-41
-
-42
-</code></pre><pre tabindex="0"><code>
-
-\# -\*- coding:utf-8 -\*-
-
-\_\_author = &#39;&#39;
-
-import tensorflow as tf
-
-import numpy as np
-
-\# \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*define\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-
-MODEL\_PATH   = &#39;/Users/dobby/TEMP/SaveData/model/101\_class\_model.ckpt-50.meta&#39;
-
-MODEL\_DIR    =  &#39;/Users/dobby/TEMP/SaveData/model&#39;
-
-image\_path   = &#39;/Users/dobby/Desktop/pisa.jpeg&#39;
-
-CATO\_PATH    = &#39;/Users/dobby/TEMP/SaveData/model/catogory.info&#39;
-
-catogo\_list  = open(CATO\_PATH, &#39;r&#39;).read().split(&#39;|&#39;)
-
-\# \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*LOADGraph\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-
-sess = tf.Session()
-
-saver = tf.train.import\_meta\_graph(MODEL\_PATH)
-
-saver.restore(sess, tf.train.latest\_checkpoint(MODEL\_DIR))
-
-graph = tf.get\_default\_graph()
-
-\# \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*Define-Node\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-
-inpiut\_x     = graph.get\_tensor\_by\_name(&#39;import/DecodeJpeg/contents:0&#39;)
-
-poo3         = graph.get\_tensor\_by\_name(&#39;import/pool\_3/\_reshape:0&#39;)
-
-change\_input = graph.get\_tensor\_by\_name(&#39;BottleneckInputPlaceholder:0&#39;)
-
-predict      = graph.get\_tensor\_by\_name(&#39;final\_train\_ops/softMax\_last:0&#39;)
-
-print(&#39;加载模型成功&#39;)
-
-def classification\_photo():
-
-    \# step 打开图片切换格式
-
-    image = tf.gfile.FastGFile(image\_path, &#39;rb&#39;).read()        \# inceptionV3不需要转换图片, 它自己换处理图片
-
-    poo3\_frist = sess.run(poo3, feed\_dict={inpiut\_x: image})   \# 按照模型的顺序要, 先喂给它图片, 然后图片提取到瓶颈的tensor
-
-    result = sess.run(predict, feed\_dict={change\_input:poo3\_frist}) \# 瓶颈的tensor再转入input传入, 得到我们最后的predict
-
-    ar = np.array(result).flatten().tolist()
-
-    inde = ar.index(max(ar))
-
-    print(&#34;it&#39;s a {} photo&#34;.format(catogo\_list\[inde\]))
-
-classification\_photo()
-</code></pre><p><img src="succeed.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> tensorflow <span style="color:#66d9ef">as</span> tf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ***********************define***********************</span>
+</span></span><span style="display:flex;"><span>MODEL_PATH   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/akarizo/TEMP/SaveData/model/101_class_model.ckpt-50.meta&#39;</span>
+</span></span><span style="display:flex;"><span>MODEL_DIR    <span style="color:#f92672">=</span>  <span style="color:#e6db74">&#39;/Users/akarizo/TEMP/SaveData/model&#39;</span>
+</span></span><span style="display:flex;"><span>image_path   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/akarizo/Desktop/pisa.jpeg&#39;</span>
+</span></span><span style="display:flex;"><span>CATO_PATH    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/akarizo/TEMP/SaveData/model/catogory.info&#39;</span>
+</span></span><span style="display:flex;"><span>catogo_list  <span style="color:#f92672">=</span> open(CATO_PATH, <span style="color:#e6db74">&#39;r&#39;</span>)<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;|&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ***********************LOADGraph***********************</span>
+</span></span><span style="display:flex;"><span>sess <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>Session()
+</span></span><span style="display:flex;"><span>saver <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>import_meta_graph(MODEL_PATH)
+</span></span><span style="display:flex;"><span>saver<span style="color:#f92672">.</span>restore(sess, tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>latest_checkpoint(MODEL_DIR))
+</span></span><span style="display:flex;"><span>graph <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>get_default_graph()
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ***********************Define-Node***********************</span>
+</span></span><span style="display:flex;"><span>inpiut_x     <span style="color:#f92672">=</span> graph<span style="color:#f92672">.</span>get_tensor_by_name(<span style="color:#e6db74">&#39;import/DecodeJpeg/contents:0&#39;</span>)
+</span></span><span style="display:flex;"><span>poo3         <span style="color:#f92672">=</span> graph<span style="color:#f92672">.</span>get_tensor_by_name(<span style="color:#e6db74">&#39;import/pool_3/_reshape:0&#39;</span>)
+</span></span><span style="display:flex;"><span>change_input <span style="color:#f92672">=</span> graph<span style="color:#f92672">.</span>get_tensor_by_name(<span style="color:#e6db74">&#39;BottleneckInputPlaceholder:0&#39;</span>)
+</span></span><span style="display:flex;"><span>predict      <span style="color:#f92672">=</span> graph<span style="color:#f92672">.</span>get_tensor_by_name(<span style="color:#e6db74">&#39;final_train_ops/softMax_last:0&#39;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;加载模型成功&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">classification_photo</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># step 打开图片切换格式</span>
+</span></span><span style="display:flex;"><span>    image <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>gfile<span style="color:#f92672">.</span>FastGFile(image_path, <span style="color:#e6db74">&#39;rb&#39;</span>)<span style="color:#f92672">.</span>read()        <span style="color:#75715e"># inceptionV3不需要转换图片, 它自己换处理图片</span>
+</span></span><span style="display:flex;"><span>    poo3_frist <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run(poo3, feed_dict<span style="color:#f92672">=</span>{inpiut_x: image})   <span style="color:#75715e"># 按照模型的顺序要, 先喂给它图片, 然后图片提取到瓶颈的tensor</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> sess<span style="color:#f92672">.</span>run(predict, feed_dict<span style="color:#f92672">=</span>{change_input:poo3_frist}) <span style="color:#75715e"># 瓶颈的tensor再转入input传入, 得到我们最后的predict</span>
+</span></span><span style="display:flex;"><span>    ar <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(result)<span style="color:#f92672">.</span>flatten()<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>    inde <span style="color:#f92672">=</span> ar<span style="color:#f92672">.</span>index(max(ar))
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;it&#39;s a </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> photo&#34;</span><span style="color:#f92672">.</span>format(catogo_list[inde]))
+</span></span><span style="display:flex;"><span>classification_photo()
+</span></span></code></pre></div><p><img src="succeed.webp" alt=""></p>
 <h4 id="预告">
 <a href="#%e9%a2%84%e5%91%8a"
    >

@@ -117,7 +117,7 @@ dir="ltr">
     <div class="mx-auto max-w-5xl w-full py-6 px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-1 lg:grid-cols-[1fr]"><section id="posts" class="space-y-2"><h1 class="text-3xl font-bold mb-2">逆向-UNREAD去除阅读限制</h1>
 
 <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-6">
-  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>2 Mins read
+  <div class="flex items-center gap-1"><i class="fas fa-clock"></i>1 Mins read
   </div>
 
   <div class="flex items-center gap-1">
@@ -200,24 +200,10 @@ dir="ltr">
 嗯,就是<code>updateUnlockInfo</code><br>
 <img src="soudao.webp" alt=""><br>
 回溯上层的调用栈, 初步我们先查看下这些Unread模块的栈,看看是否我们调用的信息.分别减去初始偏移量后他们依次是:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-\-\[UNRPermissionManager setRemainingCount:\]
-
-\-\[UNRPermissionManager permissionToReadArticleWithUniqueID:\]
-
-\-\[UNRArticlesListViewController showArticleViewer\]
-
-\-\[UNRArticlesListViewController deadEndTapTimerFired:\]
+<pre tabindex="0"><code>-[UNRPermissionManager setRemainingCount:]
+-[UNRPermissionManager permissionToReadArticleWithUniqueID:]
+-[UNRArticlesListViewController showArticleViewer]
+-[UNRArticlesListViewController deadEndTapTimerFired:]
 </code></pre><h4 id="逻辑梳理">
 <a href="#%e9%80%bb%e8%be%91%e6%a2%b3%e7%90%86"
    >
@@ -262,61 +248,19 @@ so , 继续看看<code>storeCountry</code>的返回逻辑,依旧常规Hopper搜�
    
 </a>hook代码</h3>
 <p>全部的Hook代码如下, copy执行即:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-</code></pre><pre tabindex="0"><code>
-
-@interface UNRIAPManager
-
-\- (NSString \*) storeCountry;
-
-@end
-
-CHDeclareClass(UNRIAPManager)
-
-CHOptimizedMethod(0, self, NSString\*, UNRIAPManager,storeCountry){
-
-    NSLog(@&#34;is hook succeed? -- -------------------&#34;);
-
-    return @&#34;:happysquid:&#34;;
-
-}
-
-CHConstructor{
-
-    CHLoadLateClass(UNRIAPManager);
-
-    CHClassHook(0, UNRIAPManager, storeCountry);
-
-}
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">UNRIAPManager</span>
+</span></span><span style="display:flex;"><span>- (NSString <span style="color:#f92672">*</span>) <span style="color:#a6e22e">storeCountry</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span>CHDeclareClass(UNRIAPManager)
+</span></span><span style="display:flex;"><span>CHOptimizedMethod(<span style="color:#ae81ff">0</span>, self, NSString<span style="color:#f92672">*</span>, UNRIAPManager,storeCountry){
+</span></span><span style="display:flex;"><span>    NSLog(<span style="color:#e6db74">@&#34;is hook succeed? -- -------------------&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">@&#34;:happysquid:&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>CHConstructor{
+</span></span><span style="display:flex;"><span>    CHLoadLateClass(UNRIAPManager);
+</span></span><span style="display:flex;"><span>    CHClassHook(<span style="color:#ae81ff">0</span>, UNRIAPManager, storeCountry);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
 <p>思路就是直接Hook<code>storeCountry</code>,让其永远返回”:happysquid:”,这里似乎也是比较粗糙的做法(如何这里是后台动态下发呢? ),但换个思路想, 这里返回”:happysquid:”,逻辑的意思就是 “I’m the VIP” 的暗号,既然如此何乐不为. 碰碰运气跑一下看看. 这不就是逆向的随机性乐趣所在吗…<br>
 尝试就是收获,目前自用并未发现问题.几乎天天在这里APP里面看前辈文章的,稳的</p>
 </blockquote>

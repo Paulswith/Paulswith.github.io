@@ -143,14 +143,14 @@ dir="ltr">
    
 </a>先上下图</h4>
 <p>(功能入口在 新手引导-&gt;探探怎么玩-&gt; ):<br>
-<img src="genggai.png" alt=""><br>
+<img src="genggai.webp" alt=""><br>
 这是目前逆向后我给它新增的功能,因为工作也比较忙,就没有新增过多的需求,但是整个App的架构逻辑其实已经很清晰了, 基本可以合理的新增一些需求在里面, 这也说明探探的开发架构逻辑挺棒的.</p>
 <h4 id="功能简介">
 <a href="#%e5%8a%9f%e8%83%bd%e7%ae%80%e4%bb%8b"
    >
    
 </a>功能简介</h4>
-<p><img src="geng.png" alt=""><br>
+<p><img src="geng.webp" alt=""><br>
 下方是一个简单的tableview, 功能的启动都在这里,当然功能是有互斥和优先级的,</p>
 <ul>
 <li>同时开启无条件选妹和选妹子onlyStudent, 无条件选妹子优先.</li>
@@ -169,53 +169,34 @@ dir="ltr">
    
 </a>调试工具</h4>
 <ul>
-<li>
-<p>依然是最酷的
+<li>依然是最酷的
 <a href="https://github.com/AloneMonkey/MonkeyDev"
    
      target="_blank" rel="noopener noreferrer"
    >
    MonkeyDev
-</a></p>
-</li>
+</a></li>
 <li>
-<p>
 <a href="https://github.com/Flipboard/FLEX"
    
      target="_blank" rel="noopener noreferrer"
    >
    FLEX
-</a>(reveal过期了,这是一个很棒的替代品), 下载后编译一下, 然后按照monkeyDev中wifi加入第三方库的方式操作即可</p>
-</li>
+</a>(reveal过期了,这是一个很棒的替代品), 下载后编译一下, 然后按照monkeyDev中wifi加入第三方库的方式操作即可</li>
 <li>
-<p>
 <a href="https://github.com/AloneMonkey/frida-ios-dump"
    
      target="_blank" rel="noopener noreferrer"
    >
    frida-ios-dump
-</a> 还是庆哥出品,砸壳后顺带把整个APP导出</p>
-</li>
-<li>
-<p>其它的全程是cycript+LLDB调戏 就不累述了…<br>
-<img src="flex.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-#import 
-
-// open it in here
-
- \[\[FLEXManager sharedManager\] showExplorer\];
-</code></pre></li>
+</a> 还是庆哥出品,砸壳后顺带把整个APP导出</li>
+<li>其它的全程是cycript+LLDB调戏 就不累述了…<br>
+<img src="flex.webp" alt=""></li>
 </ul>
-<p>导入库之后,在注入成功的这个通知回调里,启动这个方法</p>
+<pre tabindex="0"><code>#import 
+// open it in here
+[[FLEXManager sharedManager] showExplorer];
+</code></pre><p>导入库之后,在注入成功的这个通知回调里,启动这个方法</p>
 <h4 id="调试遇到的问题">
 <a href="#%e8%b0%83%e8%af%95%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98"
    >
@@ -223,7 +204,16 @@ dir="ltr">
 </a>调试遇到的问题</h4>
 <p>探探是有反调试的, 用的是sysctl. 很强<br>
 那么你调试的时候需要讲MonkeyDev里面的打开, 这个反反调试检测默认是关闭的,原因注释上有<br>
-<img src="syscall.png" alt=""></p></div></header>
+<img src="syscall.webp" alt=""></p>
+<h4 id="从需求粗发的debug">
+<a href="#%e4%bb%8e%e9%9c%80%e6%b1%82%e7%b2%97%e5%8f%91%e7%9a%84debug"
+   >
+   
+</a>从需求粗发的debug</h4>
+<p>逆向App,我一般的套路都是酱紫.<br>
+设计需求 -&gt; 需求在哪里会展示 -&gt; 从view到Controller-&gt; controller方法猜测 -&gt; 结合monkeyDev进行方法trace -&gt; 确认需求方法 -&gt; hopper找方法地址 -&gt; LLDB调试下断点 -&gt; 查看调用栈(bt) -&gt; 然后开始埋点尝试hook<br>
+<img src="xuxu.webp" alt=""><br>
+用笔记在记录每次你发现的新宇宙(虽然开始的很早,实际没有时间弄它…)</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -257,7 +247,7 @@ dir="ltr">
    >
    
 </a>工具准备</h3>
-<p><img src="predic.png" alt=""><br>
+<p><img src="predic.webp" alt=""><br>
 mac上的逆向其实比较省, 你不需要额外的砸壳,直接就能能从包里面拿到执行文件.<br>
 class-dump 头文件.<br>
 用Hopper打开,反汇编一下方便待会查看.<br>
@@ -268,15 +258,15 @@ class-dump 头文件.<br>
    
 </a>入口分析</h3>
 <p>本来大多数的步骤一定是从view开始, 有一款神器就[interface inspector], 但总会报错一些乱七八糟的问题,暂时还没调好, 于是乎我粗糙的从hopper搜索”Register”,(如果一开始搜的是首字母小写的话可能不会饶那么弯…),结果是这样子的,<br>
-<img src="first.png" alt=""><br>
+<img src="first.webp" alt=""><br>
 也查到其他无关的,最后确定就是这里,伪代码和汇编看并没有看出什么头绪,于是乎先看看有没有调用这里这个类相关.</p>
 <p>追踪前,这里有一款强大的工具说下:<br>
 <code>frida-trace</code>: frida-trace -m “-[PTHotKeyCenter _]” Divvy<br>
-<img src="frida.png" alt=""><br>
+<img src="frida.webp" alt=""><br>
 用法是frida-trace -m “&lt;+类方法/-实例方法&gt;[类名 方法名&lt;_代表全部&gt;]”<br>
 执行后它会自动帮你生成跟踪的js文件,然后监听所指定的方法.</p>
 <p>一开始觉得吧, PTHotKeyCenter不像是很关键的类, 也是没怎么写Mac的App的原因,但还是监听了一下:<br>
-<img src="trace.png" alt=""><br>
+<img src="trace.webp" alt=""><br>
 我尝试打开它,然后随便输入一串号码注册, 发现他怎么整都只打印这些, 而且就在我使用快捷键的时候~<br>
 随意也明白了,这就是”热键”,仅此而已…</p>
 <h3 id="动态调试">
@@ -286,31 +276,18 @@ class-dump 头文件.<br>
 </a>动态调试</h3>
 <p>进行到这里其实是无头绪的, 然后想着是从mondev进行动态调试,看看能不能从调用栈看看这里的情况.<br>
 想着hook哪个方法的时候,脑子冒个灵光,想到了这个view的展示, 我就输入”)show”看看有没有什么可疑的,结果:<br>
-<img src="show.png" alt=""> 十分意外第一个方法,很明显这个方法应该是展示注册这个View的,而且还待会参数时间.<br>
+<img src="show.webp" alt=""> 十分意外第一个方法,很明显这个方法应该是展示注册这个View的,而且还待会参数时间.<br>
 如果是这个方法果然没错, 那么我可能得到,一是找不到更好的hook方法,duration的参数改为最少的时间,或者可以尝试return这部展示的操作. 其次先Hook下看看调用栈,是什么决定它展示也是可以的, 于是开始我的Hook代码.<br>
 MonkeyDev默认是subStrate的hook方法代码, 当然也是可以替换成其它的(按道理当然可以~):<br>
 这是一开始的代码:<br>
-<img src="array.png" alt=""><br>
+<img src="array.webp" alt=""><br>
 但是允许会报错,其中需要修改:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-static void newHookFunc(AppController\* self,SEL \_cmd,id array){ // }
-
-                    //replacet to | //下面
-
-static void newHookFunc(AppController\* self,SEL \_cmd,id arg1, id arg2){ // }
-
-// 需要指明多少个参数, 不知道参数类型就使用泛型id
-</code></pre><p>build一下且进入调试后, 用时在<code>static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2){</code> 这里Xcode断点一下:<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">newHookFunc</span>(AppController<span style="color:#f92672">*</span> self,<span style="color:#66d9ef">SEL</span> _cmd,<span style="color:#66d9ef">id</span> array){ }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//replacet to | //下面
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 需要指明多少个参数, 不知道参数类型就使用泛型id
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">newHookFunc</span>(AppController<span style="color:#f92672">*</span> self,<span style="color:#66d9ef">SEL</span> _cmd,<span style="color:#66d9ef">id</span> arg1, <span style="color:#66d9ef">id</span> arg2){ }
+</span></span></code></pre></div><p>build一下且进入调试后, 用时在<code>static void newHookFunc(AppController* self,SEL _cmd,id arg1, id arg2){</code> 这里Xcode断点一下:<br>
 但如果直接执行还需要做两部:</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
@@ -444,7 +421,7 @@ static void newHookFunc(AppController\* self,SEL \_cmd,id arg1, id arg2){ // }
    https://github.com/stefanesser/dumpdecrypted
 </a><br>
 下载后<code>make</code>一下会生成一个.dylib<br>
-<img src="build.png" alt=""></p>
+<img src="build.webp" alt=""></p>
 <h3 id="拷贝到设备上">
 <a href="#%e6%8b%b7%e8%b4%9d%e5%88%b0%e8%ae%be%e5%a4%87%e4%b8%8a"
    >
@@ -459,12 +436,7 @@ static void newHookFunc(AppController\* self,SEL \_cmd,id arg1, id arg2){ // }
    
 </a>获取App目录</h3>
 <p>启动下目标App,cycript到进程中, 输入:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-NSHomeDirectory()
+<pre tabindex="0"><code>NSHomeDirectory()
 </code></pre><h3 id="拷贝dylib到app目录">
 <a href="#%e6%8b%b7%e8%b4%9d-dylib%e5%88%b0App%e7%9b%ae%e5%bd%95"
    >
@@ -472,46 +444,26 @@ NSHomeDirectory()
 </a>拷贝.dylib到App目录</h3>
 <p>退出cycript,切换到App目录后:<br>
 拷贝.dylib 到得到的目录:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-cp /tmp/dumpdecrypted.dylib  .
+<pre tabindex="0"><code>cp /tmp/dumpdecrypted.dylib  .
 </code></pre><p>mible用户查看进程:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-su mobile    #切换普通用户
-</code></pre><p><img src="quit.png" alt=""></p>
+<pre tabindex="0"><code>su mobile    #切换普通用户
+</code></pre><p><img src="quit.webp" alt=""></p>
 <h3 id="开始砸壳">
 <a href="#%e5%bc%80%e5%a7%8b%e7%a0%b8%e5%a3%b3"
    >
    
 </a>开始砸壳</h3>
 <p>启动下App,然后:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址
-</code></pre><pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-DYLD\_INSERT\_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
-</code></pre><p><img src="perform.png" alt=""></p>
+<pre tabindex="0"><code>ps -e  | grep /Application   #查看App进程,我们需要正确的二进制文件地址
+</code></pre><pre tabindex="0"><code>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
+</code></pre><p><img src="perform.webp" alt=""></p>
 <h3 id="查看文件">
 <a href="#%e6%9f%a5%e7%9c%8b%e6%96%87%e4%bb%b6"
    >
    
 </a>查看文件</h3>
-<p><img src="end.png" alt=""><br>
-<img src="end2.png" alt=""></p></div></header>
+<p><img src="end.webp" alt=""><br>
+<img src="end2.webp" alt=""></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -552,33 +504,14 @@ DYLD\_INSERT\_LIBRARIES=dumpdecrypted.dylib &lt;上面的二进制地址&gt;
 </a>定位目标对象</h4>
 <p>连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的view,上面有一行文本”Buy the full version to remove ads?”<br>
 这时候我们连接到cycript打印下层级:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-UIApp.keyWindow.recursiveDescription().toString()
-</code></pre><p><img src="fe.png" alt=""><br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>UIApp.keyWindow.recursiveDescription().toString()
+</span></span></code></pre></div><p><img src="fe.webp" alt=""><br>
 由于我已去除了过了,又从App Store重新下载, 发现还是没有广告,图片暂时就没哈<br>
 其中有引起我们注意的层级是:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-|    |    | \&gt;
-
-|    |    |    | \&gt;
-
-|    |    |    |    | \&gt;
-
-|    |    |    | \&gt;
+<pre tabindex="0"><code>|    |    | &gt;
+|    |    |    | &gt;
+|    |    |    |    | &gt;
+|    |    |    | &gt;
 </code></pre><p>其中<code>UILabel: 0x176b1380</code>中的text属性跟我们看到的ads上是一样的,它的同级view是UIButton, 父view是UIView .<br>
 因为咱们要解决的目标是view, 尤为关注是这里的frame.size, 它们都是<code>320 50</code>, label也是height=50. 把这部分截图保存下来,待会查找的时候需要用到</p>
 <h4 id="正向分析设计">
@@ -589,7 +522,12 @@ UIApp.keyWindow.recursiveDescription().toString()
 <blockquote>
 <p>划重点: 从正向的开发的角度, 分析它是如何设计的</p>
 </blockquote>
-<p>如果是我开发君, 我的伪代码大概如下</p></div></header>
+<p>如果是我开发君, 我的伪代码大概如下</p>
+<pre tabindex="0"><code>if  (!payBuyFullViersion)  {
+    AdsView *adsview =  [[AdsView alloc] init];
+    [self.palyerView addSubview:adsview]
+}
+</code></pre><p>可能其他的逻辑未必跟我符合. 但是一定必然的是, 这个adsView 必须是addSubview上去的,addSubview是UIKit中view的方法, 咱们需要静态分析这个地址, 通过断点来查看它对应的调用者/参数, 从而拿到地址,来定位到OplayerLite</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -625,13 +563,8 @@ UIApp.keyWindow.recursiveDescription().toString()
 </a>什么是壳</h3>
 <p>一个App无论是Android还是ios, 或者是PC平台, 为了保护app都会加上一层壳, 加壳的app可能无法被一些IDA之类的工具解析, 那么也就无法搞事情,所以砸壳是必须走的一步,也可以从某助手平台下载已砸壳的, 当然最好用下面的命令确认下先.<br>
 怎么查看一个app是否有壳, 可以使用下面的命令, 替换为App的二进制文件查看:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-otool -l targetBinary | grep cryptid
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>otool -l targetBinary | grep cryptid
+</span></span></code></pre></div><blockquote>
 <p>得到的结果如果是1则是未砸壳的, 0是已砸壳.<br>
 还有一种情况是一些App支持多种架构的,可能会展示多个cryptid=1/0, 在哪个平台跑就砸哪个.</p>
 </blockquote>
@@ -669,28 +602,34 @@ otool -l targetBinary | grep cryptid
    >
    
 </a>连接手机</h4>
-<p><img src="remote.png" alt=""><br>
+<p><img src="remote.webp" alt=""><br>
 我这里用iproxy从22映射到2222端口,并整个过程保持. 右边线尝试登录下,默认密码是alpine, 其他情况就自行谷歌帮助,我相信这没什么难度.</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-iproxy 2222 22
-</code></pre><pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-ssh root@localhost -p 2222
-</code></pre><p>测试连接成功后输入 <code>exit</code> 退出,接着下一步</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iproxy <span style="color:#ae81ff">2222</span> <span style="color:#ae81ff">22</span>
+</span></span><span style="display:flex;"><span>ssh root@localhost -p <span style="color:#ae81ff">2222</span>
+</span></span></code></pre></div><p>测试连接成功后输入 <code>exit</code> 退出,接着下一步</p>
 <h4 id="scp拷贝到手机">
 <a href="#scp%e6%8b%b7%e8%b4%9d%e5%88%b0%e6%89%8b%e6%9c%ba"
    >
    
 </a>scp拷贝到手机</h4>
 <p>scp(secure copy) 支持ssh协议远程拷贝, 我们用它拷贝到设备上, 前提是上面的<br>
-的测试成功了.</p></div></header>
+的测试成功了.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp -P <span style="color:#ae81ff">2222</span> ./clutch root@localhost:/usr/bin/
+</span></span></code></pre></div><p><img src="copyto.webp" alt=""><br>
+如果这样子的话就成功了, /usr/bin/默认已经在环境变量查找内, 拷贝到这里可以省事很多多.</p>
+<h4 id="找到目标">
+<a href="#%e6%89%be%e5%88%b0%e7%9b%ae%e6%a0%87"
+   >
+   
+</a>找到目标</h4>
+<p>先介绍下clutch用法:<br>
+<img src="usafe.webp" alt=""><br>
+推荐<code>ios-deploy -B</code>可以获取bundleID, <code>brew install ios-deploy</code>就可以安装了.<br>
+<img src="searchBD.webp" alt=""><br>
+例如我这里的目标是麦当劳app, 尝试搜一下<code>mc</code>,果不其然就是它了.<br>
+拿到的bundleID就是<code>com.mcdonalds.gma</code><br>
+(嗯, 还有个grep的方法更简单,但是我真的不知道它是麦当劳, 因为他显示的是Arch,所以靠谱的话就还是上面,BundleID基本会跟名称一直吧)<br>
+<img src="nofound.webp" alt=""></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

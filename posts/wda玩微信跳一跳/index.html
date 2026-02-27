@@ -158,14 +158,9 @@ dir="ltr">
 </a><br>
 facebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应该说是最准的,这也是这套玩法的关键点<br>
 需要一些环境依赖,代码clone下来之后, 得在项目路径下执行下:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-./Scripts/bootstrap.sh
-</code></pre><p>xcode打开,选择Target是WebDriverAgentRunner,Test到手机(签名用个人Appid就可以,然后Test到手机后,信任一下证书)<br>
-<img src="wdaAgent.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./Scripts/bootstrap.sh
+</span></span></code></pre></div><p>xcode打开,选择Target是WebDriverAgentRunner,Test到手机(签名用个人Appid就可以,然后Test到手机后,信任一下证书)<br>
+<img src="wdaAgent.webp" alt=""></p>
 <h4 id="facebook-wda">
 <a href="#facebook-wda"
    >
@@ -179,35 +174,20 @@ facebook开源的自动化驱动框架, 调的私有Api,所以执行的速度应
    https://github.com/openatx/facebook-wda
 </a><br>
 wda,一个python脚本,配合WebDriverAgent使用,便捷的安装方法:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-sudo pip install --pre facebook-wda
-</code></pre><h4 id="测试下环境">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo pip install --pre facebook-wda
+</span></span></code></pre></div><h4 id="测试下环境">
 <a href="#%e6%b5%8b%e8%af%95%e4%b8%8b%e7%8e%af%e5%a2%83"
    >
    
 </a>测试下环境</h4>
 <p>用个终端端口转发下(iproxy 可以通过 brew install usbmuxd安装):</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-iproxy 8100 8100
-</code></pre><p>用以下命令启动下WebDriverAgent,你需要改下下方的name=你自己的手机名:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination &#39;platform=iOS,name=YourDeviceName&#39; test
-</code></pre><p>看到输出这个就启动正常了:<br>
-<img src="startAgent.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>iproxy <span style="color:#ae81ff">8100</span> <span style="color:#ae81ff">8100</span>
+</span></span></code></pre></div><p>用以下命令启动下WebDriverAgent,你需要改下下方的name=你自己的手机名:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -destination <span style="color:#e6db74">&#39;platform=iOS,name=YourDeviceName&#39;</span> test
+</span></span></code></pre></div><p>看到输出这个就启动正常了:<br>
+<img src="startAgent.webp" alt=""></p>
 <p>另开个终端,启动下python,如下测试下:<br>
-<img src="pyhonTest.png" alt=""></p>
+<img src="pyhonTest.webp" alt=""></p>
 <h3 id="脚本实现">
 <a href="#%e8%84%9a%e6%9c%ac%e5%ae%9e%e7%8e%b0"
    >
@@ -220,135 +200,42 @@ xcodebuild -project WebDriverAgent.xcodeproj -scheme WebDriverAgentRunner -desti
    >
    git代码地址-python3.6.3
 </a></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-
-17
-
-18
-
-19
-
-20
-
-21
-
-22
-
-23
-
-24
-
-25
-
-26
-
-27
-
-28
-
-29
-
-30
-
-31
-
-32
-</code></pre><pre tabindex="0"><code>
-
-IMAGE\_PLACE = &#39;/tmp/screen.png&#39;
-
-each\_pixel\_d = 0.00190
-
-c = wda.Client()
-
-s = c.session(&#39;com.tencent.xin&#39;)
-
-input(&#34;请自行切换到游戏里面的界面,回车即可开始&#34;)
-
-def change\_to\_duration(position\_list):
-
-    &#34;&#34;&#34;
-
-    勾股定理 求d=C=开根号(A^2+B^2)
-
-    &#34;&#34;&#34;
-
-    if not position\_list:
-
-        return
-
-    x1,y1 = position\_list\[0\]
-
-    x2,y2 = position\_list\[1\]
-
-    the\_d = math.sqrt(math.pow(y2 - y1, 2) + math.pow(x2 - x1, 2))
-
-    return float(&#39;%.3f&#39; % (the\_d \* each\_pixel\_d))
-
-if \_\_name\_\_ == &#39;\_\_main\_\_&#39;:
-
-    while 1:
-
-        x = c.screenshot(IMAGE\_PLACE)
-
-        if not os.path.exists(IMAGE\_PLACE):
-
-            continue
-
-        \# time.sleep(1)  #图片就算在了,渲染还没结束,这1秒阻塞就给了吧,或者不给,为渲染正常的以下方阴影为准
-
-        pl.imshow(pl.array(Image.open(IMAGE\_PLACE)))
-
-        position\_list = pl.ginput(2,timeout=2147483647)
-
-        pl.ion()
-
-        duration = change\_to\_duration(position\_list)
-
-        pl.ioff()
-
-        if duration and os.path.exists(IMAGE\_PLACE):
-
-            s.tap\_hold(200, 200, duration=duration)
-
-            os.remove(IMAGE\_PLACE)
-</code></pre><p>首先进入到游戏页面,截图到本地<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>IMAGE_PLACE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/screen.webp&#39;</span>
+</span></span><span style="display:flex;"><span>each_pixel_d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.00190</span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> wda<span style="color:#f92672">.</span>Client()
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> c<span style="color:#f92672">.</span>session(<span style="color:#e6db74">&#39;com.tencent.xin&#39;</span>)
+</span></span><span style="display:flex;"><span>input(<span style="color:#e6db74">&#34;请自行切换到游戏里面的界面,回车即可开始&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">change_to_duration</span>(position_list):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    勾股定理 求d=C=开根号(A^2+B^2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> position_list:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    x1,y1 <span style="color:#f92672">=</span> position_list[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    x2,y2 <span style="color:#f92672">=</span> position_list[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    the_d <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>sqrt(math<span style="color:#f92672">.</span>pow(y2 <span style="color:#f92672">-</span> y1, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> math<span style="color:#f92672">.</span>pow(x2 <span style="color:#f92672">-</span> x1, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (the_d <span style="color:#f92672">*</span> each_pixel_d))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> c<span style="color:#f92672">.</span>screenshot(IMAGE_PLACE)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(IMAGE_PLACE):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># time.sleep(1)  #图片就算在了,渲染还没结束,这1秒阻塞就给了吧,或者不给,为渲染正常的以下方阴影为准</span>
+</span></span><span style="display:flex;"><span>        pl<span style="color:#f92672">.</span>imshow(pl<span style="color:#f92672">.</span>array(Image<span style="color:#f92672">.</span>open(IMAGE_PLACE)))
+</span></span><span style="display:flex;"><span>        position_list <span style="color:#f92672">=</span> pl<span style="color:#f92672">.</span>ginput(<span style="color:#ae81ff">2</span>,timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">2147483647</span>)
+</span></span><span style="display:flex;"><span>        pl<span style="color:#f92672">.</span>ion()
+</span></span><span style="display:flex;"><span>        duration <span style="color:#f92672">=</span> change_to_duration(position_list)
+</span></span><span style="display:flex;"><span>        pl<span style="color:#f92672">.</span>ioff()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> duration <span style="color:#f92672">and</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(IMAGE_PLACE):
+</span></span><span style="display:flex;"><span>            s<span style="color:#f92672">.</span>tap_hold(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>, duration<span style="color:#f92672">=</span>duration)
+</span></span><span style="display:flex;"><span>            os<span style="color:#f92672">.</span>remove(IMAGE_PLACE)
+</span></span></code></pre></div><p>首先进入到游戏页面,截图到本地<br>
 使用plt.imshow展示这张图片, 通过plt.ginput我们点击的两个点会被记录下来,<br>
 我们通过分析这两个点, 得到小人到对面物体的地点:<br>
 嗯, 勾股定理:<br>
-<img src="calcuC.png" alt=""></p>
+<img src="calcuC.webp" alt=""></p>
 <p><code>change_to_duration</code>中先勾股计算的距离d, 然后乘以每个像素点的对应的秒, <code>each_pixel_d = 0.00190</code>是我目前计算到的.应该算还挺准.最后这个方法返回的是按键时间.<br>
 而最终操作的方法:<br>
 <code>s.tap_hold(200, 200, duration=duration)</code> durantion就是<code>change_to_duration</code>计算出的按键时间.</p>
@@ -358,7 +245,7 @@ if \_\_name\_\_ == &#39;\_\_main\_\_&#39;:
    
 </a>直接使用</h3>
 <p>启动后只需要做三步, 点击小人的底部,点击前方物体的中心,然后关闭图, 嗯就可以了, 耐心点,还是可以在朋友圈装一下下的.<br>
-<img src="the_d.png" alt=""></p>
+<img src="the_d.webp" alt=""></p>
 </article>
 <br>
     <div class="flex flex-wrap items-center gap-2">

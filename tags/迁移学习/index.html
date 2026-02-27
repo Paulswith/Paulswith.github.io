@@ -160,71 +160,25 @@ dir="ltr">
    https://storage.googleapis.com/download.tensorflow.org/models/inception_dec_2015.zip
 </a> 并解压得到.pd文件</p>
 <p>执行下方代码, 可以打印出pb文件的全部节点:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-</code></pre><pre tabindex="0"><code>
-
-tf\_model\_path = &#39;/Users/dobby/Desktop/inception\_dec\_2015/tensorflow\_inception\_graph.pb&#39;
-
-with open(tf\_model\_path, &#39;rb&#39;) as f:
-
-    serialized = f.read()
-
-tf.reset\_default\_graph()
-
-original\_gdef = tf.GraphDef()
-
-original\_gdef.ParseFromString(serialized)
-
-##2 可以在这里查看到全部的图信息(前提是你有转换成功)
-
-with tf.Graph().as\_default() as g:
-
-    tf.import\_graph\_def(original\_gdef, name=&#39;&#39;)
-
-    ops = g.get\_operations()
-
-    try:
-
-        for i in range(10000):
-
-            print(&#39;op id {} : op name: {}, op type: &#34;{}&#34;&#39;.format(str(i),ops\[i\].name, ops\[i\].type))
-
-    except:
-
-        pass
-</code></pre><p>需要关注的输入层:</p></div></header>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tf_model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/Users/akarizo/Desktop/inception_dec_2015/tensorflow_inception_graph.pb&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(tf_model_path, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    serialized <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>reset_default_graph()
+</span></span><span style="display:flex;"><span>original_gdef <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>GraphDef()
+</span></span><span style="display:flex;"><span>original_gdef<span style="color:#f92672">.</span>ParseFromString(serialized)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##2 可以在这里查看到全部的图信息(前提是你有转换成功)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Graph()<span style="color:#f92672">.</span>as_default() <span style="color:#66d9ef">as</span> g:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>import_graph_def(original_gdef, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    ops <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>get_operations()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;op id </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> : op name: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, op type: &#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;&#39;</span><span style="color:#f92672">.</span>format(str(i),ops[i]<span style="color:#f92672">.</span>name, ops[i]<span style="color:#f92672">.</span>type))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p>需要关注的输入层:</p>
+<p><img src="input.webp" alt=""></p>
+<p>和需要被修改最后一层的全连接层:<br>
+<img src="fl.webp" alt=""></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

@@ -151,33 +151,14 @@ dir="ltr">
 </a>定位目标对象</h4>
 <p>连接到越狱机(切换到无网络模式, 因为Oplayer lite有网络的时候加载的广告是不同的,不利于分析), 同时点击任意视频,进入到视频播放页面, 我们会看到广告的view,上面有一行文本”Buy the full version to remove ads?”<br>
 这时候我们连接到cycript打印下层级:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-UIApp.keyWindow.recursiveDescription().toString()
-</code></pre><p><img src="fe.png" alt=""><br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>UIApp.keyWindow.recursiveDescription().toString()
+</span></span></code></pre></div><p><img src="fe.webp" alt=""><br>
 由于我已去除了过了,又从App Store重新下载, 发现还是没有广告,图片暂时就没哈<br>
 其中有引起我们注意的层级是:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-|    |    | \&gt;
-
-|    |    |    | \&gt;
-
-|    |    |    |    | \&gt;
-
-|    |    |    | \&gt;
+<pre tabindex="0"><code>|    |    | &gt;
+|    |    |    | &gt;
+|    |    |    |    | &gt;
+|    |    |    | &gt;
 </code></pre><p>其中<code>UILabel: 0x176b1380</code>中的text属性跟我们看到的ads上是一样的,它的同级view是UIButton, 父view是UIView .<br>
 因为咱们要解决的目标是view, 尤为关注是这里的frame.size, 它们都是<code>320 50</code>, label也是height=50. 把这部分截图保存下来,待会查找的时候需要用到</p>
 <h4 id="正向分析设计">
@@ -189,23 +170,9 @@ UIApp.keyWindow.recursiveDescription().toString()
 <p>划重点: 从正向的开发的角度, 分析它是如何设计的</p>
 </blockquote>
 <p>如果是我开发君, 我的伪代码大概如下</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-if  (!payBuyFullViersion)  {
-
-    AdsView \*adsview =  \[\[AdsView alloc\] init\];
-
-    \[self.palyerView addSubview:adsview\]
-
+<pre tabindex="0"><code>if  (!payBuyFullViersion)  {
+    AdsView *adsview =  [[AdsView alloc] init];
+    [self.palyerView addSubview:adsview]
 }
 </code></pre><p>可能其他的逻辑未必跟我符合. 但是一定必然的是, 这个adsView 必须是addSubview上去的,addSubview是UIKit中view的方法, 咱们需要静态分析这个地址, 通过断点来查看它对应的调用者/参数, 从而拿到地址,来定位到OplayerLite</p>
 <h3 id="静态分析">
@@ -220,22 +187,17 @@ if  (!payBuyFullViersion)  {
 </a>从UIKit入手</h4>
 <p>我们需要用到lldb, 连接到设备, 查看UIKit的存储地址, 然后通过IDA查看addSubview:的静态代码地址.<br>
 本地先映射一下 <code>iproxy 1234 1234</code> , 然后越狱启动<code>debugserver *:1234 -a</code><br>
-<img src="debugS.png" alt=""><br>
+<img src="debugS.webp" alt=""><br>
 本地连接:<br>
-<img src="lldb.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-im list -o -f
-</code></pre><p><img src="offset.png" alt=""><br>
+<img src="lldb.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>im list -o -f
+</span></span></code></pre></div><p><img src="offset.webp" alt=""><br>
 得到了Oplayer lite的偏移地址和UIKit偏移地址<br>
 同时我们看到了UIKit的文件地址(可能有的地址是在设备上, 那么你需要拷贝到本地,不想这样子就连一下Xcode,你就会在本地看到它了)</p>
 <p>IDA分析UIKit, 并获取addSubview:的地址:<br>
-<img src="viewadd.png" alt=""><br>
+<img src="viewadd.webp" alt=""><br>
 在lldb下断点,记得加上上面看到的偏移,如:<br>
-<img src="bradd.png" alt=""><br>
+<img src="bradd.webp" alt=""><br>
 然后进入到播放界面触发断点</p>
 <h4 id="体力活查询">
 <a href="#%e4%bd%93%e5%8a%9b%e6%b4%bb%e6%9f%a5%e8%af%a2"
@@ -250,7 +212,7 @@ im list -o -f
 <p>…….<br>
 当你发现frame跟我们所看到符合的时候,那么基本就可以确认是它了.同时有个地方要注意:<br>
 你需要看到这个地址来自于Oplayer lite才可以, 否则执行以下<code>ni</code>,执行下一条汇编直到看见它<br>
-<img src="fit.png" alt=""><br>
+<img src="fit.webp" alt=""><br>
 而第一条指令的地址就是我们要的地址, 减去我们上面的偏移地址,拿到静态代码的地址.</p>
 <h3 id="分析目标静态代码">
 <a href="#%e5%88%86%e6%9e%90%e7%9b%ae%e6%a0%87%e9%9d%99%e6%80%81%e4%bb%a3%e7%a0%81"
@@ -264,25 +226,14 @@ im list -o -f
 </a>对逻辑静态分析</h4>
 <p>通过上面拿到的地址, 我们可以看到这里是一个实例方法<br>
 <code>-[PlayViewController addAds_OnLocalAds]</code><br>
-<img src="addfun.png" alt=""><br>
+<img src="addfun.webp" alt=""><br>
 不是很仔细的看了一遍伪代码,这个方法是被调用来展示view,但是否展示的逻辑并不在这里, 我们需要看谁是它的调用方, 因为删掉之前的断点,重新在<code>-[PlayViewController addAds_OnLocalAds]</code>这个方法上下断点, 依然加上偏移地址(这里的偏移地址已经是OPlayerlite了).</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-br s -a &#39;0x00052000+0x002A49F8&#39;
-
+<pre tabindex="0"><code>br s -a &#39;0x00052000+0x002A49F8&#39;
 #断点触发后, 打印lr寄存器的值
-
-p/x $lr
+px $lr
 </code></pre><p>LR寄存器(R14)可以理解当代码段执行完毕后要回到调用者的地址.<br>
 通过LR寄存器得到的值, 我们减去偏移地址,可以得到调用者在静态代码的位置.<br>
-<img src="spass.png" alt=""><br>
+<img src="spass.webp" alt=""><br>
 依然借助IDA分析, 可以看到msg_send的一些部分是相关的设置方向, frame, getWidth等方法, 而调用的位置就在viewWillAppear:这里.</p>
 <h4 id="寻找绕弯的方法">
 <a href="#%e5%af%bb%e6%89%be%e7%bb%95%e5%bc%af%e7%9a%84%e6%96%b9%e6%b3%95"
@@ -291,66 +242,33 @@ p/x $lr
 </a>寻找绕弯的方法</h4>
 <p>现在, 我们定位到了调用添加广告View的代码块, 继续往上翻,能不能找到帮助我们跳过这里的逻辑呢?<br>
 果然, 神器就是神器, 留意左边这根线:<br>
-<img src="findMethod.png" alt=""><br>
+<img src="findMethod.webp" alt=""><br>
 辅助IDA的伪代码,我们还能发现些神马:<br>
-<img src="jumpCode.png" alt=""></p>
+<img src="jumpCode.webp" alt=""></p>
 <blockquote>
 <p>这里的两个跳转对应了两个逻辑判断分支, 我在图片中表明了, 逻辑2的情况其实稍加复杂, 但我在逻辑1发现了关键点:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-if ( !((unsigned int)+\[OlimSoftUtility isUpgraded\](&amp;OBJC\_CLASS\_\_\_OlimSoftUtility, &#34;isUpgraded&#34;, a3) &amp; 0xFF) )
-</code></pre></blockquote>
-<p>伪代码的意思是<code>+[OlimSoftUtility isUpgraded]</code>的返回值和 #0xFF 进行了逻辑与的运算, 理解到 #0xFF 是非0类型必为真, 而现在只需要<code>+[OlimSoftUtility isUpgraded]</code>能返回真即可跳过这段代码. 这个猜想是否正确,毕竟是伪代码,所以需要对汇编部分进行确认:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-\_\_text:0029D2F8     BLX.W           \_objc\_msgSend ; +\[OlimSoftUtility isUpgraded\]
-
-\_\_text:0029D2FC     TST.W           R0, #0xFF
+</blockquote>
+<pre tabindex="0"><code>if ( !((unsigned int)+[OlimSoftUtility isUpgraded](&amp;OBJC_CLASS___OlimSoftUtility, &#34;isUpgraded&#34;, a3) &amp; 0xFF) )
+</code></pre><p>伪代码的意思是<code>+[OlimSoftUtility isUpgraded]</code>的返回值和 #0xFF 进行了逻辑与的运算, 理解到 #0xFF 是非0类型必为真, 而现在只需要<code>+[OlimSoftUtility isUpgraded]</code>能返回真即可跳过这段代码. 这个猜想是否正确,毕竟是伪代码,所以需要对汇编部分进行确认:</p>
+<pre tabindex="0"><code>__text:0029D2F8     BLX.W           _objc_msgSend ; +[OlimSoftUtility isUpgraded]
+__text:0029D2FC     TST.W           R0, #0xFF
 </code></pre><p>第一行很容易看出是发送了消息,也就是刚才说的调用了<code>+[OlimSoftUtility isUpgraded]</code>这个方法, 而第二行, 将第一行<code>+[OlimSoftUtility isUpgraded]</code> 返回值 与 0xFF进行了 <code>TST</code>指令, 对于目前汇编的底子不硬,通过查询资料得知:</p>
 <blockquote>
 <p>TST 指令对 Rn 中的值和 Operand2 的值按位进行“与”运算。 除了结果会被丢弃以外，这与 ANDS 指令功能相同。</p>
 </blockquote>
 <p>那么就基本能确定结论了:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-if ( (\[OlimSoftUtility isUpgraded\] &amp;&amp; 0xFF) == NO ) {
-
-    // 添加广告
-
-}
-
-// 0xFF 固定为YES
-</code></pre><h4 id="头文件最终确认">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ( ([OlimSoftUtility isUpgraded] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">0xFF</span>) <span style="color:#f92672">==</span> NO ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 添加广告
+</span></span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="头文件最终确认">
 <a href="#%e5%a4%b4%e6%96%87%e4%bb%b6%e6%9c%80%e7%bb%88%e7%a1%ae%e8%ae%a4"
    >
    
 </a>头文件最终确认</h4>
 <p>找到class-dump 出的头文件目录:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-grep -rn &#34;isUpgraded&#34; ./headers
-</code></pre><p><img src="findH.png" alt=""><br>
-<img src="H1.png" alt=""><br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep -rn <span style="color:#e6db74">&#34;isUpgraded&#34;</span> ./headers
+</span></span></code></pre></div><p><img src="findH.webp" alt=""><br>
+<img src="H1.webp" alt=""><br>
 发现它就是一个类方法,很纯粹.那么也不用太多想法, 试试就试试了.</p>
 <h3 id="编写代码">
 <a href="#%e7%bc%96%e5%86%99%e4%bb%a3%e7%a0%81"
@@ -362,104 +280,31 @@ grep -rn &#34;isUpgraded&#34; ./headers
    >
    
 </a>code</h4>
-<p><img src="tweek.png" alt=""></p>
+<p><img src="tweek.webp" alt=""></p>
 <p>让个惊讶的tweak.xm代码:<br>
 “当然我这样子处理应该是会引起某些问题了, 但这是目前我分析到的能力”</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-</code></pre><pre tabindex="0"><code>
-
-%hook OlimSoftUtility
-
-\+ (BOOL)isUpgraded {
-
-%log;
-
-// NSLog(@&#34;replace this method!!!!!!!!!!!!!!!!!!!&#34;);
-
-return YES;
-
-}
-
-%end
-</code></pre><p>Makefile代码:<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span><span style="color:#f92672">%</span>hook OlimSoftUtility
+</span></span><span style="display:flex;"><span><span style="color:#f92672">+</span> (<span style="color:#66d9ef">BOOL</span>)isUpgraded {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">%</span>log;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// NSLog(@&#34;replace this method!!!!!!!!!!!!!!!!!!!&#34;);
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> YES;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%</span>end
+</span></span></code></pre></div><p>Makefile代码:<br>
 我指定了IP 和 Port, 待会可以在直接调用 make install 进行安装</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-
-15
-
-16
-</code></pre><pre tabindex="0"><code>
-
-export THEOS\_DEVICE\_IP=localhost    
-
-export THEOS\_DEVICE\_PORT=2222
-
-export ARCHS=armv7
-
-export TARGET=iphone:clang:latest:8.0
-
-export THEOS\_MAKE\_PATH=/opt/theos/makefiles
-
-export THEOS=/opt/theos
-
-include $(THEOS)/makefiles/common.mk
-
-TWEAK\_NAME = removeOplayerAds
-
-removeOplayerAds\_FILES = Tweak.xm
-
-include $(THEOS\_MAKE\_PATH)/tweak.mk
-
-after-install::
-
-install.exec &#34;killall -9 SpringBoard&#34;
-</code></pre><h4 id="一些小坑点">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export THEOS_DEVICE_IP<span style="color:#f92672">=</span>localhost    
+</span></span><span style="display:flex;"><span>export THEOS_DEVICE_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">2222</span>
+</span></span><span style="display:flex;"><span>export ARCHS<span style="color:#f92672">=</span>armv7
+</span></span><span style="display:flex;"><span>export TARGET<span style="color:#f92672">=</span>iphone:clang:latest:8.0
+</span></span><span style="display:flex;"><span>export THEOS_MAKE_PATH<span style="color:#f92672">=</span>/opt/theos/makefiles
+</span></span><span style="display:flex;"><span>export THEOS<span style="color:#f92672">=</span>/opt/theos
+</span></span><span style="display:flex;"><span>include <span style="color:#66d9ef">$(</span>THEOS<span style="color:#66d9ef">)</span>/makefiles/common.mk
+</span></span><span style="display:flex;"><span>TWEAK_NAME <span style="color:#f92672">=</span> removeOplayerAds
+</span></span><span style="display:flex;"><span>removeOplayerAds_FILES <span style="color:#f92672">=</span> Tweak.xm
+</span></span><span style="display:flex;"><span>include <span style="color:#66d9ef">$(</span>THEOS_MAKE_PATH<span style="color:#66d9ef">)</span>/tweak.mk
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># after-install::</span>
+</span></span><span style="display:flex;"><span>install.exec <span style="color:#e6db74">&#34;killall -9 SpringBoard&#34;</span>
+</span></span></code></pre></div><h4 id="一些小坑点">
 <a href="#%e4%b8%80%e4%ba%9b%e5%b0%8f%e5%9d%91%e7%82%b9"
    >
    
@@ -470,31 +315,12 @@ install.exec &#34;killall -9 SpringBoard&#34;
    
 </a>没找到dpkg-deb:</h4>
 <p>dpkg-deb的原名是/opt/theos/bin/dm.pl, 你需要把它的名字改为dpkg-deb,然后执行下面的语句</p>
-<pre tabindex="0"><code>
+<pre tabindex="0"><code>$  removeoplayerads make package
+==&gt; Error: /Applications/Xcode.app/Contents/Developer/usr/bin/make package requires dpkg-deb.
+make: *** [internal-package-check] Error 1
 
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-</code></pre><pre tabindex="0"><code>
-
-➜  removeoplayerads make package
-
-\==&gt; Error: /Applications/Xcode.app/Contents/Developer/usr/bin/make package requires dpkg-deb.
-
-make: \*\*\* \[internal-package-check\] Error 1
-
-#\## 决绝方法
-
-➜  removeoplayerads sudo perl -i -pe &#39;y|\\r||d&#39; /opt/theos/bin/dpkg-deb
-
+### 决绝方法
+$  removeoplayerads sudo perl -i -pe &#39;y|r||d&#39; /opt/theos/bin/dpkg-deb
 Password:
 </code></pre><h4 id="bundleid最准确的获取方法">
 <a href="#BundleID%e6%9c%80%e5%87%86%e7%a1%ae%e7%9a%84%e8%8e%b7%e5%8f%96%e6%96%b9%e6%b3%95"
@@ -502,13 +328,8 @@ Password:
    
 </a>BundleID最准确的获取方法</h4>
 <p>cycript 进入到目标APP进程后:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-\[\[NSBundle mainBundle\] bundleIdentifier\]
-</code></pre><h4 id="汇编查询">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>[[NSBundle mainBundle] bundleIdentifier]
+</span></span></code></pre></div><h4 id="汇编查询">
 <a href="#%e6%b1%87%e7%bc%96%e6%9f%a5%e8%af%a2"
    >
    
@@ -526,7 +347,7 @@ Password:
    >
    
 </a>效果图</h3>
-<p><img src="0ads.png" alt=""></p>
+<p><img src="0ads.webp" alt=""></p>
 <p><code>[没什么比实践到的收获有成就感了,它是继续前行的动力之一]</code></p>
 </article>
 <br>

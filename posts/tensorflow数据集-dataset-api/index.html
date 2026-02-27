@@ -148,194 +148,40 @@ dir="ltr">
 <p>Dataset-API是1.3版引入的, 支持从内存中/硬盘中生成数据集.</p>
 </blockquote>
 <ul>
-<li>
-<p>一维数组<br>
-直接就是给到一维数组, 生成数据集</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(np.array(\[1.0, 2.0, 3.0, 4.0, 5.0\]))
-
-out\_put=&#34;&#34;&#34;&#34;
-
-1.0
-
-2.0
-
-3.0
-
-4.0
-
-5.0
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>多维数组, size=(5,2) , 可以理解为(count, dimension)</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(np.random.uniform(size=(5, 2)))
-
-out\_put=&#34;&#34;&#34;
-
-\[ 0.01721917  0.4621821 \]
-
-\[ 0.58484623  0.13534625\]
-
-\[ 0.83591111  0.01397783\]
-
-\[ 0.88934806  0.97464257\]
-
-\[ 0.76707649  0.42036516\]
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>元组</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(
-
-  (np.array(\[1.0, 2.0, 3.0, 4.0, 5.0\]), np.random.uniform(size=(5, 2)))
-
-)
-
-out\_put=&#34;&#34;&#34;
-
-元组的形式:
-
-(1.0, array(\[ 0.41459922,  0.75492457\]))
-
-(2.0, array(\[ 0.47954237,  0.93916116\]))
-
-(3.0, array(\[ 0.70576017,  0.58064858\]))
-
-(4.0, array(\[ 0.8239234 ,  0.92814029\]))
-
-(5.0, array(\[ 0.03073594,  0.16718188\]))
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>字典<br>
-字典的格式给到,结果也是字典, 按照key索引(<strong>这种用的比较多一些</strong>)</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-
-10
-
-11
-
-12
-
-13
-
-14
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(
-
-    {
-
-        &#34;a&#34;: np.array(\[1.0, 2.0, 3.0, 4.0, 5.0\]),
-
-        &#34;b&#34;: np.random.uniform(size=(5, 2))
-
-    }
-
-)
-
-out\_put=&#34;&#34;&#34;
-
-字典的形式:
-
-{&#39;a&#39;: 1.0, &#39;b&#39;: array(\[ 0.15337225,  0.97730736\])}
-
-{&#39;a&#39;: 2.0, &#39;b&#39;: array(\[ 0.89860896,  0.95473649\])}
-
-{&#39;a&#39;: 3.0, &#39;b&#39;: array(\[ 0.79198725,  0.84507321\])}
-
-{&#39;a&#39;: 4.0, &#39;b&#39;: array(\[ 0.27289686,  0.56223038\])}
-
-{&#39;a&#39;: 5.0, &#39;b&#39;: array(\[ 0.19825011,  0.44183586\])}
-
-&#34;&#34;&#34;
-</code></pre></li>
+<li>一维数组<br>
+直接就是给到一维数组, 生成数据集</li>
 </ul>
-<h4 id="两种输出验证方式">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices(
+</span></span><span style="display:flex;"><span>    (np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">5.0</span>]), np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>)))
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">元组的形式:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(1.0, array([ 0.41459922,  0.75492457]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(2.0, array([ 0.47954237,  0.93916116]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(3.0, array([ 0.70576017,  0.58064858]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(4.0, array([ 0.8239234 ,  0.92814029]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(5.0, array([ 0.03073594,  0.16718188]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>字典<br>
+字典的格式给到,结果也是字典, 按照key索引(<strong>这种用的比较多一些</strong>)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices(
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;a&#34;</span>: np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">5.0</span>]),
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;b&#34;</span>: np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>uniform(size<span style="color:#f92672">=</span>(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">字典的形式:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 1.0, &#39;b&#39;: array([ 0.15337225,  0.97730736])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 2.0, &#39;b&#39;: array([ 0.89860896,  0.95473649])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 3.0, &#39;b&#39;: array([ 0.79198725,  0.84507321])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 4.0, &#39;b&#39;: array([ 0.27289686,  0.56223038])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">{&#39;a&#39;: 5.0, &#39;b&#39;: array([ 0.19825011,  0.44183586])}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><h4 id="两种输出验证方式">
 <a href="#%e4%b8%a4%e7%a7%8d%e8%be%93%e5%87%ba%e9%aa%8c%e8%af%81%e6%96%b9%e5%bc%8f"
    >
    
@@ -345,72 +191,25 @@ out\_put=&#34;&#34;&#34;
 <code>dataset</code>来自上方代码</p>
 </blockquote>
 <ul>
-<li>
-<p>index提取(缺点是需要提前知道个数)</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-</code></pre><pre tabindex="0"><code>
-
-iterator = dataset.make\_one\_shot\_iterator()
-
-one\_element = iterator.get\_next()
-
-with tf.Session() as sess:
-
-     for i in range(5):
-
-         print(sess.run(one\_element))
-</code></pre></li>
-<li>
-<p>死循环提取, 当超过个数的时候会抛出OutOfRangeError,以此停止(<strong>因此它适合全部的场合</strong>)</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-
-9
-</code></pre><pre tabindex="0"><code>
-
-iterator = dataset.make\_one\_shot\_iterator()
-
-one\_element = iterator.get\_next()
-
-with tf.Session() as sess:
-
-    try:
-
-        while True:
-
-            print(sess.run(one\_element))
-
-    except tf.errors.OutOfRangeError:
-
-        print(&#34;end!&#34;)
-</code></pre></li>
+<li>index提取(缺点是需要提前知道个数)</li>
 </ul>
-<h4 id="数据混淆预处理">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>iterator <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>make_one_shot_iterator()
+</span></span><span style="display:flex;"><span>one_element <span style="color:#f92672">=</span> iterator<span style="color:#f92672">.</span>get_next()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Session() <span style="color:#66d9ef">as</span> sess:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>):
+</span></span><span style="display:flex;"><span>            print(sess<span style="color:#f92672">.</span>run(one_element))
+</span></span></code></pre></div><ul>
+<li>死循环提取, 当超过个数的时候会抛出OutOfRangeError,以此停止(<strong>因此它适合全部的场合</strong>)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>iterator <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>make_one_shot_iterator()
+</span></span><span style="display:flex;"><span>one_element <span style="color:#f92672">=</span> iterator<span style="color:#f92672">.</span>get_next()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Session() <span style="color:#66d9ef">as</span> sess:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>            print(sess<span style="color:#f92672">.</span>run(one_element))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> tf<span style="color:#f92672">.</span>errors<span style="color:#f92672">.</span>OutOfRangeError:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;end!&#34;</span>)
+</span></span></code></pre></div><h4 id="数据混淆预处理">
 <a href="#%e6%95%b0%e6%8d%ae%e6%b7%b7%e6%b7%86%e9%a2%84%e5%a4%84%e7%90%86"
    >
    
@@ -418,125 +217,49 @@ with tf.Session() as sess:
 <blockquote>
 <p>当数据从数据集读取的时候,可能存在一些不合理性,我们需要进行混淆. 又或者你的数据不是很足够, 类似图片左右投影一般进行N*2复制来扩大数据集. 诸如此类的预处理是很有必要的.</p>
 </blockquote>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-dataset = tf.data.Dataset.from\_tensor\_slices(np.array(\[1.0, 2.0, 3.0, 4.0, 5.0\]))
-</code></pre><ul>
-<li>
-<p>dataset.map(func), 可以理解一个很酷的装饰器,如例子</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-</code></pre><pre tabindex="0"><code>
-
-dataset = dataset.map(lambda x: x + 1)
-
-out\_put=&#34;&#34;&#34;
-
-2.0, 3.0, 4.0, 5.0, 6.0
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>dataset = dataset.batch(batch_size), 可以按batch_size格式, 无法放大</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-</code></pre><pre tabindex="0"><code>
-
-ataset = dataset.batch(2)
-
-out\_put=&#34;&#34;&#34;
-
-\# 注意上方batch原先是5的, 现在传入2之后最大只有2. 
-
-2,
-
-2,
-
-1
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>dataset.shuffle(buffer_size) , 按照大小进行打乱,特别注意buffer最好大于数据的数量, 详见
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>Dataset<span style="color:#f92672">.</span>from_tensor_slices(np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">5.0</span>]))
+</span></span></code></pre></div><ul>
+<li>dataset.map(func), 可以理解一个很酷的装饰器,如例子</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>map(<span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2.0, 3.0, 4.0, 5.0, 6.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>dataset = dataset.batch(batch_size), 可以按batch_size格式, 无法放大</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>batch(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># 注意上方batch原先是5的, 现在传入2之后最大只有2. 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>dataset.shuffle(buffer_size) , 按照大小进行打乱,特别注意buffer最好大于数据的数量, 详见
 <a href="https://stackoverflow.com/questions/46444018/meaning-of-buffer-size-in-dataset-map-dataset-prefetch-and-dataset-shuffle"
    
      target="_blank" rel="noopener noreferrer"
    >
    stackoverflow
-</a></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-
-7
-
-8
-</code></pre><pre tabindex="0"><code>
-
-dataset = dataset.shuffle(buffer\_size=5)
-
-out\_put=&#34;&#34;&#34;
-
-3.0
-
-1.0
-
-2.0
-
-5.0
-
-4.0
-
-&#34;&#34;&#34;
-</code></pre></li>
-<li>
-<p>dataset.repeat(repeat_count) 数据重复放大repeat_count倍, 搭配shuffle打乱更酷(数据总数*repeat_count,这样子才足以覆盖全部数据), repeat必须带有参数, 不然会无限重复下去</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-dataset = dataset.repeat(10).shuffle(buffer\_size=1000\*10)
-
-\# 数量太多不贴了
-</code></pre></li>
+</a></li>
 </ul>
-</article>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>shuffle(buffer_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>out_put<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">5.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li>dataset.repeat(repeat_count) 数据重复放大repeat_count倍, 搭配shuffle打乱更酷(数据总数*repeat_count,这样子才足以覆盖全部数据), repeat必须带有参数, 不然会无限重复下去</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dataset <span style="color:#f92672">=</span> dataset<span style="color:#f92672">.</span>repeat(<span style="color:#ae81ff">10</span>)<span style="color:#f92672">.</span>shuffle(buffer_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span><span style="color:#f92672">*</span><span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 数量太多不贴了</span>
+</span></span></code></pre></div></article>
 <br>
     <div class="flex flex-wrap items-center gap-2">
       <i class="fas fa-tags"></i>

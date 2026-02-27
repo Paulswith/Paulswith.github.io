@@ -152,14 +152,14 @@ dir="ltr">
    
 </a>先上下图</h4>
 <p>(功能入口在 新手引导-&gt;探探怎么玩-&gt; ):<br>
-<img src="genggai.png" alt=""><br>
+<img src="genggai.webp" alt=""><br>
 这是目前逆向后我给它新增的功能,因为工作也比较忙,就没有新增过多的需求,但是整个App的架构逻辑其实已经很清晰了, 基本可以合理的新增一些需求在里面, 这也说明探探的开发架构逻辑挺棒的.</p>
 <h4 id="功能简介">
 <a href="#%e5%8a%9f%e8%83%bd%e7%ae%80%e4%bb%8b"
    >
    
 </a>功能简介</h4>
-<p><img src="geng.png" alt=""><br>
+<p><img src="geng.webp" alt=""><br>
 下方是一个简单的tableview, 功能的启动都在这里,当然功能是有互斥和优先级的,</p>
 <ul>
 <li>同时开启无条件选妹和选妹子onlyStudent, 无条件选妹子优先.</li>
@@ -178,53 +178,34 @@ dir="ltr">
    
 </a>调试工具</h4>
 <ul>
-<li>
-<p>依然是最酷的
+<li>依然是最酷的
 <a href="https://github.com/AloneMonkey/MonkeyDev"
    
      target="_blank" rel="noopener noreferrer"
    >
    MonkeyDev
-</a></p>
-</li>
+</a></li>
 <li>
-<p>
 <a href="https://github.com/Flipboard/FLEX"
    
      target="_blank" rel="noopener noreferrer"
    >
    FLEX
-</a>(reveal过期了,这是一个很棒的替代品), 下载后编译一下, 然后按照monkeyDev中wifi加入第三方库的方式操作即可</p>
-</li>
+</a>(reveal过期了,这是一个很棒的替代品), 下载后编译一下, 然后按照monkeyDev中wifi加入第三方库的方式操作即可</li>
 <li>
-<p>
 <a href="https://github.com/AloneMonkey/frida-ios-dump"
    
      target="_blank" rel="noopener noreferrer"
    >
    frida-ios-dump
-</a> 还是庆哥出品,砸壳后顺带把整个APP导出</p>
-</li>
-<li>
-<p>其它的全程是cycript+LLDB调戏 就不累述了…<br>
-<img src="flex.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-#import 
-
-// open it in here
-
- \[\[FLEXManager sharedManager\] showExplorer\];
-</code></pre></li>
+</a> 还是庆哥出品,砸壳后顺带把整个APP导出</li>
+<li>其它的全程是cycript+LLDB调戏 就不累述了…<br>
+<img src="flex.webp" alt=""></li>
 </ul>
-<p>导入库之后,在注入成功的这个通知回调里,启动这个方法</p>
+<pre tabindex="0"><code>#import 
+// open it in here
+[[FLEXManager sharedManager] showExplorer];
+</code></pre><p>导入库之后,在注入成功的这个通知回调里,启动这个方法</p>
 <h4 id="调试遇到的问题">
 <a href="#%e8%b0%83%e8%af%95%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98"
    >
@@ -232,7 +213,7 @@ dir="ltr">
 </a>调试遇到的问题</h4>
 <p>探探是有反调试的, 用的是sysctl. 很强<br>
 那么你调试的时候需要讲MonkeyDev里面的打开, 这个反反调试检测默认是关闭的,原因注释上有<br>
-<img src="syscall.png" alt=""></p>
+<img src="syscall.webp" alt=""></p>
 <h4 id="从需求粗发的debug">
 <a href="#%e4%bb%8e%e9%9c%80%e6%b1%82%e7%b2%97%e5%8f%91%e7%9a%84debug"
    >
@@ -240,7 +221,7 @@ dir="ltr">
 </a>从需求粗发的debug</h4>
 <p>逆向App,我一般的套路都是酱紫.<br>
 设计需求 -&gt; 需求在哪里会展示 -&gt; 从view到Controller-&gt; controller方法猜测 -&gt; 结合monkeyDev进行方法trace -&gt; 确认需求方法 -&gt; hopper找方法地址 -&gt; LLDB调试下断点 -&gt; 查看调用栈(bt) -&gt; 然后开始埋点尝试hook<br>
-<img src="xuxu.png" alt=""><br>
+<img src="xuxu.webp" alt=""><br>
 用笔记在记录每次你发现的新宇宙(虽然开始的很早,实际没有时间弄它…)</p>
 <h3 id="hookkkk">
 <a href="#HookKKK"
@@ -258,7 +239,7 @@ dir="ltr">
    
 </a>hook位置:</h5>
 <p>入口开关之所以选在 [新手引导-&gt;探探怎么玩-&gt;], 因为很符合呀,介绍都免了<br>
-<img src="access.png" alt=""><br>
+<img src="access.webp" alt=""><br>
 就是找到控制器后,发现这里是tableview , 直接hook了tableview的代理方法, == 0的时候进入.</p>
 <h5 id="ui层设计">
 <a href="#UI%e5%b1%82%e8%ae%be%e8%ae%a1"
@@ -266,7 +247,7 @@ dir="ltr">
    
 </a>UI层设计:</h5>
 <p>上方是mapview, 这本身就是一个内存问题,地图App都知道, 所以在dismiss的位置,需要很”干净”的把它清理一下.<br>
-<img src="close.png" alt=""><br>
+<img src="close.webp" alt=""><br>
 下方是tableView, 还是很简单cell注册来循环利用,省点内存</p>
 <h4 id="人物存储的方式">
 <a href="#%e4%ba%ba%e7%89%a9%e5%ad%98%e5%82%a8%e7%9a%84%e6%96%b9%e5%bc%8f"
@@ -274,7 +255,7 @@ dir="ltr">
    
 </a>人物存储的方式</h4>
 <p>探探采取CoreData进行本地存储,用户的模型是<code>UserObject</code><br>
-<img src="user.png" alt=""><br>
+<img src="user.webp" alt=""><br>
 简要一些浅层面我所看到的:</p>
 <ul>
 <li>其实又有<code>ProfileInfo</code>存储用户的一些社会内容, 里面又包含学校信息在模型<code>StudiesInfo</code>和工作信息模型<code>WorkInfo</code></li>
@@ -291,90 +272,58 @@ dir="ltr">
 </a>自动划妹子</h4>
 <p><code>P1HomeNearbyViewController</code>是我们一进去的时候的控制器,我在<code>viewDidAppear</code>是时候进行了逻辑判断, 逻辑设置项来自<code>自定义入口</code>所写到的本地缓存,<code>1 - 0</code>字符串存储的方式进行boolValue处理:<br>
 全局的几个定义:<br>
-<img src="hong.png" alt=""><br>
+<img src="hong.webp" alt=""><br>
 设置YES(1) or NO(0) 来存储:<br>
-<img src="value.png" alt=""><br>
+<img src="value.webp" alt=""><br>
 那么通过这样子,我们就能进行全局的逻辑判断了:<br>
-<img src="huameizi.png" alt=""></p>
+<img src="huameizi.webp" alt=""></p>
 <p>其中,我把这些我需要hook用到的头文件,从class-dump出来的抽出来, 进行@interface一下,来欺骗编译器,如果是@property就不需要继承什么, 如果是方法,报错的话可能需要继承NSObject或其他已定义的:<br>
-<img src="dingyi.png" alt=""></p>
+<img src="dingyi.webp" alt=""></p>
 <p>用起来的时候就跟正向开发很像了,你熟悉的味道:<br>
-<img src="use.png" alt=""><br>
+<img src="use.webp" alt=""><br>
 其中有尝试刷妹子这里,如果直接调用响应后的方法刷卡片, 会有一系列问题,最后认怂直接是模拟点击的.而且为什么用NSTimer而不是for循环之类呢,可能就是runloop层的概念了,当前运行NOPro,有兴趣的自行调戏</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-\[likeButton sendActionsForControlEvents:\[likeButton allControlEvents\]\];
-</code></pre><h4 id="改定位">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>[likeButton sendActionsForControlEvents:[likeButton allControlEvents]];
+</span></span></code></pre></div><h4 id="改定位">
 <a href="#%e6%94%b9%e5%ae%9a%e4%bd%8d"
    >
    
 </a>改定位</h4>
 <p>该定位和大多数的App一样,但是探探有点麻烦的是我一直就没有刷出来地图过, (听说是触发”擦肩而过”这个业务逻辑才会展示地图),业务不熟真的很不好玩~<br>
 因为上层展示卡片的控制器是<code>P1HomeLookingViewController</code>,我直接trace到他有返回了信息:<br>
-<img src="fenxi.png" alt=""></p>
+<img src="fenxi.webp" alt=""></p>
 <p>所以我也姑且很粗糙的做了hook,Mapview保存到配置的经纬度,在这里转为double值并返回:<br>
-<img src="location.png" alt=""></p>
+<img src="location.webp" alt=""></p>
 <p>手动创建自定义的CLLocation对象,返回给它,核心方法:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-CLLocation \*lacationInfo = \[\[CLLocation alloc\] initWithLatitude:latitude.doubleValue longitude:longitude.doubleValue\];
-</code></pre><h4 id="自动尬聊">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>CLLocation <span style="color:#f92672">*</span>lacationInfo <span style="color:#f92672">=</span> [[CLLocation alloc] initWithLatitude:latitude.doubleValue longitude:longitude.doubleValue];
+</span></span></code></pre></div><h4 id="自动尬聊">
 <a href="#%e8%87%aa%e5%8a%a8%e5%b0%ac%e8%81%8a"
    >
    
 </a>自动尬聊</h4>
 <p>尬聊是一门技术, 猿不懂, 那找会的来帮忙吧~~<br>
 目前实现的单个尬聊, 多个尬聊尚存在问题, 且在有限的时间内就给到这样子的需求了<br>
-<img src="galiao.png" alt=""><br>
+<img src="galiao.webp" alt=""><br>
 网络请求很粗糙了使用了NSURLSession,但能保证内存是不会问题.<br>
 <code>#pragma mark - HOOK =&gt; &quot;-[P1ConversationTableView controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:]&quot;</code><br>
 这个方法其实未必是很合理hook地点, 原因是存在多次抛的通知, 我进行了过滤后才拿到那条到底是她刚才发的:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-
-4
-
-5
-
-6
-</code></pre><pre tabindex="0"><code>
-
-ConversationObject \*conversation = \[self conversationObject\];
-
-NSComparisonResult compareResult = \[\[conversation latestReceivedTime\] compare:\[conversation latestReadMessageCreatedTime\]\];
-
-if (compareResult == NSOrderedDescending &amp;&amp; !conversation.isRead &amp;&amp; !\[arg2.owner isCurrentUser\]) {
-
-            NSString \*message = conversation.messageCollection.latestNormalMessage.message;
-
-            NSString \*lastMessage = \[TT\_CONFIG objectForKey:LAST\_MESSAGE\];
-
-            if (!\[lastMessage isEqualToString:message\]) {  //  这里会收到重复的通知 ,可能这里并不是最佳hook的位置
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>ConversationObject <span style="color:#f92672">*</span>conversation <span style="color:#f92672">=</span> [self conversationObject];
+</span></span><span style="display:flex;"><span>NSComparisonResult compareResult <span style="color:#f92672">=</span> [[conversation latestReceivedTime] compare:[conversation latestReadMessageCreatedTime]];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (compareResult <span style="color:#f92672">==</span> NSOrderedDescending <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>conversation.isRead <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>[arg2.owner isCurrentUser]) {
+</span></span><span style="display:flex;"><span>    NSString <span style="color:#f92672">*</span>message <span style="color:#f92672">=</span> conversation.messageCollection.latestNormalMessage.message;
+</span></span><span style="display:flex;"><span>    NSString <span style="color:#f92672">*</span>lastMessage <span style="color:#f92672">=</span> [TT_CONFIG objectForKey:LAST_MESSAGE];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>[lastMessage isEqualToString:message]) { 
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">//  这里会收到重复的通知 ,可能这里并不是最佳hook的位置
+</span></span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>conversation是消息的模型,每条信息对应一个conversation,第一个过滤<code>本条消息的创建时间</code> 和 <code>上条已读消息的创建时间</code>比对</li>
 <li>消息不能是已读</li>
 <li>消息的发送者不是自己</li>
 <li>本条消息和配置的消息不同(确认是新的消息后回保存到配置,完整字符串比较)</li>
 </ul>
 <p>在确认是最新消息后, 通过图灵机器人的接口, POST请求出去,剩下的就是解包-&gt; 调方法发回去,其中主要的是:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-P1MessagesViewController \*messageVC = (P1MessagesViewController \*)\[self.superview nextResponder\];
-</code></pre><p>发送消息的方法在P1MessagesViewController,为了找到它,可真是废了一把劲, 最后就是这么简单</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Objective-c" data-lang="Objective-c"><span style="display:flex;"><span>P1MessagesViewController <span style="color:#f92672">*</span>messageVC <span style="color:#f92672">=</span> (P1MessagesViewController <span style="color:#f92672">*</span>)[self.superview nextResponder];
+</span></span></code></pre></div><p>发送消息的方法在P1MessagesViewController,为了找到它,可真是废了一把劲, 最后就是这么简单</p>
 <p>ano: 尬聊木有真实妹子,都是探探小助手帮的我 谢谢哦</p>
 <h3 id="总结">
 <a href="#%e6%80%bb%e7%bb%93"

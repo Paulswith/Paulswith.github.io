@@ -146,7 +146,7 @@ dir="ltr">
 <li>xcrun打包为.ipa文件</li>
 </ol>
 <p>第三步是和XCode9差异最大的地方, 先记住这里:<br>
-<img src="xcrun.png" alt=""></p>
+<img src="xcrun.webp" alt=""></p>
 <h2 id="xcode9之后的打包">
 <a href="#XCode9%e4%b9%8b%e5%90%8e%e7%9a%84%e6%89%93%e5%8c%85"
    >
@@ -171,42 +171,20 @@ xcodebuild clean -workspace $workspace -scheme $scheme -configuration $configura
    >
    
 </a>编译,生成.xcarchive</h4>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-xcodebuild archive -workspace $workspace -scheme $scheme -configuration \\
-
-$configuration -archivePath $archivePath -destination generic/platform=ios \\
-
-CODE\_SIGN\_IDENTITY=&#34;$code\_sign\_indentity&#34;
-</code></pre><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>xcodebuild archive -workspace $workspace -scheme $scheme -configuration 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>$configuration -archivePath $archivePath -destination generic/platform<span style="color:#f92672">=</span>ios 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>CODE_SIGN_IDENTITY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$code_sign_indentity<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>这里可以不需要这个参数, <code>CODE_SIGN_IDENTITY=&quot;$code_sign_indentity&quot;</code>.</p>
 <h4 id="将xcarchive生成ipa">
 <a href="#%e5%b0%86-xcarchive%e7%94%9f%e6%88%90-IPA"
    >
    
 </a>将.xcarchive生成.IPA</h4>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-xcodebuild -exportArchive -archivePath $archivePath \\
-
-\-exportPath $exportPath -destination generic/platform=ios \\
-
-\-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates
-</code></pre><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br>
-<img src="plist.png" alt=""></p></div></header>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>xcodebuild -exportArchive -archivePath $archivePath 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>-exportPath $exportPath -destination generic/platform<span style="color:#f92672">=</span>ios 
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">\ </span>-exportOptionsPlist $exportOptionPlist -allowProvisioningUpdates
+</span></span></code></pre></div><p>这一步有特殊的地方, 就是<code>-exportOptionsPlist $exportOptionPlist</code>, 它的格式如下, 做了下扼要的说明, 官网能找到它的说明文档:<br>
+<img src="plist.webp" alt=""></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -258,7 +236,7 @@ xcodebuild -exportArchive -archivePath $archivePath \\
 <p>说说转换为mlmodel的工具有两个:</p>
 <ul>
 <li>coremltools, 它目前只支持五种模型的转换, 不包括tensorflow:<br>
-<img src="tools.png" alt=""></li>
+<img src="tools.webp" alt=""></li>
 <li>若你跟我一样是tensorflow , 那么必须使用tfcoreml<br>
 
 <a href="https://github.com/tf-coreml"
@@ -282,25 +260,12 @@ xcodebuild -exportArchive -archivePath $archivePath \\
    
 </a>是否是graph-pb?</h4>
 <p>如果你跟我一样, 训练的模型, 从tensorflow的代码保存下来的, 调用的:</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-saver.save(sess, MODEL\_SAVEPATH, global\_step=50)
-</code></pre><p>它并不会保存出一个pb文件, 其中的.meta也需要其他方式转换似乎也可以, 我没有尝试过.<br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>saver<span style="color:#f92672">.</span>save(sess, MODEL_SAVEPATH, global_step<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>)
+</span></span></code></pre></div><p>它并不会保存出一个pb文件, 其中的.meta也需要其他方式转换似乎也可以, 我没有尝试过.<br>
 用这个方法, 你需要在上方代码的下面加两行,就可以继续:</p>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-if i %SAVE\_EPOCH == 0:
-
-                    tf.train.write\_graph(sess.graph, MODEL\_SAVE\_DIR, &#39;model.pbtxt&#39;)
-</code></pre><h4 id="pdtxt固化为pd">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span>SAVE_EPOCH <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>train<span style="color:#f92672">.</span>write_graph(sess<span style="color:#f92672">.</span>graph, MODEL_SAVE_DIR, <span style="color:#e6db74">&#39;model.pbtxt&#39;</span>)
+</span></span></code></pre></div><h4 id="pdtxt固化为pd">
 <a href="#pdtxt%e5%9b%ba%e5%8c%96%e4%b8%bapd"
    >
    
@@ -313,14 +278,36 @@ if i %SAVE\_EPOCH == 0:
    https://www.jianshu.com/p/091415b114e2
 </a><br>
 我是直接使用的bezel, 编译tensorflow源码后, 直接使用, 其中参数跟着填, 需要注意的是output_node:<br>
-<img src="guhua.png" alt=""></p>
+<img src="guhua.webp" alt=""></p>
 <h4 id="导入化图">
 <a href="#%e5%af%bc%e5%85%a5%e5%8c%96%e5%9b%be"
    >
    
 </a>导入化图</h4>
 <p>导入图和查看图的节点信息:<br>
-如果你的图不属于pb文件, 那么就会在导入图的时候报错的.</p></div></header>
+如果你的图不属于pb文件, 那么就会在导入图的时候报错的.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(TF_MODEL_FILE, <span style="color:#e6db74">&#39;rb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    serialized <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span>tf<span style="color:#f92672">.</span>reset_default_graph()
+</span></span><span style="display:flex;"><span>original_gdef <span style="color:#f92672">=</span> tf<span style="color:#f92672">.</span>GraphDef()
+</span></span><span style="display:flex;"><span>original_gdef<span style="color:#f92672">.</span>ParseFromString(serialized)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">##2 可以在这里查看到全部的图信息(前提是你有转换成功)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> tf<span style="color:#f92672">.</span>Graph()<span style="color:#f92672">.</span>as_default() <span style="color:#66d9ef">as</span> g:
+</span></span><span style="display:flex;"><span>    tf<span style="color:#f92672">.</span>import_graph_def(original_gdef, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    ops <span style="color:#f92672">=</span> g<span style="color:#f92672">.</span>get_operations()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10000</span>):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;op id </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> : op name: </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">, op type: &#34;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#34;&#39;</span><span style="color:#f92672">.</span>format(str(i),ops[i]<span style="color:#f92672">.</span>name, ops[i]<span style="color:#f92672">.</span>type))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;全部节点已打印完毕.&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><h4 id="预处理节点">
+<a href="#%e9%a2%84%e5%a4%84%e7%90%86%e8%8a%82%e7%82%b9"
+   >
+   
+</a>预处理节点</h4>
+<p>其实这一步个人不是很清楚很知道它做了什么,但确是不得不做的. 最后的大小看着也不像是”减包”<br>
+需要注意两点:</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 

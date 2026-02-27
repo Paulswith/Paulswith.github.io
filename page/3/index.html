@@ -192,53 +192,31 @@ dir="ltr">
    >
    
 </a>Profile</h3>
-<p><img src="/images/sign_profile.png" alt=""></p>
+<p><img src="/images/sign_profile.webp" alt=""></p>
 <h3 id="使用">
 <a href="#%e4%bd%bf%e7%94%a8"
    >
    
 </a>使用</h3>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-./resign.sh /Users/dobby/Desktop/微信-已砸壳.ipa  /Users/dobby/Desktop/original.mobileprovision  com.weixin.resign
-</code></pre><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./resign.sh /Users/akarizo/Desktop/微信-已砸壳.ipa  /Users/akarizo/Desktop/original.mobileprovision  com.weixin.resign
+</span></span></code></pre></div><ul>
 <li>$1 需要砸壳过的ipa,从PP助手下载即可</li>
 <li>$2 .mobileprovision 这个是证书对应的文件,也可以指定证书Xcode的product下也会生成</li>
 <li>$3 是否修改bundleID,默认是原先的</li>
 </ul>
-<p><img src="/images/signstr.png" alt=""></p>
+<p><img src="/images/signstr.webp" alt=""></p>
 <blockquote>
 <p>脚本内部需要写入一个一个签名字符串,可以通过下方的命令拿到</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security find-identity -v -p codesigning
-</code></pre><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手\\(正版\\)/Payload/MQQSecure.app/MQQSecure | grep cryptid
-</code></pre></blockquote>
-<h3 id="mobileprovision生成entitlementsplist">
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security find-identity -v -p codesigning
+</span></span></code></pre></div><p>若是cryptid显示为0,非砸壳为1. 砸壳虽不影响签名的成功率, 但是我试了下可安装,但不可使用. 可google下砸壳方法自行砸壳.下面是查看cryptid的命令</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>otool -l ./腾讯手机管家-来电防骚扰的QQ安全助手<span style="color:#f92672">(</span>正版<span style="color:#f92672">)</span>/Payload/MQQSecure.app/MQQSecure | grep cryptid
+</span></span></code></pre></div><h3 id="mobileprovision生成entitlementsplist">
 <a href="#mobileProvision%e7%94%9f%e6%88%90Entitlements-plist"
    >
    
 </a>mobileProvision生成Entitlements.plist</h3>
-<pre tabindex="0"><code>
-
-1
-
-2
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i $provision &gt; ProvisionProfile.plist 
+<pre tabindex="0"><code>security cms -D -i $provision &gt; ProvisionProfile.plist 
 
 /usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; $tempPlace/Entitlements.plist
 </code></pre><p>用该方法生成一个Entitlements.plist文件,之前还没找到这么快捷的生成方法, 有个土方法自己折腾出来的也是可行的,详见
@@ -247,7 +225,24 @@ security cms -D -i $provision &gt; ProvisionProfile.plist
      target="_blank" rel="noopener noreferrer"
    >
    plist文件-在脚本中的操作
-</a></p></div></header>
+</a></p>
+<h3 id="mobileprovision拷贝为embeddedmobileprovision">
+<a href="#mobileProvision%e6%8b%b7%e8%b4%9d%e4%b8%baembedded-mobileprovision"
+   >
+   
+</a>mobileProvision拷贝为embedded.mobileprovision</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp $provision $appPlace/embedded.mobileprovision
+</span></span></code></pre></div><h3 id="是否概要更改bundleid">
+<a href="#%e6%98%af%e5%90%a6%e6%a6%82%e8%a6%81%e6%9b%b4%e6%94%b9BundleID"
+   >
+   
+</a>是否概要更改BundleID</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $3 <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>plutil -replace CFBundleIdentifier -string <span style="color:#e6db74">&#34;</span>$3<span style="color:#e6db74">&#34;</span> $appPlace/Info.plist
+</span></span><span style="display:flex;"><span>reBundleID<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>plutil -p $appPlace/Info.plist | grep <span style="color:#e6db74">&#39;CFBundleIdentifier&#39;</span> <span style="color:#e6db74">`</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Log info : you wanna replace to: </span><span style="color:#e6db74">${</span>reBundleID<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>默认的时候是原先的, BundleID安装到设备上是唯一的,若是原版本共存,必须要更改</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -287,37 +282,22 @@ security cms -D -i $provision &gt; ProvisionProfile.plist
    
 </a>内容截取并保存临时文件中</h4>
 <p>先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间<br>
-<img src="all.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i ./original.mobileprovision | grep --after-context=20 &#34;Entitlements&#34;  &gt; /tmp/tmp\_provision
-</code></pre><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p>
+<img src="all.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security cms -D -i ./original.mobileprovision | grep --after-context<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span> <span style="color:#e6db74">&#34;Entitlements&#34;</span>  &gt; /tmp/tmp_provision
+</span></span></code></pre></div><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p>
 <h4 id="python进行正则匹配过滤dict之后的内容">
 <a href="#python%e8%bf%9b%e8%a1%8c%e6%ad%a3%e5%88%99%e5%8c%b9%e9%85%8d-%e8%bf%87%e6%bb%a4dict%e4%b9%8b%e5%90%8e%e7%9a%84%e5%86%85%e5%ae%b9"
    >
    
 </a>python进行正则匹配,过滤dict之后的内容</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-provision=\`python -c &#34;from re import findall,compile,S;data=open(&#39;/tmp/tmp\_provision&#39;,&#39;r&#39;).read();print findall(compile(r&#39;.\*&#39;,S),data)\[0\];&#34;\`
-</code></pre><h4 id="最后重定向到一个plist文件中">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>provision<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>python -c <span style="color:#e6db74">&#34;from re import findall,compile,S;data=open(&#39;/tmp/tmp_provision&#39;,&#39;r&#39;).read();print findall(compile(r&#39;.*&#39;,S),data)[0];&#34;</span><span style="color:#e6db74">`</span>
+</span></span></code></pre></div><h4 id="最后重定向到一个plist文件中">
 <a href="#%e6%9c%80%e5%90%8e%e9%87%8d%e5%ae%9a%e5%90%91%e5%88%b0%e4%b8%80%e4%b8%aa-plist%e6%96%87%e4%bb%b6%e4%b8%ad"
    >
    
 </a>最后重定向到一个.plist文件中</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-echo &#39;&#39;$provision&#39;&#39; &gt; Entitlements.plist
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;&#39;</span>$provision<span style="color:#e6db74">&#39;&#39;</span> &gt; Entitlements.plist
+</span></span></code></pre></div><blockquote>
 <p>这个方法虽然可以, 但是其中第三部, 必须要格外注意字符的使用, 不然就格式不对,导致重定向出来的无法识别为.plist</p>
 </blockquote>
 <h3 id="method_two">
@@ -330,25 +310,29 @@ echo &#39;&#39;$provision&#39;&#39; &gt; Entitlements.plist
    >
    
 </a>重定向为一个.plist</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
-</code></pre><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
+</span></span></code></pre></div><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p>
 <h4 id="提取内容生成">
 <a href="#%e6%8f%90%e5%8f%96%e5%86%85%e5%ae%b9%e7%94%9f%e6%88%90"
    >
    
 </a>提取内容生成</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-/usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; Entitlements.plist
-</code></pre><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p></div></header>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/usr/libexec/PlistBuddy -x -c <span style="color:#e6db74">&#34;Print Entitlements&#34;</span> ProvisionProfile.plist &gt; Entitlements.plist
+</span></span></code></pre></div><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p>
+<blockquote>
+<p>这个方法比上面的稳妥不知道多少倍, 但是第一个的方法是自己钻研</p>
+</blockquote>
+<h3 id="plist文件的增删改查">
+<a href="#plist%e6%96%87%e4%bb%b6%e7%9a%84%e5%a2%9e%e5%88%a0%e6%94%b9%e6%9f%a5"
+   >
+   
+</a>.plist文件的增删改查</h3>
+<p><img src="plutil.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>plutil -p ./ProvisionProfile.plist  <span style="color:#75715e">#查看</span>
+</span></span><span style="display:flex;"><span>plutil -insert Insert -string <span style="color:#e6db74">&#34;insert data here&#34;</span> ./ProvisionProfile.plist    <span style="color:#75715e">#增</span>
+</span></span><span style="display:flex;"><span>plutil -replace Insert -string <span style="color:#e6db74">&#34;change  data here&#34;</span> ./ProvisionProfile.plist  <span style="color:#75715e">#替换</span>
+</span></span></code></pre></div><blockquote>
+<p>列举的就诸如此类,plutil是一个.plist官方推荐的好工具</p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
                 
@@ -384,10 +368,10 @@ security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
    >
    
 </a>#?和echo输出命令要注意</h3>
-<p><img src="echo1.png" alt=""><br>
+<p><img src="echo1.webp" alt=""><br>
 这是一条echo输出命令,命令处于``之中,输出后执行. 但是命令是错误,执行的话会抛错误,也就是<code>echo $?</code>应该给到是1<br>
 但是看看执行结果:<br>
-<img src="echo2.png" alt=""><br>
+<img src="echo2.webp" alt=""><br>
 看到输出的结果是0, 原因在于<code>echo</code>上, <code>echo</code>包了这一层命令, 只要<code>echo</code>直接将这命令打印在终端, 就是完整的完成工作,根本没有异常可言.</p>
 <h3 id="修复">
 <a href="#%e4%bf%ae%e5%a4%8d"
@@ -395,8 +379,8 @@ security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
    
 </a>修复</h3>
 <p>当然是去除<code>echo</code>直接输出, 但是还是要注意的是, <code>$?</code>仅仅提示是上一条,这里必须十分谨慎.列下能捕获到异常:<br>
-<img src="fix1.png" alt=""><br>
-<img src="fix2.png" alt=""><br>
+<img src="fix1.webp" alt=""><br>
+<img src="fix2.webp" alt=""><br>
 可以看到输出是1了, 确认命令使用没问题后,就可以进行逻辑处理.</p>
 <h3 id="避免">
 <a href="#%e9%81%bf%e5%85%8d"
@@ -404,9 +388,9 @@ security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
    
 </a>避免</h3>
 <p>这是完整的逻辑代码:<br>
-<img src="full1.png" alt=""><br>
+<img src="full1.webp" alt=""><br>
 更好的避免, 将允许的条件, 并到逻辑与:<br>
-<img src="full2.png" alt=""></p>
+<img src="full2.webp" alt=""></p>
 <p><code>[shell大法好]</code></p></div></header>
             </div>
             <footer class="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">

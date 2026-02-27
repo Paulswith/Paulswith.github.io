@@ -150,37 +150,22 @@ dir="ltr">
    
 </a>内容截取并保存临时文件中</h4>
 <p>先看看.provision文字长什么样子, 我截取了其中一部分展示的信息,其中我们要的内容是从dict到dict之间<br>
-<img src="all.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i ./original.mobileprovision | grep --after-context=20 &#34;Entitlements&#34;  &gt; /tmp/tmp\_provision
-</code></pre><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p>
+<img src="all.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security cms -D -i ./original.mobileprovision | grep --after-context<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span> <span style="color:#e6db74">&#34;Entitlements&#34;</span>  &gt; /tmp/tmp_provision
+</span></span></code></pre></div><p>读取匹配的信息,并保存到/tmp/tmp_provision这个文件中</p>
 <h4 id="python进行正则匹配过滤dict之后的内容">
 <a href="#python%e8%bf%9b%e8%a1%8c%e6%ad%a3%e5%88%99%e5%8c%b9%e9%85%8d-%e8%bf%87%e6%bb%a4dict%e4%b9%8b%e5%90%8e%e7%9a%84%e5%86%85%e5%ae%b9"
    >
    
 </a>python进行正则匹配,过滤dict之后的内容</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-provision=\`python -c &#34;from re import findall,compile,S;data=open(&#39;/tmp/tmp\_provision&#39;,&#39;r&#39;).read();print findall(compile(r&#39;.\*&#39;,S),data)\[0\];&#34;\`
-</code></pre><h4 id="最后重定向到一个plist文件中">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>provision<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>python -c <span style="color:#e6db74">&#34;from re import findall,compile,S;data=open(&#39;/tmp/tmp_provision&#39;,&#39;r&#39;).read();print findall(compile(r&#39;.*&#39;,S),data)[0];&#34;</span><span style="color:#e6db74">`</span>
+</span></span></code></pre></div><h4 id="最后重定向到一个plist文件中">
 <a href="#%e6%9c%80%e5%90%8e%e9%87%8d%e5%ae%9a%e5%90%91%e5%88%b0%e4%b8%80%e4%b8%aa-plist%e6%96%87%e4%bb%b6%e4%b8%ad"
    >
    
 </a>最后重定向到一个.plist文件中</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-echo &#39;&#39;$provision&#39;&#39; &gt; Entitlements.plist
-</code></pre><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;&#39;</span>$provision<span style="color:#e6db74">&#39;&#39;</span> &gt; Entitlements.plist
+</span></span></code></pre></div><blockquote>
 <p>这个方法虽然可以, 但是其中第三部, 必须要格外注意字符的使用, 不然就格式不对,导致重定向出来的无法识别为.plist</p>
 </blockquote>
 <h3 id="method_two">
@@ -193,25 +178,15 @@ echo &#39;&#39;$provision&#39;&#39; &gt; Entitlements.plist
    >
    
 </a>重定向为一个.plist</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
-</code></pre><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
+</span></span></code></pre></div><p>查看到全部的信息, 重定向为一个ProvisionProfile.plist,还没有过滤</p>
 <h4 id="提取内容生成">
 <a href="#%e6%8f%90%e5%8f%96%e5%86%85%e5%ae%b9%e7%94%9f%e6%88%90"
    >
    
 </a>提取内容生成</h4>
-<pre tabindex="0"><code>
-
-1
-</code></pre><pre tabindex="0"><code>
-
-/usr/libexec/PlistBuddy -x -c &#34;Print Entitlements&#34; ProvisionProfile.plist &gt; Entitlements.plist
-</code></pre><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/usr/libexec/PlistBuddy -x -c <span style="color:#e6db74">&#34;Print Entitlements&#34;</span> ProvisionProfile.plist &gt; Entitlements.plist
+</span></span></code></pre></div><p>直接将里面的子项Entitlements拿出来,生成一个新的Entitlements.plist</p>
 <blockquote>
 <p>这个方法比上面的稳妥不知道多少倍, 但是第一个的方法是自己钻研</p>
 </blockquote>
@@ -220,22 +195,11 @@ security cms -D -i ./original.mobileprovision &gt; ProvisionProfile.plist
    >
    
 </a>.plist文件的增删改查</h3>
-<p><img src="plutil.png" alt=""></p>
-<pre tabindex="0"><code>
-
-1
-
-2
-
-3
-</code></pre><pre tabindex="0"><code>
-
-plutil -p ./ProvisionProfile.plist  #查看
-
-plutil -insert Insert -string &#34;insert data here&#34; ./ProvisionProfile.plist    #增
-
-plutil -replace Insert -string &#34;change  data here&#34; ./ProvisionProfile.plist  #替换
-</code></pre><blockquote>
+<p><img src="plutil.webp" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>plutil -p ./ProvisionProfile.plist  <span style="color:#75715e">#查看</span>
+</span></span><span style="display:flex;"><span>plutil -insert Insert -string <span style="color:#e6db74">&#34;insert data here&#34;</span> ./ProvisionProfile.plist    <span style="color:#75715e">#增</span>
+</span></span><span style="display:flex;"><span>plutil -replace Insert -string <span style="color:#e6db74">&#34;change  data here&#34;</span> ./ProvisionProfile.plist  <span style="color:#75715e">#替换</span>
+</span></span></code></pre></div><blockquote>
 <p>列举的就诸如此类,plutil是一个.plist官方推荐的好工具</p>
 </blockquote>
 </article>
